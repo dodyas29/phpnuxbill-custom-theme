@@ -182,14 +182,14 @@
                     </div>
                 </div>
                 <div class="hero-plan-line">
-                    <span class="skl skl-bright w-sm h-sm" style="width:130px" id="sklPlan"></span>
+                    <span class="skl skl-bright w-sm" style="width:130px;height:15px" id="sklPlan"></span>
                     <span class="skl skl-bright w-xs h-md pill" style="width:60px" id="sklBw"></span>
-                    <span class="skl skl-bright w-xs h-sm" style="width:80px;margin-left:auto" id="sklPlanPrice"></span>
+                    <span class="skl skl-bright w-xs h-sm" style="width:80px;margin-left:auto;height:12px" id="sklPlanPrice"></span>
                 </div>
                 <div class="hero-divider"></div>
                 <div class="hero-numbers">
-                    <div class="hero-num"><div class="hero-num-label">{Lang::T('Last Payment')}</div><div class="hero-num-value"><span class="skl skl-bright w-sm h-sm" id="sklPayDate"></span></div></div>
-                    <div class="hero-num"><div class="hero-num-label">{Lang::T('Expired')}</div><div class="hero-num-value"><span class="skl skl-bright w-md h-sm" id="sklExpired"></span></div></div>
+                    <div class="hero-num"><div class="hero-num-label">{Lang::T('Last Payment')}</div><div class="hero-num-value"><span class="skl skl-bright w-sm" style="height:13px" id="sklPayDate"></span></div></div>
+                    <div class="hero-num"><div class="hero-num-label">{Lang::T('Expired')}</div><div class="hero-num-value"><span class="skl skl-bright w-md" style="height:13px" id="sklExpired"></span></div></div>
                     <div class="hero-num"><div class="hero-num-label">{Lang::T('Auto Renewal')}</div><div class="hero-num-value"><span class="skl skl-bright w-xs h-md pill" style="width:44px" id="sklAutoRenewal"></span></div></div>
                 </div>
                 <div class="hero-actions">
