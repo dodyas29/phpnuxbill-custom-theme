@@ -579,7 +579,7 @@
 
         function fetchData(){
             var start=Date.now();
-            fetch(appUrl+'/ui/themes/my_theme/api/plan.php',{credentials:'include'})
+            fetch(appUrl+'/ui/ui_custom/api/plan.php',{credentials:'include'})
             .then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json()})
             .then(function(d){
                 var delay=Math.max(0,600-(Date.now()-start));
@@ -643,7 +643,7 @@
             var btn=document.querySelector('.ns-refresh');if(btn)btn.classList.add('spinning');
             var start=Date.now();
             if(refresh){document.getElementById('nsContent').style.display='none';document.getElementById('nsSkeleton').style.display='block'}
-            fetch(appUrl+'/ui/themes/my_theme/api/device.php',{credentials:'include'})
+            fetch(appUrl+'/ui/ui_custom/api/device.php',{credentials:'include'})
             .then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json()})
             .then(function(d){_deviceData=d;
                 var delay=refresh?Math.max(0,400-(Date.now()-start)):Math.max(0,600-(Date.now()-start));
@@ -709,7 +709,7 @@
         function saveWifi(band){
             var ssid = document.getElementById('nsSsid'+(band==='24g'?'24':'5')+'Input').value;
             var pass = document.getElementById('nsPass'+(band==='24g'?'24':'5')+'Input').value;
-            fetch(appUrl+'/ui/themes/my_theme/api/device.php',{
+            fetch(appUrl+'/ui/ui_custom/api/device.php',{
                 method:'POST',credentials:'include',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify({band:band,ssid:ssid,password:pass})
@@ -747,7 +747,7 @@
         }
 
         function deviceAction(action,band,mac){
-            fetch(appUrl+'/ui/themes/my_theme/api/device.php',{
+            fetch(appUrl+'/ui/ui_custom/api/device.php',{
                 method:'POST',credentials:'include',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify({action:action,band:band,mac:mac})
