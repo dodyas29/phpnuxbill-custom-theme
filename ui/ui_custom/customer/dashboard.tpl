@@ -182,9 +182,9 @@
                     </div>
                 </div>
                 <div class="hero-plan-line">
-                    <span class="skl skl-bright w-lg h-md" style="width:180px" id="sklPlan"></span>
-                    <span class="skl skl-bright w-xs h-sm pill" style="width:70px" id="sklBw"></span>
-                    <span class="skl skl-bright w-xs h-sm pill" style="width:80px;margin-left:auto" id="sklPlanPrice"></span>
+                    <span class="skl skl-bright w-sm h-sm" style="width:130px" id="sklPlan"></span>
+                    <span class="skl skl-bright w-xs h-xs pill" style="width:60px" id="sklBw"></span>
+                    <span class="skl skl-bright w-xs h-sm" style="width:80px;margin-left:auto" id="sklPlanPrice"></span>
                 </div>
                 <div class="hero-divider"></div>
                 <div class="hero-numbers">
