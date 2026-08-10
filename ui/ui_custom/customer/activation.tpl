@@ -46,7 +46,8 @@
         .pay-select-text{font-size:.82rem;font-weight:600}
         .pay-select-text.placeholder{color:var(--t3)}
 
-        .pay-modal-item{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;border-radius:12px;font-size:.85rem;font-weight:500;color:var(--tx);transition:all .1s}
+        .pay-modal-item{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;border-radius:0;font-size:.85rem;font-weight:500;color:var(--tx);transition:all .1s;border-bottom:1px solid var(--bd)}
+        .pay-modal-item:last-child{border-bottom:none}
         .pay-modal-item:active{background:var(--bgc)}
         .pay-modal-item.selected{color:var(--c1)}
         .pay-modal-logo{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;font-size:.7rem;font-weight:800;color:#fff}
