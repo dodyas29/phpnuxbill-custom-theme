@@ -67,7 +67,7 @@
                 <div class="vcard-body">
                     <div class="vcard-left">
                         <span class="vcard-code-label">Kode Voucher</span>
-                        <span class="vcard-code" id="voucherCode">VCH-XXXX-XXXX</span>
+                        <span class="vcard-code" id="voucherCode">{if isset($_c['voucher_prefix'])}{$_c['voucher_prefix']|escape:'html'}XXXXXXXX{else}XXXXXXXX{/if}</span>
                         <span class="vcard-code-note">Simpan kode voucher sebelum masa aktif habis</span>
                     </div>
                     <div class="vcard-qr" id="voucherQr"></div>
@@ -104,16 +104,20 @@
 
 {include file="components/_scripts_common.tpl"}
 
+    <meta id="voucher-config" data-prefix="{$_c['voucher_prefix']|escape:'html'}">
+
     <script>
         {literal}
         var selectedChannel = '';
         var voucherGenerated = '';
 
         (function(){
-            var chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            var code='';
-            for(var i=0;i<8;i++){code+=chars.charAt(Math.floor(Math.random()*chars.length))}
-            voucherGenerated='VCH-'+code.substring(0,4)+'-'+code.substring(4,8);
+            var cfg=document.getElementById('voucher-config');
+            var prefix=cfg?cfg.getAttribute('data-prefix')||'':'';
+            var hexLen=8;
+            var hex='';
+            for(var i=0;i<hexLen;i++){hex+='0123456789ABCDEF'.charAt(Math.floor(Math.random()*16))}
+            voucherGenerated=prefix+hex;
             document.getElementById('voucherCode').textContent=voucherGenerated;
             new QRCode(document.getElementById('voucherQr'),{text:voucherGenerated,width:78,height:78,colorDark:'#fafafa',colorLight:'#09090b',correctLevel:QRCode.CorrectLevel.M});
         })();
