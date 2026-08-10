@@ -19,7 +19,7 @@
         .status-dot.on{background:#4ade80;box-shadow:0 0 8px #4ade80}
         .status-dot.off{background:#f87171;box-shadow:0 0 8px #f87171}
         .hero-plan-line{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
-        .hero-plan{font-size:1.25rem;font-weight:700;letter-spacing:-.3px}
+        .hero-plan{font-size:.78rem;font-weight:700;letter-spacing:-.3px}
         .hero-bw{font-size:.68rem;font-weight:600;opacity:.6}
         .hero-bw-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.1);padding:5px 12px;border-radius:var(--rp);font-size:.66rem;font-weight:600;vertical-align:middle}
         .hero-divider{height:1px;background:rgba(255,255,255,.08);margin:0 0 14px}
