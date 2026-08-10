@@ -89,15 +89,15 @@
         }
 
         /* Form */
-        .field{margin-bottom:20px;position:relative}
-        .field-label{display:block;font-size:.78rem;font-weight:600;color:var(--t2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
-        .field-wrap{position:relative;display:flex;align-items:center;background:var(--bg);border:2px solid var(--bd);border-radius:var(--rm);overflow:hidden;transition:all .2s}
+        .field{margin-bottom:16px;position:relative}
+        .field-wrap{position:relative;background:var(--bg);border:2px solid var(--bd);border-radius:var(--rm);transition:all .2s}
         .field-wrap:focus-within{border-color:var(--cp);box-shadow:0 0 0 3px rgba(124,58,237,.12)}
-        .field-wrap .fi{display:flex;align-items:center;justify-content:center;width:44px;min-width:44px;color:var(--t3);font-size:1.1rem;transition:color .2s}
-        .field-wrap:focus-within .fi{color:var(--cp)}
-        .field-wrap input{flex:1;border:none;background:transparent;padding:14px 12px 14px 0;font-size:.95rem;color:var(--tx);outline:none;font-family:var(--ff)}
-        .field-wrap input::placeholder{color:var(--t3)}
-        .pw-toggle{background:none;border:none;color:var(--t3);cursor:pointer;padding:12px 14px;font-size:1.1rem;transition:color .2s;min-width:44px;display:flex;align-items:center;justify-content:center}
+        .field-wrap input{width:100%;border:none;background:transparent;padding:22px 14px 10px 14px;font-size:.95rem;color:var(--tx);outline:none;font-family:var(--ff)}
+        .field-wrap input::placeholder{color:transparent}
+        .fl{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.95rem;color:var(--t3);pointer-events:none;transition:all .2s ease;font-family:var(--ff);font-weight:400}
+        .field-wrap:focus-within .fl,
+        .field-wrap input:not(:placeholder-shown) ~ .fl{top:7px;font-size:.62rem;color:var(--cp);font-weight:600;letter-spacing:.5px;text-transform:uppercase;transform:translateY(0)}
+        .pw-toggle{position:absolute;right:0;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--t3);cursor:pointer;padding:12px 14px;font-size:1.1rem;transition:color .2s;min-width:44px;display:flex;align-items:center;justify-content:center;z-index:1}
         .pw-toggle:hover{color:var(--t2)}
 
         /* Button */
@@ -172,27 +172,20 @@
                 <input type="hidden" name="csrf_token" value="{$csrf_token}">
 
                 <div class="field">
-                    <span class="field-label">
-                        {if $_c['registration_username'] == 'phone'}{Lang::T('Phone Number')}
-                        {elseif $_c['registration_username'] == 'email'}{Lang::T('Email')}
-                        {else}{Lang::T('Username')}{/if}
-                    </span>
                     <div class="field-wrap">
-                        <span class="fi">
-                            {if $_c['registration_username'] == 'phone'}<i class="bi bi-phone"></i>
-                            {elseif $_c['registration_username'] == 'email'}<i class="bi bi-envelope"></i>
-                            {else}<i class="bi bi-person"></i>{/if}
+                        <span class="fl">
+                            {if $_c['registration_username'] == 'phone'}{Lang::T('Phone Number')}
+                            {elseif $_c['registration_username'] == 'email'}{Lang::T('Email')}
+                            {else}{Lang::T('Username')}{/if}
                         </span>
-                        <input type="text" name="username" required autocomplete="username" autofocus
-                            placeholder="{if $_c['registration_username'] == 'phone'}{if $_c['country_code_phone'] != ''}{$_c['country_code_phone']} {/if}{Lang::T('Phone Number')}{elseif $_c['registration_username'] == 'email'}{Lang::T('Email')}{else}{Lang::T('Username')}{/if}">
+                        <input type="text" name="username" required autocomplete="username" autofocus placeholder=" ">
                     </div>
                 </div>
 
                 <div class="field">
-                    <span class="field-label">{Lang::T('Password')}</span>
                     <div class="field-wrap">
-                        <span class="fi"><i class="bi bi-lock"></i></span>
-                        <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
+                        <span class="fl">{Lang::T('Password')}</span>
+                        <input type="password" id="password" name="password" required autocomplete="current-password" placeholder=" ">
                         <button type="button" class="pw-toggle" id="togglePassword" aria-label="Toggle password">
                             <i class="bi bi-eye-slash"></i>
                         </button>
