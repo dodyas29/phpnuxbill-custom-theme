@@ -89,7 +89,7 @@
                                 {/if}
                                 <span>{$_c['CompanyName']|truncate:16:"":true}</span>
                             </div>
-                            <span class="vcard-price">Rp 100.000</span>
+                            <span class="vcard-price" id="vcardPrice">Rp 0</span>
                         </div>
                         <div class="vcard-body">
                             <div class="vcard-left">
@@ -109,15 +109,11 @@
             <div class="sh stg"><h2>Pilih Paket</h2></div>
             <div class="sk-load" id="skPkg">
                 <div class="sk-placeholder">
-                    <span class="skl skl-bright w-sm" style="height:48px;border-radius:var(--r2);display:block;width:auto"></span>
+                    <span class="skl skl-bright w-md" style="height:48px;border-radius:var(--r2);display:block;width:auto"></span>
                 </div>
                 <div class="sk-content">
                     <div class="pkg-wrap stg">
-                        <select id="packageSelect">
-                            <option value="daily">Harian</option>
-                            <option value="weekly">Mingguan</option>
-                            <option value="monthly" selected>Bulanan</option>
-                        </select>
+                        <select id="packageSelect" onchange="onPackageChange()"></select>
                     </div>
                 </div>
             </div>
@@ -175,7 +171,6 @@
             voucherGenerated=prefix+hex;
             document.getElementById('voucherCode').textContent=voucherGenerated;
             new QRCode(document.getElementById('voucherQr'),{text:voucherGenerated,width:78,height:78,colorDark:'#09090b',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
-            document.getElementById('skPkg').classList.add('loaded');
 
             fetch(appUrl+'/ui/ui_custom/api/plan.php',{credentials:'include'})
             .then(function(r){return r.json()})
@@ -184,7 +179,31 @@
                     var ab=document.getElementById('abBal');if(ab){ab.className='';ab.style.cssText='';ab.textContent=d.balance_formatted}
                 }
             }).catch(function(){});
+
+            loadPackages();
         })();
+
+        function loadPackages(){
+            fetch(appUrl+'/ui/ui_custom/api/packages.php',{credentials:'include'})
+            .then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json()})
+            .then(function(d){
+                var sel=document.getElementById('packageSelect'),h='';
+                d.forEach(function(p,i){h+='<option value="'+p.id+'" data-price="'+p.price+'" data-name="'+p.name+'"'+(i===0?' selected':'')+'>'+p.name+' - '+p.price_formatted+'</option>'});
+                sel.innerHTML=h;
+                document.getElementById('skPkg').classList.add('loaded');
+                onPackageChange();
+            })
+            .catch(function(){showToast('Gagal memuat paket','error')})
+        }
+
+        function onPackageChange(){
+            var sel=document.getElementById('packageSelect');
+            var opt=sel.options[sel.selectedIndex];
+            if(opt){
+                var price=parseInt(opt.getAttribute('data-price'))||0;
+                document.getElementById('vcardPrice').textContent='Rp '+price.toLocaleString('id-ID');
+            }
+        }
 
         function loadChannels(){
             fetch(appUrl+'/ui/ui_custom/api/tripay_channels.php',{credentials:'include'})
