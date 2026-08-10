@@ -178,7 +178,7 @@
                         <input type="tel" id="waPhone" placeholder="WhatsApp Number" inputmode="numeric">
                     </div>
                     <button class="btn" id="sendOtpBtn" disabled>Kirim Kode Verifikasi <i class="bi bi-whatsapp"></i></button>
-                    <div style="text-align:center;margin-top:12px"><a href="javascript:void(0)" onclick="goStep(1)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
+                    <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="goStep(1)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
                 </div>
                 <div id="step2b" style="display:none">
                     <div class="coord" style="margin-bottom:14px">
@@ -195,7 +195,7 @@
                     </div>
                     <div class="field-hint" id="otpMsg"></div>
                     <button class="btn" id="step2Next" disabled>Verifikasi & Lanjut <i class="bi bi-arrow-right"></i></button>
-                    <div style="text-align:center;margin-top:12px"><a href="javascript:void(0)" onclick="goStep(1)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
+                    <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="goStep(1)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
                 </div>
             </div>
 
@@ -225,7 +225,7 @@
                         <button type="button" class="pw-toggle" onclick="togglePw('cpassword',this)"><i class="bi bi-eye-slash"></i></button>
                     </div>
                     <button type="submit" class="btn"><i class="bi bi-person-check"></i> Selesai & Daftar</button>
-                    <div style="text-align:center;margin-top:12px"><a href="javascript:void(0)" onclick="goStep(2)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
+                    <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="goStep(2)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
                 </form>
             </div>
         </div>
