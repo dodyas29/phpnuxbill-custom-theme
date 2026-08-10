@@ -178,19 +178,19 @@
                         <span>{$_user['fullname']|truncate:20:"":true}</span>
                     </div>
                     <div class="hero-status-badge" id="heroStatus">
-                        <span class="skl skl-bright w-sm h-sm pill" style="width:56px"></span>
+                        <span class="skl skl-bright w-sm h-md pill" style="width:56px"></span>
                     </div>
                 </div>
                 <div class="hero-plan-line">
                     <span class="skl skl-bright w-sm h-sm" style="width:130px" id="sklPlan"></span>
-                    <span class="skl skl-bright w-xs h-sm pill" style="width:60px" id="sklBw"></span>
+                    <span class="skl skl-bright w-xs h-md pill" style="width:60px" id="sklBw"></span>
                     <span class="skl skl-bright w-xs h-sm" style="width:80px;margin-left:auto" id="sklPlanPrice"></span>
                 </div>
                 <div class="hero-divider"></div>
                 <div class="hero-numbers">
                     <div class="hero-num"><div class="hero-num-label">{Lang::T('Last Payment')}</div><div class="hero-num-value"><span class="skl skl-bright w-sm h-sm" id="sklPayDate"></span></div></div>
                     <div class="hero-num"><div class="hero-num-label">{Lang::T('Expired')}</div><div class="hero-num-value"><span class="skl skl-bright w-md h-sm" id="sklExpired"></span></div></div>
-                    <div class="hero-num"><div class="hero-num-label">{Lang::T('Auto Renewal')}</div><div class="hero-num-value"><span class="skl skl-bright w-xs h-sm pill" style="width:44px" id="sklAutoRenewal"></span></div></div>
+                    <div class="hero-num"><div class="hero-num-label">{Lang::T('Auto Renewal')}</div><div class="hero-num-value"><span class="skl skl-bright w-xs h-md pill" style="width:44px" id="sklAutoRenewal"></span></div></div>
                 </div>
                 <div class="hero-actions">
                     <span class="skl skl-bright w-full pill" style="flex:1;height:36px" id="sklBtn1"></span>
