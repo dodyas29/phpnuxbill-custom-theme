@@ -7,6 +7,7 @@
     <title>{ucwords(Lang::T($type))} - {$_c['CompanyName']}</title>
     <link rel="shortcut icon" href="{$app_url}/ui/ui/images/logo.png" type="image/x-icon">
     <style>
+        {literal}
         *,::before,::after{box-sizing:border-box;margin:0;padding:0}
         body{
             font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
@@ -26,6 +27,7 @@
         .btn{display:inline-block;padding:10px 28px;border-radius:9999px;background:rgba(255,255,255,.15);color:#fff;text-decoration:none;font-size:.82rem;font-weight:600;border:1px solid rgba(255,255,255,.2);transition:all .15s}
         .btn:hover{background:rgba(255,255,255,.25)}
         .footer{margin-top:40px;font-size:.7rem;opacity:.4}
+        {/literal}
     </style>
 </head>
 <body>
