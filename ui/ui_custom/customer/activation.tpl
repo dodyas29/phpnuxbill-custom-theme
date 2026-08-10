@@ -43,6 +43,7 @@
         .pay-modal-item.selected .bi{display:block}
         .pay-modal-item .bi-circle{margin-left:auto;font-size:.8rem;color:var(--bd2)}
         .pay-modal-item.selected .bi-circle{display:none}
+        .pay-modal-skel{display:flex;align-items:center;gap:14px;padding:14px 16px}
 
         .vbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:15px 24px;border-radius:var(--rp);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .15s;background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;border:none;letter-spacing:.4px;font-family:var(--ff)}
         .vbtn:active{transform:scale(.97);filter:brightness(.9)}
@@ -124,26 +125,27 @@
 
         <section>
             <div class="sh stg"><h2>Metode Pembayaran</h2></div>
-            <div class="sk-load" id="skPay">
-                <div class="sk-placeholder">
-                    <span class="skl skl-bright w-md" style="height:48px;border-radius:var(--r2);display:block;width:auto"></span>
-                </div>
-                <div class="sk-content">
-                    <div class="pay-select stg" onclick="openPayModal()">
-                        <span class="pay-select-logo" id="paySelectLogo" style="background:var(--bgc)">--</span>
-                        <span class="pay-select-text placeholder" id="paySelectText">Pilih metode pembayaran</span>
-                    </div>
-                </div>
+            <div class="pay-select stg" onclick="openPayModal()">
+                <span class="pay-select-logo" id="paySelectLogo" style="background:var(--bgc)">--</span>
+                <span class="pay-select-text placeholder" id="paySelectText">Pilih metode pembayaran</span>
             </div>
         </section>
 
         <button class="vbtn stg" style="margin-top:24px" onclick="proceedPayment()"><i class="bi bi-arrow-right-circle"></i> Lanjutkan</button>
     </div>
 
-    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="payModal">
+    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="payModal" style="max-height:55vh">
         <div class="offcanvas-header flex-column"></div>
         <div class="offcanvas-body">
             <h6 class="fw-bold mb-3" style="font-size:.82rem;color:var(--tx)">Pilih Metode Pembayaran</h6>
+            <div id="payModalSkel">
+                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
+                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-md h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
+                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
+                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-lg h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
+                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
+                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-md h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
+            </div>
             <div id="payModalList"></div>
         </div>
     </div>
@@ -162,6 +164,7 @@
         var voucherGenerated='';
         var channels=[];
         var payModal=null;
+        var channelsLoaded=false;
 
         (function init(){
             document.getElementById('skCard').classList.add('loaded');
@@ -178,8 +181,14 @@
             document.getElementById('skPkg').classList.add('loaded');
             fetch(appUrl+'/ui/ui_custom/api/tripay_channels.php',{credentials:'include'})
             .then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json()})
-            .then(function(d){channels=d;renderPayModal();document.getElementById('skPay').classList.add('loaded')})
+            .then(function(d){channels=d;renderPayModal();channelsLoaded=true})
             .catch(function(){showToast('Gagal memuat metode pembayaran','error')})
+        }
+
+        function openPayModal(){
+            if(!payModal)payModal=new bootstrap.Offcanvas(document.getElementById('payModal'));
+            payModal.show();
+            if(!channelsLoaded)loadChannels();
         }
 
         function renderPayModal(){
@@ -189,10 +198,8 @@
                 h+='<div class="pay-modal-item" data-channel="'+ch.id+'" data-name="'+ch.name+'" data-logo="'+(ch.logo||'')+'" data-color="'+(ch.color||'')+'" data-init="'+ch.init+'" onclick="selectPayMethod(this)"><div class="pay-modal-logo" style="background:'+(ch.color||'#666')+'">'+logo+'</div><span>'+ch.name+'</span><i class="bi bi-circle"></i><i class="bi bi-check-circle-fill"></i></div>';
             });
             c.innerHTML=h;
-            payModal=new bootstrap.Offcanvas(document.getElementById('payModal'));
+            document.getElementById('payModalSkel').style.display='none';
         }
-
-        function openPayModal(){if(payModal)payModal.show()}
 
         function selectPayMethod(el){
             document.querySelectorAll('.pay-modal-item').forEach(function(e){e.classList.remove('selected')});
@@ -214,8 +221,6 @@
             if(!selectedChannel){showToast('Pilih metode pembayaran','error');return}
             showToast('Mengarahkan ke pembayaran...','success');
         }
-
-        loadChannels();
         {/literal}
     </script>
 </body>
