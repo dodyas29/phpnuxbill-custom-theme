@@ -160,7 +160,7 @@
             <div class="step-panel active" id="step1">
                 <div class="stitle">Coverage Check</div>
                 <div id="coverageMap"></div>
-                <div class="coord" id="coordDisplay" style="display:none">
+                <div class="coord" style="display:none">
                     <i class="bi bi-geo-alt-fill" style="color:var(--c6)" id="coordIcon"></i>
                     <div style="flex:1;min-width:0">
                         <div id="coordText">Click map to select location</div>
@@ -293,8 +293,7 @@
 
         function updateCoord(ll){
             userCoords=ll.lat.toFixed(6)+','+ll.lng.toFixed(6);
-            document.getElementById('coordText').textContent='Lat: '+ll.lat.toFixed(6)+'  Lng: '+ll.lng.toFixed(6);
-            document.getElementById('coordDisplay').style.display='flex';covInCoverage=false;
+            covInCoverage=false;
             for(var i=0;i<routerCircles.length;i++){if(routerCircles[i].getLatLng().distanceTo(ll)<=routerCircles[i].getRadius()){covInCoverage=true;break}}
             var icon=document.getElementById('coordIcon'),status=document.getElementById('coordStatus');
             if(covInCoverage){icon.style.color=getComputedStyle(document.body).getPropertyValue('--cg');icon.className='bi bi-check-circle-fill';status.textContent='Within coverage area';status.className='coord-status in'}
