@@ -165,15 +165,23 @@
         var payModal=null;
         var channelsLoaded=false;
 
-        (function init(){
-            document.getElementById('skCard').classList.add('loaded');
+        var selectedPackageId=null;
+
+        function genVoucherCode(){
             var cfg=document.getElementById('voucher-config');
             var prefix=cfg?cfg.getAttribute('data-prefix')||'':'';
             var hex='';
             for(var i=0;i<8;i++)hex+='0123456789ABCDEF'.charAt(Math.floor(Math.random()*16));
             voucherGenerated=prefix+hex;
             document.getElementById('voucherCode').textContent=voucherGenerated;
-            new QRCode(document.getElementById('voucherQr'),{text:voucherGenerated,width:78,height:78,colorDark:'#09090b',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+            var qrEl=document.getElementById('voucherQr');
+            qrEl.innerHTML='';
+            new QRCode(qrEl,{text:voucherGenerated,width:78,height:78,colorDark:'#09090b',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+        }
+
+        (function init(){
+            document.getElementById('skCard').classList.add('loaded');
+            genVoucherCode();
 
             fetch(appUrl+'/ui/ui_custom/api/plan.php',{credentials:'include'})
             .then(function(r){return r.json()})
@@ -205,8 +213,10 @@
         function selectPackage(el){
             document.querySelectorAll('.pkg-item').forEach(function(e){e.classList.remove('selected')});
             el.classList.add('selected');
+            selectedPackageId=el.getAttribute('data-id');
             var price=parseInt(el.getAttribute('data-price'))||0;
             document.getElementById('vcardPrice').textContent='Rp '+price.toLocaleString('id-ID');
+            genVoucherCode();
         }
 
         function loadChannels(){
