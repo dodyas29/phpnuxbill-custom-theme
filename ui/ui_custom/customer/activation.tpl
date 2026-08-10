@@ -117,17 +117,8 @@
 
         <section>
             <div class="sh stg"><h2>Pilih Paket</h2></div>
-            <div class="sk-load" id="skPkg">
-                <div class="sk-placeholder">
-                    <div style="display:flex;flex-direction:column;gap:1px;border-radius:var(--r2);overflow:hidden">
-                        <div style="background:var(--bgs);display:flex;align-items:center;gap:14px;padding:14px 16px"><span class="skl skl-bright" style="width:42px;height:46px;border-radius:6px"></span><div style="flex:1;display:flex;flex-direction:column;gap:6px"><span class="skl skl-bright w-sm h-sm"></span><span class="skl skl-bright w-xs h-xs"></span></div></div>
-                        <div style="background:var(--bgs);display:flex;align-items:center;gap:14px;padding:14px 16px"><span class="skl skl-bright" style="width:42px;height:46px;border-radius:6px"></span><div style="flex:1;display:flex;flex-direction:column;gap:6px"><span class="skl skl-bright w-md h-sm"></span><span class="skl skl-bright w-xs h-xs"></span></div></div>
-                        <div style="background:var(--bgs);display:flex;align-items:center;gap:14px;padding:14px 16px"><span class="skl skl-bright" style="width:42px;height:46px;border-radius:6px"></span><div style="flex:1;display:flex;flex-direction:column;gap:6px"><span class="skl skl-bright w-sm h-sm"></span><span class="skl skl-bright w-xs h-xs"></span></div></div>
-                    </div>
-                </div>
-                <div class="sk-content">
-                    <div class="pkg-list stg" id="pkgList"></div>
-                </div>
+            <div class="pkg-list stg" id="pkgList">
+                <div class="pc-empty">Loading...</div>
             </div>
         </section>
 
@@ -206,7 +197,6 @@
                     h+='<div class="pkg-item'+(i===0?' selected':'')+'" data-id="'+p.id+'" data-price="'+p.price+'" data-name="'+p.name+'" onclick="selectPackage(this)"><div class="pkg-cal"><div class="pkg-cal-bar"></div><div class="pkg-cal-num">'+calNum+'</div></div><div class="pkg-info"><div class="pkg-name">'+p.name+'</div><div class="pkg-price">'+p.price_formatted+'</div></div></div>';
                 });
                 list.innerHTML=h;
-                document.getElementById('skPkg').classList.add('loaded');
                 if(d.length)document.getElementById('vcardPrice').textContent='Rp '+Number(d[0].price).toLocaleString('id-ID');
             })
             .catch(function(){showToast('Gagal memuat paket','error')})
