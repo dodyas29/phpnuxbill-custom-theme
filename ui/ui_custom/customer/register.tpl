@@ -104,8 +104,8 @@
         .otp-inputs input:focus{border-color:var(--cp);box-shadow:0 0 0 3px rgba(124,58,237,.12)}
         .otp-inputs input.filled{border-color:var(--cg)}
 
-        .btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--cp);color:#fff;border:none;border-radius:var(--rp);padding:14px 28px;font-weight:600;font-size:.95rem;width:100%;min-height:50px;letter-spacing:.3px;transition:all .2s ease;cursor:pointer;box-shadow:var(--shg);font-family:var(--ff)}
-        .btn:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 12px 40px rgba(124,58,237,.3)}
+        .btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--cp);color:#fff;border:none;border-radius:var(--rp);padding:14px 28px;font-weight:600;font-size:.95rem;width:100%;min-height:50px;letter-spacing:.3px;transition:all .2s ease;cursor:pointer;box-shadow:0 2px 8px rgba(124,58,237,.12);font-family:var(--ff)}
+        .btn:hover{filter:brightness(1.05);box-shadow:0 4px 16px rgba(124,58,237,.2)}
         .btn:active{transform:translateY(0);filter:brightness(.95)}
         .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
 

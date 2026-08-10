@@ -110,9 +110,9 @@
             background:var(--cp);color:#fff;border:none;border-radius:var(--rp);
             padding:14px 28px;font-weight:600;font-size:1rem;width:100%;min-height:50px;
             letter-spacing:.3px;transition:all .2s ease;cursor:pointer;
-            box-shadow:var(--shg);position:relative;overflow:hidden
+            box-shadow:0 2px 8px rgba(124,58,237,.12);position:relative;overflow:hidden
         }
-        .btn-primary-custom:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 12px 40px rgba(124,58,237,.3)}
+        .btn-primary-custom:hover{filter:brightness(1.05);box-shadow:0 4px 16px rgba(124,58,237,.2)}
         .btn-primary-custom:active{transform:translateY(0);filter:brightness(.95)}
         .btn-primary-custom:disabled{opacity:.6;cursor:not-allowed;transform:none}
         .btn-primary-custom .spinner{display:none;width:20px;height:20px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
