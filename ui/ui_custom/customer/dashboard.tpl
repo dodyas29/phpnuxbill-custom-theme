@@ -90,6 +90,7 @@
         .ns-rx-red .ns-half-icon-label,.ns-rx-red .ns-half-icon-label i,.ns-rx-red .ns-half-icon-label span,.ns-rx-red .ns-half-value{color:var(--c6)}
         .ns-disc-error .ns-half-icon-label,.ns-disc-error .ns-half-icon-label i,.ns-disc-error .ns-half-icon-label span,.ns-disc-error .ns-half-value,.ns-disc-error .ns-half-sub{color:var(--c6)}
         #nsDiscCol{text-align:right}
+        #nsDiscCol .ns-half-icon-label{justify-content:flex-end}
 
         /* Chart */
         .ns-chart-outer{background:var(--bg);border:1px solid var(--bd);border-radius:10px;margin-bottom:14px}
@@ -219,7 +220,7 @@
                     <div class="ns-top"><span class="skl skl-bright h-xl" style="width:40px;height:40px;border-radius:10px"></span><div style="flex:1;display:flex;flex-direction:column;gap:4px"><span class="skl skl-bright w-sm h-sm" style="width:90px;height:14px"></span><span class="skl skl-bright w-xs h-xs" style="width:60px;height:10px"></span></div><span class="skl skl-bright w-xs h-xs pill" style="width:56px;height:26px"></span></div>
                     <div class="ns-info-row">
                         <div class="ns-info-half"><span class="skl skl-bright w-xs h-xs" style="width:70px;height:18px;margin-bottom:6px;display:block"></span><span class="skl skl-bright w-md h-md"></span><span class="skl skl-bright w-sm h-xs" style="margin-top:4px;display:block"></span></div>
-                        <div class="ns-info-half"><span class="skl skl-bright w-xs h-xs" style="width:90px;height:18px;margin-bottom:6px;display:block"></span><span class="skl skl-bright w-md h-sm" style="font-size:.78rem"></span><span class="skl skl-bright w-lg h-xs" style="margin-top:4px;display:block"></span></div>
+                        <div class="ns-info-half" style="text-align:right"><span class="skl skl-bright w-xs h-xs" style="width:90px;height:18px;margin-bottom:6px;display:block;margin-left:auto"></span><span class="skl skl-bright w-md h-sm" style="font-size:.78rem;margin-left:auto"></span><span class="skl skl-bright w-lg h-xs" style="margin-top:4px;display:block;margin-left:auto"></span></div>
                     </div>
                     <div class="ns-chart-outer">
                         <div class="ns-chart-wrap">
