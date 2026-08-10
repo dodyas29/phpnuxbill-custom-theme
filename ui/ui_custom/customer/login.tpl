@@ -160,12 +160,9 @@
 
     <div class="login-wrap">
         <div class="logo-wrap">
-            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="80" height="80" rx="20" fill="url(#logoGrad)"/>
-                <path d="M56 40h-6m6 0a12 12 0 00-12-12m12 12a20 20 0 00-20-20m20 20a28 28 0 00-28-28" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".9"/>
-                <circle cx="40" cy="40" r="5" fill="#fff"/>
-                <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="80" y2="80"><stop stop-color="var(--cp)"/><stop offset="1" stop-color="var(--cd)"/></linearGradient></defs>
-            </svg>
+            {if isset($_c['login_page_logo']) && $_c['login_page_logo'] != ''}
+                <img src="{$app_url}/{$UPLOAD_PATH}/{$_c['login_page_logo']}" style="width:72px;height:72px;margin:0 auto 16px;display:block;object-fit:contain;border-radius:12px" onerror="this.style.display='none'">
+            {/if}
             <h1>{$_c['CompanyName']}</h1>
             <p>{Lang::T('Login to Member Panel')}</p>
         </div>
