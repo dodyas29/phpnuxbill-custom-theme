@@ -121,7 +121,7 @@
             <div class="sh stg"><h2>Pilih Paket</h2></div>
             <div class="pay-select stg" onclick="openPkgModal()">
                 <i class="bi bi-box" id="pkgSelectLogo" style="color:var(--t3);font-size:1.2rem"></i>
-                <span class="pay-select-text" id="pkgSelectText" style="color:var(--t3)">Pilih paket internet</span>
+                <span class="pay-select-text" id="pkgSelectText" style="color:var(--t3)">Pilih Paket Voucher</span>
             </div>
         </section>
 
@@ -216,17 +216,9 @@
                 var catIcons={harian:1,mingguan:7,bulanan:30};
                 d.forEach(function(p,i){
                     var calNum=catIcons[p.category]||p.validity_days||1;
-                    h+='<div class="pkg-item'+(i===0?' selected':'')+'" data-id="'+p.id+'" data-price="'+p.price+'" data-name="'+p.name+'" onclick="selectPackage(this)"><div class="pkg-cal"><div class="pkg-cal-bar"></div><div class="pkg-cal-num">'+calNum+'</div></div><div class="pkg-info"><div class="pkg-name">'+p.name+'</div><div class="pkg-price">'+p.price_formatted+'</div></div><i class="bi bi-check-lg"></i></div>';
+                    h+='<div class="pkg-item" data-id="'+p.id+'" data-price="'+p.price+'" data-name="'+p.name+'" onclick="selectPackage(this)"><div class="pkg-cal"><div class="pkg-cal-bar"></div><div class="pkg-cal-num">'+calNum+'</div></div><div class="pkg-info"><div class="pkg-name">'+p.name+'</div><div class="pkg-price">'+p.price_formatted+'</div></div><i class="bi bi-check-lg"></i></div>';
                 });
                 list.innerHTML=h;
-                if(d.length){
-                    selectedPackageId=d[0].id;
-                    document.getElementById('vcardPrice').textContent='Rp '+Number(d[0].price).toLocaleString('id-ID');
-                    document.getElementById('pkgSelectText').textContent=d[0].name+' - '+d[0].price_formatted;
-                    document.getElementById('pkgSelectText').style.color='';
-                    document.getElementById('pkgSelectLogo').className='bi bi-box';
-                    document.getElementById('pkgSelectLogo').style.color='var(--c1)';
-                }
             })
             .catch(function(){showToast('Gagal memuat paket','error')})
         }
