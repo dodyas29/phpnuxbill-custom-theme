@@ -105,7 +105,7 @@
                         <div class="vcard-body">
                             <div class="vcard-left">
                                 <span class="vcard-code-label">Kode Voucher</span>
-                                <span class="vcard-code" id="voucherCode">{if isset($_c['voucher_prefix'])}{$_c['voucher_prefix']|escape:'html'}XXXXXXXX{else}XXXXXXXX{/if}</span>
+                                <span class="vcard-code" id="voucherCode">{if isset($_c['voucher_prefix'])}{$_c['voucher_prefix']|escape:'html'}00000000{else}00000000{/if}</span>
                                 <span class="vcard-code-note">Simpan kode voucher sebelum masa aktif habis</span>
                                 <span class="vcard-code-note">Scan QR menggunakan browser Chrome.</span>
                             </div>
@@ -199,7 +199,6 @@
 
         (function init(){
             document.getElementById('skCard').classList.add('loaded');
-            genVoucherCode();
 
             fetch(appUrl+'/ui/ui_custom/api/plan.php',{credentials:'include'})
             .then(function(r){return r.json()})
