@@ -22,6 +22,7 @@
         .hero-plan{font-size:.78rem;font-weight:700;letter-spacing:-.3px}
         .hero-bw{font-size:.68rem;font-weight:600;opacity:.6}
         .hero-bw-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.1);padding:5px 12px;border-radius:var(--rp);font-size:.66rem;font-weight:600;vertical-align:middle}
+        .hero-plan-price{margin-left:auto;font-size:.72rem;font-weight:600;opacity:.7}
         .hero-divider{height:1px;background:rgba(255,255,255,.08);margin:0 0 14px}
         .hero-numbers{display:flex;gap:16px;margin-bottom:16px}
         .hero-num{flex:1}
@@ -183,6 +184,7 @@
                 <div class="hero-plan-line">
                     <span class="skl skl-bright w-lg h-md" style="width:180px" id="sklPlan"></span>
                     <span class="skl skl-bright w-xs h-sm pill" style="width:70px" id="sklBw"></span>
+                    <span class="skl skl-bright w-xs h-sm pill" style="width:80px;margin-left:auto" id="sklPlanPrice"></span>
                 </div>
                 <div class="hero-divider"></div>
                 <div class="hero-numbers">
@@ -395,6 +397,10 @@
             var sP=document.getElementById('sklPlan'),sBw=document.getElementById('sklBw');
             if(sP){sP.className='hero-plan';sP.style.cssText='';sP.textContent=p?p.name:L.noPlan}
             if(sBw&&p){sBw.className='hero-bw-badge';sBw.style.cssText='';sBw.textContent=p.bw_name&&p.bw_name!=='-'?p.bw_name:''}
+
+            // Plan price
+            var sPr=document.getElementById('sklPlanPrice');
+            if(sPr){sPr.className='hero-plan-price';sPr.style.cssText='';sPr.textContent='Rp '+Number(p?p.price:0).toLocaleString('id-ID')}
 
             // Status badge
             var hs=document.getElementById('heroStatus');
