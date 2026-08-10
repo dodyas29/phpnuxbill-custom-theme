@@ -365,26 +365,8 @@
         <script>var hh="http://{$hostname}/login",hu="{$_user['username']}",hp="{$_user['password']}",hd="{$apkurl}",hda="2";var hk=hexMD5('{$key1}'+hp+'{$key2}'),ha=hh+'?username='+hu+'&dst='+hd+'&password='+hk;document.write('<meta http-equiv="refresh" target="_blank" content="'+hda+'; url='+ha+'">');</script>
     {/if}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+{include file="components/_scripts_common.tpl"}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
-    <meta id="js-data"
-        data-t-light="{Lang::T('Light Mode')|escape}"
-        data-t-dark="{Lang::T('Dark Mode')|escape}"
-        data-t-active="{Lang::T('Active')|escape}"
-        data-t-expired="{Lang::T('Expired')|escape}"
-        data-t-no-plan="{Lang::T('No active plan')|escape}"
-        data-t-no-trx="{Lang::T('No transactions')|escape}"
-        data-t-days="{Lang::T('days')|escape}"
-        data-t-recharge="{Lang::T('Recharge')|escape}"
-        data-t-extend="{Lang::T('Extend')|escape}"
-        data-t-stop="{Lang::T('Stop')|escape}"
-        data-t-buy="{Lang::T('Buy Package')|escape}"
-        data-t-paid="{Lang::T('Paid')|escape}"
-        data-t-pending="{Lang::T('Pending')|escape}"
-        data-t-retry="{Lang::T('Retry')|escape}"
-        data-t-error="{Lang::T('Failed to load')|escape}"
-        data-csrf="{$csrf_token}">
 
     <script>
         {literal}
