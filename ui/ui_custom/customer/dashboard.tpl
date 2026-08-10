@@ -89,6 +89,7 @@
         .ns-rx-yellow .ns-half-icon-label,.ns-rx-yellow .ns-half-icon-label i,.ns-rx-yellow .ns-half-icon-label span,.ns-rx-yellow .ns-half-value{color:var(--c5)}
         .ns-rx-red .ns-half-icon-label,.ns-rx-red .ns-half-icon-label i,.ns-rx-red .ns-half-icon-label span,.ns-rx-red .ns-half-value{color:var(--c6)}
         .ns-disc-error .ns-half-icon-label,.ns-disc-error .ns-half-icon-label i,.ns-disc-error .ns-half-icon-label span,.ns-disc-error .ns-half-value,.ns-disc-error .ns-half-sub{color:var(--c6)}
+        #nsDiscCol{text-align:right}
 
         /* Chart */
         .ns-chart-outer{background:var(--bg);border:1px solid var(--bd);border-radius:10px;margin-bottom:14px}
@@ -477,7 +478,7 @@
             // Last Disconnect — red only on error reason
             var discCol=document.getElementById('nsDiscCol');
             if(d.last_disconnect){
-                document.getElementById('nsDiscDate').textContent=d.last_disconnect.date+' '+d.last_disconnect.time;
+                document.getElementById('nsDiscDate').textContent=(d.last_disconnect.time||'').replace(' WIB','')+' '+(d.last_disconnect.date||'');
                 document.getElementById('nsDiscDetail').textContent=(d.last_disconnect.reason||'')+' · '+(d.last_disconnect.duration||'');
                 var re=/error|fail|timeout|down|loss/i;
                 if(discCol)discCol.className='ns-info-half '+(re.test(d.last_disconnect.reason||'')?'ns-disc-error':'');
