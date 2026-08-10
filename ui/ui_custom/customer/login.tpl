@@ -178,14 +178,14 @@
                             {elseif $_c['registration_username'] == 'email'}{Lang::T('Email')}
                             {else}{Lang::T('Username')}{/if}
                         </span>
-                        <input type="text" name="username" required autocomplete="username" autofocus placeholder=" ">
+                        <input type="text" name="username" required autocomplete="username" autofocus placeholder="{if $_c['registration_username'] == 'phone'}{Lang::T('Phone Number')}{elseif $_c['registration_username'] == 'email'}{Lang::T('Email')}{else}{Lang::T('Username')}{/if}">
                     </div>
                 </div>
 
                 <div class="field">
                     <div class="field-wrap">
                         <span class="fl">{Lang::T('Password')}</span>
-                        <input type="password" id="password" name="password" required autocomplete="current-password" placeholder=" ">
+                        <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="{Lang::T('Password')}">
                         <button type="button" class="pw-toggle" id="togglePassword" aria-label="Toggle password">
                             <i class="bi bi-eye-slash"></i>
                         </button>
