@@ -184,7 +184,7 @@
                         <input type="tel" id="waPhone" placeholder="WhatsApp Number" inputmode="numeric">
                     </div>
                     <button class="btn" id="sendOtpBtn" disabled onclick="sendOTP()">Kirim Kode Verifikasi <i class="bi bi-whatsapp"></i></button>
-                    <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="goStep(1)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
+                    <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="goBack(1)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
                 </div>
                 <div id="step2b" style="display:none">
                     <div class="coord" style="margin-bottom:14px">
@@ -201,7 +201,7 @@
                     </div>
                     <div class="field-hint" id="otpMsg"></div>
                     <button class="btn" id="step2Next" disabled>Verifikasi & Lanjut <i class="bi bi-arrow-right"></i></button>
-                    <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="goStep(1)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
+                    <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="goBack(1)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
                 </div>
             </div>
 
@@ -231,7 +231,7 @@
                         <button type="button" class="pw-toggle" onclick="togglePw('cpassword',this)"><i class="bi bi-eye-slash"></i></button>
                     </div>
                     <button type="submit" class="btn"><i class="bi bi-person-check"></i> Selesai & Daftar</button>
-                    <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="goStep(2)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
+                    <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="goBack(2)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
                 </form>
             </div>
         </div>
@@ -276,6 +276,14 @@
 
         function showDots(el){el._old=el.innerHTML;el.innerHTML='<div class="btn-dots"><span></span><span></span><span></span></div>';el.disabled=true}
         function hideDots(el){el.innerHTML=el._old;el.disabled=false}
+
+        function goBack(n){
+            document.querySelectorAll('.step-panel').forEach(function(p){p.classList.remove('active')});
+            document.getElementById('step'+n).classList.add('active');currentStep=n;
+            var dots=document.querySelectorAll('.step-dot');
+            dots.forEach(function(d,i){var s=parseInt(d.getAttribute('data-step'));d.classList.remove('active','done');if(s<n)d.classList.add('done');if(s===n)d.classList.add('active')});
+            document.querySelectorAll('.step-line').forEach(function(l){var p=l.getAttribute('data-between').split('-');if(parseInt(p[1])<=n)l.classList.add('done');else l.classList.remove('done')});
+        }
 
         function goStep(n){
             var btn=document.querySelector('#step'+currentStep+' .btn');
