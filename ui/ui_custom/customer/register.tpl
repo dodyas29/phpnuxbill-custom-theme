@@ -201,7 +201,7 @@
                     </div>
                     <div class="field-hint" id="otpMsg"></div>
                     <button class="btn" id="step2Next" disabled>Verifikasi & Lanjut <i class="bi bi-arrow-right"></i></button>
-                    <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="goBack(1)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
+                    <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="document.getElementById('step2a').style.display='block';document.getElementById('step2b').style.display='none';document.getElementById('sendOtpBtn').style.display='';document.getElementById('sendOtpBtn').disabled=false;otpInputs.forEach(function(i){i.value='';i.classList.remove('filled');i.disabled=false})" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
                 </div>
             </div>
 
@@ -334,9 +334,9 @@
             var phone=document.getElementById('waPhone').value.replace(/\D/g,'');
             if(phone.length<10){showToast('Nomor WhatsApp tidak valid','error');return}
             var btn=document.getElementById('sendOtpBtn');
-            btn.disabled=true;btn.textContent='Mengirim...';
+            showDots(btn);
             setTimeout(function(){
-                btn.style.display='none';document.getElementById('step2a').style.display='none';
+                hideDots(btn);btn.style.display='none';document.getElementById('step2a').style.display='none';
                 document.getElementById('step2b').style.display='block';
                 document.getElementById('waDisplay').textContent=phone;otpInputs[0].focus();
             },800);
@@ -385,9 +385,9 @@
             var btn=this.querySelector('button[type=submit]');
             var phone=document.getElementById('waPhone').value.replace(/\D/g,'');
             document.getElementById('phonenumber').value=phone;
-            if(!regPhone){e.preventDefault();btn.disabled=true;btn.innerHTML='Menyimpan...';
+            if(!regPhone){e.preventDefault();showDots(btn);
                 fetch(appUrl+'/ui/ui_custom/api/hold_registration_data.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone,coordinates:userCoords})})
-                .then(function(){regPhone=true;btn.disabled=false;btn.innerHTML='<i class="bi bi-person-check"></i> Selesai & Daftar';document.getElementById('regForm').submit()});
+                .then(function(){hideDots(btn);regPhone=true;btn.disabled=false;btn.innerHTML='<i class="bi bi-person-check"></i> Selesai & Daftar';document.getElementById('regForm').submit()});
             }
         });
         {/literal}
