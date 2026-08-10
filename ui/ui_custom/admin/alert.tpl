@@ -23,7 +23,7 @@
         .aw-icon{font-size:3rem;margin-bottom:12px;color:#fff}
         .aw-text{font-size:.95rem;font-weight:500;color:rgba(255,255,255,.9);line-height:1.6;margin-bottom:24px}
         .aw-bar{height:4px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden;margin-bottom:20px}
-        .aw-bar-fill{height:100%;border-radius:2px;width:100%;background:#fff;transition:width 1s linear}
+        .aw-bar-fill{height:100%;border-radius:2px;width:0%;background:#fff;transition:width 1s linear}
         .aw-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 24px;border-radius:var(--rp);font-size:.8rem;font-weight:600;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.25);transition:all .15s;font-family:var(--ff)}
         .aw-btn:hover{background:rgba(255,255,255,.15)}
         .aw-footer{margin-top:32px;font-size:.66rem;color:rgba(255,255,255,.4)}
@@ -53,7 +53,7 @@
         function tick(){
             t--;
             document.getElementById('awCount').textContent='('+t+')';
-            bar.style.width=Math.max(0,(t/{$time})*100)+'%';
+            bar.style.width=Math.min(100,(({$time}-t)/{$time})*100)+'%';
             if(t>=0)setTimeout(tick,1000);
             else window.location.href='{$url}';
         }
