@@ -21,7 +21,7 @@
         .vcard-code-label{font-size:.56rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
         .vcard-code{font-size:1.05rem;font-weight:700;font-family:'Courier New',monospace;color:var(--tx);letter-spacing:.5px;word-break:break-all}
         .vcard-code-note{font-size:.58rem;color:var(--t2);line-height:1.4}
-        .vcard-qr{width:86px;height:86px;border-radius:10px;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:4px;background:#fff;flex-shrink:0}
+        .vcard-qr{width:96px;height:96px;border-radius:12px;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;background:#fff;flex-shrink:0}
         .vcard-footer{border-top:1px solid var(--bd);padding-top:10px;font-size:.56rem;color:var(--t3);text-align:center;line-height:1.5}
 
         .pkg-list{display:flex;flex-direction:column;gap:8px}
@@ -86,7 +86,7 @@
                                 <span class="skl skl-bright w-full h-md"></span>
                                 <span class="skl skl-bright w-lg h-xs"></span>
                             </div>
-                            <span class="skl skl-bright" style="width:86px;height:86px;border-radius:10px"></span>
+                            <span class="skl skl-bright" style="width:96px;height:96px;border-radius:12px"></span>
                         </div>
                         <div class="vcard-footer">
                             <span class="skl skl-bright w-md h-xs"></span>
