@@ -219,7 +219,6 @@
                         <input type="text" name="username" id="username" required placeholder="{Lang::T('Username')}">
                     </div>
                     <div class="field-hint" id="usernameHint">Auto-generated from your name</div>
-                    <div class="suggest-list" id="suggestList"></div>
                     <div class="field-wrap">
                         <span class="fl">{Lang::T('Password')}</span>
                         <input type="password" name="password" id="password" required placeholder="{Lang::T('Password')}">
@@ -373,14 +372,14 @@
 
         function checkUsername(u){if(u.length<3)return;
             fetch(appUrl+'/ui/ui_custom/api/check_username.php?username='+encodeURIComponent(u)).then(function(r){return r.json()}).then(function(d){
-                var hint=document.getElementById('usernameHint'),list=document.getElementById('suggestList');
-                if(d.available){hint.innerHTML='<i class="bi bi-check-circle-fill"></i> Username tersedia';hint.className='field-hint ok';list.innerHTML=''}
-                else{hint.textContent='Username sudah digunakan';hint.className='field-hint err';
-                    if(d.suggestions.length){var s='';d.suggestions.forEach(function(x){s+='<span class="suggest-chip" onclick="selectSuggestion(\''+x+'\')">'+x+'</span>'});list.innerHTML=s}}
+                var hint=document.getElementById('usernameHint');
+                if(d.available){hint.innerHTML='<i class="bi bi-check-circle-fill"></i> Username tersedia';hint.className='field-hint ok'}
+                else{hint.innerHTML='Username sudah digunakan. '+(d.suggestions.length?'Saran: <a href=\"javascript:void(0)\" onclick=\"selectSuggestion(\''+d.suggestions[0]+'\')\">'+d.suggestions[0]+'</a>':'');
+                    hint.className='field-hint err'}
             }).catch(function(){});
         }
 
-        function selectSuggestion(u){document.getElementById('username').value=u;checkUsername(u);document.querySelectorAll('.suggest-chip').forEach(function(c){c.classList.remove('selected')});event.target.classList.add('selected')}
+        function selectSuggestion(u){document.getElementById('username').value=u;checkUsername(u);}
 
         function togglePw(id,btn){var el=document.getElementById(id),icon=btn.querySelector('i');if(el.type==='password'){el.type='text';icon.className='bi bi-eye'}else{el.type='password';icon.className='bi bi-eye-slash'}}
 
