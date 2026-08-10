@@ -21,7 +21,8 @@
         .vcard-code-label{font-size:.56rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
         .vcard-code{font-size:1.05rem;font-weight:700;font-family:'Courier New',monospace;color:var(--tx);letter-spacing:.5px;word-break:break-all}
         .vcard-code-note{font-size:.58rem;color:var(--t2);line-height:1.4}
-        .vcard-qr{width:96px;height:96px;border-radius:12px;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;background:#fff;flex-shrink:0}
+        .vcard-qr{width:96px;height:96px;border-radius:12px;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;background:#fff;flex-shrink:0;cursor:pointer}
+        .qr-big{margin:0 auto;width:240px;height:240px;border-radius:12px;overflow:hidden;padding:12px;background:#fff}
 
         .pkg-list{display:flex;flex-direction:column;gap:8px}
         .pkg-item{background:var(--bgs);border:1.5px solid var(--bd);border-radius:var(--r2);display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;transition:all .12s}
@@ -108,7 +109,7 @@
                                 <span class="vcard-code-note">Simpan kode voucher sebelum masa aktif habis</span>
                                 <span class="vcard-code-note">Scan QR menggunakan browser Chrome.</span>
                             </div>
-                            <div class="vcard-qr" id="voucherQr"></div>
+                            <div class="vcard-qr" id="voucherQr" onclick="openQrModal()"></div>
                         </div>
                     </div>
                 </div>
@@ -155,6 +156,13 @@
             <div class="pkg-list stg" id="pkgList">
                 <div class="pc-empty">Loading...</div>
             </div>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="qrModal">
+        <div class="offcanvas-header flex-column"></div>
+        <div class="offcanvas-body">
+            <div class="qr-big" id="qrBig"></div>
         </div>
     </div>
 
@@ -278,6 +286,15 @@
                 pl.outerHTML='<span class="pay-select-logo" id="paySelectLogo" style="background:'+(color||'var(--bgc)')+'"><span>'+init.substring(0,2)+'</span></span>';
             }
             if(payModal)payModal.hide();
+        }
+
+        var qrModal=null;
+        function openQrModal(){
+            if(!qrModal)qrModal=new bootstrap.Offcanvas(document.getElementById('qrModal'));
+            var qrEl=document.getElementById('qrBig');
+            qrEl.innerHTML='';
+            new QRCode(qrEl,{text:voucherGenerated,width:216,height:216,colorDark:'#09090b',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.H});
+            qrModal.show();
         }
 
         function proceedPayment(){
