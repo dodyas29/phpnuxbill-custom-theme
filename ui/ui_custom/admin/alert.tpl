@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{$app_url}/ui/ui_custom/assets/css/style.css">
     <style>
+        {literal}
         *,::before,::after{box-sizing:border-box;margin:0;padding:0}
         body{
             font-family:var(--ff);background:var(--bg);color:var(--tx);
@@ -30,6 +31,7 @@
         .aw-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 24px;border-radius:var(--rp);font-size:.8rem;font-weight:600;text-decoration:none;color:var(--tx);border:1px solid var(--bd);transition:all .15s;font-family:var(--ff)}
         .aw-btn:hover{background:var(--bgc);border-color:var(--c1);color:var(--c1)}
         .aw-footer{margin-top:32px;font-size:.66rem;color:var(--t3)}
+        {/literal}
     </style>
 </head>
 <body>
