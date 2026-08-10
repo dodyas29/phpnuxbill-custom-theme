@@ -9,9 +9,9 @@
         .sk-load.loaded .sk-placeholder{display:none}
         .sk-load.loaded .sk-content{display:block}
 
-        .vcard{background:linear-gradient(160deg,var(--bgs) 0%,color-mix(in srgb,var(--c1) 6%,var(--bgs)) 100%);border:1px solid var(--bd);border-radius:var(--r3);padding:22px 20px 18px;margin-bottom:4px;position:relative;overflow:hidden}
+        .vcard{background:var(--bgs);border:2px dashed var(--bd);border-radius:var(--r3);padding:22px 20px 18px;margin-bottom:4px;position:relative;overflow:hidden}
         .vcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c4))}
-        .vcard::after{content:'';position:absolute;top:-40px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(129,140,248,.06) 0%,transparent 70%);pointer-events:none}
+        .vcard::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0,transparent 24px,rgba(129,140,248,.04) 24px,rgba(129,140,248,.04) 25px);pointer-events:none}
         .vcard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
         .vcard-brand{display:flex;align-items:center;gap:10px;min-width:0}
         .vcard-brand-img{width:36px;height:36px;border-radius:8px;object-fit:contain;border:1px solid var(--bd);flex-shrink:0}
