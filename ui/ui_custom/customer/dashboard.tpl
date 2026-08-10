@@ -2,6 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
 {include file="components/_head_common.tpl"}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         {literal}
         .hero{position:relative;overflow:hidden;border-radius:var(--r3);padding:28px 24px 24px;margin-bottom:16px;color:#fff;background:linear-gradient(135deg,#1e1b4b,#312e81,#3730a3,#1e3a5f);box-shadow:0 0 80px rgba(99,102,241,.15),0 4px 24px rgba(0,0,0,.4);min-height:240px}
@@ -366,7 +367,6 @@
     {/if}
 
 {include file="components/_scripts_common.tpl"}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <script>
         {literal}
