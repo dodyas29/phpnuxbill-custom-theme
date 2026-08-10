@@ -1,50 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-    <meta name="theme-color" content="#09090b" id="themeColorMeta">
-    <title>{$_title} &mdash; {$_c['CompanyName']}</title>
-    <link rel="shortcut icon" href="{$app_url}/ui/ui/images/logo.png" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <script>var appUrl='{$app_url}';</script>
+{include file="components/_head_common.tpl"}
     <style>
         {literal}
-        *,::before,::after{box-sizing:border-box;margin:0;padding:0}
-        :root,[data-theme=dark]{--c1:#818cf8;--c2:#a78bfa;--c3:#38bdf8;--c4:#34d399;--c5:#fb923c;--c6:#f87171;--bg:#09090b;--bgs:#18181b;--bgc:#27272a;--bgh:#1f1f23;--tx:#fafafa;--t2:#a1a1aa;--t3:#71717a;--bd:#27272a;--bd2:#3f3f46;--r1:8px;--r2:12px;--r3:18px;--rp:9999px;--sh1:0 1px 2px rgba(0,0,0,.3);--sh2:0 4px 12px rgba(0,0,0,.4);--sb:env(safe-area-inset-bottom,0px);--st:env(safe-area-inset-top,0px);--ff:'Inter',system-ui,-apple-system,sans-serif;--ah:56px;--bn:64px;--sk:rgba(255,255,255,.08);--sk-shine:rgba(255,255,255,.05);--sk-bright:rgba(255,255,255,.20);--sk-shine-bright:rgba(255,255,255,.10)}
-        [data-theme=light]{--c1:#6366f1;--c2:#8b5cf6;--c3:#0ea5e9;--c4:#10b981;--c5:#f97316;--c6:#ef4444;--bg:#fafafa;--bgs:#ffffff;--bgc:#f4f4f5;--bgh:#f0f0f1;--tx:#18181b;--t2:#71717a;--t3:#a1a1aa;--bd:#e4e4e7;--bd2:#d4d4d8;--sh1:0 1px 3px rgba(0,0,0,.04);--sh2:0 4px 16px rgba(0,0,0,.06);--sk:rgba(0,0,0,.08);--sk-shine:rgba(0,0,0,.03);--sk-bright:rgba(0,0,0,.10);--sk-shine-bright:rgba(0,0,0,.05)}
-        html{color-scheme:dark}[data-theme=light]{color-scheme:light}
-        body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh;min-height:100dvh;padding:calc(var(--ah) + var(--st)) 0 calc(var(--bn) + var(--sb) + 48px) 0;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-        ::-webkit-scrollbar{width:0;height:0}
-
-        .ab{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--ah);padding-top:var(--st);background:rgba(9,9,11,.78);backdrop-filter:blur(24px)saturate(180%);-webkit-backdrop-filter:blur(24px)saturate(180%);border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;padding-left:16px;padding-right:16px}
-        [data-theme=light] .ab{background:rgba(250,250,250,.78);border-bottom:1px solid rgba(0,0,0,.06)}
-        .ab-l{display:flex;align-items:center;gap:10px;min-width:0}
-        .ab-logo{display:flex;align-items:center;gap:8px}
-        .ab-logo-img{width:28px;height:28px;object-fit:contain;border-radius:6px;flex-shrink:0}
-        .ab-l span{font-size:.95rem;font-weight:700;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.3px}
-        .ab-r{display:flex;align-items:center;gap:2px;flex-shrink:0}
-        .ab-btn{background:none;border:none;color:var(--t2);font-size:1.2rem;padding:10px;cursor:pointer;position:relative;min-width:42px;min-height:42px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .15s}
-        .ab-btn:active{transform:scale(.92);background:var(--bgc)}
-        .ab-badge{position:absolute;top:4px;right:4px;min-width:8px;height:8px;border-radius:50%;background:var(--c6)}
-        .ab-chip{display:flex;align-items:center;gap:6px;background:var(--bgs);border:1px solid var(--bd);padding:6px 12px;border-radius:var(--rp);font-size:.72rem;font-weight:600;color:var(--tx);margin-right:4px}
-        .ab-chip i{font-size:.8rem;color:var(--c1)}
-        .ab-av{width:32px;height:32px;border-radius:50%;object-fit:cover;cursor:pointer;border:2px solid var(--bd);transition:all .15s;flex-shrink:0}
-        .ab-av:active{transform:scale(.9)}
-
-        .cw{max-width:480px;margin:0 auto;padding:20px 16px 40px}
-        .stg{animation:stg .5s ease-out both}
-        .stg:nth-child(1){animation-delay:0s}.stg:nth-child(2){animation-delay:.05s}.stg:nth-child(3){animation-delay:.1s}.stg:nth-child(4){animation-delay:.15s}.stg:nth-child(5){animation-delay:.2s}.stg:nth-child(6){animation-delay:.25s}.stg:nth-child(7){animation-delay:.3s}.stg:nth-child(8){animation-delay:.35s}
-        @keyframes stg{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-
-        .sh{margin:28px 0 12px;display:flex;align-items:center;gap:12px}
-        .sh h2{font-size:.65rem;font-weight:700;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;margin:0}
-        .sh::after{content:'';flex:1;height:1px;background:var(--bd)}
-
         .hero{position:relative;overflow:hidden;border-radius:var(--r3);padding:28px 24px 24px;margin-bottom:16px;color:#fff;background:linear-gradient(135deg,#1e1b4b,#312e81,#3730a3,#1e3a5f);box-shadow:0 0 80px rgba(99,102,241,.15),0 4px 24px rgba(0,0,0,.4);min-height:240px}
         [data-theme=light] .hero{background:linear-gradient(135deg,#312e81,#4338ca,#6366f1,#0ea5e9);box-shadow:0 0 80px rgba(99,102,241,.12),0 4px 24px rgba(0,0,0,.08)}
         .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(192,132,252,.12)0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(56,189,248,.08)0%,transparent 60%);pointer-events:none}
@@ -77,8 +36,6 @@
         .hero-btn.s{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.1)}
         .hero-btn.s:active{transform:scale(.97)}
 
-        .pc-empty{text-align:center;padding:28px 20px;color:var(--t3);font-size:.8rem;line-height:1.6}
-
         .qa{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:8px}
         .qa a{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r2);padding:18px 8px;text-decoration:none;color:var(--tx);display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .15s}
         .qa a:active{transform:scale(.95);border-color:var(--c1)}
@@ -96,11 +53,6 @@
         .tx-mid .tx-sub{font-size:.66rem;color:var(--t3);margin-top:1px}
         .tx-end{text-align:right;flex-shrink:0}
         .tx-end .tx-amount{font-size:.8rem;font-weight:700;letter-spacing:-.2px}
-
-        .btn-xs{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border-radius:var(--rp);font-size:.66rem;font-weight:600;cursor:pointer;transition:all .15s;border:1px solid var(--bd);background:transparent;color:var(--t2);text-decoration:none;letter-spacing:.3px}
-        .btn-xs:active{transform:scale(.95)}
-        .btn-xs.primary{border-color:var(--c1);color:var(--c1)}
-        .btn-xs.danger{border-color:var(--c6);color:var(--c6)}
 
         /* ====== NETWORK STATUS ====== */
         .ns-card{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r3);padding:22px 20px;margin-bottom:10px}
@@ -207,78 +159,11 @@
         .ns-submit.danger{background:var(--c6);color:#fff}.ns-submit.danger:disabled{opacity:.3;cursor:not-allowed}
         .ns-submit.danger:not(:disabled):active{filter:brightness(.9)}
 
-        .bn{position:fixed;bottom:0;left:0;right:0;z-index:100;height:var(--bn);padding-bottom:var(--sb);background:rgba(9,9,11,.82);backdrop-filter:blur(24px)saturate(180%);-webkit-backdrop-filter:blur(24px)saturate(180%);border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-around}
-        [data-theme=light] .bn{background:rgba(250,250,250,.82);border-top:1px solid rgba(0,0,0,.06)}
-        .bn a{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--t3);font-size:.58rem;font-weight:600;text-decoration:none;padding:6px 10px;border-radius:var(--r1);transition:all .15s;position:relative}
-        .bn a i{font-size:1.2rem}
-        .bn a.active{color:var(--c1)}
-        .bn a.active::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:16px;height:3px;background:var(--c1);border-radius:0 0 3px 3px}
-        .bn a:active{transform:scale(.9)}
-
-        .os{height:auto!important;max-height:85vh;border-radius:var(--r3)var(--r3)0 0;border:none;background:var(--bgs)!important}
-        .os .offcanvas-header{flex-direction:column;padding:20px 20px 0;border:none}
-        .os .offcanvas-header::before{content:'';width:36px;height:4px;background:var(--bd2);border-radius:2px;margin-bottom:16px}
-        .os .offcanvas-body{padding:8px 20px 32px}
-        .mi{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:var(--r2);color:var(--tx);text-decoration:none;font-size:.86rem;font-weight:500;transition:all .1s;cursor:pointer;border:none;background:none;width:100%;text-align:left;font-family:var(--ff)}
-        .mi:active{background:var(--bgc)}
-        .mi i{font-size:1.1rem;color:var(--t2);width:22px;text-align:center}
-        .mi.danger{color:var(--c6)}.mi.danger i{color:var(--c6)}
-        .mi-div{height:1px;background:var(--bd2);margin:8px 0}
-        .ms-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;color:var(--tx);text-decoration:none;font-size:.85rem;font-weight:500;transition:all .1s}
-        .ms-item:active{background:var(--bgc)}
-        .ms-item i{font-size:1.2rem;color:var(--t2);width:24px;text-align:center}
-        .ms-trail{font-size:.72rem;color:var(--t2);margin-left:auto;display:flex;align-items:center;gap:6px}
-        .ms-item .ms-trail i{font-size:.8rem;width:auto}
-        .ms-item.danger{color:var(--c6)}.ms-item.danger i{color:var(--c6)}
-        .ms-toggle{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-radius:12px;color:var(--tx);font-size:.85rem;font-weight:500;cursor:pointer;transition:all .1s}
-        .ms-toggle:active{background:var(--bgc)}
-        .ms-toggle i{font-size:1.2rem;color:var(--t2);width:24px;text-align:center}
-        .ms-toggle .ms-switch{width:44px;height:26px;border-radius:13px;background:var(--t3);position:relative;transition:background .25s}
-        .ms-toggle .ms-switch::after{content:'';position:absolute;width:20px;height:20px;border-radius:50%;background:var(--tx);top:3px;left:3px;transition:transform .25s}
-        .ms-toggle.on .ms-switch{background:var(--c1)}
-        .ms-toggle.on .ms-switch::after{transform:translateX(18px)}
-
-        .tc{position:fixed;bottom:calc(var(--bn)+var(--sb)+20px);left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;align-items:center}
-        .ti{padding:14px 28px;border-radius:var(--rp);box-shadow:0 8px 32px rgba(0,0,0,.5);font-size:.8rem;font-weight:600;color:#fff;animation:ti-in .35s ease-out;text-align:center;max-width:90vw}
-        .ti.success{background:var(--c4)}.ti.error{background:var(--c6)}
-        @keyframes ti-in{from{opacity:0;transform:translateY(12px)scale(.95)}to{opacity:1;transform:translateY(0)scale(1)}}
-
-        /* ====== SKELETON SYSTEM ====== */
-        .skl{background:var(--sk);border-radius:6px;position:relative;overflow:hidden;display:inline-block;vertical-align:middle;min-height:4px}
-        .skl::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 25%,var(--sk-shine) 50%,transparent 75%);animation:shimmer 1.4s ease-in-out infinite}
-        @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-        .skl.w-xs{width:20%}.skl.w-sm{width:40%}.skl.w-md{width:60%}.skl.w-lg{width:80%}.skl.w-full{width:100%}
-        .skl.h-xs{height:8px}.skl.h-sm{height:12px}.skl.h-md{height:18px}.skl.h-lg{height:28px}.skl.h-xl{height:40px}
-        .skl.pill{border-radius:var(--rp)}
-        .skl-done{animation:none!important;background:transparent!important}.skl-done::after{display:none!important}
-        .skl-bright{--sk:var(--sk-bright);--sk-shine:var(--sk-shine-bright)}
-        @media(min-width:640px){.cw{max-width:540px}}
-        @media(prefers-reduced-motion:reduce){*,::before,::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
         {/literal}
     </style>
-    {if isset($xheader)}{$xheader}{/if}
 </head>
 <body>
-    <header class="ab">
-        <div class="ab-l">
-            <div class="ab-logo">
-                {if isset($_c['login_page_logo']) && $_c['login_page_logo'] != ''}
-                    <img src="{$app_url}/{$UPLOAD_PATH}/{$_c['login_page_logo']}" class="ab-logo-img" onerror="this.style.display='none'">
-                {/if}
-                <span>{$_c['CompanyName']|truncate:14:"":true}</span>
-            </div>
-        </div>
-        <div class="ab-r">
-            {if $_c['enable_balance'] == 'yes'}<span class="ab-chip"><i class="bi bi-wallet2"></i> <span class="skl skl-bright w-sm h-sm pill" style="width:80px" id="abBal"></span></span>{/if}
-            <button class="ab-btn" id="notifBtn"><i class="bi bi-bell"></i><span class="ab-badge" id="inboxBadge" style="display:none"></span></button>
-            <button class="ab-btn" id="dmBtn"><i class="bi bi-moon-fill"></i></button>
-            {if strpos($_user['photo'], 'default') !== false}
-            <img src="{$app_url}/{$UPLOAD_PATH}{$_user['photo']}" class="ab-av" id="avatarBtn" alt="{$_user['fullname']}">
-            {else}
-            <img src="{$app_url}/{$UPLOAD_PATH}{$_user['photo']}.thumb.jpg" onerror="this.src='{$app_url}/{$UPLOAD_PATH}/user.default.jpg'" class="ab-av" id="avatarBtn" alt="{$_user['fullname']}">
-            {/if}
-        </div>
-    </header>
+{include file="components/_header.tpl"}
 
     <div class="cw">
         {if isset($notify)}<meta id="notify-data" data-msg="{$notify|escape}" data-type="{if $notify_t == 's'}success{else}error{/if}">{/if}
@@ -436,56 +321,8 @@
         </section>
     </div>
 
-    <nav class="bn">
-        <a href="{Text::url('home')}" class="active"><i class="bi bi-house-door-fill"></i><span>{Lang::T('Home')}</span></a>
-        <a href="{Text::url('order/package')}"><i class="bi bi-cart3"></i><span>{Lang::T('Buy')}</span></a>
-        {if $_c['disable_voucher'] != 'yes'}<a href="{Text::url('voucher/activation')}"><i class="bi bi-ticket-perforated"></i><span>{Lang::T('Voucher')}</span></a>{/if}
-        <a href="{Text::url('order/history')}"><i class="bi bi-clock-history"></i><span>{Lang::T('History')}</span></a>
-        <a href="{Text::url('accounts/profile')}"><i class="bi bi-person"></i><span>{Lang::T('Profile')}</span></a>
-    </nav>
-
-    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="menuSheet">
-        <div class="offcanvas-header">
-            <div style="display:flex;align-items:center;gap:14px;width:100%">
-            {if strpos($_user['photo'], 'default') !== false}
-            <img src="{$app_url}/{$UPLOAD_PATH}{$_user['photo']}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0" alt="">
-            {else}
-            <img src="{$app_url}/{$UPLOAD_PATH}{$_user['photo']}.thumb.jpg" onerror="this.src='{$app_url}/{$UPLOAD_PATH}/user.default.jpg'" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0" alt="">
-            {/if}
-            <div style="flex:1;min-width:0">
-                <h6 class="mb-0 fw-bold" style="font-size:.88rem;color:var(--tx)">{$_user['fullname']}</h6>
-                <div style="display:flex;align-items:center;margin-top:2px">
-                    <small style="font-size:.7rem;color:var(--t2)">{$_user['phonenumber']}</small>
-                </div>
-            </div>
-            </div>
-        </div>
-        <div class="offcanvas-body">
-            <a href="{Text::url('accounts/change-password')}" class="ms-item"><i class="bi bi-key"></i> {Lang::T('Change Password')}<span class="ms-trail"><i class="bi bi-chevron-right"></i></span></a>
-            <a href="{Text::url('mail')}" class="ms-item"><i class="bi bi-envelope"></i> {Lang::T('Inbox')}<span class="ms-trail"><span></span><i class="bi bi-chevron-right"></i></span></a>
-            {if $_c['enable_balance'] == 'yes' && $_c['allow_balance_transfer'] == 'yes'}<a href="javascript:void(0)" onclick="showTransfer()" class="ms-item"><i class="bi bi-send"></i> {Lang::T('Transfer')}<span class="ms-trail"><i class="bi bi-chevron-right"></i></span></a>{/if}
-            <div class="mi-div"></div>
-            <div class="ms-toggle" id="menuThemeToggle" onclick="toggleTheme()">
-                <span style="display:flex;align-items:center;gap:14px"><i class="bi bi-moon-stars" id="menuThemeIcon"></i> <span id="menuThemeLabel">{Lang::T('Light Mode')}</span></span>
-                <span class="ms-switch"></span>
-            </div>
-            <a href="{Text::url('logout')}" class="ms-item danger"><i class="bi bi-box-arrow-right"></i> {Lang::T('Logout')}</a>
-        </div>
-    </div>
-
-    {if $_c['enable_balance'] == 'yes' && $_c['allow_balance_transfer'] == 'yes'}
-    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="transferSheet">
-         <div class="offcanvas-header flex-column"><h6>{Lang::T('Transfer Balance')}</h6></div>
-        <div class="offcanvas-body">
-            <form method="post" action="{Text::url('home')}">
-                <input type="hidden" name="csrf_token" value="{$csrf_token}"><input type="hidden" name="send" value="balance">
-                <div class="mb-3"><label class="form-label small fw-semibold">{Lang::T('Recipient Username')}</label><input type="text" name="username" class="form-control" required style="background:var(--bg);border:1.5px solid var(--bd);color:var(--tx);border-radius:8px;padding:10px 14px;font-size:.85rem"></div>
-                <div class="mb-3"><label class="form-label small fw-semibold">{Lang::T('Amount')}</label><input type="number" name="balance" class="form-control" required min="1" style="background:var(--bg);border:1.5px solid var(--bd);color:var(--tx);border-radius:8px;padding:10px 14px;font-size:.85rem"></div>
-                <button type="submit" class="hero-btn p" style="width:100%;justify-content:center;padding:14px;font-size:.82rem">{Lang::T('Send')}</button>
-            </form>
-        </div>
-    </div>
-    {/if}
+{include file="components/_navbar.tpl"}
+{include file="components/_menu_sheet.tpl"}
 
     <!-- NETWORK DEVICE MODAL -->
     <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="nsDeviceModal">
@@ -551,32 +388,6 @@
 
     <script>
         {literal}
-        var L={},CSRF='';
-        (function(){var m=document.getElementById('js-data');if(!m)return;
-            ['light','dark','active','expired','noPlan','noTrx','days','recharge','extend','stop','buy','paid','pending','retry','error'].forEach(function(k){L[k]=m.getAttribute('data-t-'+k)||''});
-            CSRF=m.getAttribute('data-csrf')||'';
-        })();
-
-        function loadTheme(){
-            var s=localStorage.getItem('theme');
-            if(!s&&matchMedia&&matchMedia('(prefers-color-scheme:light)').matches)s='light';
-            if(!s)s='dark';document.documentElement.setAttribute('data-theme',s);updateThemeUI()
-        }
-        function toggleTheme(){
-            var h=document.documentElement,c=h.getAttribute('data-theme'),n=c==='dark'?'light':'dark';
-            h.setAttribute('data-theme',n);localStorage.setItem('theme',n);
-            document.getElementById('themeColorMeta').setAttribute('content',n==='dark'?'#09090b':'#fafafa');updateThemeUI()
-        }
-        function updateThemeUI(){
-            var d=document.documentElement.getAttribute('data-theme')==='dark';
-            var dm=document.getElementById('dmBtn'),mi=document.getElementById('menuThemeIcon'),ml=document.getElementById('menuThemeLabel');
-            if(dm)dm.querySelector('i').className=d?'bi bi-moon-fill':'bi bi-sun-fill';
-            if(mi)mi.className=d?'bi bi-moon-stars':'bi bi-sun-fill';
-            if(ml)ml.textContent=d?L.light:L.dark;
-            var mt=document.getElementById('menuThemeToggle');
-            if(mt)mt.classList.toggle('on',!d);
-        }
-
         function fetchData(){
             var start=Date.now();
             fetch(appUrl+'/ui/ui_custom/api/plan.php',{credentials:'include'})
@@ -803,28 +614,11 @@
             ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'#18181b',titleColor:'#a1a1aa',bodyColor:'#fafafa',borderColor:'#27272a',borderWidth:1,padding:10,titleFont:{size:10},bodyFont:{size:11},displayColors:true,boxPadding:3,callbacks:{label:function(c){return c.dataset.label+': '+c.raw+' GB'}}}},scales:{x:{display:true,border:{display:false},grid:{display:false},ticks:{color:'#71717a',font:{size:8},maxTicksLimit:6,align:'center'}},y:{display:false,border:{display:false},grid:{display:false},ticks:{display:false}}}}});
         }
         function showTransfer(){var b=bootstrap.Offcanvas.getInstance(document.getElementById('menuSheet'));if(b)b.hide();setTimeout(function(){new bootstrap.Offcanvas(document.getElementById('transferSheet')).show()},300)}
-        function showToast(m,t){var c=document.getElementById('toastContainer'),e=document.createElement('div');e.className='ti '+t;e.textContent=m;c.appendChild(e);setTimeout(function(){e.style.opacity='0';e.style.transition='opacity .3s';setTimeout(function(){e.remove()},300)},4000)}
-        function setCookie(n,v,d){var e='';if(d){var dt=new Date();dt.setTime(dt.getTime()+(d*24*60*60*1000));e='; expires='+dt.toUTCString()}document.cookie=n+'='+(v||'')+e+'; path=/'}
-        setCookie('user_language','{/literal}{$user_language}{literal}',365);
 
         document.addEventListener('DOMContentLoaded',function(){
-            loadTheme();fetchData();fetchDeviceData();
-            document.getElementById('avatarBtn').addEventListener('click',function(){new bootstrap.Offcanvas(document.getElementById('menuSheet')).show()});
-            document.getElementById('notifBtn').addEventListener('click',function(){window.location.href=appUrl+'/index.php?_route=mail'});
-            document.getElementById('dmBtn').addEventListener('click',toggleTheme);
-            fetch(appUrl+'/index.php?_route=autoload_user/inbox_unread').then(function(r){return r.text()}).then(function(t){var n=parseInt(t)||0,b=document.getElementById('inboxBadge');if(n>0)b.style.display='flex';else b.style.display='none'}).catch(function(){});
-            var nd=document.getElementById('notify-data');if(nd){var m=nd.getAttribute('data-msg'),ty=nd.getAttribute('data-type');if(m)showToast(m,ty)}
-            // Chart slider — sync dots on scroll
-            var slider=document.getElementById('nsChartWrap'),dots=document.querySelectorAll('#nsChartDots .ns-chart-dot-ind');
-            if(slider&&dots.length){
-                slider.addEventListener('scroll',function(){
-                    var idx=Math.round(slider.scrollLeft/slider.offsetWidth);
-                    dots.forEach(function(d,i){d.classList.toggle('active',i===idx)});
-                });
-            }
+            fetchData();fetchDeviceData();
         });
         {/literal}
     </script>
-    {if isset($xfooter)}{$xfooter}{/if}
 </body>
 </html>
