@@ -29,6 +29,23 @@ $icons = [
     'SAMPOERNAVA' => 'bi-building',
 ];
 
+$colors = [
+    'BCAVA' => '#0066AE', 'BNIVA' => '#0095D7', 'BRIVA' => '#005098', 'MANDIRIVA' => '#00529B',
+    'PERMATAVA' => '#FCB816', 'MYBVA' => '#F5CC07', 'BSIVA' => '#006A5B', 'SMSVA' => '#E3191E',
+    'MUAMALATVA' => '#D82B27', 'SAMPOERNAVA' => '#A0522D',
+    'ALFAMART' => '#E3191E', 'INDOMARET' => '#164A98', 'ALFAMIDI' => '#7BC143',
+    'DANA' => '#108DE5', 'OVO' => '#4C2882', 'SHOPEEPAY' => '#EE4D2D',
+    'QRIS' => '#B71C1C', 'QRISC' => '#B71C1C', 'QRIS2' => '#B71C1C',
+];
+
+$logoMap = [
+    'BCAVA' => 'bca.png', 'BNIVA' => 'bni.png', 'BRIVA' => 'bri.png', 'MANDIRIVA' => 'mandiri.png',
+    'PERMATAVA' => 'permata.png', 'MYBVA' => 'maybank.png', 'BSIVA' => 'bsi.png',
+    'SMSVA' => 'sinarmas.png', 'MUAMALATVA' => 'muamalat.png',
+    'DANA' => 'dana.png', 'OVO' => 'ovo.png', 'SHOPEEPAY' => 'shopeepay.png',
+    'QRIS' => 'qris.png', 'QRISC' => 'qris.png', 'QRIS2' => 'qris.png',
+];
+
 $result = [];
 foreach ($channels as $ch) {
     if (empty($enabled) || in_array($ch['id'], $enabled)) {
@@ -36,6 +53,9 @@ foreach ($channels as $ch) {
             'id' => $ch['id'],
             'name' => $ch['name'],
             'icon' => $icons[$ch['id']] ?? 'bi-credit-card',
+            'color' => $colors[$ch['id']] ?? '#666',
+            'logo' => isset($logoMap[$ch['id']]) ? 'assets/logo/' . $logoMap[$ch['id']] : '',
+            'init' => preg_replace('/\s.*/', '', $ch['name']),
         ];
     }
 }

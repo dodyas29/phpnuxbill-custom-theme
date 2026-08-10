@@ -31,13 +31,15 @@
         .pkg-select select{flex:1;background:none;border:none;color:var(--tx);font-size:.85rem;font-weight:600;font-family:var(--ff);cursor:pointer;outline:none;-webkit-appearance:none;-moz-appearance:none;appearance:none;padding-right:24px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2371717a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right center}
         .pkg-select i{font-size:1.1rem;color:var(--c1);flex-shrink:0}
 
-        .pmethods{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
-        .pmethod{background:var(--bgs);border:1.5px solid var(--bd);border-radius:var(--r2);padding:14px 8px;text-align:center;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:6px}
-        .pmethod:active{transform:scale(.95)}
-        .pmethod.selected{border-color:var(--c1);background:rgba(129,140,248,.08)}
-        .pmethod i{font-size:1.3rem;color:var(--t3);transition:color .15s}
-        .pmethod.selected i{color:var(--c1)}
-        .pmethod span{font-size:.62rem;font-weight:600;color:var(--t2);line-height:1.2}
+        .pmethods{display:flex;flex-direction:column;gap:1px;background:var(--bd);border-radius:var(--r2);overflow:hidden;margin-bottom:10px}
+        .pmethod{background:var(--bgs);display:flex;align-items:center;gap:14px;padding:13px 16px;cursor:pointer;transition:all .12s}
+        .pmethod:active{background:var(--bgc)}
+        .pmethod.selected{background:rgba(129,140,248,.06);border-left:3px solid var(--c1);padding-left:13px}
+        .pmethod-logo{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;font-size:.85rem;font-weight:800;color:#fff}
+        .pmethod-logo img{width:100%;height:100%;object-fit:contain}
+        .pmethod-name{flex:1;font-size:.82rem;font-weight:600;color:var(--tx)}
+        .pmethod-check{color:var(--c1);font-size:1.1rem;display:none}
+        .pmethod.selected .pmethod-check{display:block}
 
         .vbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:var(--rp);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .15s;background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;border:none;letter-spacing:.4px}
         .vbtn:active{transform:scale(.97);filter:brightness(.9)}
@@ -133,7 +135,8 @@
             var c=document.getElementById('paymentMethods');
             var h='';
             channels.forEach(function(ch){
-                h+='<div class="pmethod" data-channel="'+ch.id+'" onclick="selectMethod(this,\''+ch.id+'\')"><i class="bi '+ch.icon+'"></i><span>'+ch.name+'</span></div>';
+                var logoHtml=ch.logo?'<img src="'+appUrl+'/ui/ui_custom/'+ch.logo+'" onerror="this.parentElement.textContent=\''+(ch.init||ch.name.substring(0,3))+'\';this.parentElement.style.background=\''+(ch.color||'#666')+'\'">':'<span>'+(ch.init||ch.name.substring(0,3))+'</span>';
+                h+='<div class="pmethod" data-channel="'+ch.id+'" onclick="selectMethod(this,\''+ch.id+'\')"><div class="pmethod-logo" style="background:'+(ch.color||'#666')+'">'+logoHtml+'</div><span class="pmethod-name">'+ch.name+'</span><i class="bi bi-check-circle-fill pmethod-check"></i></div>';
             });
             c.innerHTML=h;
         }
