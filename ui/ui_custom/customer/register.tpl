@@ -116,7 +116,7 @@
         .suggest-chip{padding:6px 12px;border-radius:var(--rp);background:var(--bg2);border:1px solid var(--bd);font-size:.72rem;font-weight:600;color:var(--tx);cursor:pointer;transition:all .1s;font-family:var(--ff)}
         .suggest-chip:hover{border-color:var(--cp);color:var(--cp)}
 
-        .links{display:flex;justify-content:center;gap:12px;margin-top:18px;font-size:.78rem;color:var(--t3)}
+        .links{display:flex;justify-content:center;align-items:center;gap:4px;margin-top:18px;font-size:.78rem;color:var(--t3)}
         .links a{color:var(--cp);text-decoration:none;font-weight:600;padding:8px 12px;border-radius:var(--rs);transition:all .15s}
         .links a:hover{background:rgba(124,58,237,.08)}
 
