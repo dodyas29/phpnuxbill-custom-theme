@@ -140,7 +140,6 @@
     <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="payModal" style="max-height:55vh">
         <div class="offcanvas-header flex-column"></div>
         <div class="offcanvas-body">
-            <h6 class="fw-bold mb-3" style="font-size:.82rem;color:var(--tx)">Pilih Metode Pembayaran</h6>
             <div id="payModalSkel">
                 <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
                 <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-md h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
@@ -156,7 +155,6 @@
     <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="pkgModal" style="max-height:55vh">
         <div class="offcanvas-header flex-column"></div>
         <div class="offcanvas-body">
-            <h6 class="fw-bold mb-3" style="font-size:.82rem;color:var(--tx)">Pilih Paket Internet</h6>
             <div class="pkg-list stg" id="pkgList">
                 <div class="pc-empty">Loading...</div>
             </div>
