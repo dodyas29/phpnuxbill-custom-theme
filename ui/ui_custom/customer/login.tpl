@@ -95,7 +95,7 @@
         .field-wrap input{width:100%;border:none;background:transparent;padding:22px 14px 10px 14px;font-size:.95rem;color:var(--tx);outline:none;font-family:var(--ff);box-shadow:none;-webkit-appearance:none;-moz-appearance:none;border-radius:0.8rem}
         .field-wrap input:-webkit-autofill,
         .field-wrap input:-webkit-autofill:hover,
-        .field-wrap input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 60px var(--bg) inset!important;-webkit-text-fill-color:var(--tx)!important;background-color:var(--bg)!important;transition:background-color 9999s ease-in-out 0s}
+        .field-wrap input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 60px var(--bg) inset!important;-webkit-text-fill-color:var(--tx)!important;background-color:var(--bg)!important;transition:background-color 9999s ease-in-out 0s;animation:onAutoFillStart .01s}
         .field-wrap input::placeholder{color:transparent}
         .fl{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.95rem;color:var(--t3);pointer-events:none;transition:all .2s ease;font-family:var(--ff);font-weight:400}
         .field-wrap:focus-within .fl,
@@ -143,7 +143,8 @@
         .toast-item.error{background:var(--cr)}
         @keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-        @media(prefers-reduced-motion:reduce){*,::before,::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+        @keyframes onAutoFillStart{from{}to{}}
+        @keyframes onAutoFillCancel{from{}to{}}
 
         {/literal}
     </style>
@@ -247,12 +248,10 @@
                     if(this.value) this.parentElement.classList.add('filled');
                     else this.parentElement.classList.remove('filled');
                 });
-            });
-            setTimeout(function(){
-                document.querySelectorAll('.field-wrap input').forEach(function(input){
-                    if(input.value) input.parentElement.classList.add('filled');
+                input.addEventListener('animationstart', function(e){
+                    if(e.animationName === 'onAutoFillStart') this.parentElement.classList.add('filled');
                 });
-            },500);
+            });
             // Password toggle
             var tp=document.getElementById('togglePassword');
             var pw=document.getElementById('password');
