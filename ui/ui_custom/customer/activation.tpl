@@ -125,16 +125,9 @@
 
         <section>
             <div class="sh stg"><h2>Metode Pembayaran</h2></div>
-            <div class="sk-load" id="skPay">
-                <div class="sk-placeholder">
-                    <span class="skl skl-bright w-md" style="height:48px;border-radius:var(--r2);display:block;width:auto"></span>
-                </div>
-                <div class="sk-content">
-                    <div class="pay-select stg" onclick="openPayModal()">
-                        <i class="bi bi-credit-card" id="paySelectLogo" style="color:var(--t3);font-size:1.2rem"></i>
-                        <span class="pay-select-text" id="paySelectText" style="color:var(--t3)">Pilih metode pembayaran</span>
-                    </div>
-                </div>
+            <div class="pay-select stg" onclick="openPayModal()">
+                <i class="bi bi-credit-card" id="paySelectLogo" style="color:var(--t3);font-size:1.2rem"></i>
+                <span class="pay-select-text" id="paySelectText" style="color:var(--t3)">Pilih metode pembayaran</span>
             </div>
         </section>
 
@@ -183,12 +176,20 @@
             document.getElementById('voucherCode').textContent=voucherGenerated;
             new QRCode(document.getElementById('voucherQr'),{text:voucherGenerated,width:78,height:78,colorDark:'#09090b',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
             document.getElementById('skPkg').classList.add('loaded');
+
+            fetch(appUrl+'/ui/ui_custom/api/plan.php',{credentials:'include'})
+            .then(function(r){return r.json()})
+            .then(function(d){
+                if(typeof d.balance_formatted!=='undefined'){
+                    var ab=document.getElementById('abBal');if(ab){ab.className='';ab.style.cssText='';ab.textContent=d.balance_formatted}
+                }
+            }).catch(function(){});
         })();
 
         function loadChannels(){
             fetch(appUrl+'/ui/ui_custom/api/tripay_channels.php',{credentials:'include'})
             .then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json()})
-            .then(function(d){channels=d;renderPayModal();channelsLoaded=true;document.getElementById('skPay').classList.add('loaded')})
+            .then(function(d){channels=d;renderPayModal();channelsLoaded=true})
             .catch(function(){showToast('Gagal memuat metode pembayaran','error')})
         }
 
