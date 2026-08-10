@@ -92,7 +92,10 @@
         .field{margin-bottom:16px;position:relative}
         .field-wrap{position:relative;background:var(--bg);border:2px solid var(--bd);border-radius:var(--rm);transition:all .2s}
         .field-wrap:focus-within{border-color:var(--cp);box-shadow:0 0 0 3px rgba(124,58,237,.12)}
-        .field-wrap input{width:100%;border:none;background:transparent;padding:22px 14px 10px 14px;font-size:.95rem;color:var(--tx);outline:none;font-family:var(--ff)}
+        .field-wrap input{width:100%;border:none;background:transparent;padding:22px 14px 10px 14px;font-size:.95rem;color:var(--tx);outline:none;font-family:var(--ff);box-shadow:none;-webkit-appearance:none;-moz-appearance:none;border-radius:0}
+        .field-wrap input:-webkit-autofill,
+        .field-wrap input:-webkit-autofill:hover,
+        .field-wrap input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 30px var(--bg) inset!important;-webkit-text-fill-color:var(--tx)!important;transition:background-color 9999s ease-in-out 0s}
         .field-wrap input::placeholder{color:transparent}
         .fl{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.95rem;color:var(--t3);pointer-events:none;transition:all .2s ease;font-family:var(--ff);font-weight:400}
         .field-wrap:focus-within .fl,
