@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded',function(){
     if(nb)nb.addEventListener('click',function(){window.location.href=appUrl+'/index.php?_route=mail'});
     if(dm)dm.addEventListener('click',toggleTheme);
     fetch(appUrl+'/index.php?_route=autoload_user/inbox_unread').then(function(r){return r.text()}).then(function(t){var n=parseInt(t)||0,b=document.getElementById('inboxBadge');if(n>0)b.style.display='flex';else b.style.display='none'}).catch(function(){});
+    fetch(appUrl+'/ui/ui_custom/api/apply_registration_data.php',{credentials:'include'}).catch(function(){});
     var nd=document.getElementById('notify-data');if(nd){var m=nd.getAttribute('data-msg'),ty=nd.getAttribute('data-type');if(m)showToast(m,ty)}
     var slider=document.getElementById('nsChartWrap'),dots=document.querySelectorAll('#nsChartDots .ns-chart-dot-ind');
     if(slider&&dots.length){

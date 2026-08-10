@@ -136,6 +136,7 @@
                     <input type="password" name="cpassword" id="cpassword" required placeholder="{Lang::T('Confirm Password')}">
                     <button type="button" class="pw-toggle" onclick="togglePw('cpassword',this)"><i class="bi bi-eye-slash"></i></button>
                 </div>
+                <input type="hidden" name="phonenumber" id="phonenumber">
                 <button type="submit" class="vbtn stg"><i class="bi bi-person-check"></i> Selesai & Daftar</button>
             </form>
             <p class="stg" style="text-align:center;font-size:.78rem;color:var(--t2);margin-top:20px">Sudah punya akun? <a href="{Text::url('login')}" style="color:var(--c1);text-decoration:none;font-weight:600">Login</a></p>
@@ -275,11 +276,21 @@
 
         function togglePw(id,btn){var el=document.getElementById(id),icon=btn.querySelector('i');if(el.type==='password'){el.type='text';icon.className='bi bi-eye'}else{el.type='password';icon.className='bi bi-eye-slash'}}
 
-        document.getElementById('regForm').addEventListener('submit',function(){
+        var regPhone='';
+        document.getElementById('regForm').addEventListener('submit',function(e){
             var pw=document.getElementById('password').value,cpw=document.getElementById('cpassword').value;
-            if(pw!==cpw){showToast('Password tidak cocok','error');event.preventDefault();return}
-            if(!otpVerified){showToast('Verifikasi WhatsApp dulu','error');event.preventDefault();return}
-            if(!userCoords){showToast('Pilih lokasi di map dulu','error');event.preventDefault();return}
+            if(pw!==cpw){showToast('Password tidak cocok','error');e.preventDefault();return}
+            if(!otpVerified){showToast('Verifikasi WhatsApp dulu','error');e.preventDefault();return}
+            if(!userCoords){showToast('Pilih lokasi di map dulu','error');e.preventDefault();return}
+            var btn=this.querySelector('button[type=submit]');
+            var phone=document.getElementById('waPhone').value.replace(/\D/g,'');
+            document.getElementById('phonenumber').value=phone;
+            if(!regPhone){
+                e.preventDefault();btn.disabled=true;btn.innerHTML='<span style=\"width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block\"></span> Menyimpan...';
+                fetch(appUrl+'/ui/ui_custom/api/hold_registration_data.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone,coordinates:userCoords})})
+                .then(function(){regPhone=true;btn.disabled=false;btn.innerHTML='<i class=\"bi bi-person-check\"></i> Selesai & Daftar';document.getElementById('regForm').submit()});
+                return;
+            }
         });
 
         document.querySelectorAll('.field-wrap input').forEach(function(input){
