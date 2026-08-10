@@ -9,7 +9,7 @@
         .sk-load.loaded .sk-placeholder{display:none}
         .sk-load.loaded .sk-content{display:block}
 
-        .vcard{background:var(--bgs);border:2px dashed var(--bd);border-top:none;border-radius:0 0 var(--r3) var(--r3);padding:22px 20px 18px;margin-bottom:4px;position:relative;overflow:hidden}
+        .vcard{background:var(--bgs);border:2px dashed var(--bd);border-top:none;border-radius:var(--r3);padding:22px 20px 18px;margin-bottom:4px;position:relative;overflow:hidden}
         .vcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c4))}
         .vcard::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0,transparent 24px,rgba(129,140,248,.04) 24px,rgba(129,140,248,.04) 25px);pointer-events:none}
         .vcard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
