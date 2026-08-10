@@ -43,7 +43,7 @@
         {/if}
         <div class="aw-text">{$text}</div>
         <div class="aw-bar"><div class="aw-bar-fill" id="awBar"></div></div>
-        <a href="{$url}" class="aw-btn">{Lang::T('Click Here')} <span id="awCount">({$time})</span> <i class="bi bi-arrow-right"></i></a>
+        <a href="{$url}" class="aw-btn">{Lang::T('Click Here')} <span id="awCount">{$time}</span> <i class="bi bi-arrow-right"></i></a>
         <div class="aw-footer">{$_c['CompanyName']}</div>
     </div>
 
@@ -52,9 +52,7 @@
         var bar=document.getElementById('awBar');
         function tick(){
             t--;
-            document.getElementById('awCount').textContent='('+t+')';
-            bar.style.width=Math.min(100,(({$time}-t)/{$time})*100)+'%';
-            if(t>=0)setTimeout(tick,1000);
+            if(t>=0){document.getElementById('awCount').textContent=t; bar.style.width=Math.min(100,(({$time}-t)/{$time})*100)+'%'; setTimeout(tick,1000)}
             else window.location.href='{$url}';
         }
         tick();
