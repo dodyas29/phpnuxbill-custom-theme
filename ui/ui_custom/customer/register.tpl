@@ -201,7 +201,7 @@
                     </div>
                     <div class="field-hint" id="otpMsg"></div>
                     <button class="btn" id="step2Next" disabled>Verifikasi & Lanjut <i class="bi bi-arrow-right"></i></button>
-                    <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="document.getElementById('step2a').style.display='block';document.getElementById('step2b').style.display='none';document.getElementById('sendOtpBtn').style.display='';document.getElementById('sendOtpBtn').disabled=false;otpInputs.forEach(function(i){i.value='';i.classList.remove('filled');i.disabled=false})" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
+                    <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="resetOTP()" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
                 </div>
             </div>
 
@@ -347,6 +347,14 @@
             input.addEventListener('keydown',function(e){if(e.key==='Backspace'&&!this.value&&idx>0)otpInputs[idx-1].focus()});
             input.addEventListener('paste',function(e){e.preventDefault();var p=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'').substring(0,6);for(var i=0;i<6;i++){if(p[i]){otpInputs[i].value=p[i];otpInputs[i].classList.add('filled')}}checkOtp()});
         });
+
+        function resetOTP(){
+            document.getElementById('step2a').style.display='block';
+            document.getElementById('step2b').style.display='none';
+            document.getElementById('sendOtpBtn').style.display='';
+            document.getElementById('sendOtpBtn').disabled=false;
+            otpInputs.forEach(function(i){i.value='';i.classList.remove('filled');i.disabled=false});
+        }
 
         function checkOtp(){var code='';otpInputs.forEach(function(i){code+=i.value});if(code.length<6)return;
             var msg=document.getElementById('otpMsg'),next=document.getElementById('step2Next');
