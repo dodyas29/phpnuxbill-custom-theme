@@ -24,18 +24,20 @@
         .vcard-qr{width:86px;height:86px;border-radius:10px;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:4px;background:#fff;flex-shrink:0}
         .vcard-footer{border-top:1px solid var(--bd);padding-top:10px;font-size:.56rem;color:var(--t3);text-align:center;line-height:1.5}
 
-        .pkg-list{display:flex;flex-direction:column;gap:1px;background:var(--bd);border-radius:var(--r2);overflow:hidden;margin-bottom:4px}
-        .pkg-item{background:var(--bgs);display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;transition:all .12s}
+        .pkg-list{display:flex;flex-direction:column;gap:8px}
+        .pkg-item{background:var(--bgs);border:1.5px solid var(--bd);border-radius:var(--r2);display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;transition:all .12s}
         .pkg-item:active{background:var(--bgc)}
-        .pkg-item.selected{background:rgba(129,140,248,.06);border-left:3px solid var(--c1);padding-left:13px}
+        .pkg-item.selected{border-color:var(--c1);background:rgba(129,140,248,.06)}
         .pkg-cal{width:42px;height:46px;border-radius:6px;border:2px solid var(--bd);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;background:var(--bg)}
         .pkg-cal-bar{height:10px;background:var(--c1);flex-shrink:0}
         .pkg-cal-num{flex:1;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:var(--tx);line-height:1}
         .pkg-item.selected .pkg-cal{border-color:var(--c1)}
         .pkg-item.selected .pkg-cal-bar{background:var(--c2)}
         .pkg-info{flex:1;min-width:0}
-        .pkg-name{font-size:.8rem;font-weight:600;color:var(--tx);line-height:1.3}
+        .pkg-name{font-size:.82rem;font-weight:600;color:var(--tx);line-height:1.3}
         .pkg-price{font-size:.68rem;color:var(--t2);margin-top:2px}
+        .pkg-item .bi-check-lg{color:var(--c1);font-size:1.1rem;flex-shrink:0;display:none}
+        .pkg-item.selected .bi-check-lg{display:block}
 
         .pay-select{width:100%;background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r2);padding:12px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;font-family:var(--ff);color:var(--tx);margin-bottom:4px}
         .pay-select::after{content:'';margin-left:auto;border:solid var(--t3);border-width:0 2px 2px 0;padding:3px;transform:rotate(45deg);flex-shrink:0}
@@ -214,7 +216,7 @@
                 var catIcons={harian:1,mingguan:7,bulanan:30};
                 d.forEach(function(p,i){
                     var calNum=catIcons[p.category]||p.validity_days||1;
-                    h+='<div class="pkg-item'+(i===0?' selected':'')+'" data-id="'+p.id+'" data-price="'+p.price+'" data-name="'+p.name+'" onclick="selectPackage(this)"><div class="pkg-cal"><div class="pkg-cal-bar"></div><div class="pkg-cal-num">'+calNum+'</div></div><div class="pkg-info"><div class="pkg-name">'+p.name+'</div><div class="pkg-price">'+p.price_formatted+'</div></div></div>';
+                    h+='<div class="pkg-item'+(i===0?' selected':'')+'" data-id="'+p.id+'" data-price="'+p.price+'" data-name="'+p.name+'" onclick="selectPackage(this)"><div class="pkg-cal"><div class="pkg-cal-bar"></div><div class="pkg-cal-num">'+calNum+'</div></div><div class="pkg-info"><div class="pkg-name">'+p.name+'</div><div class="pkg-price">'+p.price_formatted+'</div></div><i class="bi bi-check-lg"></i></div>';
                 });
                 list.innerHTML=h;
                 if(d.length){
