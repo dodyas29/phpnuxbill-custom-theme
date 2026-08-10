@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="ab-r">
-        {if $_c['enable_balance'] == 'yes'}<span class="ab-chip"><i class="bi bi-wallet2"></i> <span class="skl skl-bright w-sm h-sm pill" style="width:80px" id="abBal"></span></span>{/if}
+        {if $_c['enable_balance'] == 'yes'}<span class="ab-chip"><i class="bi bi-wallet2"></i> <span class="skl skl-bright h-sm pill" style="width:65px" id="abBal"></span></span>{/if}
         <button class="ab-btn" id="notifBtn"><i class="bi bi-bell"></i><span class="ab-badge" id="inboxBadge" style="display:none"></span></button>
         <button class="ab-btn" id="dmBtn"><i class="bi bi-moon-fill"></i></button>
         {if strpos($_user['photo'], 'default') !== false}
