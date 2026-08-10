@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{$app_url}/ui/ui_custom/assets/css/style.css">
     <style>
         {literal}
@@ -26,8 +27,7 @@
         .aw-icon.info{color:var(--c3)}
         .aw-text{font-size:.95rem;font-weight:500;color:var(--tx);line-height:1.6;margin-bottom:24px}
         .aw-bar{height:4px;background:var(--bgc);border-radius:2px;overflow:hidden;margin-bottom:20px}
-        .aw-bar-fill{height:100%;border-radius:2px;background:var(--c1);animation:shrink {$time}s linear forwards}
-        @keyframes shrink{from{width:100%}to{width:0%}}
+        .aw-bar-fill{height:100%;border-radius:2px;width:100%;background:var(--c1);transition:width 1s linear}
         .aw-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 24px;border-radius:var(--rp);font-size:.8rem;font-weight:600;text-decoration:none;color:var(--tx);border:1px solid var(--bd);transition:all .15s;font-family:var(--ff)}
         .aw-btn:hover{background:var(--bgc);border-color:var(--c1);color:var(--c1)}
         .aw-footer{margin-top:32px;font-size:.66rem;color:var(--t3)}
@@ -46,14 +46,21 @@
             <i class="bi bi-x-circle-fill aw-icon error"></i>
         {/if}
         <div class="aw-text">{$text}</div>
-        <div class="aw-bar"><div class="aw-bar-fill"></div></div>
+        <div class="aw-bar"><div class="aw-bar-fill" id="awBar"></div></div>
         <a href="{$url}" class="aw-btn">{Lang::T('Click Here')} <span id="awCount">({$time})</span> <i class="bi bi-arrow-right"></i></a>
         <div class="aw-footer">{$_c['CompanyName']}</div>
     </div>
 
     <script>
         var t={$time};
-        function tick(){t--;if(t>=0){document.getElementById('awCount').textContent='('+t+')';setTimeout(tick,1000)}else{window.location.href='{$url}'}}
+        var bar=document.getElementById('awBar');
+        function tick(){
+            t--;
+            document.getElementById('awCount').textContent='('+t+')';
+            bar.style.width=Math.max(0,(t/{$time})*100)+'%';
+            if(t>=0)setTimeout(tick,1000);
+            else window.location.href='{$url}';
+        }
         tick();
     </script>
 </body>
