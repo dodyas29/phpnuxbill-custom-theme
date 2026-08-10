@@ -97,7 +97,7 @@
         .fl{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.95rem;color:var(--t3);pointer-events:none;transition:all .2s ease;font-family:var(--ff);font-weight:400}
         .field-wrap:focus-within .fl,.field-wrap input:not(:placeholder-shown) ~ .fl,.field-wrap.filled .fl{top:7px;font-size:.62rem;color:var(--cp);font-weight:600;letter-spacing:.5px;text-transform:uppercase;transform:translateY(0)}
         .field-wrap .pw-toggle{position:absolute;right:0;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--t3);cursor:pointer;padding:12px 14px;font-size:1.1rem;z-index:1}
-        .field-hint{font-size:.62rem;color:var(--t3);margin-top:-10px;margin-bottom:14px;padding-left:4px}
+        .field-hint{font-size:.62rem;color:var(--t3);margin-top:4px;margin-bottom:14px;padding-left:4px;text-align:center}
         .field-hint.ok{color:var(--cg)}.field-hint.err{color:var(--cr)}
 
         .otp-inputs{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
