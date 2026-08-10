@@ -122,7 +122,7 @@
         .ns-wifi-meta{flex:1;min-width:0;display:flex;align-items:center;gap:6px}
         .ns-wifi-ssid{font-size:.78rem;font-weight:700;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .ns-wifi-band-tag{font-size:.56rem;font-weight:600;color:var(--c2);background:rgba(167,139,250,.14);padding:2px 7px;border-radius:4px;flex-shrink:0;letter-spacing:.3px}
-        .ns-devices-btn{font-size:.64rem;color:var(--t3);display:flex;align-items:center;gap:4px;margin-left:auto;flex-shrink:0;background:none;border:none;cursor:pointer;font-family:var(--ff);padding:4px 8px;border-radius:6px;transition:all .15s}
+        .ns-devices-btn{font-size:.64rem;color:var(--t3);display:flex;align-items:center;gap:4px;margin-left:auto;flex-shrink:0;background:none;border:none;cursor:pointer;font-family:var(--ff);padding:4px 0;border-radius:6px;transition:all .15s}
         .ns-devices-btn i{font-size:.66rem}
         .ns-devices-btn:active{background:var(--bgc);color:var(--c1)}
 
