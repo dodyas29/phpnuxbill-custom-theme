@@ -1,4 +1,5 @@
 <?php
+session_start();
 $root_path = realpath(__DIR__ . '/../../../');
 $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] ?? 'localhost:8080';
 $_SERVER['SERVER_PORT'] = $_SERVER['SERVER_PORT'] ?? '8080';
