@@ -17,8 +17,8 @@ function toggleTheme(){
 function updateThemeUI(){
     var d=document.documentElement.getAttribute('data-theme')==='dark';
     var dm=document.getElementById('dmBtn'),mi=document.getElementById('menuThemeIcon'),ml=document.getElementById('menuThemeLabel');
-    if(dm)dm.querySelector('i').className=d?'bi bi-moon-fill':'bi bi-sun-fill';
-    if(mi)mi.className=d?'bi bi-moon-stars':'bi bi-sun-fill';
+    if(dm)dm.querySelector('i').className=d?'bi bi-sun-fill':'bi bi-moon-fill';
+    if(mi)mi.className=d?'bi bi-sun-fill':'bi bi-moon-stars';
     if(ml)ml.textContent=d?L.light:L.dark;
     var mt=document.getElementById('menuThemeToggle');
     if(mt)mt.classList.toggle('on',!d);
