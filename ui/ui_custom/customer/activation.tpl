@@ -33,7 +33,7 @@
         .dd-btn-logo{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;font-size:.6rem;font-weight:800;color:#fff}
         .dd-btn-logo img{width:100%;height:100%;object-fit:contain}
         .dd-btn-text{font-size:.82rem;font-weight:600}
-        .dd-menu{display:none;position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:4px;background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r2);max-height:260px;overflow-y:auto;box-shadow:var(--sh2)}
+        .dd-menu{display:none;position:absolute;top:100%;left:0;right:0;z-index:200;margin-top:4px;background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r2);max-height:260px;overflow-y:auto;box-shadow:var(--sh2)}
         .dd-menu.show{display:block}
         .dd-item{display:flex;align-items:center;gap:12px;padding:11px 16px;cursor:pointer;font-size:.82rem;color:var(--tx)}
         .dd-item:hover{background:var(--bgc)}
@@ -139,7 +139,7 @@
             </div>
         </section>
 
-        <div class="sk-load stg" id="skBtn">
+        <div class="sk-load stg" id="skBtn" style="margin-top:24px">
             <div class="sk-placeholder">
                 <div class="placeholder-glow"><span class="placeholder col-12 placeholder-lg" style="border-radius:var(--rp)"></span></div>
             </div>
