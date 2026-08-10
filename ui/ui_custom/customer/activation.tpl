@@ -117,8 +117,9 @@
 
         <section>
             <div class="sh stg"><h2>Pilih Paket</h2></div>
-            <div class="pkg-list stg" id="pkgList">
-                <div class="pc-empty">Loading...</div>
+            <div class="pay-select stg" onclick="openPkgModal()">
+                <i class="bi bi-box" id="pkgSelectLogo" style="color:var(--t3);font-size:1.2rem"></i>
+                <span class="pay-select-text" id="pkgSelectText" style="color:var(--t3)">Pilih paket internet</span>
             </div>
         </section>
 
@@ -149,6 +150,16 @@
         </div>
     </div>
 
+    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="pkgModal" style="max-height:55vh">
+        <div class="offcanvas-header flex-column"></div>
+        <div class="offcanvas-body">
+            <h6 class="fw-bold mb-3" style="font-size:.82rem;color:var(--tx)">Pilih Paket Internet</h6>
+            <div class="pkg-list stg" id="pkgList">
+                <div class="pc-empty">Loading...</div>
+            </div>
+        </div>
+    </div>
+
 {include file="components/_navbar.tpl"}
 {include file="components/_menu_sheet.tpl"}
     <div class="tc" id="toastContainer"></div>
@@ -163,6 +174,7 @@
         var voucherGenerated='';
         var channels=[];
         var payModal=null;
+        var pkgModal=null;
         var channelsLoaded=false;
 
         var selectedPackageId=null;
@@ -205,9 +217,21 @@
                     h+='<div class="pkg-item'+(i===0?' selected':'')+'" data-id="'+p.id+'" data-price="'+p.price+'" data-name="'+p.name+'" onclick="selectPackage(this)"><div class="pkg-cal"><div class="pkg-cal-bar"></div><div class="pkg-cal-num">'+calNum+'</div></div><div class="pkg-info"><div class="pkg-name">'+p.name+'</div><div class="pkg-price">'+p.price_formatted+'</div></div></div>';
                 });
                 list.innerHTML=h;
-                if(d.length)document.getElementById('vcardPrice').textContent='Rp '+Number(d[0].price).toLocaleString('id-ID');
+                if(d.length){
+                    selectedPackageId=d[0].id;
+                    document.getElementById('vcardPrice').textContent='Rp '+Number(d[0].price).toLocaleString('id-ID');
+                    document.getElementById('pkgSelectText').textContent=d[0].name+' - '+d[0].price_formatted;
+                    document.getElementById('pkgSelectText').style.color='';
+                    document.getElementById('pkgSelectLogo').className='bi bi-box';
+                    document.getElementById('pkgSelectLogo').style.color='var(--c1)';
+                }
             })
             .catch(function(){showToast('Gagal memuat paket','error')})
+        }
+
+        function openPkgModal(){
+            if(!pkgModal)pkgModal=new bootstrap.Offcanvas(document.getElementById('pkgModal'));
+            pkgModal.show();
         }
 
         function selectPackage(el){
@@ -215,8 +239,13 @@
             el.classList.add('selected');
             selectedPackageId=el.getAttribute('data-id');
             var price=parseInt(el.getAttribute('data-price'))||0;
+            var name=el.getAttribute('data-name');
             document.getElementById('vcardPrice').textContent='Rp '+price.toLocaleString('id-ID');
+            document.getElementById('pkgSelectText').textContent=name+' - Rp '+price.toLocaleString('id-ID');
+            document.getElementById('pkgSelectText').style.color='';
+            document.getElementById('pkgSelectLogo').style.color='var(--c1)';
             genVoucherCode();
+            if(pkgModal)pkgModal.hide();
         }
 
         function loadChannels(){
