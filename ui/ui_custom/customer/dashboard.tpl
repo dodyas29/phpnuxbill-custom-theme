@@ -103,7 +103,8 @@
         .ns-chart-slide{flex:0 0 100%;scroll-snap-align:start;padding:0 14px 0}
         .ns-chart-canvas-wrap{position:relative;height:110px;width:100%}
         .ns-chart-canvas-wrap canvas{width:100%!important}
-        .ns-chart-avg{display:flex;gap:16px;justify-content:center;margin-top:8px;font-size:.6rem;color:var(--t3)}
+        .ns-chart-avg{display:flex;align-items:center;gap:16px;margin-top:8px;font-size:.6rem;color:var(--t3)}
+        .ns-chart-avg-label{font-size:.55rem;font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-right:auto}
         .ns-chart-avg strong{color:var(--tx)}
         .ns-chart-dots{display:flex;justify-content:center;gap:6px;padding:8px 0 12px}
         .ns-chart-dot-ind{width:6px;height:6px;border-radius:50%;background:var(--bd2);transition:all .25s}
@@ -230,6 +231,7 @@
                                     <span class="skl skl-bright w-full" style="height:110px;border-radius:8px"></span>
                                 </div>
                                 <div class="ns-chart-avg">
+                                    <span class="skl skl-bright w-xs h-xs" style="width:50px;height:8px"></span>
                                     <span class="skl skl-bright w-xs h-xs" style="width:80px;height:12px"></span>
                                     <span class="skl skl-bright w-xs h-xs" style="width:80px;height:12px"></span>
                                 </div>
@@ -278,6 +280,7 @@
                                 </div>
                                 <div class="ns-chart-canvas-wrap"><canvas id="nsSpeedChart"></canvas></div>
                                 <div class="ns-chart-avg" id="nsSpeedAvg">
+                                    <span class="ns-chart-avg-label">Rata-rata</span>
                                     <span class="ns-chart-legend-item"><span class="ns-chart-dot" style="background:var(--c1)"></span> <strong id="nsSpeedDl">42</strong> Mbps</span>
                                     <span class="ns-chart-legend-item"><span class="ns-chart-dot" style="background:var(--c2)"></span> <strong id="nsSpeedUl">19</strong> Mbps</span>
                                 </div>
@@ -292,6 +295,7 @@
                                 </div>
                                 <div class="ns-chart-canvas-wrap"><canvas id="nsUsageChart"></canvas></div>
                                 <div class="ns-chart-avg" id="nsUsageAvg">
+                                    <span class="ns-chart-avg-label">Rata-rata</span>
                                     <span class="ns-chart-legend-item"><span class="ns-chart-dot" style="background:var(--c1)"></span> <strong id="nsUsageDl">2.1</strong> GB/hari</span>
                                     <span class="ns-chart-legend-item"><span class="ns-chart-dot" style="background:var(--c2)"></span> <strong id="nsUsageUl">1.3</strong> GB/hari</span>
                                 </div>
