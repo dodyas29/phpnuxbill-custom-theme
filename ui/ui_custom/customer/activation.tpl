@@ -22,7 +22,6 @@
         .vcard-code{font-size:1.05rem;font-weight:700;font-family:'Courier New',monospace;color:var(--tx);letter-spacing:.5px;word-break:break-all}
         .vcard-code-note{font-size:.58rem;color:var(--t2);line-height:1.4}
         .vcard-qr{width:96px;height:96px;border-radius:12px;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;background:#fff;flex-shrink:0}
-        .vcard-footer{border-top:1px solid var(--bd);padding-top:10px;font-size:.56rem;color:var(--t3);text-align:center;line-height:1.5}
 
         .pkg-list{display:flex;flex-direction:column;gap:8px}
         .pkg-item{background:var(--bgs);border:1.5px solid var(--bd);border-radius:var(--r2);display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;transition:all .12s}
@@ -85,11 +84,9 @@
                                 <span class="skl skl-bright w-xs h-xs"></span>
                                 <span class="skl skl-bright w-full h-md"></span>
                                 <span class="skl skl-bright w-lg h-xs"></span>
+                                <span class="skl skl-bright w-md h-xs"></span>
                             </div>
                             <span class="skl skl-bright" style="width:96px;height:96px;border-radius:12px"></span>
-                        </div>
-                        <div class="vcard-footer">
-                            <span class="skl skl-bright w-md h-xs"></span>
                         </div>
                     </div>
                 </div>
@@ -109,10 +106,10 @@
                                 <span class="vcard-code-label">Kode Voucher</span>
                                 <span class="vcard-code" id="voucherCode">{if isset($_c['voucher_prefix'])}{$_c['voucher_prefix']|escape:'html'}XXXXXXXX{else}XXXXXXXX{/if}</span>
                                 <span class="vcard-code-note">Simpan kode voucher sebelum masa aktif habis</span>
+                                <span class="vcard-code-note">Scan QR menggunakan browser Chrome.</span>
                             </div>
                             <div class="vcard-qr" id="voucherQr"></div>
                         </div>
-                        <div class="vcard-footer">Scan QR menggunakan browser Chrome.</div>
                     </div>
                 </div>
             </div>
