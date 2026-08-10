@@ -54,8 +54,6 @@
         {if isset($notify)}<meta id="notify-data" data-msg="{$notify|escape}" data-type="{if $notify_t == 's'}success{else}error{/if}">{/if}
 
         <section>
-            <div class="sh stg"><h2>Beli Voucher</h2></div>
-
             <div class="vcard stg" id="voucherCard">
                 <div class="vcard-top">
                     <div class="vcard-brand">
