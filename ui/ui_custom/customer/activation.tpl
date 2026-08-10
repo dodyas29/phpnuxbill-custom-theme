@@ -126,7 +126,7 @@
         <section>
             <div class="sh stg"><h2>Metode Pembayaran</h2></div>
             <div class="pay-select stg" onclick="openPayModal()">
-                <span class="pay-select-logo" id="paySelectLogo" style="background:var(--bg)"><i class="bi bi-credit-card" style="color:var(--t3);font-size:.85rem"></i></span>
+                <i class="bi bi-credit-card" id="paySelectLogo" style="color:var(--t3);font-size:1.2rem"></i>
                 <span class="pay-select-text" id="paySelectText" style="color:var(--t3)">Pilih metode pembayaran</span>
             </div>
         </section>
@@ -212,8 +212,11 @@
             document.getElementById('paySelectText').textContent=name;
             document.getElementById('paySelectText').style.color='';
             var pl=document.getElementById('paySelectLogo');
-            pl.style.background=color||'var(--bgc)';
-            pl.innerHTML=logo?'<img src="'+appUrl+'/ui/ui_custom/'+logo+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><span style="display:none">'+init.substring(0,2)+'</span>':'<span>'+init.substring(0,2)+'</span>';
+            if(logo){
+                pl.outerHTML='<span class="pay-select-logo" id="paySelectLogo" style="background:'+(color||'var(--bgc)')+'"><img src="'+appUrl+'/ui/ui_custom/'+logo+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><span style="display:none">'+init.substring(0,2)+'</span></span>';
+            } else {
+                pl.outerHTML='<span class="pay-select-logo" id="paySelectLogo" style="background:'+(color||'var(--bgc)')+'"><span>'+init.substring(0,2)+'</span></span>';
+            }
             if(payModal)payModal.hide();
         }
 
