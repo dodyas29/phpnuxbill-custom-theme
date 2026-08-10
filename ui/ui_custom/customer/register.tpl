@@ -72,6 +72,11 @@
         .step-dot.done{background:var(--cg);color:#fff}
         .step-dot.active{background:var(--cp);color:#fff;box-shadow:0 0 0 3px rgba(124,58,237,.2);animation:dotPulse .4s ease-out}
         @keyframes dotPulse{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+        @keyframes dotJump{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+        .btn-dots{display:flex;gap:6px;justify-content:center}
+        .btn-dots span{width:8px;height:8px;border-radius:50%;background:#fff;animation:dotJump .5s infinite alternate}
+        .btn-dots span:nth-child(2){animation-delay:.15s}
+        .btn-dots span:nth-child(3){animation-delay:.3s}
         .step-line{flex:1;height:2px;background:var(--bd);max-width:32px;transition:all .3s}
         .step-line.done{background:var(--cg)}
 
@@ -269,13 +274,18 @@
 
         var currentStep=1,userCoords=null,covInCoverage=false,otpVerified=false;
 
+        function showDots(el){el._old=el.innerHTML;el.innerHTML='<div class="btn-dots"><span></span><span></span><span></span></div>';el.disabled=true}
+        function hideDots(el){el.innerHTML=el._old;el.disabled=false}
+
         function goStep(n){
+            var btn=document.querySelector('#step'+currentStep+' .btn');
+            if(btn&&!btn.disabled){showDots(btn);setTimeout(function(){hideDots(btn);
             document.querySelectorAll('.step-panel').forEach(function(p){p.classList.remove('active')});
             document.getElementById('step'+n).classList.add('active');currentStep=n;
             var dots=document.querySelectorAll('.step-dot');
             dots.forEach(function(d,i){var s=parseInt(d.getAttribute('data-step'));d.classList.remove('active','done');if(s<n)d.classList.add('done');if(s===n)d.classList.add('active')});
             document.querySelectorAll('.step-line').forEach(function(l){var p=l.getAttribute('data-between').split('-');if(parseInt(p[1])<=n)l.classList.add('done');else l.classList.remove('done')});
-        }
+            },300)}
 
         var map=L.map('coverageMap',{zoomControl:true}).setView([-6.2,106.8],12);
         L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{subdomains:['mt0','mt1','mt2','mt3'],attribution:'&copy; Google'}).addTo(map);
@@ -338,7 +348,10 @@
             }).catch(function(){msg.textContent='Verification failed';msg.className='field-hint err'});
         }
 
-        document.getElementById('step2Next').addEventListener('click',function(){goStep(3)});
+        document.getElementById('step2Next').addEventListener('click',function(){
+            var b=this;showDots(b);
+            setTimeout(function(){hideDots(b);goStep(3)},300);
+        });
 
         var checkTimer;
         document.getElementById('fullname').addEventListener('input',function(){var name=this.value.trim();if(!name)return;var parts=name.split(/\s+/);var user=parts.map(function(p){return p.charAt(0).toUpperCase()+p.slice(1).toLowerCase()}).join('');document.getElementById('username').value=user;checkUsername(user)});
