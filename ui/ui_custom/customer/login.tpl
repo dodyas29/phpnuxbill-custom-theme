@@ -99,7 +99,8 @@
         .field-wrap input::placeholder{color:transparent}
         .fl{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.95rem;color:var(--t3);pointer-events:none;transition:all .2s ease;font-family:var(--ff);font-weight:400}
         .field-wrap:focus-within .fl,
-        .field-wrap input:not(:placeholder-shown) ~ .fl{top:7px;font-size:.62rem;color:var(--cp);font-weight:600;letter-spacing:.5px;text-transform:uppercase;transform:translateY(0)}
+        .field-wrap input:not(:placeholder-shown) ~ .fl,
+        .field-wrap.filled .fl{top:7px;font-size:.62rem;color:var(--cp);font-weight:600;letter-spacing:.5px;text-transform:uppercase;transform:translateY(0)}
         .pw-toggle{position:absolute;right:0;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--t3);cursor:pointer;padding:12px 14px;font-size:1.1rem;transition:color .2s;min-width:44px;display:flex;align-items:center;justify-content:center;z-index:1}
         .pw-toggle:hover{color:var(--t2)}
 
@@ -240,6 +241,18 @@
         (function(){var m=document.getElementById('js-data');if(m){DATA.privacy=m.getAttribute('data-privacy-title')||'Privacy';DATA.tc=m.getAttribute('data-tc-title')||'Terms';DATA.errLoad=m.getAttribute('data-err-load')||'Failed to load';DATA.notifyMsg=m.getAttribute('data-notify-msg')||'';DATA.notifyType=m.getAttribute('data-notify-type')||'';}})();
 
         document.addEventListener('DOMContentLoaded',function(){
+            document.querySelectorAll('.field-wrap input').forEach(function(input){
+                if(input.value) input.parentElement.classList.add('filled');
+                input.addEventListener('input',function(){
+                    if(this.value) this.parentElement.classList.add('filled');
+                    else this.parentElement.classList.remove('filled');
+                });
+            });
+            setTimeout(function(){
+                document.querySelectorAll('.field-wrap input').forEach(function(input){
+                    if(input.value) input.parentElement.classList.add('filled');
+                });
+            },500);
             // Password toggle
             var tp=document.getElementById('togglePassword');
             var pw=document.getElementById('password');
