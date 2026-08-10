@@ -17,8 +17,7 @@ if (!User::getID()) {
 }
 
 $plans = ORM::for_table('tbl_plans')
-    ->where('enabled', '1')
-    ->where('type', 'Hotspot')
+    ->where_raw("type = 'Hotspot'")
     ->order_by_asc('price')
     ->find_many();
 
