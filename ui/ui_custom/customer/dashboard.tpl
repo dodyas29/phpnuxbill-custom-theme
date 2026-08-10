@@ -94,7 +94,7 @@
         .ns-chart-outer{background:var(--bg);border:1px solid var(--bd);border-radius:10px;margin-bottom:14px}
         .ns-chart-wrap{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
         .ns-chart-wrap::-webkit-scrollbar{display:none}
-        .ns-chart-top{display:flex;align-items:center;padding:16px 14px 10px;gap:8px}
+        .ns-chart-top{display:flex;align-items:center;padding:16px 0 10px;gap:8px}
         .ns-chart-title{font-size:.62rem;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.6px;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1 1 auto}
         .ns-chart-title i{font-size:.8rem;color:var(--c1)}
         .ns-chart-legend{display:flex;gap:14px;flex-shrink:0}
