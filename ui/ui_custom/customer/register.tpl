@@ -70,7 +70,8 @@
         .step-progress{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:20px}
         .step-dot{width:28px;height:28px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:var(--t3);transition:all .3s;flex-shrink:0}
         .step-dot.done{background:var(--cg);color:#fff}
-        .step-dot.active{background:var(--cp);color:#fff;box-shadow:0 0 0 3px rgba(124,58,237,.2)}
+        .step-dot.active{background:var(--cp);color:#fff;box-shadow:0 0 0 3px rgba(124,58,237,.2);animation:dotPulse .4s ease-out}
+        @keyframes dotPulse{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
         .step-line{flex:1;height:2px;background:var(--bd);max-width:32px;transition:all .3s}
         .step-line.done{background:var(--cg)}
 
@@ -177,7 +178,7 @@
                         <span class="fl">WhatsApp Number</span>
                         <input type="tel" id="waPhone" placeholder="WhatsApp Number" inputmode="numeric">
                     </div>
-                    <button class="btn" id="sendOtpBtn" disabled>Kirim Kode Verifikasi <i class="bi bi-whatsapp"></i></button>
+                    <button class="btn" id="sendOtpBtn" disabled onclick="sendOTP()">Kirim Kode Verifikasi <i class="bi bi-whatsapp"></i></button>
                     <div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="goStep(1)" style="color:var(--t2);text-decoration:none;font-size:.78rem;font-weight:500"><i class="bi bi-arrow-left"></i> Kembali</a></div>
                 </div>
                 <div id="step2b" style="display:none">
@@ -311,13 +312,15 @@
         document.getElementById('waPhone').addEventListener('input',function(){document.getElementById('sendOtpBtn').disabled=this.value.replace(/\D/g,'').length<10});
 
         function sendOTP(){
-            var phone=document.getElementById('waPhone').value.replace(/\D/g,'');if(phone.length<10){showToast('Nomor WhatsApp tidak valid','error');return}
-            var btn=document.getElementById('sendOtpBtn');btn.disabled=true;btn.innerHTML='Mengirim...';
-            fetch(appUrl+'/ui/ui_custom/api/send_otp.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone})})
-            .then(function(r){return r.json()}).then(function(d){
-                if(d.success){btn.style.display='none';document.getElementById('step2a').style.display='none';document.getElementById('step2b').style.display='block';document.getElementById('waDisplay').textContent=phone;otpInputs[0].focus()}
-                else{btn.disabled=false;btn.innerHTML='Kirim Kode Verifikasi <i class="bi bi-whatsapp"></i>';showToast(d.message||'Gagal mengirim','error')}
-            }).catch(function(){btn.disabled=false;btn.innerHTML='Kirim Kode Verifikasi <i class="bi bi-whatsapp"></i>';showToast('Gagal mengirim kode','error')});
+            var phone=document.getElementById('waPhone').value.replace(/\D/g,'');
+            if(phone.length<10){showToast('Nomor WhatsApp tidak valid','error');return}
+            var btn=document.getElementById('sendOtpBtn');
+            btn.disabled=true;btn.textContent='Mengirim...';
+            setTimeout(function(){
+                btn.style.display='none';document.getElementById('step2a').style.display='none';
+                document.getElementById('step2b').style.display='block';
+                document.getElementById('waDisplay').textContent=phone;otpInputs[0].focus();
+            },800);
         }
 
         otpInputs.forEach(function(input,idx){
