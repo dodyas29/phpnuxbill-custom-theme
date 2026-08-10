@@ -2,18 +2,13 @@
 <html lang="en" data-bs-theme="light">
 
 <head>
-    <script>
-    {literal}
-    if(document.cookie.indexOf('uid=')!==-1) window.location.replace(appUrl+'/?_route=home');
-    {/literal}
-    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#7c3aed" id="themeColorMeta">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>{$_title} - {$_c['CompanyName']}</title>
-    <link rel="shortcut icon" href="{if isset($favicon)}{$app_url}/{$favicon|replace:'\\':'/'}{else}{$app_url}/ui/ui/images/logo.png{/if}" type="image/x-icon">
+    <link rel="shortcut icon" href="{if isset($favicon)}{$app_url}/{$favicon}{else}{$app_url}/ui/ui/images/logo.png{/if}" type="image/x-icon">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
@@ -146,31 +141,12 @@
 
         @media(prefers-reduced-motion:reduce){*,::before,::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
-        .login-loader{position:fixed;inset:0;background:var(--cp);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s}
-        .login-loader.hide{opacity:0;pointer-events:none}
-        .login-loader .dots{display:flex;gap:8px;margin-top:20px}
-        .login-loader .dots span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.5);animation:bounce .6s infinite alternate}
-        .login-loader .dots span:nth-child(2){animation-delay:.2s}
-        .login-loader .dots span:nth-child(3){animation-delay:.4s}
-        @keyframes bounce{to{transform:translateY(-8px);opacity:1}}
-
         {/literal}
     </style>
     {if isset($xheader)}{$xheader}{/if}
 </head>
 
 <body>
-
-    <div class="login-loader" id="loginLoader">
-        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="72" height="72">
-            <rect width="80" height="80" rx="20" fill="url(#llGrad)"/>
-            <path d="M56 40h-6m6 0a12 12 0 00-12-12m12 12a20 20 0 00-20-20m20 20a28 28 0 00-28-28" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".9"/>
-            <circle cx="40" cy="40" r="5" fill="#fff"/>
-            <defs><linearGradient id="llGrad" x1="0" y1="0" x2="80" y2="80"><stop stop-color="#fff"/><stop offset="1" stop-color="rgba(255,255,255,.5)"/></linearGradient></defs>
-        </svg>
-        <h1 style="color:#fff;font-size:1.3rem;font-weight:700;margin-top:16px;letter-spacing:-.3px">{$_c['CompanyName']}</h1>
-        <div class="dots"><span></span><span></span><span></span></div>
-    </div>
 
     <div class="bg-shapes">
         <div class="bg-shape bg-shape-1"></div>
@@ -271,10 +247,6 @@
         (function(){var m=document.getElementById('js-data');if(m){DATA.privacy=m.getAttribute('data-privacy-title')||'Privacy';DATA.tc=m.getAttribute('data-tc-title')||'Terms';DATA.errLoad=m.getAttribute('data-err-load')||'Failed to load';DATA.notifyMsg=m.getAttribute('data-notify-msg')||'';DATA.notifyType=m.getAttribute('data-notify-type')||'';}})();
 
         document.addEventListener('DOMContentLoaded',function(){
-            setTimeout(function(){
-                var loader=document.getElementById('loginLoader');
-                if(loader)loader.classList.add('hide');
-            },700);
             // Password toggle
             var tp=document.getElementById('togglePassword');
             var pw=document.getElementById('password');
