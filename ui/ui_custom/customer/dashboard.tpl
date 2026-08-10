@@ -12,7 +12,7 @@
         .hero *{position:relative;z-index:1}
         .hero-top-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
         .hero-user{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;opacity:.85}
-        .hero-user i{font-size:1rem;opacity:.6}
+        .hero-user i{font-size:1rem;opacity:.6;display:inline-flex;align-items:center;justify-content:center;line-height:1}
         .hero-chip-icon-alone{width:32px;height:26px;border-radius:6px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-style:normal}
         .hero-status-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);padding:6px 14px;border-radius:var(--rp);font-size:.7rem;font-weight:700;backdrop-filter:blur(4px);text-transform:uppercase;letter-spacing:.5px}
         .hero-status-badge .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
