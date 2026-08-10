@@ -126,7 +126,7 @@
         <section>
             <div class="sh stg"><h2>Metode Pembayaran</h2></div>
             <div class="pay-select stg" onclick="openPayModal()">
-                <span class="pay-select-logo" id="paySelectLogo" style="background:var(--bgc)">--</span>
+                <span class="pay-select-logo" id="paySelectLogo" style="background:var(--bg)"><i class="bi bi-credit-card" style="color:var(--t3);font-size:.85rem"></i></span>
                 <span class="pay-select-text placeholder" id="paySelectText">Pilih metode pembayaran</span>
             </div>
         </section>
