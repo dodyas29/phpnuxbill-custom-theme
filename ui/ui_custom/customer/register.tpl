@@ -286,6 +286,7 @@
             dots.forEach(function(d,i){var s=parseInt(d.getAttribute('data-step'));d.classList.remove('active','done');if(s<n)d.classList.add('done');if(s===n)d.classList.add('active')});
             document.querySelectorAll('.step-line').forEach(function(l){var p=l.getAttribute('data-between').split('-');if(parseInt(p[1])<=n)l.classList.add('done');else l.classList.remove('done')});
             },300)}
+        }
 
         var map=L.map('coverageMap',{zoomControl:true}).setView([-6.2,106.8],12);
         L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{subdomains:['mt0','mt1','mt2','mt3'],attribution:'&copy; Google'}).addTo(map);
