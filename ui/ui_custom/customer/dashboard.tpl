@@ -178,12 +178,12 @@
                         <span>{$_user['fullname']|truncate:20:"":true}</span>
                     </div>
                     <div class="hero-status-badge" id="heroStatus">
-                        <span class="skl skl-bright w-full h-xs" style="width:60px"></span>
+                        <span class="skl skl-bright w-sm h-sm pill" style="width:56px"></span>
                     </div>
                 </div>
                 <div class="hero-plan-line">
                     <span class="skl skl-bright w-sm h-sm" style="width:130px" id="sklPlan"></span>
-                    <span class="skl skl-bright w-xs h-xs pill" style="width:60px" id="sklBw"></span>
+                    <span class="skl skl-bright w-xs h-sm pill" style="width:60px" id="sklBw"></span>
                     <span class="skl skl-bright w-xs h-sm" style="width:80px;margin-left:auto" id="sklPlanPrice"></span>
                 </div>
                 <div class="hero-divider"></div>
@@ -193,8 +193,8 @@
                     <div class="hero-num"><div class="hero-num-label">{Lang::T('Auto Renewal')}</div><div class="hero-num-value"><span class="skl skl-bright w-xs h-sm pill" style="width:44px" id="sklAutoRenewal"></span></div></div>
                 </div>
                 <div class="hero-actions">
-                    <span class="skl skl-bright w-full h-xl pill" style="flex:1" id="sklBtn1"></span>
-                    {if $_c['enable_balance'] == 'yes'}<span class="skl skl-bright w-full h-xl pill" style="flex:1" id="sklBtn2"></span>{/if}
+                    <span class="skl skl-bright w-full pill" style="flex:1;height:36px" id="sklBtn1"></span>
+                    {if $_c['enable_balance'] == 'yes'}<span class="skl skl-bright w-full pill" style="flex:1;height:36px" id="sklBtn2"></span>{/if}
                 </div>
             </div>
         </section>
