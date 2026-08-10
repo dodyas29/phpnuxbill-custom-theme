@@ -431,7 +431,7 @@
             var c=document.getElementById('txList');if(!c)return;
             if(!d.transactions||!d.transactions.length){c.innerHTML='<div class="pc-empty">'+L.noTrx+'</div>';return}
             var h='';for(var i=0;i<Math.min(d.transactions.length,5);i++){var t=d.transactions[i],paid=t.status==='paid',cls=paid?'success':(t.status==='pending'?'pending':'failed'),ico=paid?'bi-check-circle-fill':(t.status==='pending'?'bi-clock-fill':'bi-x-circle-fill'),dt='';
-                try{dt=new Date(t.date.replace(' ','T')).toLocaleDateString('id-ID',{day:'numeric',month:'short'})}catch(e){dt=t.date}
+                try{dt=t.date}catch(e){dt=t.date}
                 h+='<div class="tx-item"><div class="tx-icon-wrap '+cls+'"><i class="bi '+ico+'"></i></div><div class="tx-mid"><div class="tx-name">'+es(t.plan_name)+'</div><div class="tx-sub">'+dt+' &middot; '+es(t.method)+'</div></div><div class="tx-end"><div class="tx-amount">Rp '+Number(t.amount).toLocaleString('id-ID')+'</div></div></div>'
             }c.innerHTML=h
         }
