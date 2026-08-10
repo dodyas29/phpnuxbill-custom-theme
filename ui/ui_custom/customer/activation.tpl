@@ -27,21 +27,22 @@
         .pkg-wrap{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r2);padding:0;margin-bottom:4px}
         .pkg-wrap select{width:100%;background:none;border:none;color:var(--tx);font-size:.84rem;font-weight:600;font-family:var(--ff);padding:14px 40px 14px 16px;cursor:pointer;outline:none;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2371717a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
 
-        .dd-wrap{position:relative}
-        .dd-btn{width:100%;background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r2);padding:12px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;font-family:var(--ff);color:var(--tx);text-align:left}
-        .dd-btn::after{content:'';margin-left:auto;border:solid var(--t3);border-width:0 2px 2px 0;padding:3px;transform:rotate(45deg);flex-shrink:0}
-        .dd-btn-logo{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;font-size:.6rem;font-weight:800;color:#fff}
-        .dd-btn-logo img{width:100%;height:100%;object-fit:contain}
-        .dd-btn-text{font-size:.82rem;font-weight:600}
-        .dd-menu{display:none;position:absolute;top:100%;left:0;right:0;z-index:200;margin-top:4px;background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r2);max-height:260px;overflow-y:auto;box-shadow:var(--sh2)}
-        .dd-menu.show{display:block}
-        .dd-item{display:flex;align-items:center;gap:12px;padding:11px 16px;cursor:pointer;font-size:.82rem;color:var(--tx)}
-        .dd-item:hover{background:var(--bgc)}
-        .dd-item.selected{color:var(--c1)}
-        .dd-item-logo{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;font-size:.6rem;font-weight:800;color:#fff}
-        .dd-item-logo img{width:100%;height:100%;object-fit:contain}
-        .dd-item .bi{color:var(--c1);font-size:.9rem;margin-left:auto;display:none}
-        .dd-item.selected .bi{display:block}
+        .pay-select{width:100%;background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r2);padding:12px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;font-family:var(--ff);color:var(--tx);margin-bottom:4px}
+        .pay-select::after{content:'';margin-left:auto;border:solid var(--t3);border-width:0 2px 2px 0;padding:3px;transform:rotate(45deg);flex-shrink:0}
+        .pay-select-logo{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;font-size:.65rem;font-weight:800;color:#fff}
+        .pay-select-logo img{width:100%;height:100%;object-fit:contain}
+        .pay-select-text{font-size:.82rem;font-weight:600}
+        .pay-select-text.placeholder{color:var(--t3)}
+
+        .pay-modal-item{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;border-radius:12px;font-size:.85rem;font-weight:500;color:var(--tx);transition:all .1s}
+        .pay-modal-item:active{background:var(--bgc)}
+        .pay-modal-item.selected{color:var(--c1)}
+        .pay-modal-logo{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;font-size:.7rem;font-weight:800;color:#fff}
+        .pay-modal-logo img{width:100%;height:100%;object-fit:contain}
+        .pay-modal-item .bi{color:var(--c1);font-size:1rem;margin-left:auto;display:none}
+        .pay-modal-item.selected .bi{display:block}
+        .pay-modal-item .bi-circle{margin-left:auto;font-size:.8rem;color:var(--bd2)}
+        .pay-modal-item.selected .bi-circle{display:none}
 
         .vbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:15px 24px;border-radius:var(--rp);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .15s;background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;border:none;letter-spacing:.4px;font-family:var(--ff)}
         .vbtn:active{transform:scale(.97);filter:brightness(.9)}
@@ -58,23 +59,23 @@
             <div class="sk-load" id="skCard">
                 <div class="sk-placeholder">
                     <div class="vcard" aria-hidden="true">
-                        <div class="vcard-top placeholder-glow">
+                        <div class="vcard-top">
                             <div class="vcard-brand">
-                                <span class="placeholder rounded" style="width:36px;height:36px"></span>
-                                <span class="placeholder col-4 placeholder-sm"></span>
+                                <span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span>
+                                <span class="skl skl-bright w-sm h-sm"></span>
                             </div>
-                            <span class="placeholder col-2 placeholder-sm"></span>
+                            <span class="skl skl-bright w-xs h-sm"></span>
                         </div>
                         <div class="vcard-body">
-                            <div class="vcard-left placeholder-glow">
-                                <span class="placeholder col-3 placeholder-xs"></span>
-                                <span class="placeholder col-9 placeholder-lg"></span>
-                                <span class="placeholder col-8 placeholder-xs"></span>
+                            <div class="vcard-left">
+                                <span class="skl skl-bright w-xs h-xs"></span>
+                                <span class="skl skl-bright w-full h-md"></span>
+                                <span class="skl skl-bright w-lg h-xs"></span>
                             </div>
-                            <span class="placeholder rounded" style="width:86px;height:86px"></span>
+                            <span class="skl skl-bright" style="width:86px;height:86px;border-radius:10px"></span>
                         </div>
-                        <div class="vcard-footer placeholder-glow">
-                            <span class="placeholder col-7 placeholder-xs"></span>
+                        <div class="vcard-footer">
+                            <span class="skl skl-bright w-md h-xs"></span>
                         </div>
                     </div>
                 </div>
@@ -107,7 +108,7 @@
             <div class="sh stg"><h2>Pilih Paket</h2></div>
             <div class="sk-load" id="skPkg">
                 <div class="sk-placeholder">
-                    <div class="placeholder-glow"><span class="placeholder col-4" style="height:48px;border-radius:var(--r2);display:block"></span></div>
+                    <span class="skl skl-bright w-sm" style="height:48px;border-radius:var(--r2);display:block;width:auto"></span>
                 </div>
                 <div class="sk-content">
                     <div class="pkg-wrap stg">
@@ -125,27 +126,25 @@
             <div class="sh stg"><h2>Metode Pembayaran</h2></div>
             <div class="sk-load" id="skPay">
                 <div class="sk-placeholder">
-                    <div class="placeholder-glow"><span class="placeholder col-6" style="height:48px;border-radius:var(--r2);display:block"></span></div>
+                    <span class="skl skl-bright w-md" style="height:48px;border-radius:var(--r2);display:block;width:auto"></span>
                 </div>
                 <div class="sk-content">
-                    <div class="dd-wrap stg" id="ddWrap">
-                        <button class="dd-btn" type="button" onclick="toggleDD()">
-                            <span class="dd-btn-logo" id="ddBtnLogo" style="background:var(--bgc)">--</span>
-                            <span class="dd-btn-text" id="ddBtnText">Pilih metode pembayaran</span>
-                        </button>
-                        <div class="dd-menu" id="ddMenu"></div>
+                    <div class="pay-select stg" onclick="openPayModal()">
+                        <span class="pay-select-logo" id="paySelectLogo" style="background:var(--bgc)">--</span>
+                        <span class="pay-select-text placeholder" id="paySelectText">Pilih metode pembayaran</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="sk-load stg" id="skBtn" style="margin-top:24px">
-            <div class="sk-placeholder">
-                <div class="placeholder-glow"><span class="placeholder col-12 placeholder-lg" style="border-radius:var(--rp)"></span></div>
-            </div>
-            <div class="sk-content">
-                <button class="vbtn" onclick="proceedPayment()"><i class="bi bi-arrow-right-circle"></i> Lanjutkan</button>
-            </div>
+        <button class="vbtn stg" style="margin-top:24px" onclick="proceedPayment()"><i class="bi bi-arrow-right-circle"></i> Lanjutkan</button>
+    </div>
+
+    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="payModal">
+        <div class="offcanvas-header flex-column"></div>
+        <div class="offcanvas-body">
+            <h6 class="fw-bold mb-3" style="font-size:.82rem;color:var(--tx)">Pilih Metode Pembayaran</h6>
+            <div id="payModalList"></div>
         </div>
     </div>
 
@@ -162,6 +161,7 @@
         var selectedChannel='';
         var voucherGenerated='';
         var channels=[];
+        var payModal=null;
 
         (function init(){
             document.getElementById('skCard').classList.add('loaded');
@@ -178,37 +178,42 @@
             document.getElementById('skPkg').classList.add('loaded');
             fetch(appUrl+'/ui/ui_custom/api/tripay_channels.php',{credentials:'include'})
             .then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json()})
-            .then(function(d){channels=d;renderDD();document.getElementById('skPay').classList.add('loaded');document.getElementById('skBtn').classList.add('loaded')})
+            .then(function(d){channels=d;renderPayModal();document.getElementById('skPay').classList.add('loaded')})
             .catch(function(){showToast('Gagal memuat metode pembayaran','error')})
         }
 
-        function renderDD(){
-            var m=document.getElementById('ddMenu'),h='';
+        function renderPayModal(){
+            var c=document.getElementById('payModalList'),h='';
             channels.forEach(function(ch){
                 var logo=ch.logo?'<img src="'+appUrl+'/ui/ui_custom/'+ch.logo+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><span style="display:none">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
-                h+='<div class="dd-item" onclick="selectDD(this,\''+ch.id+'\',\''+ch.name+'\',\''+(ch.logo||'')+'\',\''+(ch.color||'')+'\',\''+ch.init+'\')"><div class="dd-item-logo" style="background:'+(ch.color||'#666')+'">'+logo+'</div><span>'+ch.name+'</span><i class="bi bi-check-circle-fill"></i></div>';
+                h+='<div class="pay-modal-item" data-channel="'+ch.id+'" data-name="'+ch.name+'" data-logo="'+(ch.logo||'')+'" data-color="'+(ch.color||'')+'" data-init="'+ch.init+'" onclick="selectPayMethod(this)"><div class="pay-modal-logo" style="background:'+(ch.color||'#666')+'">'+logo+'</div><span>'+ch.name+'</span><i class="bi bi-circle"></i><i class="bi bi-check-circle-fill"></i></div>';
             });
-            m.innerHTML=h;
+            c.innerHTML=h;
+            payModal=new bootstrap.Offcanvas(document.getElementById('payModal'));
         }
 
-        function toggleDD(){document.getElementById('ddMenu').classList.toggle('show')}
+        function openPayModal(){if(payModal)payModal.show()}
 
-        function selectDD(el,id,name,logo,color,init){
-            document.querySelectorAll('.dd-item').forEach(function(e){e.classList.remove('selected')});
-            el.classList.add('selected');selectedChannel=id;
-            document.getElementById('ddBtnText').textContent=name;
-            var bl=document.getElementById('ddBtnLogo');
-            bl.style.background=color||'var(--bgc)';
-            bl.innerHTML=logo?'<img src="'+appUrl+'/ui/ui_custom/'+logo+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><span style="display:none">'+init.substring(0,2)+'</span>':'<span>'+init.substring(0,2)+'</span>';
-            document.getElementById('ddMenu').classList.remove('show');
+        function selectPayMethod(el){
+            document.querySelectorAll('.pay-modal-item').forEach(function(e){e.classList.remove('selected')});
+            el.classList.add('selected');
+            selectedChannel=el.getAttribute('data-channel');
+            var name=el.getAttribute('data-name');
+            var logo=el.getAttribute('data-logo');
+            var color=el.getAttribute('data-color');
+            var init=el.getAttribute('data-init');
+            document.getElementById('paySelectText').textContent=name;
+            document.getElementById('paySelectText').classList.remove('placeholder');
+            var pl=document.getElementById('paySelectLogo');
+            pl.style.background=color||'var(--bgc)';
+            pl.innerHTML=logo?'<img src="'+appUrl+'/ui/ui_custom/'+logo+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><span style="display:none">'+init.substring(0,2)+'</span>':'<span>'+init.substring(0,2)+'</span>';
+            if(payModal)payModal.hide();
         }
 
         function proceedPayment(){
             if(!selectedChannel){showToast('Pilih metode pembayaran','error');return}
             showToast('Mengarahkan ke pembayaran...','success');
         }
-
-        document.addEventListener('click',function(e){if(!document.getElementById('ddWrap').contains(e.target))document.getElementById('ddMenu').classList.remove('show')});
 
         loadChannels();
         {/literal}
