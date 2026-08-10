@@ -113,7 +113,7 @@
             box-shadow:0 2px 8px rgba(124,58,237,.12);position:relative;overflow:hidden
         }
         .btn-primary-custom:hover{filter:brightness(1.05);box-shadow:0 4px 16px rgba(124,58,237,.2)}
-        .btn-primary-custom:active{transform:translateY(0);filter:brightness(.95)}
+        .btn-primary-custom:active{transform:scale(.96);filter:brightness(.92)}
         .btn-primary-custom:disabled{opacity:.6;cursor:not-allowed;transform:none}
         .btn-primary-custom .spinner{display:none;width:20px;height:20px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
         .btn-primary-custom.loading .spinner{display:block}
