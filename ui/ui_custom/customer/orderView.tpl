@@ -7,6 +7,7 @@
 {include file="components/_header.tpl"}
 
     <div class="cw">
+        <a href="javascript:history.back()" style="display:inline-flex;align-items:center;gap:4px;color:var(--t3);text-decoration:none;font-size:.76rem;font-weight:500;margin-bottom:12px"><i class="bi bi-arrow-left"></i> Kembali</a>
         {if isset($notify)}<meta id="notify-data" data-msg="{$notify|escape}" data-type="{if $notify_t == 's'}success{else}error{/if}">{/if}
 
         <section>
