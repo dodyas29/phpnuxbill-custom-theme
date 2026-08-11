@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-<link rel="stylesheet" href="{$app_url}/ui/ui_custom/customer/assets/css/style.css?v=13">
+<link rel="stylesheet" href="{$app_url}/ui/ui_custom/customer/assets/css/style.css?v=14">
 <script>var appUrl='{$app_url}';var CSRF='{$csrf_token}';</script>
 <script defer src="{$app_url}/ui/ui_custom/customer/assets/js/face-api/face-api.min.js"></script>
 </head>
@@ -149,7 +149,7 @@ function pvRunLiveness(){
     var canvas=document.getElementById('pvCanvas');
     var displaySize={width:video.offsetWidth,height:video.offsetHeight};
     faceapi.matchDimensions(canvas,displaySize);
-    var blinkCount=0,blinkState=false,blinkCloseFrames=0,baselineEAR=.30;
+    var blinkCount=0,blinkState=false,blinkCloseFrames=0,baselineEAR=.28;
     pvLivenessInterval=setInterval(async function(){
             try{
                 var detections=await faceapi.detectAllFaces(video,new faceapi.TinyFaceDetectorOptions({inputSize:224,scoreThreshold:.4})).withFaceLandmarks();
@@ -165,10 +165,10 @@ function pvRunLiveness(){
                 var rightEye=landmarks.getRightEye();
                 var ear=(pvEyeAspectRatio(leftEye)+pvEyeAspectRatio(rightEye))/2;
                 if(ear>.1){baselineEAR=baselineEAR*.90+ear*.10}
-                var threshold=baselineEAR*.72;
+                var threshold=baselineEAR*.73;
                 if(!blinkState&&ear<threshold){blinkState=true;blinkCloseFrames=1}
                 else if(blinkState&&ear<threshold){blinkCloseFrames++}
-                else if(blinkState&&ear>=threshold&&blinkCloseFrames>=2){blinkState=false;blinkCount++}
+                else if(blinkState&&ear>=threshold&&blinkCloseFrames>=1){blinkState=false;blinkCount++}
                 else if(blinkState&&ear>=threshold){blinkState=false}
                 if(blinkCount>=1){
                     clearInterval(pvLivenessInterval);
