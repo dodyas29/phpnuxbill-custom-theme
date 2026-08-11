@@ -1,155 +1,123 @@
-{include file="customer/header.tpl"}
-<!-- user-orderView -->
-<div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-        <div
-            class="panel mb20 {if $trx['status']==1}panel-warning{elseif $trx['status']==2}panel-success{elseif $trx['status']==3}panel-danger{elseif $trx['status']==4}panel-danger{else}panel-primary{/if} panel-hovered">
-            <div class="panel-footer">{Lang::T('Transaction')} #{$trx['id']}</div>
-            {if !in_array($trx['routers'],['balance','radius'])}
-                <div class="panel-body">
-                    <div class="panel panel-primary panel-hovered">
-                        <div class="panel-heading">{$router['name']}</div>
-                        <div class="panel-body">
-                            {$router['description']}
-                        </div>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+{include file="components/_head_common.tpl"}
+</head>
+<body>
+{include file="components/_header.tpl"}
+
+    <div class="cw">
+        {if isset($notify)}<meta id="notify-data" data-msg="{$notify|escape}" data-type="{if $notify_t == 's'}success{else}error{/if}">{/if}
+
+        <section>
+            <div class="sh stg"><h2>Detail Transaksi</h2></div>
+
+            <div class="tx-card stg">
+                <div class="tx-card-head">
+                    <div class="tx-status status-{$trx['status']}">
+                        {if $trx['status'] == 1}<i class="bi bi-clock-fill"></i> UNPAID
+                        {elseif $trx['status'] == 2}<i class="bi bi-check-circle-fill"></i> PAID
+                        {elseif $trx['status'] == 3}<i class="bi bi-x-circle-fill"></i> FAILED
+                        {elseif $trx['status'] == 4}<i class="bi bi-x-circle-fill"></i> CANCELED
+                        {/if}
                     </div>
+                    <span class="tx-id">TRX #{$trx['id']}</span>
                 </div>
-            {/if}
-            <div class="table-responsive">
-                {if $trx['pg_url_payment']=='balance'}
-                    <table class="table table-bordered table-striped table-bordered">
-                        <tbody>
-                            <tr>
-                                <td>{Lang::T('Type')}</td>
-                                <td>{$trx['plan_name']}</td>
-                            </tr>
-                            <tr>
-                                <td>{Lang::T('Paid Date')}</td>
-                                <td>{date($_c['date_format'], strtotime($trx['paid_date']))}
-                                    {date('H:i', strtotime($trx['paid_date']))} </td>
-                            </tr>
-                            <tr>
-                                {if $trx['plan_name'] == 'Receive Balance'}
-                                    <td>{Lang::T('From')}</td>
-                                {else}
-                                    <td>{Lang::T('To')}</td>
-                                {/if}
-                                <td>{$trx['gateway']}</td>
-                            </tr>
-                            <tr>
-                                <td>{Lang::T('Total')}</td>
-                                <td>{Lang::moneyFormat($trx['price'])}</td>
-                            </tr>
-                            {if $invoice['note']}
-                                <tr>
-                                    <td>{Lang::T('Notes')}</td>
-                                    <td>
-                                        {nl2br($invoice['note'])}
-                                    </td>
-                                </tr>
-                            {/if}
-                        </tbody>
-                    </table>
-                {else}
-                    <table class="table table-bordered table-striped table-bordered">
-                        <tbody>
-                            <tr>
-                                <td>{Lang::T('Status')}</td>
-                                <td>{if $trx['status']==1}{Lang::T('UNPAID')}{elseif $trx['status']==2}{Lang::T('PAID')}{elseif $trx['status']==3}{Lang::T('FAILED')}{elseif $trx['status']==4}{Lang::T('CANCELED')}{else}{Lang::T('UNKNOWN')}{/if}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>{Lang::T('expired')}</td>
-                                <td>{date($_c['date_format'], strtotime($trx['expired_date']))}
-                                    {date('H:i', strtotime($trx['expired_date']))} </td>
-                            </tr>
-                            {if $trx['status']==2}
-                                <tr>
-                                    <td>{Lang::T('Paid Date')}</td>
-                                    <td>{date($_c['date_format'], strtotime($trx['paid_date']))}
-                                        {date('H:i', strtotime($trx['paid_date']))} </td>
-                                </tr>
-                            {/if}
-                            <tr>
-                                <td>{Lang::T('Package Name')}</td>
-                                <td>{$plan['name_plan']}</td>
-                            </tr>
-                            {if $add_cost!=0}
-                                {foreach $bills as $k => $v}
-                                    <tr>
-                                        <td>{$k}</td>
-                                        <td>{Lang::moneyFormat($v)}</td>
-                                    </tr>
-                                {/foreach}
-                                <tr>
-                                    <td>{Lang::T('Additional Cost')}</td>
-                                    <td>{Lang::moneyFormat($add_cost)}</td>
-                                </tr>
-                            {/if}
-                            <tr>
-                                <td>{Lang::T('Package Price')}{if $add_cost!=0}<small> +
-                                        {Lang::T('Additional Cost')}{/if}</small></td>
-                                <td
-                                    style="font-size: large; font-weight:bolder; font-family: 'Courier New', Courier, monospace; ">
-                                    {Lang::moneyFormat($trx['price'])}</td>
-                            </tr>
-                            <tr>
-                                <td>{Lang::T('Type')}</td>
-                                <td>{$plan['type']}</td>
-                            </tr>
-                            {if $plan['type']!='Balance'}
-                                {if $plan['type'] eq 'Hotspot'}
-                                    <tr>
-                                        <td>{Lang::T('Plan_Type')}</td>
-                                        <td>{Lang::T($plan['typebp'])}</td>
-                                    </tr>
-                                    {if $plan['typebp'] eq 'Limited'}
-                                        {if $plan['limit_type'] eq 'Time_Limit' or $plan['limit_type'] eq 'Both_Limit'}
-                                            <tr>
-                                                <td>{Lang::T('Time_Limit')}</td>
-                                                <td>{$ds['time_limit']} {$ds['time_unit']}</td>
-                                            </tr>
-                                        {/if}
-                                        {if $plan['limit_type'] eq 'Data_Limit' or $plan['limit_type'] eq 'Both_Limit'}
-                                            <tr>
-                                                <td>{Lang::T('Data_Limit')}</td>
-                                                <td>{$ds['data_limit']} {$ds['data_unit']}</td>
-                                            </tr>
-                                        {/if}
-                                    {/if}
-                                {/if}
-                                <tr>
-                                    <td>{Lang::T('Validity Periode')}</td>
-                                    <td>{$plan['validity']} {$plan['validity_unit']}</td>
-                                </tr>
-                                {if $_c['show_bandwidth_plan'] == 'yes'}
-                                    <tr>
-                                        <td>{Lang::T('Bandwidth Plans')}</td>
-                                        <td>{$bandw['name_bw']}<br>{$bandw['rate_down']}{$bandw['rate_down_unit']}/{$bandw['rate_up']}{$bandw['rate_up_unit']}
-                                        </td>
-                                    </tr>
-                                {/if}
-                            {/if}
-                        </tbody>
-                    </table>
-                {/if}
+
+                <div class="tx-card-body">
+                    <div class="tx-row">
+                        <span class="tx-label">Paket</span>
+                        <span class="tx-value">{$trx['plan_name']}</span>
+                    </div>
+                    {if $trx['pg_url_payment'] != 'balance'}
+                    <div class="tx-row">
+                        <span class="tx-label">Harga</span>
+                        <span class="tx-value tx-price">Rp {number_format($trx['price'], 0, ',', '.')}</span>
+                    </div>
+                    {/if}
+                    {if isset($router) && $router['name'] != 'balance' && $router['name'] != 'radius'}
+                    <div class="tx-row">
+                        <span class="tx-label">Router</span>
+                        <span class="tx-value">{$router['name']}</span>
+                    </div>
+                    {/if}
+                    <div class="tx-row">
+                        <span class="tx-label">Metode</span>
+                        <span class="tx-value">{if $trx['pg_url_payment'] == 'balance'}Balance{else}{$trx['gateway']|capitalize}{/if}</span>
+                    </div>
+                    {if !empty($trx['payment_channel'])}
+                    <div class="tx-row">
+                        <span class="tx-label">Channel</span>
+                        <span class="tx-value">{$trx['payment_channel']}</span>
+                    </div>
+                    {/if}
+                    <div class="tx-row">
+                        <span class="tx-label">Dibuat</span>
+                        <span class="tx-value">{Lang::dateAndTimeFormat($trx['created_date'], '')}</span>
+                    </div>
+                    {if !empty($trx['expired_date'])}
+                    <div class="tx-row">
+                        <span class="tx-label">Kedaluwarsa</span>
+                        <span class="tx-value">{Lang::dateAndTimeFormat($trx['expired_date'], '')}</span>
+                    </div>
+                    {/if}
+                    {if $trx['status'] == 2 && !empty($trx['paid_date'])}
+                    <div class="tx-row">
+                        <span class="tx-label">Dibayar</span>
+                        <span class="tx-value">{Lang::dateAndTimeFormat($trx['paid_date'], '')}</span>
+                    </div>
+                    {/if}
+                    {if isset($invoice) && !empty($invoice['invoice'])}
+                    <div class="tx-row">
+                        <span class="tx-label">Invoice</span>
+                        <span class="tx-value">{$invoice['invoice']}</span>
+                    </div>
+                    {/if}
+                    {if !empty($trx['payment_method'])}
+                    <div class="tx-row">
+                        <span class="tx-label">Metode Bayar</span>
+                        <span class="tx-value">{$trx['payment_method']}</span>
+                    </div>
+                    {/if}
+                </div>
             </div>
-            {if $trx['status']==1}
-                <div class="panel-footer">
-                    <div class="btn-group btn-group-justified">
-                        <a href="{$trx['pg_url_payment']}" {if $trx['gateway']=='midtrans'} target="_blank" {/if}
-                            class="btn btn-primary">{Lang::T('Pay Now')}</a>
-                        <a href="{Text::url('order/view/', $trx['id'], '/check')}"
-                            class="btn btn-info">{Lang::T('Check for Payment')}</a>
-                    </div>
-                </div>
-                <div class="panel-footer">
-                    <a href="{Text::url('order/view/', $trx['id'], '/cancel')}" class="btn btn-danger"
-                        onclick="return ask(this, '{Lang::T('Cancel it?')}')">{Lang::T('Cancel')}</a>
-                </div>
+
+            {if $trx['status'] == 1}
+            <div class="tx-actions stg">
+                {if !empty($trx['pg_url_payment']) && $trx['pg_url_payment'] != 'balance'}
+                <a href="{$trx['pg_url_payment']}" class="vbtn"><i class="bi bi-credit-card"></i> Bayar Sekarang</a>
+                {/if}
+                <a href="{Text::url('order/view/')}{$trx['id']}/check" class="vbtn" style="margin-top:10px;background:var(--bgc);color:var(--tx)"><i class="bi bi-arrow-repeat"></i> Cek Pembayaran</a>
+                <a href="{Text::url('order/view/')}{$trx['id']}/cancel" class="vbtn" style="margin-top:10px;background:transparent;color:var(--c6);border:1px solid var(--c6)" onclick="return confirm('{Lang::T('Cancel transaction')}?')"><i class="bi bi-x-circle"></i> Batalkan</a>
+            </div>
             {/if}
-        </div>
+        </section>
     </div>
-</div>
-{include file="customer/footer.tpl"}
+
+{include file="components/_navbar.tpl"}
+{include file="components/_menu_sheet.tpl"}
+    <div class="tc" id="toastContainer"></div>
+
+{include file="components/_scripts_common.tpl"}
+
+    <style>
+        {literal}
+        .tx-card{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r3);overflow:hidden}
+        .tx-card-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--bd);background:var(--bg)}
+        .tx-status{font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+        .tx-status i{font-size:1rem}
+        .tx-status.status-1{color:var(--c5)}
+        .tx-status.status-2{color:var(--c4)}
+        .tx-status.status-3,.tx-status.status-4{color:var(--c6)}
+        .tx-id{font-size:.72rem;font-weight:600;color:var(--t3);font-family:'Courier New',monospace}
+        .tx-card-body{padding:16px 20px}
+        .tx-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--bd)}
+        .tx-row:last-child{border-bottom:none}
+        .tx-label{font-size:.76rem;color:var(--t3);flex-shrink:0}
+        .tx-value{font-size:.82rem;font-weight:600;color:var(--tx);text-align:right;margin-left:12px}
+        .tx-price{color:var(--c1);font-size:.9rem;font-weight:700}
+        .tx-actions{margin-top:16px}
+        {/literal}
+    </style>
+</body>
+</html>
