@@ -146,15 +146,15 @@ function pvRunLiveness(){
     faceapi.matchDimensions(canvas,displaySize);
     var blinkCount=0,blinkState=false;
     pvLivenessInterval=setInterval(async function(){
-        try{
-            var detections=await faceapi.detectAllFaces(video,new faceapi.TinyFaceDetectorOptions({inputSize:224,scoreThreshold:.5})).withFaceLandmarks();
-            var ctx=canvas.getContext('2d');
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            if(detections.length>0){
-                var landmarks=detections[0].landmarks;
-                var pts=landmarks.positions;
-                ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--c1').trim();
-                for(var i=0;i<pts.length;i++){ctx.beginPath();ctx.arc(pts[i].x,pts[i].y,1.5,0,2*Math.PI);ctx.fill()}
+            try{
+                var detections=await faceapi.detectAllFaces(video,new faceapi.TinyFaceDetectorOptions({inputSize:320,scoreThreshold:.4})).withFaceLandmarks();
+                var ctx=canvas.getContext('2d');
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                if(detections.length>0){
+                    var landmarks=detections[0].landmarks;
+                    var pts=landmarks.positions;
+                    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--c1').trim();
+                    for(var i=0;i<pts.length;i++){ctx.beginPath();ctx.arc(canvas.width-pts[i].x,pts[i].y,1.5,0,2*Math.PI);ctx.fill()}
                 var leftEye=landmarks.getLeftEye();
                 var rightEye=landmarks.getRightEye();
                 var ear=(pvEyeAspectRatio(leftEye)+pvEyeAspectRatio(rightEye))/2;
