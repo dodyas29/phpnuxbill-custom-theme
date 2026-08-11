@@ -43,7 +43,7 @@
                     {/if}
                     <div class="tx-row">
                         <span class="tx-label">Metode</span>
-                        <span class="tx-value">{if $trx['pg_url_payment'] == 'balance'}Balance{else}{$trx['gateway']|capitalize}{/if}</span>
+                        <span class="tx-value">{if $trx['pg_url_payment'] == 'balance'}Balance{else}{ucwords($trx['gateway'])}{/if}</span>
                     </div>
                     {if !empty($trx['payment_channel'])}
                     <div class="tx-row">
@@ -53,18 +53,18 @@
                     {/if}
                     <div class="tx-row">
                         <span class="tx-label">Dibuat</span>
-                        <span class="tx-value">{Lang::dateAndTimeFormat($trx['created_date'], '')}</span>
+                        <span class="tx-value">{Lang::dateAndTimeFormat($trx['created_date'], ' ')}</span>
                     </div>
                     {if !empty($trx['expired_date'])}
                     <div class="tx-row">
                         <span class="tx-label">Kedaluwarsa</span>
-                        <span class="tx-value">{Lang::dateAndTimeFormat($trx['expired_date'], '')}</span>
+                        <span class="tx-value">{Lang::dateAndTimeFormat($trx['expired_date'], ' ')}</span>
                     </div>
                     {/if}
                     {if $trx['status'] == 2 && !empty($trx['paid_date'])}
                     <div class="tx-row">
                         <span class="tx-label">Dibayar</span>
-                        <span class="tx-value">{Lang::dateAndTimeFormat($trx['paid_date'], '')}</span>
+                        <span class="tx-value">{Lang::dateAndTimeFormat($trx['paid_date'], ' ')}</span>
                     </div>
                     {/if}
                     {if isset($invoice) && !empty($invoice['invoice'])}
