@@ -79,10 +79,10 @@
             {if $trx['status'] == 1}
             <div class="tx-actions stg">
                 {if !empty($trx['pg_url_payment']) && $trx['pg_url_payment'] != 'balance'}
-                <a href="{$trx['pg_url_payment']}" class="vbtn"><i class="bi bi-credit-card"></i> Bayar</a>
+                <a href="{$trx['pg_url_payment']}" class="tx-act pay"><i class="bi bi-credit-card"></i> Bayar</a>
                 {/if}
-                <a href="{Text::url('order/view/')}{$trx['id']}/check" class="vbtn" style="background:var(--bgc);color:var(--tx)"><i class="bi bi-arrow-repeat"></i> Cek</a>
-                <a href="javascript:void(0)" class="vbtn" style="background:transparent;color:var(--c6);border:1px solid var(--c6)" onclick="cancelTrx({$trx['id']})"><i class="bi bi-x-circle"></i> Batal</a>
+                <a href="{Text::url('order/view/')}{$trx['id']}/check" class="tx-act check"><i class="bi bi-arrow-repeat"></i> Cek</a>
+                <a href="javascript:void(0)" class="tx-act cancel" onclick="cancelTrx({$trx['id']})"><i class="bi bi-x-circle"></i> Batal</a>
             </div>
             {/if}
         </section>
