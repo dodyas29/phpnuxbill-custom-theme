@@ -23,11 +23,7 @@ function changePassword(e){
     };
     fetch(appUrl+'/ui/ui_custom/api/change_password.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
     .then(function(r){return r.json()}).then(function(d){
-        if(d.success){
-            var body=document.querySelector('#pwModal .offcanvas-body');
-            body.innerHTML='<div style="text-align:center;padding:30px 0"><i class="bi bi-check-circle-fill" style="font-size:3rem;color:var(--c4);display:block;margin-bottom:12px"></i><p style="font-size:.9rem;color:var(--tx);margin-bottom:8px">Password berhasil diubah</p><p style="font-size:.7rem;color:var(--t3)">Mengalihkan ke login...</p></div>';
-            setTimeout(function(){window.location.href=d.redirect},2000);
-        }
+        if(d.success)window.location.href=d.redirect;
         else{hideDots(btn);btn.innerHTML='<i class="bi bi-check-lg"></i> '+txt;showToast(d.message,'error')}
     }).catch(function(){hideDots(btn);btn.innerHTML='<i class="bi bi-check-lg"></i> '+txt;showToast('Gagal','error')});
 }
