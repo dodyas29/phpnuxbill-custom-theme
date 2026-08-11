@@ -146,13 +146,8 @@
     {/if}
 </div>
 
-<nav class="bn">
-    <a href="{$app_url}/?_route=home"><i class="bi bi-house-door-fill"></i><span>Home</span></a>
-    <a href="{$app_url}/?_route=plugin/postpaid_page" class="active"><i class="bi bi-arrow-repeat"></i><span>Package</span></a>
-    <a href="{$app_url}/?_route=voucher/activation"><i class="bi bi-ticket-perforated"></i><span>Voucher</span></a>
-    <a href="{$app_url}/?_route=order/history"><i class="bi bi-clock-history"></i><span>History</span></a>
-    <a href="{$app_url}/?_route=accounts/profile"><i class="bi bi-person"></i><span>Profile</span></a>
-</nav>
+{include file="customer/components/_navbar.tpl"}
+{include file="customer/components/_menu_sheet.tpl"}
 
 <div class="offcanvas offcanvas-bottom os mod-h" tabindex="-1" id="upgradeModal">
     <div class="offcanvas-header flex-column"></div>
