@@ -87,7 +87,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="vbtn stg" id="saveBtn"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
+                <button type="submit" class="vbtn stg" id="saveBtn" style="margin-top:24px"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
                 <div style="text-align:center;margin-top:14px"><a href="{Text::url('home')}" style="color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a></div>
             </form>
         </section>
