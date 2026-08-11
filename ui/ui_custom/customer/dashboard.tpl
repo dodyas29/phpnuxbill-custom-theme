@@ -216,7 +216,7 @@
     </div>
     </div>
 
-    <div class="offcanvas offcanvas-bottom os bal-mh" tabindex="-1" id="rechargeModal">
+    <div class="offcanvas offcanvas-bottom os mod-h" tabindex="-1" id="rechargeModal">
         <div class="offcanvas-header flex-column"></div>
         <div class="offcanvas-body">
             <div id="rechargeSkel">
