@@ -243,12 +243,13 @@
         function proceedPayment(){
             if(!selectedChannel){showToast('Pilih metode pembayaran','error');return}
             if(!selectedPackageId){showToast('Pilih paket','error');return}
-            showDots(event.target);
+            var btn=event.target;
+            showDots(btn);
             fetch(appUrl+'/ui/ui_custom/api/voucher_payment.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan_id:selectedPackageId,channel:selectedChannel})})
             .then(function(r){return r.json()}).then(function(d){
                 if(d.success&&d.url)window.location.href=d.url;
-                else{hideDots(event.target);showToast(d.error||'Gagal','error')}
-            }).catch(function(){hideDots(event.target);showToast('Gagal','error')});
+                else{hideDots(btn);showToast(d.error||'Gagal','error')}
+            }).catch(function(){hideDots(btn);showToast('Gagal','error')});
         }
         {/literal}
     </script>
