@@ -116,6 +116,27 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .oh-date{font-size:.62rem;color:var(--t3);flex-shrink:0;width:36px;text-align:right}
 .oh-pager{display:flex;gap:10px;margin-top:24px}
 
+.pr-card{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r3);padding:18px 20px;margin-bottom:10px}
+.pr-photo-wrap{display:flex;align-items:center;gap:16px}
+.pr-photo{width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid var(--bd);flex-shrink:0}
+.pr-upload{display:none}
+.pr-upload-label{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--rp);font-size:.72rem;font-weight:600;cursor:pointer;color:var(--c1);border:1px solid var(--c1);transition:all .15s}
+.pr-upload-label:active{background:rgba(129,140,248,.1)}
+.pr-change-link{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--c1);font-size:.95rem;text-decoration:none;z-index:1}
+
+.field-wrap{position:relative;background:var(--bg);border:2px solid var(--bd);border-radius:var(--rm);transition:all .2s;margin-bottom:16px}
+.field-wrap:focus-within{border-color:var(--c1);box-shadow:0 0 0 3px rgba(129,140,248,.12)}
+.field-wrap input{width:100%;border:none;background:transparent;padding:22px 14px 10px 14px;font-size:.95rem;color:var(--tx);outline:none;font-family:var(--ff);box-shadow:none;-webkit-appearance:none;-moz-appearance:none;border-radius:.8rem}
+.field-wrap input:-webkit-autofill,.field-wrap input:-webkit-autofill:hover,.field-wrap input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 60px var(--bg) inset!important;-webkit-text-fill-color:var(--tx)!important;background-color:var(--bg)!important;transition:background-color 9999s ease-in-out 0s;animation:onAutoFillStart .01s}
+.field-wrap input::placeholder{color:transparent}
+.fl{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.95rem;color:var(--t3);pointer-events:none;transition:all .2s ease;font-family:var(--ff);font-weight:400}
+.field-wrap:focus-within .fl,.field-wrap input:not(:placeholder-shown) ~ .fl,.field-wrap.filled .fl{top:7px;font-size:.62rem;color:var(--c1);font-weight:600;letter-spacing:.5px;text-transform:uppercase;transform:translateY(0)}
+.field-wrap .pw-toggle{position:absolute;right:0;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--t3);cursor:pointer;padding:12px 14px;font-size:1.1rem;z-index:1}
+.field-hint{font-size:.62rem;color:var(--t3);margin-top:-12px;margin-bottom:16px;padding-left:4px}
+.field-hint.ok{color:var(--c4)}.field-hint.err{color:var(--c6)}
+@keyframes onAutoFillStart{from{}to{}}
+.suggest-link{color:var(--c1);font-weight:700;text-decoration:none}
+
 .receipt{text-align:center;padding:28px 20px 20px}
 .receipt-company{font-size:.7rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
 .receipt-id{font-size:.68rem;color:var(--t3);font-family:'Courier New',monospace;margin-bottom:16px}
