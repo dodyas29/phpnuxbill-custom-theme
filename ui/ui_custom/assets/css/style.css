@@ -133,7 +133,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .pr-row input:focus{color:var(--tx)}
 .pr-val{font-size:.82rem;color:var(--t2);text-decoration:none;display:flex;align-items:center}
 
-.field-wrap{position:relative;background:var(--bg);border:2px solid var(--bd);border-radius:var(--rm);transition:all .2s;margin-bottom:16px}
+.field-wrap{position:relative;background:var(--bg);border:2px solid var(--bd);border-radius:12px;transition:all .2s;margin-bottom:16px}
 .field-wrap:focus-within{border-color:var(--c1);box-shadow:0 0 0 3px rgba(129,140,248,.12)}
 .field-wrap input{width:100%;border:none;background:transparent;padding:22px 14px 10px 14px;font-size:.95rem;color:var(--tx);outline:none;font-family:var(--ff);box-shadow:none;-webkit-appearance:none;-moz-appearance:none;border-radius:.8rem}
 .field-wrap input:-webkit-autofill,.field-wrap input:-webkit-autofill:hover,.field-wrap input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 60px var(--bg) inset!important;-webkit-text-fill-color:var(--tx)!important;background-color:var(--bg)!important;transition:background-color 9999s ease-in-out 0s;animation:onAutoFillStart .01s}
