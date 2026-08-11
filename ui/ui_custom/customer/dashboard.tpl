@@ -214,6 +214,9 @@
             <button class="vbtn" onclick="errModal.hide()" style="max-width:200px;margin:0 auto">Tutup</button>
         </div>
     </div>
+    </div>
+
+    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="rechargeModal" style="max-height:55vh">
         <div class="offcanvas-header flex-column"></div>
         <div class="offcanvas-body">
             <div id="rechargeSkel">
