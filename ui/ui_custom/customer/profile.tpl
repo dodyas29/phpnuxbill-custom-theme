@@ -12,7 +12,7 @@
         <section>
             <div class="sh stg"><h2>{Lang::T('My Account')}</h2></div>
 
-            <form action="{Text::url('accounts/edit-profile-post')}" method="post" enctype="multipart/form-data">
+            <form action="{Text::url('accounts/edit-profile-post')}" method="post" enctype="multipart/form-data" id="profileForm">
                 <input type="hidden" name="csrf_token" value="{$csrf_token}">
                 <input type="hidden" name="id" value="{$_user['id']}">
 
@@ -64,11 +64,15 @@
                     </div>
                     {/if}
                     {if isset($customFields)}{$customFields}{/if}
-                    <div class="pr-row" onclick="togglePwForm()">
+                </div>
+            </form>
+
+            <div class="pr-row" onclick="togglePwForm()">
                         <span>{Lang::T('Change Password')}</span>
                         <span class="pr-val"><i class="bi bi-chevron-down pr-pw-icon" style="font-size:.7rem;margin-left:4px;transition:transform .2s"></i></span>
                     </div>
-                    <div id="pwWrap" style="display:none;padding:16px 16px 0">
+                    <form action="{Text::url('accounts/change-password-post')}" method="post" id="pwWrap" style="display:none;padding:16px 16px 0">
+                        <input type="hidden" name="csrf_token" value="{$csrf_token}">
                         <div class="field-wrap" style="margin-bottom:12px">
                             <span class="fl">{Lang::T('Current Password')}</span>
                             <input type="password" id="pwCurrent" name="password" required placeholder="{Lang::T('Current Password')}">
@@ -84,14 +88,11 @@
                             <input type="password" id="pwConfirm" name="cnewpassword" required placeholder="{Lang::T('Confirm New Password')}">
                             <button type="button" class="pw-toggle" onclick="togglePw('pwConfirm',this)"><i class="bi bi-eye-slash"></i></button>
                         </div>
-                    </div>
-                </div>
+                    </form>
 
-                <button type="submit" class="vbtn stg" id="saveBtn" style="margin-top:24px" data-pw-url="{Text::url('accounts/change-password-post')}"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
-                <div style="text-align:center;margin-top:14px"><a href="{Text::url('home')}" style="color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a></div>
-            </form>
-        </section>
-    </div>
+            <button type="submit" class="vbtn stg" form="profileForm" style="margin-top:24px"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
+            <div style="text-align:center;margin-top:14px"><a href="{Text::url('home')}" style="color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a></div>
+        </div>
 
 {include file="components/_navbar.tpl"}
 {include file="components/_menu_sheet.tpl"}
@@ -106,9 +107,6 @@
             var open=pw.style.display==='block';
             pw.style.display=open?'none':'block';
             icon.style.transform=open?'rotate(0)':'rotate(180deg)';
-            var btn=document.getElementById('saveBtn');
-            if(!open){btn.setAttribute('formaction',btn.getAttribute('data-pw-url'))}
-            else{btn.removeAttribute('formaction')}
         }
         function togglePw(id,btn){
             var el=document.getElementById(id),icon=btn.querySelector('i');
