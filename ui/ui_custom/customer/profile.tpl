@@ -91,7 +91,7 @@
                 </form>
             </div>
 
-            <button type="submit" class="vbtn stg" form="profileForm" style="margin-top:24px"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
+            <button type="submit" class="vbtn stg" id="saveBtn" form="profileForm" style="margin-top:24px"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
             <div style="text-align:center;margin-top:14px"><a href="{Text::url('home')}" style="color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a></div>
         </div>
 
@@ -108,8 +108,6 @@
             var open=pw.style.display==='block';
             pw.style.display=open?'none':'block';
             icon.style.transform=open?'rotate(0)':'rotate(180deg)';
-            var btn=document.getElementById('saveBtn');
-            btn.setAttribute('form',open?'profileForm':'pwWrap');
         }
         function togglePw(id,btn){
             var el=document.getElementById(id),icon=btn.querySelector('i');
