@@ -67,28 +67,30 @@
                 </div>
             </form>
 
+            <div class="pr-card stg">
             <div class="pr-row" onclick="togglePwForm()">
-                        <span>{Lang::T('Change Password')}</span>
-                        <span class="pr-val"><i class="bi bi-chevron-down pr-pw-icon" style="font-size:.7rem;margin-left:4px;transition:transform .2s"></i></span>
-                    </div>
-                    <form action="{Text::url('accounts/change-password-post')}" method="post" id="pwWrap" style="display:none;padding:16px 16px 0">
-                        <input type="hidden" name="csrf_token" value="{$csrf_token}">
-                        <div class="field-wrap" style="margin-bottom:12px">
-                            <span class="fl">{Lang::T('Current Password')}</span>
-                            <input type="password" id="pwCurrent" name="password" required placeholder="{Lang::T('Current Password')}">
-                            <button type="button" class="pw-toggle" onclick="togglePw('pwCurrent',this)"><i class="bi bi-eye-slash"></i></button>
-                        </div>
-                        <div class="field-wrap" style="margin-bottom:12px">
-                            <span class="fl">{Lang::T('New Password')}</span>
-                            <input type="password" id="pwNew" name="newpassword" required placeholder="{Lang::T('New Password')}">
-                            <button type="button" class="pw-toggle" onclick="togglePw('pwNew',this)"><i class="bi bi-eye-slash"></i></button>
-                        </div>
-                        <div class="field-wrap">
-                            <span class="fl">{Lang::T('Confirm New Password')}</span>
-                            <input type="password" id="pwConfirm" name="cnewpassword" required placeholder="{Lang::T('Confirm New Password')}">
-                            <button type="button" class="pw-toggle" onclick="togglePw('pwConfirm',this)"><i class="bi bi-eye-slash"></i></button>
-                        </div>
-                    </form>
+                <span>{Lang::T('Change Password')}</span>
+                <span class="pr-val"><i class="bi bi-chevron-down pr-pw-icon" style="font-size:.7rem;margin-left:4px;transition:transform .2s"></i></span>
+            </div>
+            <form action="{Text::url('accounts/change-password-post')}" method="post" id="pwWrap" style="display:none;padding:16px 16px 0">
+                <input type="hidden" name="csrf_token" value="{$csrf_token}">
+                <div class="field-wrap" style="margin-bottom:12px">
+                    <span class="fl">{Lang::T('Current Password')}</span>
+                    <input type="password" id="pwCurrent" name="password" required placeholder="{Lang::T('Current Password')}">
+                    <button type="button" class="pw-toggle" onclick="togglePw('pwCurrent',this)"><i class="bi bi-eye-slash"></i></button>
+                </div>
+                <div class="field-wrap" style="margin-bottom:12px">
+                    <span class="fl">{Lang::T('New Password')}</span>
+                    <input type="password" id="pwNew" name="newpassword" required placeholder="{Lang::T('New Password')}">
+                    <button type="button" class="pw-toggle" onclick="togglePw('pwNew',this)"><i class="bi bi-eye-slash"></i></button>
+                </div>
+                <div class="field-wrap">
+                    <span class="fl">{Lang::T('Confirm New Password')}</span>
+                    <input type="password" id="pwConfirm" name="cnewpassword" required placeholder="{Lang::T('Confirm New Password')}">
+                    <button type="button" class="pw-toggle" onclick="togglePw('pwConfirm',this)"><i class="bi bi-eye-slash"></i></button>
+                </div>
+            </form>
+            </div>
 
             <button type="submit" class="vbtn stg" form="profileForm" style="margin-top:24px"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
             <div style="text-align:center;margin-top:14px"><a href="{Text::url('home')}" style="color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a></div>
