@@ -152,7 +152,7 @@ function pvRunLiveness(){
     var blinkCount=0,blinkState=false,blinkCloseFrames=0;
     pvLivenessInterval=setInterval(async function(){
             try{
-                var detections=await faceapi.detectAllFaces(video,new faceapi.TinyFaceDetectorOptions({inputSize:320,scoreThreshold:.4})).withFaceLandmarks();
+                var detections=await faceapi.detectAllFaces(video,new faceapi.TinyFaceDetectorOptions({inputSize:224,scoreThreshold:.4})).withFaceLandmarks();
                 var ctx=canvas.getContext('2d');
                 ctx.clearRect(0,0,canvas.width,canvas.height);
                 if(detections.length>0){
@@ -164,10 +164,10 @@ function pvRunLiveness(){
                 var leftEye=landmarks.getLeftEye();
                 var rightEye=landmarks.getRightEye();
                 var ear=(pvEyeAspectRatio(leftEye)+pvEyeAspectRatio(rightEye))/2;
-                if(!blinkState&&ear<.23){blinkState=true;blinkCloseFrames=1}
-                else if(blinkState&&ear<.23){blinkCloseFrames++}
-                else if(blinkState&&ear>=.23&&blinkCloseFrames>=2){blinkState=false;blinkCount++}
-                else if(blinkState&&ear>=.23){blinkState=false}
+                if(!blinkState&&ear<.22){blinkState=true;blinkCloseFrames=1}
+                else if(blinkState&&ear<.22){blinkCloseFrames++}
+                else if(blinkState&&ear>=.22&&blinkCloseFrames>=1){blinkState=false;blinkCount++}
+                else if(blinkState&&ear>=.22){blinkState=false}
                 if(blinkCount>=1){
                     clearInterval(pvLivenessInterval);
                     pvStopStream();
@@ -179,13 +179,13 @@ function pvRunLiveness(){
                     document.getElementById('pvSubmit').disabled=false;
                     document.getElementById('pvSubmit').click();
                 }else{
-                    document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-person-bounding-box"></i> Kedipkan mata... ('+blinkCount+'/1)';
+                    document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-person-bounding-box"></i> Kedipkan mata... EAR:'+ear.toFixed(2)+' ('+blinkCount+'/1)';
                 }
             }else{
                 document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-person-bounding-box"></i> Arahkan wajah ke kamera...';
             }
         }catch(e){}
-    },200);
+    },100);
 }
 
 function pvEyeAspectRatio(eye){
