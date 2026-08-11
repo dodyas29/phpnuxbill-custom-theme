@@ -478,13 +478,17 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .pp-hero-cta{font-size:.76rem;font-weight:700;padding:12px 28px;border-radius:var(--rp);background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;border:none;cursor:pointer;font-family:var(--ff);display:inline-block;transition:all .15s}
 .pp-hero.postpaid .pp-hero-cta{background:linear-gradient(135deg,var(--c4),var(--c3))}
 .pp-hero-cta:active{transform:scale(.96);filter:brightness(.9)}
-.pp-verify-card{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r3);padding:28px 20px}
-.pp-verify-card .vbtn{min-height:44px}
-.pp-verify.hidden{display:none}
-.pp-capture-card{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r3);padding:24px 20px}
-.pp-capture.hidden{display:none}
-.pp-capture-preview{width:100%;min-height:220px;background:var(--bg);border:2px dashed var(--bd);border-radius:var(--r2);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;overflow:hidden}
-.pp-capture-preview:active{border-color:var(--c1)}
+.pv-card{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r3);padding:28px 20px;text-align:center}
+.pv-icon{font-size:2.5rem;color:var(--c1);display:block;margin-bottom:12px}
+.pv-title{font-size:.88rem;font-weight:700;color:var(--tx);margin-bottom:6px}
+.pv-desc{font-size:.68rem;color:var(--t3);line-height:1.5;margin-bottom:20px}
+.pv-step-label{font-size:.6rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:8px}
+.pv-btn-alt{background:var(--bgc)!important;color:var(--tx)!important;margin-top:10px}
+.pv-preview{width:100%;min-height:220px;background:var(--bg);border:2px dashed var(--bd);border-radius:var(--r2);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;overflow:hidden;background-size:cover;background-position:center}
+.pv-preview:active{border-color:var(--c1)}
+.pv-camera-icon{font-size:3rem;color:var(--t3)}
+.pv-camera-text{font-size:.7rem;color:var(--t3);margin-top:8px}
+.pp-verify-choice.hidden,.pp-verify-capture.hidden{display:none}
 .pp-plans-wrap{overflow:hidden;transition:all .35s cubic-bezier(.4,0,.2,1);max-height:0;opacity:0}
 .pp-plans-wrap.show{max-height:2000px;opacity:1}
 .pp-plans-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}

@@ -45,6 +45,22 @@ function postpaid_admin()
     $ui->display('postpaid_admin.tpl');
 }
 
+function postpaid_verify()
+{
+    global $ui;
+    _auth();
+    $planId = (int) _req('plan_id');
+    if (!$planId) r2(U . 'plugin/postpaid_page', 'e', 'Paket tidak ditemukan');
+
+    $plan = ORM::for_table('tbl_plans')->where('id', $planId)->where('enabled', 1)->find_one();
+    if (!$plan) r2(U . 'plugin/postpaid_page', 'e', 'Paket tidak tersedia');
+
+    $ui->assign('_title', 'Verifikasi Perangkat');
+    $ui->assign('plan_id', $planId);
+    $ui->assign('plan_name', $plan['name_plan']);
+    $ui->display('postpaid_verify.tpl');
+}
+
 function postpaid_page()
 {
     global $ui, $config;
