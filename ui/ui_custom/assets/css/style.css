@@ -105,6 +105,17 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .tx-act.cancel{background:transparent;color:var(--c6);border:1px solid var(--bd)}
 .tx-act:active{transform:scale(.95)}
 
+.oh-month{font-size:.62rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;padding:20px 0 8px;text-align:center}
+.oh-month::after{content:'';display:block;height:2px;margin:8px auto 0;width:40px;background:var(--c1);border-radius:1px}
+.oh-row{display:flex;align-items:center;gap:10px;padding:13px 16px;text-decoration:none;color:var(--tx);border-bottom:1px solid var(--bd);transition:all .1s}
+.oh-row:active{background:var(--bgc)}
+.oh-plan{flex:1;font-size:.8rem;font-weight:600;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.oh-price{font-size:.76rem;font-weight:700;color:var(--c1);flex-shrink:0;min-width:60px;text-align:right}
+.oh-status{font-size:.6rem;font-weight:700;flex-shrink:0;width:18px;text-align:center}
+.oh-status.s1{color:var(--c5)}.oh-status.s2{color:var(--c4)}.oh-status.s3,.oh-status.s4{color:var(--c6)}
+.oh-date{font-size:.62rem;color:var(--t3);flex-shrink:0;width:36px;text-align:right}
+.oh-pager{display:flex;gap:10px;margin-top:24px}
+
 .receipt{text-align:center;padding:28px 20px 20px}
 .receipt-company{font-size:.7rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
 .receipt-id{font-size:.68rem;color:var(--t3);font-family:'Courier New',monospace;margin-bottom:16px}

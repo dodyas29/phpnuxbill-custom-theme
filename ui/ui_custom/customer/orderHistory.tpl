@@ -1,56 +1,59 @@
-{include file="customer/header.tpl"}
-<!-- user-orderHistory -->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+{include file="components/_head_common.tpl"}
+</head>
+<body>
+{include file="components/_header.tpl"}
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="panel mb20 panel-hovered panel-primary">
-            <div class="panel-heading">{Lang::T('Order History')}</div>
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <table id="datatable" class="table table-bordered table-striped table-condensed">
-                        <thead>
-                            <tr>
-                                <th>{Lang::T('Package Name')}</th>
-                                <th>{Lang::T('Payment Method')}</th>
-                                <th>Routers</th>
-                                <th>{Lang::T('Type')}</th>
-                                <th>{Lang::T('Package Price')}</th>
-                                <th>{Lang::T('Created on')}</th>
-                                <th>{Lang::T('Expires on')}</th>
-                                <th>{Lang::T('Date')}</th>
-                                <th>{Lang::T('Status')}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {foreach $d as $ds}
-                                <tr>
-                                    <td><a href="{Text::url('order/view/')}{$ds['id']}">{$ds['plan_name']}</a></td>
-                                    <td>{$ds['gateway']}</td>
-                                    <td>{$ds['routers']}</td>
-                                    <td>{$ds['payment_channel']}</td>
-                                    <td>{Lang::moneyFormat($ds['price'])}</td>
-                                    <td class="text-primary">{date("{$_c['date_format']} H:i",
-                                        strtotime($ds['created_date']))}</td>
-                                    <td class="text-danger">{date("{$_c['date_format']} H:i",
-                                        strtotime($ds['expired_date']))}</td>
-                                    <td class="text-success">{if $ds['status']!=1}{date("{$_c['date_format']} H:i",
-                                        strtotime($ds['paid_date']))}{/if}</td>
-                                    <td>{if $ds['status']==1}{Lang::T('UNPAID')}
-                                        {elseif $ds['status']==2}{Lang::T('PAID')}
-                                        {elseif $ds['status']==3}{$_L['FAILED']}
-                                        {elseif $ds['status']==4}{Lang::T('CANCELED')}
-                                        {elseif $ds['status']==5}{Lang::T('UNKNOWN')}
-                                        {/if}</td>
-                                </tr>
-                            {/foreach}
-                        </tbody>
-                    </table>
-                </div>
-                {include file="pagination.tpl"}
+    <div class="cw">
+        <section>
+            <div class="sh stg"><h2>{Lang::T('Order History')}</h2></div>
+
+            {if empty($d)}
+            <div class="pc-empty">{Lang::T('No transactions')}</div>
+            {else}
+            {assign var="lastMonth" value=""}
+            {foreach $d as $ds}
+                {assign var="curMonth" value=$ds['created_date']|date_format:"%B %Y"}
+                {if $curMonth != $lastMonth}
+                <div class="oh-month">{$curMonth}</div>
+                {assign var="lastMonth" value=$curMonth}
+                {/if}
+                <a href="{Text::url('order/view/')}{$ds['id']}" class="oh-row stg">
+                    <span class="oh-plan">{$ds['plan_name']}</span>
+                    <span class="oh-price">{Lang::moneyFormat($ds['price'])}</span>
+                    <span class="oh-status s{$ds['status']}">
+                        {if $ds['status'] == 1}⏳
+                        {elseif $ds['status'] == 2}✅
+                        {elseif $ds['status'] == 3}✗
+                        {elseif $ds['status'] == 4}✗
+                        {/if}
+                    </span>
+                    <span class="oh-date">{$ds['created_date']|date_format:"%d %b"}</span>
+                    <i class="bi bi-chevron-right" style="color:var(--t3);font-size:.7rem;flex-shrink:0"></i>
+                </a>
+            {/foreach}
+
+            {if $paginator['last'] > 1}
+            <div class="oh-pager">
+                {if $paginator['prev'] > 0}
+                <a href="{$paginator['url']}{$paginator['prev']}" class="vbtn" style="background:var(--bgc);color:var(--tx)">← Sebelumnya</a>
+                {/if}
+                {if $paginator['next'] > 0}
+                <a href="{$paginator['url']}{$paginator['next']}" class="vbtn" style="background:var(--bgc);color:var(--tx)">Selanjutnya →</a>
+                {/if}
             </div>
-        </div>
+            {/if}
+            {/if}
+        </section>
     </div>
-</div>
 
+{include file="components/_navbar.tpl"}
+{include file="components/_menu_sheet.tpl"}
+    <div class="tc" id="toastContainer"></div>
 
-{include file="customer/footer.tpl"}
+{include file="components/_scripts_common.tpl"}
+
+</body>
+</html>
