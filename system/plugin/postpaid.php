@@ -102,6 +102,7 @@ function postpaid_page()
 
     $ui->assign('_title', 'Package');
     $ui->assign('_system_menu', 'package');
+    $ui->assign('_user', $user);
     $ui->assign('user', $user);
     $ui->assign('active', $active);
     $ui->assign('activePlan', $activePlan);

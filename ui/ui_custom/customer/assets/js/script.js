@@ -193,11 +193,22 @@ function selectMode(mode){
     if(mode==='prepaid'){
         p1.classList.add('selected');p2.classList.remove('selected');
         h1.classList.remove('hidden');h2.classList.add('hidden');
-        l1.classList.add('show');l2.classList.remove('show');
+        l2.classList.remove('show');
     }else{
         p1.classList.remove('selected');p2.classList.add('selected');
         h1.classList.add('hidden');h2.classList.remove('hidden');
-        l1.classList.remove('show');l2.classList.add('show');
+        l1.classList.remove('show');
+    }
+}
+function togglePlanList(mode,btn){
+    var list=document.getElementById(mode==='prepaid'?'ppPrepaidList':'ppPostpaidList');
+    var isOpen=list.classList.contains('show');
+    if(isOpen){
+        list.classList.remove('show');
+        btn.textContent=mode==='prepaid'?'Lihat Paket Prepaid':'Lihat Paket Postpaid';
+    }else{
+        list.classList.add('show');
+        btn.textContent='Tutup';
     }
 }
 

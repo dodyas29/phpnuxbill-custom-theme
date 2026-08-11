@@ -20,8 +20,10 @@
         <div class="ab-logo"><img src="{$app_url}/ui/ui/images/logo.png" class="ab-logo-img" alt=""><span>{$_c['CompanyName']}</span></div>
     </div>
     <div class="ab-r">
-        <button class="ab-btn" id="dmBtn" onclick="toggleTheme()"><i class="bi bi-sun-fill"></i></button>
-        <button class="ab-btn" id="avatarBtn" onclick="location.href=appUrl+'/?_route=accounts/profile'"><i class="bi bi-person-circle"></i></button>
+        {if $_c['enable_balance'] == 'yes'}<span class="ab-chip"><i class="bi bi-wallet2"></i> <span class="skl skl-bright h-sm pill" style="width:65px" id="abBal"></span></span>{/if}
+        <button class="ab-btn" id="notifBtn"><i class="bi bi-bell"></i><span class="ab-badge" id="inboxBadge" style="display:none"></span></button>
+        <button class="ab-btn" id="dmBtn"><i class="bi bi-sun-fill"></i></button>
+        <img src="{$app_url}/{$UPLOAD_PATH}/user.default.jpg" class="ab-av" id="avatarBtn" alt="">
     </div>
 </header>
 
@@ -97,7 +99,7 @@
                 <div class="pp-hero-title">Bayar Sekali, Pakai Sesuai Durasi</div>
                 <div class="pp-hero-desc">Masa aktif tetap sesuai paket yang dipilih. Tanpa tagihan bulanan. Cocok untuk kebutuhan jangka pendek dan fleksibel.</div>
                 <div class="pp-hero-tags"><span>7 Hari</span><span>30 Hari</span><span>Fleksibel</span></div>
-                <button class="pp-hero-cta" onclick="document.getElementById('ppPrepaidList').classList.add('show')">Lihat Paket Prepaid</button>
+                <button class="pp-hero-cta" onclick="togglePlanList('prepaid',this)">Lihat Paket Prepaid</button>
             </div>
 
             <div class="pp-hero postpaid hidden stg" id="ppHeroPostpaid">
@@ -105,14 +107,10 @@
                 <div class="pp-hero-title">Langganan Bulanan, Jatuh Tempo Tetap</div>
                 <div class="pp-hero-desc">Internet tanpa putus, bayar setiap bulan. Jatuh tempo di tanggal yang sama setiap bulannya. Lebih hemat untuk jangka panjang.</div>
                 <div class="pp-hero-tags"><span>Tgl {$dayExp}</span><span>Bulanan</span><span>Lebih Hemat</span></div>
-                <button class="pp-hero-cta" onclick="document.getElementById('ppPostpaidList').classList.add('show')">Lihat Paket Postpaid</button>
+                <button class="pp-hero-cta" onclick="togglePlanList('postpaid',this)">Lihat Paket Postpaid</button>
             </div>
 
             <div class="pp-plans-wrap" id="ppPrepaidList">
-                <div class="pp-plans-header">
-                    <span class="pp-plans-title"><i class="bi bi-lightning-charge-fill"></i> Prepaid Packages</span>
-                    <button class="pp-plans-back" onclick="selectMode(null)"><i class="bi bi-arrow-left"></i> Back</button>
-                </div>
                 {if !empty($prepaidPlans)}
                 {foreach $prepaidPlans as $plan}
                 <div class="pp-pkg">
@@ -133,10 +131,6 @@
             </div>
 
             <div class="pp-plans-wrap" id="ppPostpaidList">
-                <div class="pp-plans-header">
-                    <span class="pp-plans-title"><i class="bi bi-calendar-check-fill"></i> Postpaid Packages</span>
-                    <button class="pp-plans-back" onclick="selectMode(null)"><i class="bi bi-arrow-left"></i> Back</button>
-                </div>
                 <div class="pp-upgrade-info">
                     Jatuh tempo setiap <strong>tanggal {$dayExp}</strong>. Bayar per bulan, internet tanpa putus.
                 </div>
