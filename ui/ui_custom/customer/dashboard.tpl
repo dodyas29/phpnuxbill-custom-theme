@@ -51,7 +51,7 @@
 
         <section>
             <div class="sh stg"><h2>{Lang::T('Network Status')}</h2></div>
-            <div class="ns-card stg" id="nsCard">
+            <div class="ns-card flat stg" id="nsCard">
                 <!-- SKELETON -->
                 <div id="nsSkeleton">
                     <div class="ns-top"><span class="skl skl-bright h-xl" style="width:40px;height:40px;border-radius:10px"></span><div style="flex:1;display:flex;flex-direction:column;gap:4px"><span class="skl skl-bright w-sm h-sm" style="width:90px;height:14px"></span><span class="skl skl-bright w-xs h-xs" style="width:60px;height:10px"></span></div><span class="skl skl-bright w-xs h-xs pill" style="width:56px;height:26px"></span></div>
