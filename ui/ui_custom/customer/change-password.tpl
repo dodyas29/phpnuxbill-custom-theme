@@ -1,43 +1,28 @@
-{include file="customer/header.tpl"}
-<!-- user-change-password -->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+{include file="components/_head_common.tpl"}
+</head>
+<body>
+{include file="components/_header.tpl"}
 
-<div class="row">
-    <div class="col-sm-12 col-md-12">
-        <div class="panel panel-primary panel-hovered panel-stacked mb30">
-            <div class="panel-heading">{Lang::T('Change Password')}</div>
-            <div class="panel-body">
-                <form class="form-horizontal" method="post" role="form"
-                    action="{Text::url('accounts/change-password-post')}">
-                    <input type="hidden" name="csrf_token" value="{$csrf_token|escape:'html'}">
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">{Lang::T('Current Password')}</label>
-                        <div class="col-md-6">
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">{Lang::T('New Password')}</label>
-                        <div class="col-md-6">
-                            <input type="password" class="form-control" id="npass" name="npass">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">{Lang::T('Confirm New Password')}</label>
-                        <div class="col-md-6">
-                            <input type="password" class="form-control" id="cnpass" name="cnpass">
-                        </div>
-                    </div>
+    <div class="cw">
+        {if isset($notify)}<meta id="notify-data" data-msg="{$notify|escape}" data-type="{if $notify_t == 's'}success{else}error{/if}">{/if}
 
-                    <div class="form-group">
-                        <div class="col-lg-offset-2 col-lg-10">
-                            <button class="btn btn-success" type="submit">{Lang::T('Save Changes')}</button>
-                            Or <a href="{Text::url('home')}">{Lang::T('Cancel')}</a>
-                        </div>
-                    </div>
-                </form>
+        <section>
+            <div class="pr-card stg" style="text-align:center;padding:40px 20px">
+                <i class="bi bi-x-circle-fill" style="font-size:2.5rem;color:var(--c6);display:block;margin-bottom:12px"></i>
+                <p style="font-size:.85rem;color:var(--tx);line-height:1.5;margin-bottom:24px">{$notify}</p>
+                <a href="{Text::url('accounts/profile')}" class="vbtn" style="max-width:200px;margin:0 auto"><i class="bi bi-arrow-left"></i> Kembali ke Profile</a>
             </div>
-        </div>
+        </section>
     </div>
-</div>
 
-{include file="customer/footer.tpl"}
+{include file="components/_navbar.tpl"}
+{include file="components/_menu_sheet.tpl"}
+    <div class="tc" id="toastContainer"></div>
+
+{include file="components/_scripts_common.tpl"}
+
+</body>
+</html>

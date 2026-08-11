@@ -121,6 +121,10 @@
             input.addEventListener('input',function(){if(this.value)this.parentElement.classList.add('filled');else this.parentElement.classList.remove('filled')});
             input.addEventListener('animationstart',function(e){if(e.animationName==='onAutoFillStart')this.parentElement.classList.add('filled')});
         });
+        document.getElementById('pwConfirm').addEventListener('input',function(){
+            var n=document.getElementById('pwNew').value;
+            if(n&&this.value===n&&this.value.length>=2)document.getElementById('pwWrap').submit();
+        });
         {/literal}
     </script>
 </body>
