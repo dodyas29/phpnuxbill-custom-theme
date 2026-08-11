@@ -194,10 +194,12 @@ function selectMode(mode){
         p1.classList.add('selected');p2.classList.remove('selected');
         h1.classList.remove('hidden');h2.classList.add('hidden');
         l2.classList.remove('show');
+        var b2=h2.querySelector('.pp-hero-cta');if(b2)b2.textContent='Lihat Paket Postpaid';
     }else{
         p1.classList.remove('selected');p2.classList.add('selected');
         h1.classList.add('hidden');h2.classList.remove('hidden');
         l1.classList.remove('show');
+        var b1=h1.querySelector('.pp-hero-cta');if(b1)b1.textContent='Lihat Paket Prepaid';
     }
 }
 function togglePlanList(mode,btn){
