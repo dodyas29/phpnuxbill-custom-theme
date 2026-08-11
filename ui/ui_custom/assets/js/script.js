@@ -62,11 +62,14 @@ function togglePw(id,btn){
     if(el.type==='password'){el.type='text';icon.className='bi bi-eye'}
     else{el.type='password';icon.className='bi bi-eye-slash'}
 }
+function showDots(el){el._old=el.innerHTML;el.innerHTML='<div class=\"btn-dots\" style=\"display:flex;gap:6px;justify-content:center\"><span></span><span></span><span></span></div>';el.disabled=true}
+function hideDots(el){el.innerHTML=el._old;el.disabled=false}
+
 function changePassword(e){
     e.preventDefault();
     var btn=document.getElementById('pwSubmit');
-    btn.disabled=true;var txt=btn.getAttribute('data-text')||'Save New Password';
-    btn.innerHTML='Menyimpan...';
+    showDots(btn);
+    var txt=btn.getAttribute('data-text')||'Save New Password';
     var data={
         password:document.getElementById('pwCurrent').value,
         npass:document.getElementById('pwNew').value,
@@ -74,9 +77,13 @@ function changePassword(e){
     };
     fetch(appUrl+'/ui/ui_custom/api/change_password.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
     .then(function(r){return r.json()}).then(function(d){
-        if(d.success)window.location.href=d.redirect;
-        else{btn.disabled=false;btn.innerHTML='<i class=\"bi bi-check-lg\"></i> '+txt;showToast(d.message,'error')}
-    }).catch(function(){btn.disabled=false;btn.innerHTML='<i class=\"bi bi-check-lg\"></i> '+txt;showToast('Gagal','error')});
+        if(d.success){
+            var body=document.querySelector('#pwModal .offcanvas-body');
+            body.innerHTML='<div style=\"text-align:center;padding:30px 0\"><i class=\"bi bi-check-circle-fill\" style=\"font-size:3rem;color:var(--c4);display:block;margin-bottom:12px\"></i><p style=\"font-size:.9rem;color:var(--tx);margin-bottom:8px\">Password berhasil diubah</p><p style=\"font-size:.7rem;color:var(--t3)\">Mengalihkan ke login...</p></div>';
+            setTimeout(function(){window.location.href=d.redirect},2000);
+        }
+        else{hideDots(btn);btn.innerHTML='<i class=\"bi bi-check-lg\"></i> '+txt;showToast(d.message,'error')}
+    }).catch(function(){hideDots(btn);btn.innerHTML='<i class=\"bi bi-check-lg\"></i> '+txt;showToast('Gagal','error')});
 }
 
 document.querySelectorAll('.field-wrap input').forEach(function(input){
