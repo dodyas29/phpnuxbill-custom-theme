@@ -63,15 +63,12 @@
                     </div>
                     {/if}
                     {if isset($customFields)}{$customFields}{/if}
-                </div>
             </form>
-
-            <div class="pr-list stg" style="margin-top:10px">
                 <div class="pr-row" onclick="openPwModal()">
                     <span>{Lang::T('Change Password')}</span>
                     <span class="pr-val"><i class="bi bi-chevron-right" style="font-size:.7rem;margin-left:4px"></i></span>
                 </div>
-            </div>
+                </div>
 
             <button type="submit" class="vbtn stg" form="profileForm" style="margin-top:24px"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
             <div style="text-align:center;margin-top:14px"><a href="{Text::url('home')}" style="color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a></div>
