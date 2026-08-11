@@ -44,8 +44,35 @@ if (!$imageData) {
 $filename = $user['username'] . '_' . $type . '_' . date('YmdHis') . '.' . $ext;
 $filepath = $uploadDir . $filename;
 
-if (file_put_contents($filepath, $imageData)) {
-    echo json_encode(['success' => true, 'filename' => $filename]);
-} else {
+if (!file_put_contents($filepath, $imageData)) {
     echo json_encode(['success' => false, 'error' => 'Failed to save image']);
+    exit;
 }
+
+if ($type === 'selfie') {
+    $hash = md5_file($filepath);
+    $subfolder = substr($hash, 0, 2);
+    $photoDir = $UPLOAD_PATH . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR;
+    if (!is_dir($photoDir)) mkdir($photoDir, 0755, true);
+    $photoDir .= $subfolder . DIRECTORY_SEPARATOR;
+    if (!is_dir($photoDir)) mkdir($photoDir, 0755, true);
+
+    $imgPath = $photoDir . $hash . '.jpg';
+    if (!file_exists($imgPath)) {
+        copy($filepath, $imgPath);
+    }
+    if (!file_exists($imgPath . '.thumb.jpg')) {
+        File::makeThumb($imgPath, $imgPath . '.thumb.jpg', 200);
+    }
+
+    $userOld = ORM::for_table('tbl_customers')->find_one($user['id']);
+    if ($userOld['photo'] && strpos($userOld['photo'], 'default') === false) {
+        $oldFile = $UPLOAD_PATH . DIRECTORY_SEPARATOR . ltrim($userOld['photo'], '/');
+        if (file_exists($oldFile)) unlink($oldFile);
+        if (file_exists($oldFile . '.thumb.jpg')) unlink($oldFile . '.thumb.jpg');
+    }
+    $userOld->photo = 'photos/' . $subfolder . '/' . $hash . '.jpg';
+    $userOld->save();
+}
+
+echo json_encode(['success' => true, 'filename' => $filename]);
