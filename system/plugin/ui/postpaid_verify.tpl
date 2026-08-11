@@ -122,7 +122,12 @@ async function pvInitCamera(){
         pvStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:320,height:240}});
         var video=document.getElementById('pvVideo');
         video.srcObject=pvStream;
-        video.onloadedmetadata=function(){pvLoadModels()};
+        video.onloadedmetadata=function(){
+            var c=document.getElementById('pvCanvas');
+            c.width=video.offsetWidth;
+            c.height=video.offsetHeight;
+            pvLoadModels();
+        };
     }catch(e){
         document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-exclamation-triangle pv-fail"></i> Tidak bisa mengakses kamera. Izinkan akses kamera.';
     }
@@ -142,7 +147,7 @@ async function pvLoadModels(){
 function pvRunLiveness(){
     var video=document.getElementById('pvVideo');
     var canvas=document.getElementById('pvCanvas');
-    var displaySize={width:320,height:240};
+    var displaySize={width:video.offsetWidth,height:video.offsetHeight};
     faceapi.matchDimensions(canvas,displaySize);
     var blinkCount=0,blinkState=false;
     pvLivenessInterval=setInterval(async function(){
