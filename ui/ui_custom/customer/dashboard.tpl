@@ -43,7 +43,7 @@
             <div class="sh stg"><h2>{Lang::T('Quick Actions')}</h2></div>
             <div class="qa stg">
                 <a href="#"><i class="bi bi-ticket-detailed"></i><span>Tiket</span></a>
-                <a href="#"><i class="bi bi-question-circle"></i><span>Tanya Jawab</span></a>
+                <a href="#"><i class="bi bi-question-circle"></i><span>FAQ</span></a>
                 <a href="#"><i class="bi bi-chat-dots"></i><span>Live Chat</span></a>
                 <a href="#"><i class="bi bi-telephone"></i><span>Call Center</span></a>
             </div>
