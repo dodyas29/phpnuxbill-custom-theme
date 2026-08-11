@@ -10,7 +10,6 @@
         {if isset($notify)}<meta id="notify-data" data-msg="{$notify|escape}" data-type="{if $notify_t == 's'}success{else}error{/if}">{/if}
 
         <section>
-            <div class="sh stg"><h2>{Lang::T('My Account')}</h2></div>
 
             <form action="{Text::url('accounts/edit-profile-post')}" method="post" enctype="multipart/form-data" id="profileForm">
                 <input type="hidden" name="csrf_token" value="{$csrf_token}">
