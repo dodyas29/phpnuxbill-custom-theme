@@ -28,6 +28,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .sh{margin:28px 0 12px;display:flex;align-items:center;gap:12px}
 .sh h2{font-size:.65rem;font-weight:700;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;margin:0}
 .sh::after{content:'';flex:1;height:1px;background:var(--bd)}
+.shm{margin-top:0}
 
 .pc-empty{text-align:center;padding:28px 20px;color:var(--t3);font-size:.8rem;line-height:1.6}
 

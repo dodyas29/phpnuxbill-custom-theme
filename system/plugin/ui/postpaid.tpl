@@ -92,7 +92,7 @@
     {else}
 
         <section>
-            <div class="sh stg"><h2>Choose Your Plan</h2></div>
+            <div class="sh shm stg"><h2>Choose Your Plan</h2></div>
 
             <div class="pp-toggle stg" id="ppToggle">
                 <button class="pp-tpill prepaid selected" id="ppPillPrepaid" onclick="selectMode('prepaid')"><i class="bi bi-lightning-charge-fill"></i> Prepaid</button>
