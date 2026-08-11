@@ -16,19 +16,7 @@
 </head>
 <body>
 
-<header class="ab">
-    <div class="ab-l">
-        <div class="ab-logo">
-            {if isset($_c['login_page_logo']) && $_c['login_page_logo'] != ''}
-                <img src="{$app_url}/{$UPLOAD_PATH}/{$_c['login_page_logo']}" class="ab-logo-img" onerror="this.style.display='none'">
-            {/if}
-            <span>{$_c['CompanyName']|truncate:14:""}</span>
-        </div>
-    </div>
-    <div class="ab-r">
-        <button class="ab-btn" id="dmBtn" onclick="toggleTheme()"><i class="bi bi-sun-fill"></i></button>
-    </div>
-</header>
+{include file="customer/components/_header.tpl"}
 
 <div class="cw">
 

@@ -49,6 +49,7 @@ function postpaid_verify()
 {
     global $ui;
     _auth();
+    $user = User::_info();
     $planId = (int) _req('plan_id');
     if (!$planId) r2(U . 'plugin/postpaid_page', 'e', 'Paket tidak ditemukan');
 
@@ -56,6 +57,7 @@ function postpaid_verify()
     if (!$plan) r2(U . 'plugin/postpaid_page', 'e', 'Paket tidak tersedia');
 
     $ui->assign('_title', 'Verifikasi Perangkat');
+    $ui->assign('_user', $user);
     $ui->assign('plan_id', $planId);
     $ui->assign('plan_name', $plan['name_plan']);
     $ui->display('postpaid_verify.tpl');
