@@ -154,3 +154,59 @@ function showPackageError(msg){
 document.querySelectorAll('[api-get-text]').forEach(function(el){
     fetch(el.getAttribute('api-get-text'),{credentials:'include'}).then(function(r){return r.text()}).then(function(t){el.textContent=t}).catch(function(){el.textContent='-'});
 });
+
+function selectMode(mode){
+    var c1=document.getElementById('ppCardPrepaid'),c2=document.getElementById('ppCardPostpaid');
+    var l1=document.getElementById('ppPrepaidList'),l2=document.getElementById('ppPostpaidList');
+    if(!mode){
+        if(c1.classList.contains('removing')||c2.classList.contains('removing')){c1.classList.remove('removing');c2.classList.remove('removing');c1.classList.add('selected')}
+        l1.classList.remove('show');l2.classList.remove('show');
+        document.getElementById('ppOffer').style.display='flex';
+        return;
+    }
+    document.getElementById('ppOffer').style.display='flex';
+    if(mode==='prepaid'){
+        c2.classList.add('removing');c2.classList.remove('selected');c1.classList.add('selected');
+        setTimeout(function(){l1.classList.add('show');l2.classList.remove('show')},350);
+    }else{
+        c1.classList.add('removing');c1.classList.remove('selected');c2.classList.add('selected');
+        setTimeout(function(){l2.classList.add('show');l1.classList.remove('show')},350);
+    }
+}
+
+var upgradeModalBS=null,upgradeErrModalBS=null,upgradePlanId=null;
+function getUpgradeChannels(){
+    fetch(appUrl+'/ui/ui_custom/customer/api/tripay_channels.php',{credentials:'include'})
+    .then(function(r){return r.json()}).then(function(d){
+        var h='';d.forEach(function(ch){
+            var logo=ch.logo?'<img src=\"'+appUrl+'/ui/ui_custom/customer/'+ch.logo+'\" onerror=\"this.style.display=\\\'none\\\';this.nextElementSibling.style.display=\\\'block\\\'\"><span style=\"display:none\">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
+            h+='<div class=\"rch-item\" data-channel=\"'+ch.id+'\" onclick=\"selectUpgradeChannel(this)\"><span class=\"rch-logo\" style=\"background:'+(ch.color||'#666')+'\">'+logo+'</span><span class=\"rch-name\">'+ch.name+'</span><i class=\"bi bi-chevron-right rch-arrow\"></i></div>';
+        });
+        document.getElementById('upgradeSkel').style.display='none';
+        document.getElementById('upgradeList').innerHTML=h;
+    });
+}
+function openPostpaidModal(pid){
+    if(!upgradeModalBS)upgradeModalBS=new bootstrap.Offcanvas(document.getElementById('upgradeModal'));
+    upgradePlanId=pid;
+    document.getElementById('upgradeSkel').style.display='block';
+    document.getElementById('upgradeList').innerHTML='';
+    upgradeModalBS.show();
+    getUpgradeChannels();
+}
+function selectUpgradeChannel(el){
+    var channel=el.getAttribute('data-channel');
+    el.classList.add('loading');
+    el.querySelector('.rch-arrow').outerHTML='<span class=\"btn-dots\" style=\"display:flex;gap:4px\"><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.15s\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.3s\"></span></span>';
+    fetch(appUrl+'/ui/ui_custom/customer/api/postpaid_upgrade.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan_id:upgradePlanId,channel:channel})})
+    .then(function(r){return r.json()}).then(function(d){
+        if(d.success&&d.url){window.location.href=d.url}
+        else{el.classList.remove('loading');el.querySelector('.btn-dots').outerHTML='<i class=\"bi bi-chevron-right rch-arrow\"></i>';showUpgradeError(d.error||'Gagal membuat transaksi')}
+    }).catch(function(){el.classList.remove('loading');el.querySelector('.btn-dots').outerHTML='<i class=\"bi bi-chevron-right rch-arrow\"></i>';showUpgradeError('Gagal membuat transaksi')});
+}
+function showUpgradeError(msg){
+    if(upgradeModalBS)upgradeModalBS.hide();
+    if(!upgradeErrModalBS)upgradeErrModalBS=new bootstrap.Offcanvas(document.getElementById('upgradeErrModal'));
+    document.getElementById('upgradeErrMsg').textContent=msg;
+    upgradeErrModalBS.show();
+}
