@@ -347,5 +347,11 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
         .pay-modal-item.selected .bi-circle{display:none}
         .pay-modal-skel{display:flex;align-items:center;gap:14px;padding:14px 16px}
 
-        .vbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:15px 24px;border-radius:var(--rp);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .15s;background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;border:none;letter-spacing:.4px;font-family:var(--ff)}
+        .vbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:15px 24px;border-radius:var(--rp);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .15s;background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;border:none;letter-spacing:.4px;font-family:var(--ff);min-height:50px}
+        .vbtn:active{transform:scale(.97);filter:brightness(.9)}
+        .vbtn:disabled{opacity:.4;cursor:not-allowed}
+        .btn-dots{display:flex;gap:6px;justify-content:center;align-items:center}
+        .btn-dots span{width:8px;height:8px;border-radius:50%;background:#fff;animation:dotJump .5s infinite alternate}
+        .btn-dots span:nth-child(2){animation-delay:.15s}.btn-dots span:nth-child(3){animation-delay:.3s}
+        @keyframes dotJump{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
         .vbtn:active{transform:scale(.97);filter:brightness(.9)}
