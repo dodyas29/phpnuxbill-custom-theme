@@ -12,7 +12,7 @@
         <section>
             <div class="sh stg"><h2>{Lang::T('My Account')}</h2></div>
 
-            <form action="{Text::url('accounts/edit-profile-post')}" method="post" enctype="multipart/form-data">
+            <form action="{Text::url('accounts/edit-profile-post')}" method="post" enctype="multipart/form-data" id="profileForm">
                 <input type="hidden" name="csrf_token" value="{$csrf_token}">
                 <input type="hidden" name="id" value="{$_user['id']}">
 
@@ -64,12 +64,10 @@
                     </div>
                     {/if}
                     {if isset($customFields)}{$customFields}{/if}
-
-                <button type="submit" class="vbtn stg"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
-                <a href="{Text::url('home')}" style="display:block;text-align:center;margin-top:14px;color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a>
+                </div>
             </form>
 
-            <div class="pr-row" style="border-top:1px solid var(--bd);margin-top:16px;padding-top:16px" onclick="togglePwForm()">
+            <div class="pr-row" onclick="togglePwForm()">
                 <span>{Lang::T('Change Password')}</span>
                 <span class="pr-val"><i class="bi bi-chevron-down pr-pw-icon" style="font-size:.7rem;margin-left:4px;transition:transform .2s"></i></span>
             </div>
@@ -88,6 +86,9 @@
                     <input type="password" name="cnewpassword" required placeholder="{Lang::T('Confirm New Password')}">
                 </div>
             </form>
+
+            <button type="submit" form="profileForm" class="vbtn stg"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
+            <a href="{Text::url('home')}" style="display:block;text-align:center;margin-top:14px;color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a>
         </div>
         </section>
     </div>
