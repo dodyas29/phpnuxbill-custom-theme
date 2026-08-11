@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-<link rel="stylesheet" href="{$app_url}/ui/ui_custom/customer/assets/css/style.css?v=5">
+<link rel="stylesheet" href="{$app_url}/ui/ui_custom/customer/assets/css/style.css?v=6">
 <script>var appUrl='{$app_url}';var CSRF='{$csrf_token}';</script>
 <script defer src="{$app_url}/ui/ui_custom/customer/assets/js/face-api/face-api.min.js"></script>
 </head>
@@ -124,8 +124,9 @@ async function pvInitCamera(){
         video.srcObject=pvStream;
         video.onloadedmetadata=function(){
             var c=document.getElementById('pvCanvas');
-            c.width=video.offsetWidth;
-            c.height=video.offsetHeight;
+            var scale=Math.max(video.offsetWidth/320,video.offsetHeight/240);
+            c.width=Math.round(320*scale);
+            c.height=Math.round(240*scale);
             pvLoadModels();
         };
     }catch(e){
@@ -147,7 +148,8 @@ async function pvLoadModels(){
 function pvRunLiveness(){
     var video=document.getElementById('pvVideo');
     var canvas=document.getElementById('pvCanvas');
-    var displaySize={width:video.offsetWidth,height:video.offsetHeight};
+    var scale=Math.max(video.offsetWidth/320,video.offsetHeight/240);
+    var displaySize={width:Math.round(320*scale),height:Math.round(240*scale)};
     faceapi.matchDimensions(canvas,displaySize);
     var blinkCount=0,blinkState=false,faceFrames=0;
     pvLivenessInterval=setInterval(async function(){
