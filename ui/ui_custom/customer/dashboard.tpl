@@ -206,7 +206,14 @@
 
     </div>
 
-    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="rechargeModal" style="max-height:55vh">
+    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="rechargeErrModal" style="max-height:40vh">
+        <div class="offcanvas-header flex-column"></div>
+        <div class="offcanvas-body" style="text-align:center">
+            <i class="bi bi-x-circle-fill" style="font-size:2.5rem;color:var(--c6);display:block;margin-bottom:12px"></i>
+            <p id="rechargeErrMsg" style="font-size:.85rem;color:var(--t2);line-height:1.5;margin-bottom:20px"></p>
+            <button class="vbtn" onclick="errModal.hide()" style="max-width:200px;margin:0 auto">Tutup</button>
+        </div>
+    </div>
         <div class="offcanvas-header flex-column"></div>
         <div class="offcanvas-body">
             <div id="rechargeSkel">
@@ -493,9 +500,16 @@
             el.querySelector('.rch-arrow').outerHTML='<span class=\"btn-dots\" style=\"display:flex;gap:4px\"><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.15s\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.3s\"></span></span>';
             fetch(appUrl+'/ui/ui_custom/api/recharge_redirect.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({recharge_id:rechargeId,channel:channel})})
             .then(function(r){return r.json()}).then(function(d){
-                if(d.url)window.location.href=d.url;
-                else showToast(d.error||'Gagal','error');
-            });
+                if(d.success&&d.url){window.location.href=d.url}
+                else{el.classList.remove('loading');el.querySelector('.btn-dots').outerHTML='<i class=\"bi bi-chevron-right rch-arrow\"></i>';showRechargeError(d.error||'Gagal membuat transaksi')}
+            }).catch(function(){el.classList.remove('loading');el.querySelector('.btn-dots').outerHTML='<i class=\"bi bi-chevron-right rch-arrow\"></i>';showRechargeError('Gagal membuat transaksi')});
+        }
+
+        var errModal=null;
+        function showRechargeError(msg){
+            if(!errModal)errModal=new bootstrap.Offcanvas(document.getElementById('rechargeErrModal'));
+            document.getElementById('rechargeErrMsg').textContent=msg;
+            errModal.show();
         }
 
         document.addEventListener('DOMContentLoaded',function(){
