@@ -112,7 +112,7 @@
         function openPwModal(){
             var pw=document.getElementById('pwCurrent'),pn=document.getElementById('pwNew'),pc=document.getElementById('pwConfirm');
             if(pw)pw.value='';if(pn)pn.value='';if(pc)pc.value='';
-            document.querySelectorAll('.field-wrap').forEach(function(e){e.classList.remove('filled')});
+            [pw,pn,pc].forEach(function(i){if(i&&i.parentElement)i.parentElement.classList.remove('filled')});
             if(!pwModal)pwModal=new bootstrap.Offcanvas(document.getElementById('pwModal'));
             pwModal.show();
         }
@@ -121,6 +121,11 @@
             if(el.type==='password'){el.type='text';icon.className='bi bi-eye'}
             else{el.type='password';icon.className='bi bi-eye-slash'}
         }
+        document.querySelectorAll('.field-wrap input').forEach(function(input){
+            if(input.value)input.parentElement.classList.add('filled');
+            input.addEventListener('input',function(){if(this.value)this.parentElement.classList.add('filled');else this.parentElement.classList.remove('filled')});
+            input.addEventListener('animationstart',function(e){if(e.animationName==='onAutoFillStart')this.parentElement.classList.add('filled')});
+        });
         {/literal}
     </script>
 </body>
