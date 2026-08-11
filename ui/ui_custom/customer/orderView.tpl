@@ -79,10 +79,10 @@
             {if $trx['status'] == 1}
             <div class="tx-actions stg">
                 {if !empty($trx['pg_url_payment']) && $trx['pg_url_payment'] != 'balance'}
-                <a href="{$trx['pg_url_payment']}" class="vbtn"><i class="bi bi-credit-card"></i> Bayar Sekarang</a>
+                <a href="{$trx['pg_url_payment']}" class="vbtn"><i class="bi bi-credit-card"></i> Bayar</a>
                 {/if}
-                <a href="{Text::url('order/view/')}{$trx['id']}/check" class="vbtn" style="margin-top:10px;background:var(--bgc);color:var(--tx)"><i class="bi bi-arrow-repeat"></i> Cek Pembayaran</a>
-                <a href="{Text::url('order/view/')}{$trx['id']}/cancel" class="vbtn" style="margin-top:10px;background:transparent;color:var(--c6);border:1px solid var(--c6)" onclick="return confirm('{Lang::T('Cancel transaction')}?')"><i class="bi bi-x-circle"></i> Batalkan</a>
+                <a href="{Text::url('order/view/')}{$trx['id']}/check" class="vbtn" style="background:var(--bgc);color:var(--tx)"><i class="bi bi-arrow-repeat"></i> Cek</a>
+                <a href="javascript:void(0)" class="vbtn" style="background:transparent;color:var(--c6);border:1px solid var(--c6)" onclick="cancelTrx({$trx['id']})"><i class="bi bi-x-circle"></i> Batal</a>
             </div>
             {/if}
         </section>
@@ -94,5 +94,18 @@
 
 {include file="components/_scripts_common.tpl"}
 
+    <script>
+        {literal}
+        function cancelTrx(id){
+            if(!confirm('Batalkan transaksi?'))return;
+            var btn=event.target.closest('.vbtn');if(btn)btn.disabled=true;
+            fetch(appUrl+'/ui/ui_custom/api/cancel_transaction.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({trx_id:id})})
+            .then(function(r){return r.json()}).then(function(d){
+                if(d.success)window.location.href=appUrl+'/?_route=home';
+                else showToast(d.error||'Gagal','error');
+            }).catch(function(){if(btn)btn.disabled=false});
+        }
+        {/literal}
+    </script>
 </body>
 </html>
