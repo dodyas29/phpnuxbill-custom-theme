@@ -103,7 +103,8 @@
         .field-wrap:focus-within .fl,.field-wrap input:not(:placeholder-shown) ~ .fl,.field-wrap.filled .fl{top:7px;font-size:.62rem;color:var(--cp);font-weight:600;letter-spacing:.5px;text-transform:uppercase;transform:translateY(0)}
         .field-wrap .pw-toggle{position:absolute;right:0;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--t3);cursor:pointer;padding:12px 14px;font-size:1.1rem;z-index:1}
         .field-hint{font-size:.62rem;color:var(--t3);margin-top:4px;margin-bottom:14px;padding-left:4px;text-align:center}
-        .field-hint.ok{color:var(--cg)}.field-hint.err{color:var(--cr)}
+        .field-hint.ok{color:var(--cg)}        .field-hint.err{color:var(--cr)}
+        .suggest-link{color:var(--cp);font-weight:700;text-decoration:none}
 
         .otp-inputs{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
         .otp-inputs input{width:42px;height:48px;text-align:center;font-size:1.2rem;font-weight:700;background:var(--bg);border:2px solid var(--bd);border-radius:var(--rs);color:var(--tx);outline:none;font-family:'Courier New',monospace;transition:all .15s}
@@ -374,8 +375,8 @@
             fetch(appUrl+'/ui/ui_custom/api/check_username.php?username='+encodeURIComponent(u)).then(function(r){return r.json()}).then(function(d){
                 var hint=document.getElementById('usernameHint');
                 if(d.available){hint.innerHTML='<i class="bi bi-check-circle-fill"></i> Username tersedia';hint.className='field-hint ok'}
-                else{hint.innerHTML='Username sudah digunakan. '+(d.suggestions.length?'Saran: <a href=\"javascript:void(0)\" onclick=\"selectSuggestion(\''+d.suggestions[0]+'\')\">'+d.suggestions[0]+'</a>':'');
-                    hint.className='field-hint err'}
+                else{hint.innerHTML='<span style=\"color:var(--t3)\">Username sudah digunakan.</span> '+(d.suggestions.length?'Saran: <a href=\"javascript:void(0)\" class=\"suggest-link\" onclick=\"selectSuggestion(\''+d.suggestions[0]+'\')\">'+d.suggestions[0]+'</a>':'');
+                    hint.className='field-hint'}
             }).catch(function(){});
         }
 
