@@ -88,6 +88,7 @@
                         <input type="password" id="pwConfirm" name="cnpass" required placeholder="{Lang::T('Confirm New Password')}">
                         <button type="button" class="pw-toggle" onclick="togglePw('pwConfirm',this)"><i class="bi bi-eye-slash"></i></button>
                     </div>
+                    <button type="submit" class="vbtn" style="margin-top:12px"><i class="bi bi-check-lg"></i> {Lang::T('Save New Password')}</button>
                 </form>
             </div>
 
