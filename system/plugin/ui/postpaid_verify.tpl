@@ -149,23 +149,25 @@ function pvRunLiveness(){
     var canvas=document.getElementById('pvCanvas');
     var displaySize={width:video.offsetWidth,height:video.offsetHeight};
     faceapi.matchDimensions(canvas,displaySize);
-    var blinkCount=0,blinkState=false;
+    var blinkCount=0,blinkState=false,faceFrames=0;
     pvLivenessInterval=setInterval(async function(){
             try{
-                var detections=await faceapi.detectAllFaces(video,new faceapi.TinyFaceDetectorOptions({inputSize:320,scoreThreshold:.4})).withFaceLandmarks();
+                var detections=await faceapi.detectAllFaces(video,new faceapi.TinyFaceDetectorOptions({inputSize:320,scoreThreshold:.5})).withFaceLandmarks();
                 var ctx=canvas.getContext('2d');
                 ctx.clearRect(0,0,canvas.width,canvas.height);
                 if(detections.length>0){
+                    faceFrames++;
                     var landmarks=detections[0].landmarks;
                     var pts=landmarks.positions;
                     ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--c1').trim();
                     for(var i=0;i<pts.length;i++){ctx.beginPath();ctx.arc(canvas.width-pts[i].x,pts[i].y,1.5,0,2*Math.PI);ctx.fill()}
+                if(faceFrames<8){document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-person-bounding-box"></i> Tahan posisi...';return}
                 var leftEye=landmarks.getLeftEye();
                 var rightEye=landmarks.getRightEye();
                 var ear=(pvEyeAspectRatio(leftEye)+pvEyeAspectRatio(rightEye))/2;
-                if(ear<.23&&!blinkState){blinkState=true;blinkCount++}
-                else if(ear>=.23&&blinkState)blinkState=false;
-                if(blinkCount>=1){
+                if(ear<.20&&!blinkState){blinkState=true;blinkCount++}
+                else if(ear>=.20&&blinkState)blinkState=false;
+                if(blinkCount>=2){
                     clearInterval(pvLivenessInterval);
                     pvStopStream();
                     document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-check-circle-fill pv-pass"></i> Wajah terverifikasi! Mengambil foto...';
@@ -176,7 +178,7 @@ function pvRunLiveness(){
                     document.getElementById('pvSubmit').disabled=false;
                     document.getElementById('pvSubmit').click();
                 }else{
-                    document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-person-bounding-box"></i> Kedipkan mata... ('+blinkCount+'/1)';
+                    document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-person-bounding-box"></i> Kedipkan mata... ('+blinkCount+'/2)';
                 }
             }else{
                 document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-person-bounding-box"></i> Arahkan wajah ke kamera...';
