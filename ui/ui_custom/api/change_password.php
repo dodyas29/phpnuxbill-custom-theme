@@ -84,7 +84,4 @@ if ($password != $user->password) {
 $user->password = $npass;
 $user->save();
 
-setcookie('uid', '', time() - 3600, '/');
-session_destroy();
-
-echo json_encode(['success' => true, 'message' => 'Password changed successfully', 'redirect' => $APP_URL . '/?_route=login']);
+echo json_encode(['success' => true, 'message' => 'Password changed successfully']);
