@@ -16,7 +16,6 @@ function changePassword(e){
     var btn=document.getElementById('pwSubmit');
     showDots(btn);
     var txt=btn.getAttribute('data-text')||'Save New Password';
-    var start=performance.now();
     var data={
         password:document.getElementById('pwCurrent').value,
         npass:document.getElementById('pwNew').value,
@@ -24,10 +23,8 @@ function changePassword(e){
     };
     fetch(appUrl+'/ui/ui_custom/api/change_password.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
     .then(function(r){return r.json()}).then(function(d){
-        if(d.success){
-            var delay=Math.max(0,400-(performance.now()-start));
-            setTimeout(function(){window.location.href=d.redirect},delay);
-        }
-        else{hideDots(btn);btn.innerHTML='<i class="bi bi-check-lg"></i> '+txt;showToast(d.message,'error')}
-    }).catch(function(){hideDots(btn);btn.innerHTML='<i class="bi bi-check-lg"></i> '+txt;showToast('Gagal','error')});
+        hideDots(btn);btn.innerHTML='<i class=\"bi bi-check-lg\"></i> '+txt;
+        if(d.success){if(pwModal)pwModal.hide();showToast('Password berhasil diubah','success')}
+        else showToast(d.message,'error')
+    }).catch(function(){hideDots(btn);btn.innerHTML='<i class=\"bi bi-check-lg\"></i> '+txt;showToast('Gagal','error')});
 }
