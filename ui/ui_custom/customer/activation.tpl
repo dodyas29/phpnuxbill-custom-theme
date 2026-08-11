@@ -3,66 +3,6 @@
 <head>
 {include file="components/_head_common.tpl"}
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-    <style>
-        {literal}
-        .sk-content{display:none}
-        .sk-load.loaded .sk-placeholder{display:none}
-        .sk-load.loaded .sk-content{display:block}
-
-        .vcard{background:var(--bgs);border:2px dashed var(--bd);border-top:none;border-radius:var(--r3);padding:22px 20px 18px;margin-bottom:4px;position:relative;overflow:hidden}
-        .vcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c4))}
-        .vcard::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0,transparent 24px,rgba(129,140,248,.04) 24px,rgba(129,140,248,.04) 25px);pointer-events:none}
-        .vcard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-        .vcard-brand{display:flex;align-items:center;gap:10px;min-width:0}
-        .vcard-brand-img{width:36px;height:36px;border-radius:8px;object-fit:contain;border:1px solid var(--bd);flex-shrink:0}
-        .vcard-brand span{font-size:.78rem;font-weight:700;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.3px}
-        .vcard-price{font-size:.88rem;font-weight:800;color:var(--c1);flex-shrink:0;letter-spacing:-.3px}
-        .vcard-body{display:flex;gap:18px}
-        .vcard-left{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
-        .vcard-code-label{font-size:.56rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
-        .vcard-code{font-size:1.05rem;font-weight:700;font-family:'Courier New',monospace;color:var(--tx);letter-spacing:.5px;word-break:break-all}
-        .vcard-code-note{font-size:.58rem;color:var(--t2);line-height:1.4}
-        .vcard-qr{width:96px;height:96px;border-radius:12px;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;background:#fff;flex-shrink:0;cursor:pointer}
-        .qr-big{margin:0 auto;width:240px;height:240px;border-radius:12px;overflow:hidden;padding:12px;background:#fff}
-
-        .pkg-list{display:flex;flex-direction:column;gap:8px}
-        .pkg-item{background:var(--bgs);border:1.5px solid var(--bd);border-radius:var(--r2);display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;transition:all .12s}
-        .pkg-item:active{background:var(--bgc)}
-        .pkg-item.selected{border-color:var(--c1);background:rgba(129,140,248,.06)}
-        .pkg-cal{width:42px;height:46px;border-radius:6px;border:2px solid var(--bd);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;background:var(--bg)}
-        .pkg-cal-bar{height:10px;background:var(--c1);flex-shrink:0}
-        .pkg-cal-num{flex:1;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:var(--tx);line-height:1}
-        .pkg-item.selected .pkg-cal{border-color:var(--c1)}
-        .pkg-item.selected .pkg-cal-bar{background:var(--c2)}
-        .pkg-info{flex:1;min-width:0}
-        .pkg-name{font-size:.82rem;font-weight:600;color:var(--tx);line-height:1.3}
-        .pkg-price{font-size:.68rem;color:var(--t2);margin-top:2px}
-        .pkg-item .bi-check-lg{color:var(--c1);font-size:1.1rem;flex-shrink:0;display:none}
-        .pkg-item.selected .bi-check-lg{display:block}
-
-        .pay-select{width:100%;background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r2);padding:12px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;font-family:var(--ff);color:var(--tx);margin-bottom:4px}
-        .pay-select::after{content:'';margin-left:auto;border:solid var(--t3);border-width:0 2px 2px 0;padding:3px;transform:rotate(45deg);flex-shrink:0}
-        .pay-select-logo{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;font-size:.65rem;font-weight:800;color:#fff}
-        .pay-select-logo img{width:100%;height:100%;object-fit:contain}
-        .pay-select-text{font-size:.82rem;font-weight:600}
-        .pay-select-text.placeholder{color:var(--t3)}
-
-        .pay-modal-item{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;border-radius:0;font-size:.85rem;font-weight:500;color:var(--tx);transition:all .1s;border-bottom:1px solid var(--bd)}
-        .pay-modal-item:last-child{border-bottom:none}
-        .pay-modal-item:active{background:var(--bgc)}
-        .pay-modal-item.selected{color:var(--c1)}
-        .pay-modal-logo{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;font-size:.7rem;font-weight:800;color:#fff}
-        .pay-modal-logo img{width:100%;height:100%;object-fit:contain}
-        .pay-modal-item .bi{color:var(--c1);font-size:1rem;margin-left:auto;display:none}
-        .pay-modal-item.selected .bi{display:block}
-        .pay-modal-item .bi-circle{margin-left:auto;font-size:.8rem;color:var(--bd2)}
-        .pay-modal-item.selected .bi-circle{display:none}
-        .pay-modal-skel{display:flex;align-items:center;gap:14px;padding:14px 16px}
-
-        .vbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:15px 24px;border-radius:var(--rp);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .15s;background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;border:none;letter-spacing:.4px;font-family:var(--ff)}
-        .vbtn:active{transform:scale(.97);filter:brightness(.9)}
-        {/literal}
-    </style>
 </head>
 <body>
 {include file="components/_header.tpl"}
