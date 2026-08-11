@@ -119,5 +119,13 @@
         .tx-actions{margin-top:16px}
         {/literal}
     </style>
+    <script>
+        fetch(appUrl+'/ui/ui_custom/api/plan.php',{credentials:'include'})
+        .then(function(r){return r.json()}).then(function(d){
+            if(typeof d.balance_formatted!=='undefined'){
+                var ab=document.getElementById('abBal');if(ab){ab.className='';ab.style.cssText='';ab.textContent=d.balance_formatted}
+            }
+        }).catch(function(){});
+    </script>
 </body>
 </html>
