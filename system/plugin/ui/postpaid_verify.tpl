@@ -172,12 +172,12 @@ function pvRunLiveness(){
                 else if(blinkState&&ear>=threshold){blinkState=false}
                 if(blinkCount>=1){
                     clearInterval(pvLivenessInterval);
-                    pvStopStream();
                     document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-check-circle-fill pv-pass"></i> Wajah terverifikasi! Mengambil foto...';
                     var capCanvas=document.createElement('canvas');
                     capCanvas.width=video.videoWidth;capCanvas.height=video.videoHeight;
                     capCanvas.getContext('2d').drawImage(video,0,0);
                     pvSelfie=capCanvas.toDataURL('image/jpeg',.85);
+                    pvStopStream();
                     document.getElementById('pvSubmit').disabled=false;
                     document.getElementById('pvSubmit').click();
                 }else{
