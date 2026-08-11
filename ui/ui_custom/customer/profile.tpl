@@ -87,7 +87,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="vbtn stg" id="saveBtn" style="margin-top:24px"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
+                <button type="submit" class="vbtn stg" id="saveBtn" style="margin-top:24px" data-pw-url="{Text::url('accounts/change-password-post')}"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
                 <div style="text-align:center;margin-top:14px"><a href="{Text::url('home')}" style="color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a></div>
             </form>
         </section>
@@ -107,7 +107,7 @@
             pw.style.display=open?'none':'block';
             icon.style.transform=open?'rotate(0)':'rotate(180deg)';
             var btn=document.getElementById('saveBtn');
-            if(!open){btn.setAttribute('formaction','{/literal}{Text::url('accounts/change-password-post')}{literal}')}
+            if(!open){btn.setAttribute('formaction',btn.getAttribute('data-pw-url'))}
             else{btn.removeAttribute('formaction')}
         }
         function togglePw(id,btn){
