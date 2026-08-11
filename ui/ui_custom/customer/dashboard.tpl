@@ -510,6 +510,7 @@
 
         var errModal=null;
         function showRechargeError(msg){
+            if(rechargeModal)rechargeModal.hide();
             if(!errModal)errModal=new bootstrap.Offcanvas(document.getElementById('rechargeErrModal'));
             document.getElementById('rechargeErrMsg').textContent=msg;
             errModal.show();
