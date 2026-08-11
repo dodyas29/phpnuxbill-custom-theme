@@ -173,7 +173,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .receipt-status.s1{color:var(--c5)}.receipt-status.s2{color:var(--c4)}.receipt-status.s3,.receipt-status.s4{color:var(--c6)}
 .receipt-footer{font-size:.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-top:4px}
 
-.hero{position:relative;overflow:hidden;border-radius:var(--r3);padding:28px 24px 24px;margin-bottom:16px;color:#fff;background:linear-gradient(135deg,#1e1b4b,#312e81,#3730a3,#1e3a5f);box-shadow:0 0 80px rgba(99,102,241,.15),0 4px 24px rgba(0,0,0,.4);min-height:240px}
+.hero{position:relative;overflow:hidden;border-radius:var(--r3);padding:20px;margin-bottom:16px;color:#fff;background:linear-gradient(135deg,#1e1b4b,#312e81,#3730a3,#1e3a5f);box-shadow:0 0 80px rgba(99,102,241,.15),0 4px 24px rgba(0,0,0,.4);min-height:240px}
         [data-theme=light] .hero{background:linear-gradient(135deg,#312e81,#4338ca,#6366f1,#0ea5e9);box-shadow:0 0 80px rgba(99,102,241,.12),0 4px 24px rgba(0,0,0,.08)}
         .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(192,132,252,.12)0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(56,189,248,.08)0%,transparent 60%);pointer-events:none}
         .hero::after{content:'';position:absolute;top:-60px;right:-60px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.02);pointer-events:none}
@@ -225,7 +225,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
         .tx-end .tx-amount{font-size:.8rem;font-weight:700;letter-spacing:-.2px}
 
         /* ====== NETWORK STATUS ====== */
-        .ns-card{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r3);padding:22px 20px;margin-bottom:10px}
+        .ns-card{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r3);padding:20px;margin-bottom:10px}
         .ns-top{display:flex;align-items:center;gap:10px;margin-bottom:18px}
         .ns-device-icon{width:40px;height:40px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--c1);flex-shrink:0;border:1px solid var(--bd)}
         .ns-device-info{min-width:0;flex:1}
