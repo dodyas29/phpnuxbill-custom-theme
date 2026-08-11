@@ -192,6 +192,29 @@
     </div>
 </div>
 
+<div class="offcanvas offcanvas-bottom os" tabindex="-1" id="packageErrModal">
+    <div class="offcanvas-header flex-column"></div>
+    <div class="offcanvas-body bem-body">
+        <i class="bi bi-x-circle-fill bem-icon"></i>
+        <p id="packageErrMsg" class="bem-msg"></p>
+        <button class="vbtn bem-btn" onclick="packageErrModalBS.hide()">Tutup</button>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-bottom os mod-h" tabindex="-1" id="packageModal">
+    <div class="offcanvas-header flex-column"></div>
+    <div class="offcanvas-body">
+        <div id="packageSkel">
+            <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+            <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-md h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+            <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+            <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-lg h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+            <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+        </div>
+        <div id="packageList"></div>
+    </div>
+</div>
+
 <div class="tc" id="toastContainer"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
