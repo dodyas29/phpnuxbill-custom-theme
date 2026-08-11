@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-<link rel="stylesheet" href="{$app_url}/ui/ui_custom/customer/assets/css/style.css?v=9">
+<link rel="stylesheet" href="{$app_url}/ui/ui_custom/customer/assets/css/style.css?v=10">
 <script>var appUrl='{$app_url}';var CSRF='{$csrf_token}';</script>
 <script defer src="{$app_url}/ui/ui_custom/customer/assets/js/face-api/face-api.min.js"></script>
 </head>
@@ -164,8 +164,8 @@ function pvRunLiveness(){
                 var leftEye=landmarks.getLeftEye();
                 var rightEye=landmarks.getRightEye();
                 var ear=(pvEyeAspectRatio(leftEye)+pvEyeAspectRatio(rightEye))/2;
-                if(!blinkState&&ear>.1){baselineEAR=baselineEAR*.9+ear*.1}
-                var threshold=baselineEAR*.7;
+                if(ear>.1){baselineEAR=baselineEAR*.85+ear*.15}
+                var threshold=baselineEAR*.75;
                 if(!blinkState&&ear<threshold){blinkState=true;blinkCloseFrames=1}
                 else if(blinkState&&ear<threshold){blinkCloseFrames++}
                 else if(blinkState&&ear>=threshold&&blinkCloseFrames>=1){blinkState=false;blinkCount++}
