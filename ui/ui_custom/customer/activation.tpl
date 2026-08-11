@@ -237,7 +237,7 @@
             qrModal.show();
         }
 
-        function showDots(el){el._old=el.innerHTML;el.innerHTML='<div class="btn-dots" style="display:flex;gap:6px;justify-content:center"><span style="width:8px;height:8px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.15s"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.3s"></span></div>';el.disabled=true}
+        function showDots(el){el._old=el.innerHTML;el.innerHTML='<div class="btn-dots" style="display:flex;gap:6px;justify-content:center"><span style="width:8px;height:8px;border-radius:50%;background:#fff;animation:dotJump .5s infinite alternate"></span><span style="width:8px;height:8px;border-radius:50%;background:#fff;animation:dotJump .5s infinite alternate;animation-delay:.15s"></span><span style="width:8px;height:8px;border-radius:50%;background:#fff;animation:dotJump .5s infinite alternate;animation-delay:.3s"></span></div>';el.disabled=true}
         function hideDots(el){el.innerHTML=el._old;el.disabled=false}
 
         function proceedPayment(){
