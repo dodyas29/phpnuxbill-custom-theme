@@ -43,7 +43,7 @@
                     {/if}
                     <div class="tx-row">
                         <span class="tx-label">Metode</span>
-                        <span class="tx-value">{if $trx['pg_url_payment'] == 'balance'}Balance{else}{ucwords($trx['gateway'])}{/if}</span>
+                        <span class="tx-value">{if $trx['pg_url_payment'] == 'balance'}Balance{elseif !empty($trx['payment_channel'])}{$trx['payment_channel']}{else}{ucwords($trx['gateway'])}{/if}</span>
                     </div>
                     {if !empty($trx['payment_channel'])}
                     <div class="tx-row">

@@ -78,6 +78,7 @@ $d->routers = $router['name'];
 $d->price = $total;
 $d->created_date = date('Y-m-d H:i:s');
 $d->status = 1;
+$d->payment_channel = $channel;
 $d->save();
 $trxId = $d->id();
 
