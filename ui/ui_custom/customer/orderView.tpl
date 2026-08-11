@@ -32,7 +32,7 @@
                     {if $trx['pg_url_payment'] != 'balance'}
                     <div class="tx-row">
                         <span class="tx-label">Harga</span>
-                        <span class="tx-value tx-price">Rp {number_format($trx['price'], 0, ',', '.')}</span>
+                        <span class="tx-value tx-price">{Lang::moneyFormat($trx['price'])}</span>
                     </div>
                     {/if}
                     {if isset($router) && $router['name'] != 'balance' && $router['name'] != 'radius'}
