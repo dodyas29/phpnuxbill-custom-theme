@@ -56,8 +56,15 @@ foreach ($recharges as $r) {
         'bw_name'    => $bw ? $bw['name_bw'] : '-',
         'price'      => $plan ? $plan['price'] : '0',
         'plan_id'    => (int) $r['plan_id'],
+        'validity_unit' => $plan ? $plan['validity_unit'] : '',
     ];
 }
+
+// Invoice for postpaid plans
+$invoice = ORM::for_table('tbl_customers_fields')
+    ->where('customer_id', $uid)
+    ->where('field_name', 'Invoice')
+    ->find_one();
 
 // Last payment
 $payment = ORM::for_table('tbl_payment_gateway')
@@ -98,4 +105,5 @@ echo json_encode([
     'balance_formatted' => Lang::moneyFormat($user['balance']),
     'last_payment' => $payment_data,
     'transactions' => $transactions,
+    'invoice'      => $invoice ? (int) $invoice['field_value'] : 0,
 ], JSON_PRETTY_PRINT);

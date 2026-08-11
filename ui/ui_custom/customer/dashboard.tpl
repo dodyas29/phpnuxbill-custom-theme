@@ -267,9 +267,14 @@
             if(sP){sP.className='hero-plan';sP.style.cssText='';sP.textContent=p?p.name:L.noPlan}
             if(sBw&&p){sBw.className='hero-bw-badge';sBw.style.cssText='';sBw.textContent=p.bw_name&&p.bw_name!=='-'?p.bw_name:''}
 
-            // Plan price
+            // Plan price — show Invoice for postpaid (Period) plans
             var sPr=document.getElementById('sklPlanPrice');
-            if(sPr){sPr.className='hero-plan-price';sPr.style.cssText='';sPr.textContent='Rp '+Number(p?p.price:0).toLocaleString('id-ID')}
+            if(sPr){sPr.className='hero-plan-price';sPr.style.cssText='';
+                if(p&&p.validity_unit==='Period'&&d.invoice>0){
+                    sPr.textContent='Rp '+d.invoice.toLocaleString('id-ID');
+                }else{
+                    sPr.textContent='Rp '+Number(p?p.price:0).toLocaleString('id-ID');
+                }}
 
             // Status badge
             var hs=document.getElementById('heroStatus');

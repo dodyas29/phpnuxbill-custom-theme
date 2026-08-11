@@ -183,10 +183,11 @@ function postpaidUpgrade(pid){
             msg='Upgrade dari '+d.breakdown.old_plan+' ke '+d.breakdown.new_plan+'?\n\nRincian:\n'+d.breakdown.days_used+'hr x Rp '+d.breakdown.daily_old.toLocaleString()+' = Rp '+d.breakdown.old_portion.toLocaleString()+'\n'+d.breakdown.days_remaining+'hr x Rp '+d.breakdown.daily_new.toLocaleString()+' = Rp '+d.breakdown.new_portion.toLocaleString()+'\n\nTotal Invoice: Rp '+d.breakdown.total.toLocaleString();
         }
         if(!confirm(msg))return;
-        var btn=document.querySelector('.tx-act.pay');if(btn)btn.textContent='Memproses...';
+        var btn=document.querySelector('.tx-act.pay');
+        if(btn)showDots(btn);
         fetch(appUrl+'/?_route=plugin/postpaid_upgrade_exec&plan_id='+pid,{credentials:'include'})
         .then(function(){window.location.href=appUrl+'/?_route=plugin/postpaid_page'})
-        .catch(function(){showToast('Gagal upgrade','error');if(btn)btn.textContent='Upgrade'});
+        .catch(function(){showToast('Gagal upgrade','error');if(btn)hideDots(btn)});
     }).catch(function(){showToast('Gagal menghitung','error')});
 }
 
