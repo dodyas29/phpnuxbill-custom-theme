@@ -32,7 +32,7 @@
                     </label>
                 </div>
 
-                <div class="pr-list stg">
+                <div class="pr-card stg">
                     <label class="pr-row">
                         <span>{Lang::T('Full Name')}</span>
                         <input type="text" name="fullname" value="{$_user['fullname']}" required>
