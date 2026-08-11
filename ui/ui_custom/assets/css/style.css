@@ -409,6 +409,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
         @keyframes dotJump{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
 .bal-mh{max-height:55vh}
+.bal-mh .offcanvas-body{overflow-y:auto}
 .bem-body{text-align:center}
 .bem-icon{font-size:2.5rem;color:var(--c6);display:block;margin-bottom:12px}
 .bem-msg{font-size:.85rem;color:var(--t2);line-height:1.5;margin-bottom:20px}
