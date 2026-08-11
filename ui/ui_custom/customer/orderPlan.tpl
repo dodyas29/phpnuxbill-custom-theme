@@ -53,9 +53,9 @@
 
         {foreach $routers as $router}
             {assign var="hasPlans" value=false}
-            {foreach $plans_hotspot as $p}{if $router['id'] eq $p['routers']}{assign var="hasPlans" value=true}{/if}{/foreach}
-            {foreach $plans_pppoe as $p}{if $router['id'] eq $p['routers']}{assign var="hasPlans" value=true}{/if}{/foreach}
-            {if isset($plans_vpn)}{foreach $plans_vpn as $p}{if $router['id'] eq $p['routers']}{assign var="hasPlans" value=true}{/if}{/foreach}{/if}
+            {foreach $plans_hotspot as $p}{if $router['name'] eq $p['routers']}{assign var="hasPlans" value=true}{/if}{/foreach}
+            {foreach $plans_pppoe as $p}{if $router['name'] eq $p['routers']}{assign var="hasPlans" value=true}{/if}{/foreach}
+            {if isset($plans_vpn)}{foreach $plans_vpn as $p}{if $router['name'] eq $p['routers']}{assign var="hasPlans" value=true}{/if}{/foreach}{/if}
 
             {if $hasPlans}
             <section>
