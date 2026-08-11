@@ -88,7 +88,6 @@
                         <input type="password" id="pwConfirm" name="cnpass" required placeholder="{Lang::T('Confirm New Password')}">
                         <button type="button" class="pw-toggle" onclick="togglePw('pwConfirm',this)"><i class="bi bi-eye-slash"></i></button>
                     </div>
-                    <button type="submit" class="vbtn" style="margin-top:12px"><i class="bi bi-check-lg"></i> {Lang::T('Save New Password')}</button>
                 </form>
             </div>
 
@@ -109,6 +108,8 @@
             var open=pw.style.display==='block';
             pw.style.display=open?'none':'block';
             icon.style.transform=open?'rotate(0)':'rotate(180deg)';
+            var btn=document.getElementById('saveBtn');
+            btn.setAttribute('form',open?'profileForm':'pwWrap');
         }
         function togglePw(id,btn){
             var el=document.getElementById(id),icon=btn.querySelector('i');
