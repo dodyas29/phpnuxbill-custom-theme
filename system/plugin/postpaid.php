@@ -6,6 +6,7 @@ function postpaid_admin()
 {
     global $ui, $config;
     _admin();
+    $admin = Admin::_info();
 
     if (_post('save') == 'yes') {
         $enable = _post('postpaid_upgrade_enable') ? 'yes' : 'no';
@@ -37,6 +38,8 @@ function postpaid_admin()
     $onlyUp = $config['postpaid_upgrade_only_up'] ?? 'yes';
 
     $ui->assign('_title', 'Postpaid Upgrade Plugin');
+    $ui->assign('_system_menu', 'plugin/postpaid_admin');
+    $ui->assign('_admin', $admin);
     $ui->assign('enable', $enable);
     $ui->assign('only_up', $onlyUp);
     $ui->display('postpaid_admin.tpl');

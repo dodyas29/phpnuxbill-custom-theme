@@ -1,11 +1,13 @@
-{include file="admin/header.tpl"}
-<div class="content-header"><h4><i class="ion-arrow-swap"></i> Postpaid Upgrade Plugin</h4></div>
+{include file="sections/header.tpl"}
+
 <div class="row">
     <div class="col-md-6">
         <div class="box box-primary">
-            <div class="box-header with-border"><h3 class="box-title">Settings</h3></div>
+            <div class="box-header with-border">
+                <h3 class="box-title"><i class="ion-arrow-swap"></i> Postpaid Upgrade Settings</h3>
+            </div>
             <div class="box-body">
-                <form method="post">
+                <form method="post" action="{$_url}plugin/postpaid_admin">
                     <input type="hidden" name="save" value="yes">
                     <div class="form-group">
                         <label>
@@ -27,8 +29,10 @@
     </div>
     <div class="col-md-6">
         <div class="box box-info">
-            <div class="box-header with-border"><h3 class="box-title">Info</h3></div>
-            <div class="box-body" style="font-size:.85rem;line-height:1.7">
+            <div class="box-header with-border">
+                <h3 class="box-title">Info</h3>
+            </div>
+            <div class="box-body">
                 <p>This plugin adds a <b>Package</b> page for customers that supports:</p>
                 <ul>
                     <li>Postpaid plan listing &amp; prorated upgrade billing</li>
@@ -40,4 +44,5 @@
         </div>
     </div>
 </div>
-{include file="admin/footer.tpl"}
+
+{include file="sections/footer.tpl"}
