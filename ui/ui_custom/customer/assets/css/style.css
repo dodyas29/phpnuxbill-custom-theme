@@ -47,7 +47,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .os{height:auto!important;max-height:85vh;border-radius:var(--r3)var(--r3)0 0;border:none;background:var(--bgs)!important}
 .os .offcanvas-header{flex-direction:column;padding:20px 20px 0;border:none}
 .os .offcanvas-header::before{content:'';width:36px;height:4px;background:var(--bd2);border-radius:2px;margin-bottom:16px}
-.os .offcanvas-body{padding:8px 20px 32px}
+.os .offcanvas-body{padding:8px 20px 20px}
 .mi{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:var(--r2);color:var(--tx);text-decoration:none;font-size:.86rem;font-weight:500;transition:all .1s;cursor:pointer;border:none;background:none;width:100%;text-align:left;font-family:var(--ff)}
 .mi:active{background:var(--bgc)}
 .mi i{font-size:1.1rem;color:var(--t2);width:22px;text-align:center}
