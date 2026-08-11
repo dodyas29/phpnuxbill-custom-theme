@@ -484,7 +484,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .pv-desc{font-size:.68rem;color:var(--t3);line-height:1.5;margin-bottom:20px}
 .pv-step-label{font-size:.6rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:8px}
 .pv-btn-alt{background:var(--bgc)!important;color:var(--tx)!important;margin-top:10px}
-.pv-preview{width:100%;min-height:220px;background:var(--bg);border:2px dashed var(--bd);border-radius:var(--r2);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;overflow:hidden;background-size:cover;background-position:center}
+.pv-preview{width:100%;min-height:220px;background:var(--bg);border:2px dashed var(--bd);border-radius:var(--r2);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;overflow:hidden;background-size:cover;background-position:center;margin-bottom:16px}
 .pv-preview:active{border-color:var(--c1)}
 .pv-camera-icon{font-size:3rem;color:var(--t3)}
 .pv-camera-text{font-size:.7rem;color:var(--t3);margin-top:8px}
