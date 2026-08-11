@@ -21,7 +21,7 @@
     </div>
     <div class="ab-r">
         <button class="ab-btn" id="dmBtn" onclick="toggleTheme()"><i class="bi bi-sun-fill"></i></button>
-        <img src="{$app_url}/ui/ui/images/default-avatar.png" class="ab-av" id="avatarBtn" alt="">
+        <button class="ab-btn" id="avatarBtn" onclick="location.href=appUrl+'/?_route=accounts/profile'"><i class="bi bi-person-circle"></i></button>
     </div>
 </header>
 
