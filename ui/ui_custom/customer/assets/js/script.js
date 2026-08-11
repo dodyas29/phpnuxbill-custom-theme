@@ -43,6 +43,20 @@ document.addEventListener('DOMContentLoaded',function(){
             dots.forEach(function(d,i){d.classList.toggle('active',i===idx)});
         });
     }
+    document.querySelectorAll('.qa a').forEach(function(el){
+        el.addEventListener('click',function(e){
+            e.preventDefault();
+            var t=this;
+            t.style.minWidth=t.offsetWidth+'px';
+            t.style.minHeight=t.offsetHeight+'px';
+            showDots(t);
+            setTimeout(function(){
+                hideDots(t);
+                t.style.minWidth='';
+                t.style.minHeight='';
+            },2000);
+        });
+    });
 });
 
 if(typeof userLang!=='undefined')setCookie('user_language',userLang,365);
