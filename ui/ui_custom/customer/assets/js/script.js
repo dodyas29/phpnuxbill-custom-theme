@@ -253,7 +253,7 @@ function selectUpgradeChannel(el){
     var channel=el.getAttribute('data-channel');
     el.classList.add('loading');
     el.querySelector('.rch-arrow').outerHTML='<span class=\"btn-dots\" style=\"display:flex;gap:4px\"><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.15s\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.3s\"></span></span>';
-    fetch(appUrl+'/ui/ui_custom/customer/api/postpaid_upgrade.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan_id:upgradePlanId,channel:channel})})
+    fetch(appUrl+'/ui/ui_custom/customer/api/postpaid_payment.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan_id:upgradePlanId,channel:channel})})
     .then(function(r){return r.json()}).then(function(d){
         if(d.success&&d.url){window.location.href=d.url}
         else{el.classList.remove('loading');el.querySelector('.btn-dots').outerHTML='<i class=\"bi bi-chevron-right rch-arrow\"></i>';showUpgradeError(d.error||'Gagal membuat transaksi')}
@@ -264,4 +264,60 @@ function showUpgradeError(msg){
     if(!upgradeErrModalBS)upgradeErrModalBS=new bootstrap.Offcanvas(document.getElementById('upgradeErrModal'));
     document.getElementById('upgradeErrMsg').textContent=msg;
     upgradeErrModalBS.show();
+}
+
+var ppVerifyPlan=null,ppStep=0,ppDeviceImg=null,ppSelfieImg=null;
+function postpaidVerify(planId){
+    ppVerifyPlan=planId;ppStep=0;ppDeviceImg=null;ppSelfieImg=null;
+    document.getElementById('ppVerify').classList.remove('hidden');
+    document.getElementById('ppCapture').classList.add('hidden');
+    window.scrollTo({top:document.getElementById('ppVerify').offsetTop-80,behavior:'smooth'});
+}
+function startCapture(step){
+    ppStep=step;
+    var input=document.getElementById('ppCaptureInput');
+    if(step===1){input.setAttribute('capture','environment');document.getElementById('ppStepTitle').textContent='Foto Perangkat Modem'}
+    else{input.setAttribute('capture','user');document.getElementById('ppStepTitle').textContent='Selfi Wajah'}
+    document.getElementById('ppStepNum').textContent=step;
+    document.getElementById('ppCapturePreview').innerHTML='<i class=\"bi bi-camera\" style=\"font-size:3rem;color:var(--t3)\"></i><span style=\"font-size:.7rem;color:var(--t3);margin-top:8px\">Klik untuk mengambil foto</span>';
+    document.getElementById('ppCapturePreview').style.backgroundImage='';
+    document.getElementById('ppCapture').classList.remove('hidden');
+    window.scrollTo({top:document.getElementById('ppCapture').offsetTop-80,behavior:'smooth'});
+}
+function openCaptureCamera(){
+    document.getElementById('ppCaptureInput').click();
+}
+function previewCapture(input){
+    if(!input.files||!input.files[0])return;
+    var reader=new FileReader();
+    reader.onload=function(e){
+        var prev=document.getElementById('ppCapturePreview');
+        prev.innerHTML='';
+        prev.style.backgroundImage='url('+e.target.result+')';
+        prev.style.backgroundSize='cover';
+        prev.style.backgroundPosition='center';
+        if(ppStep===1)ppDeviceImg=e.target.result;
+        else ppSelfieImg=e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+}
+function submitCapture(){
+    if(ppStep===1&&!ppDeviceImg){showToast('Ambil foto perangkat dulu','error');return}
+    if(ppStep===2&&!ppSelfieImg){showToast('Ambil foto selfi dulu','error');return}
+    var img=ppStep===1?ppDeviceImg:ppSelfieImg;
+    var btn=document.getElementById('ppCaptureSubmit');
+    showDots(btn);
+    var body={plan_id:ppVerifyPlan,image:img,type:ppStep===1?'device':'selfie'};
+    fetch(appUrl+'/ui/ui_custom/customer/api/postpaid_verify.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+    .then(function(r){return r.json()}).then(function(d){
+        hideDots(btn);
+        if(!d.success){showToast(d.error||'Gagal upload','error');return}
+        if(ppStep===1){startCapture(2)}
+        else{
+            document.getElementById('ppCapture').classList.add('hidden');
+            document.getElementById('ppVerify').classList.add('hidden');
+            showToast('Verifikasi berhasil','success');
+            setTimeout(function(){openPostpaidModal(ppVerifyPlan)},600);
+        }
+    }).catch(function(){hideDots(btn);showToast('Gagal upload','error')});
 }

@@ -150,7 +150,7 @@
                         </div>
                     </div>
                     <div class="pp-pkg-price">{Lang::moneyFormat($plan['price'])}<small>per bulan</small></div>
-                    <a href="javascript:void(0)" class="tx-act pay" onclick="openPostpaidModal({$plan['id']})">Pilih</a>
+                    <a href="javascript:void(0)" class="tx-act pay" onclick="postpaidVerify({$plan['id']})">Pilih</a>
                 </div>
                 {/foreach}
                 {else}
@@ -159,6 +159,31 @@
             </div>
         </section>
     {/if}
+
+    <div class="pp-verify hidden stg" id="ppVerify">
+        <div class="pp-verify-card">
+            <i class="bi bi-shield-check" style="font-size:2.5rem;color:var(--c1);display:block;margin-bottom:12px;text-align:center"></i>
+            <h3 style="text-align:center;font-size:.88rem;font-weight:700;color:var(--tx);margin-bottom:6px">Verifikasi Perangkat</h3>
+            <p style="text-align:center;font-size:.68rem;color:var(--t3);line-height:1.5;margin-bottom:20px">Sebelum berlangganan, pastikan modem sudah terpasang di lokasi Anda.</p>
+            <div class="pp-verify-btns">
+                <button class="vbtn" onclick="startCapture(1)" style="margin-bottom:10px"><i class="bi bi-camera-fill"></i> Verifikasi</button>
+                <button class="vbtn" onclick="showToast('Fitur permintaan instalasi segera hadir','success')" style="background:var(--bgc);color:var(--tx)"><i class="bi bi-tools"></i> Minta Instalasi</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="pp-capture hidden stg" id="ppCapture">
+        <div class="pp-capture-card">
+            <span style="font-size:.6rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:8px;text-align:center">Langkah <b id="ppStepNum">1</b>/2</span>
+            <h3 style="text-align:center;font-size:.85rem;font-weight:700;color:var(--tx);margin-bottom:16px" id="ppStepTitle">Foto Perangkat Modem</h3>
+            <div class="pp-capture-preview" id="ppCapturePreview" onclick="openCaptureCamera()">
+                <i class="bi bi-camera" style="font-size:3rem;color:var(--t3)"></i>
+                <span style="font-size:.7rem;color:var(--t3);margin-top:8px">Klik untuk mengambil foto</span>
+            </div>
+            <input type="file" id="ppCaptureInput" capture="environment" accept="image/*" onchange="previewCapture(this)" style="display:none">
+            <button class="vbtn" id="ppCaptureSubmit" onclick="submitCapture()" style="margin-top:16px"><i class="bi bi-check-lg"></i> Lanjutkan</button>
+        </div>
+    </div>
 </div>
 
 <nav class="bn">
