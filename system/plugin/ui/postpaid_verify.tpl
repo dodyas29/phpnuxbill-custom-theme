@@ -157,7 +157,8 @@ function pvRunLiveness(){
                 ctx.clearRect(0,0,canvas.width,canvas.height);
                 if(detections.length>0){
                     var landmarks=detections[0].landmarks;
-                    var pts=landmarks.positions;
+                    var resized=faceapi.resizeResults(detections,displaySize);
+                    var pts=resized[0].landmarks.positions;
                     ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--c1').trim();
                     for(var i=0;i<pts.length;i++){ctx.beginPath();ctx.arc(pts[i].x,pts[i].y,1.5,0,2*Math.PI);ctx.fill()}
                 var leftEye=landmarks.getLeftEye();
