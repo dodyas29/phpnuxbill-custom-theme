@@ -181,21 +181,23 @@ document.querySelectorAll('[api-get-text]').forEach(function(el){
 });
 
 function selectMode(mode){
-    var c1=document.getElementById('ppCardPrepaid'),c2=document.getElementById('ppCardPostpaid');
+    var p1=document.getElementById('ppPillPrepaid'),p2=document.getElementById('ppPillPostpaid');
+    var h1=document.getElementById('ppHeroPrepaid'),h2=document.getElementById('ppHeroPostpaid');
     var l1=document.getElementById('ppPrepaidList'),l2=document.getElementById('ppPostpaidList');
     if(!mode){
-        if(c1.classList.contains('removing')||c2.classList.contains('removing')){c1.classList.remove('removing');c2.classList.remove('removing');c1.classList.add('selected')}
+        p1.classList.add('selected');p2.classList.remove('selected');
+        h1.classList.remove('hidden');h2.classList.add('hidden');
         l1.classList.remove('show');l2.classList.remove('show');
-        document.getElementById('ppOffer').style.display='flex';
         return;
     }
-    document.getElementById('ppOffer').style.display='flex';
     if(mode==='prepaid'){
-        c2.classList.add('removing');c2.classList.remove('selected');c1.classList.add('selected');
-        setTimeout(function(){l1.classList.add('show');l2.classList.remove('show')},350);
+        p1.classList.add('selected');p2.classList.remove('selected');
+        h1.classList.remove('hidden');h2.classList.add('hidden');
+        l1.classList.add('show');l2.classList.remove('show');
     }else{
-        c1.classList.add('removing');c1.classList.remove('selected');c2.classList.add('selected');
-        setTimeout(function(){l2.classList.add('show');l1.classList.remove('show')},350);
+        p1.classList.remove('selected');p2.classList.add('selected');
+        h1.classList.add('hidden');h2.classList.remove('hidden');
+        l1.classList.remove('show');l2.classList.add('show');
     }
 }
 

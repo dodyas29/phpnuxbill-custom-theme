@@ -87,21 +87,25 @@
         <section>
             <div class="sh stg"><h2>Choose Your Plan</h2></div>
 
-            <div class="pp-offer stg" id="ppOffer">
-                <div class="pp-card prepaid selected" id="ppCardPrepaid" onclick="selectMode('prepaid')">
-                    <div class="pp-card-icon"><i class="bi bi-lightning-charge-fill"></i></div>
-                    <div class="pp-card-title">Bayar Sekali, Pakai Sesuai Durasi</div>
-                    <div class="pp-card-desc">Beli paket internet dengan masa aktif tetap. Tanpa khawatir tagihan bulanan. Cocok untuk kebutuhan jangka pendek.</div>
-                    <div class="pp-card-tags"><span>7 Hari</span><span>30 Hari</span><span>Fleksibel</span></div>
-                    <div class="pp-card-btn">Lihat Paket Prepaid</div>
-                </div>
-                <div class="pp-card postpaid" id="ppCardPostpaid" onclick="selectMode('postpaid')">
-                    <div class="pp-card-icon"><i class="bi bi-calendar-check-fill"></i></div>
-                    <div class="pp-card-title">Langganan Bulanan, Jatuh Tempo Tetap</div>
-                    <div class="pp-card-desc">Nikmati internet tanpa putus. Bayar setiap bulan dengan tanggal jatuh tempo yang sama. Lebih hemat untuk pemakaian jangka panjang.</div>
-                    <div class="pp-card-tags"><span>Tgl {$dayExp}</span><span>Bulanan</span><span>Lebih Hemat</span></div>
-                    <div class="pp-card-btn">Lihat Paket Postpaid</div>
-                </div>
+            <div class="pp-toggle stg" id="ppToggle">
+                <button class="pp-tpill prepaid selected" id="ppPillPrepaid" onclick="selectMode('prepaid')"><i class="bi bi-lightning-charge-fill"></i> Prepaid</button>
+                <button class="pp-tpill postpaid" id="ppPillPostpaid" onclick="selectMode('postpaid')"><i class="bi bi-calendar-check-fill"></i> Postpaid</button>
+            </div>
+
+            <div class="pp-hero prepaid stg" id="ppHeroPrepaid">
+                <span class="pp-hero-icon"><i class="bi bi-lightning-charge-fill"></i></span>
+                <div class="pp-hero-title">Bayar Sekali, Pakai Sesuai Durasi</div>
+                <div class="pp-hero-desc">Masa aktif tetap sesuai paket yang dipilih. Tanpa tagihan bulanan. Cocok untuk kebutuhan jangka pendek dan fleksibel.</div>
+                <div class="pp-hero-tags"><span>7 Hari</span><span>30 Hari</span><span>Fleksibel</span></div>
+                <button class="pp-hero-cta" onclick="document.getElementById('ppPrepaidList').classList.add('show')">Lihat Paket Prepaid</button>
+            </div>
+
+            <div class="pp-hero postpaid hidden stg" id="ppHeroPostpaid">
+                <span class="pp-hero-icon"><i class="bi bi-calendar-check-fill"></i></span>
+                <div class="pp-hero-title">Langganan Bulanan, Jatuh Tempo Tetap</div>
+                <div class="pp-hero-desc">Internet tanpa putus, bayar setiap bulan. Jatuh tempo di tanggal yang sama setiap bulannya. Lebih hemat untuk jangka panjang.</div>
+                <div class="pp-hero-tags"><span>Tgl {$dayExp}</span><span>Bulanan</span><span>Lebih Hemat</span></div>
+                <button class="pp-hero-cta" onclick="document.getElementById('ppPostpaidList').classList.add('show')">Lihat Paket Postpaid</button>
             </div>
 
             <div class="pp-plans-wrap" id="ppPrepaidList">
