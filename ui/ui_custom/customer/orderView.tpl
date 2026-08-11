@@ -17,10 +17,12 @@
 
                     <div class="receipt-divider"></div>
 
-                    <div class="receipt-plan">{$trx['plan_name']}</div>
-                    {if $trx['pg_url_payment'] != 'balance'}
-                    <div class="receipt-price">{Lang::moneyFormat($trx['price'])}</div>
-                    {/if}
+                    <div class="receipt-line">
+                        <span class="receipt-plan">{$trx['plan_name']}</span>
+                        {if $trx['pg_url_payment'] != 'balance'}
+                        <span class="receipt-price">{Lang::moneyFormat($trx['price'])}</span>
+                        {/if}
+                    </div>
 
                     <div class="receipt-divider"></div>
 

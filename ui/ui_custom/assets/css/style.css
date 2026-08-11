@@ -105,6 +105,8 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .receipt-id{font-size:.68rem;color:var(--t3);font-family:'Courier New',monospace;margin-bottom:16px}
 .receipt-divider{height:0;border:none;border-top:2px dashed var(--bd);margin:16px 0}
 .receipt-plan{font-size:.9rem;font-weight:600;color:var(--tx);margin-bottom:4px}
+.receipt-line{display:flex;justify-content:space-between;align-items:center;padding:6px 0}
+.receipt-line .receipt-plan{margin-bottom:0;flex:1;text-align:left}
 .receipt-price{font-size:1.2rem;font-weight:800;color:var(--c1);margin-bottom:4px;letter-spacing:-.3px}
 .receipt-row{display:flex;justify-content:space-between;padding:6px 0;font-size:.78rem}
 .receipt-label{color:var(--t3)}
