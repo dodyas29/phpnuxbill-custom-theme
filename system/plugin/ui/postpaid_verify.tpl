@@ -157,8 +157,10 @@ function pvRunLiveness(){
                 ctx.clearRect(0,0,canvas.width,canvas.height);
                 if(detections.length>0){
                     faceFrames++;
-                    var resized=faceapi.resizeResults(detections,displaySize);
-                    faceapi.draw.drawFaceLandmarks(ctx.canvas,resized,{drawLines:false,pointSize:1.5,color:getComputedStyle(document.documentElement).getPropertyValue('--c1').trim()});
+                    var resized=detections;
+                    var pts=detections[0].landmarks.positions;
+                    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--c1').trim();
+                    for(var i=0;i<pts.length;i++){ctx.beginPath();ctx.arc(pts[i].x,pts[i].y,1.5,0,2*Math.PI);ctx.fill()}
                 if(faceFrames<8){document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-person-bounding-box"></i> Tahan posisi...';return}
                 var leftEye=landmarks.getLeftEye();
                 var rightEye=landmarks.getRightEye();
