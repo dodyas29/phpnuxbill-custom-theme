@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-<link rel="stylesheet" href="{$app_url}/ui/ui_custom/customer/assets/css/style.css?v=8">
+<link rel="stylesheet" href="{$app_url}/ui/ui_custom/customer/assets/css/style.css?v=9">
 <script>var appUrl='{$app_url}';var CSRF='{$csrf_token}';</script>
 <script defer src="{$app_url}/ui/ui_custom/customer/assets/js/face-api/face-api.min.js"></script>
 </head>
@@ -157,10 +157,8 @@ function pvRunLiveness(){
                 ctx.clearRect(0,0,canvas.width,canvas.height);
                 if(detections.length>0){
                     faceFrames++;
-                    var landmarks=detections[0].landmarks;
-                    var pts=landmarks.positions;
-                    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--c1').trim();
-                    for(var i=0;i<pts.length;i++){ctx.beginPath();ctx.arc(canvas.width-pts[i].x,pts[i].y,1.5,0,2*Math.PI);ctx.fill()}
+                    var resized=faceapi.resizeResults(detections,displaySize);
+                    faceapi.draw.drawFaceLandmarks(ctx.canvas,resized,{drawLines:false,pointSize:1.5,color:getComputedStyle(document.documentElement).getPropertyValue('--c1').trim()});
                 if(faceFrames<8){document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-person-bounding-box"></i> Tahan posisi...';return}
                 var leftEye=landmarks.getLeftEye();
                 var rightEye=landmarks.getRightEye();
