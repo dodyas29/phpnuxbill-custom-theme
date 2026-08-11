@@ -111,7 +111,13 @@ if ($gateway === 'tripay') {
         'signature' => $signature,
     ];
 
-    $server = ($_app_stage === 'Live') ? 'https://tripay.co.id/api/' : 'https://tripay.co.id/api-sandbox/';
+    $server = 'https://tripay.co.id/api-sandbox/';
+    if (function_exists('tripay_get_server')) {
+        $server = tripay_get_server();
+    }
+    if (in_array($_SERVER['HTTP_HOST'] ?? '', ['localhost', '127.0.0.1'])) {
+        $server = 'https://tripay.co.id/api-sandbox/';
+    }
     $result = json_decode(Http::postJsonData($server . 'transaction/create', $payload, [
         'Authorization: Bearer ' . $apiKey
     ]), true);
