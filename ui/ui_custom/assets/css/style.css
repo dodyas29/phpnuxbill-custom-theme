@@ -100,6 +100,19 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .tx-price{color:var(--c1);font-size:.9rem;font-weight:700}
 .tx-actions{margin-top:16px}
 
+.receipt{text-align:center;padding:28px 20px 20px}
+.receipt-company{font-size:.7rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.receipt-id{font-size:.68rem;color:var(--t3);font-family:'Courier New',monospace;margin-bottom:16px}
+.receipt-divider{height:0;border:none;border-top:2px dashed var(--bd);margin:16px 0}
+.receipt-plan{font-size:.9rem;font-weight:600;color:var(--tx);margin-bottom:4px}
+.receipt-price{font-size:1.2rem;font-weight:800;color:var(--c1);margin-bottom:4px;letter-spacing:-.3px}
+.receipt-row{display:flex;justify-content:space-between;padding:6px 0;font-size:.78rem}
+.receipt-label{color:var(--t3)}
+.receipt-value{color:var(--tx);font-weight:500;text-align:right}
+.receipt-status{display:inline-flex;align-items:center;gap:4px;font-size:.65rem;font-weight:700;text-transform:uppercase}
+.receipt-status.s1{color:var(--c5)}.receipt-status.s2{color:var(--c4)}.receipt-status.s3,.receipt-status.s4{color:var(--c6)}
+.receipt-footer{font-size:.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-top:4px}
+
 .hero{position:relative;overflow:hidden;border-radius:var(--r3);padding:28px 24px 24px;margin-bottom:16px;color:#fff;background:linear-gradient(135deg,#1e1b4b,#312e81,#3730a3,#1e3a5f);box-shadow:0 0 80px rgba(99,102,241,.15),0 4px 24px rgba(0,0,0,.4);min-height:240px}
         [data-theme=light] .hero{background:linear-gradient(135deg,#312e81,#4338ca,#6366f1,#0ea5e9);box-shadow:0 0 80px rgba(99,102,241,.12),0 4px 24px rgba(0,0,0,.08)}
         .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(192,132,252,.12)0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(56,189,248,.08)0%,transparent 60%);pointer-events:none}
