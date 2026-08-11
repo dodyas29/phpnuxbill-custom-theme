@@ -80,12 +80,12 @@
                     </div>
                     <div class="field-wrap" style="margin-bottom:12px">
                         <span class="fl">{Lang::T('New Password')}</span>
-                        <input type="password" id="pwNew" name="newpassword" required placeholder="{Lang::T('New Password')}">
+                        <input type="password" id="pwNew" name="npass" required placeholder="{Lang::T('New Password')}">
                         <button type="button" class="pw-toggle" onclick="togglePw('pwNew',this)"><i class="bi bi-eye-slash"></i></button>
                     </div>
                     <div class="field-wrap">
                         <span class="fl">{Lang::T('Confirm New Password')}</span>
-                        <input type="password" id="pwConfirm" name="cnewpassword" required placeholder="{Lang::T('Confirm New Password')}">
+                        <input type="password" id="pwConfirm" name="cnpass" required placeholder="{Lang::T('Confirm New Password')}">
                         <button type="button" class="pw-toggle" onclick="togglePw('pwConfirm',this)"><i class="bi bi-eye-slash"></i></button>
                     </div>
                 </form>
