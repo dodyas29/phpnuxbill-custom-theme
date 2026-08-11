@@ -334,7 +334,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
         .ns-submit.danger:not(:disabled):active{filter:brightness(.9)}
 
         .rch-skel{display:flex;align-items:center;gap:14px;padding:14px 16px}
-        .rch-item{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;transition:all .1s;border-bottom:1px solid var(--bd)}
+        .rch-item{display:flex;align-items:center;gap:14px;padding:14px 0;cursor:pointer;transition:all .1s;border-bottom:1px solid var(--bd)}
         .rch-item:last-child{border-bottom:none}
         .rch-item:active{background:var(--bgc)}
         .rch-logo{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;font-size:.7rem;font-weight:800;color:#fff}
