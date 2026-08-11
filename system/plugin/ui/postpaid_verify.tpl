@@ -52,7 +52,7 @@
                 <span class="pv-camera-text">Klik untuk mengambil foto</span>
             </div>
             <input type="file" id="pvInput" accept="image/*" onchange="pvPreviewImage(this)" style="display:none">
-            <button class="vbtn" id="pvSubmit" onclick="pvSubmit()"><i class="bi bi-check-lg"></i> Lanjutkan</button>
+            <button class="vbtn" id="pvSubmit" onclick="pvSubmit()" disabled><i class="bi bi-check-lg"></i> Lanjutkan</button>
         </div>
     </div>
 
@@ -73,8 +73,10 @@ function pvStart(step){
     document.getElementById('pvStepNum').textContent=step;
     var prev=document.getElementById('pvPreview');
     prev.style.backgroundImage='';prev.innerHTML='<i class="bi bi-camera pv-camera-icon"></i><span class="pv-camera-text">Klik untuk mengambil foto</span>';
+    document.getElementById('pvSubmit').disabled=true;
     document.getElementById('pvChoice').classList.add('hidden');
     document.getElementById('pvCapture').classList.remove('hidden');
+    setTimeout(function(){document.getElementById('pvInput').click()},300);
 }
 function pvOpenCamera(){document.getElementById('pvInput').click()}
 function pvPreviewImage(input){
@@ -83,6 +85,7 @@ function pvPreviewImage(input){
     reader.onload=function(e){
         var prev=document.getElementById('pvPreview');
         prev.innerHTML='';prev.style.backgroundImage='url('+e.target.result+')';
+        document.getElementById('pvSubmit').disabled=false;
         if(pvStep===1)pvDevice=e.target.result;else pvSelfie=e.target.result;
     };
     reader.readAsDataURL(input.files[0]);
