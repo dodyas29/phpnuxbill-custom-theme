@@ -105,6 +105,7 @@
     <div class="tc" id="toastContainer"></div>
 
 {include file="components/_scripts_common.tpl"}
+    <script src="{$app_url}/ui/ui_custom/assets/js/profile.js"></script>
 
 </body>
 </html>
