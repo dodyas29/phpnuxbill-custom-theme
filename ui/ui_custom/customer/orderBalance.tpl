@@ -19,11 +19,11 @@
             {if !empty($plans_balance)}
             <div class="pr-list stg">
                 {foreach $plans_balance as $plan}
-                <a href="{Text::url('order/gateway/0/')}{$plan['id']}" class="bal-item">
+                <div class="bal-item">
                     <span class="bal-plan">{$plan['name_plan']}</span>
                     <span class="bal-price">{Lang::moneyFormat($plan['price'])}</span>
-                    <span class="bal-buy">{Lang::T('Buy')}</span>
-                </a>
+                    <a href="{Text::url('order/gateway/0/')}{$plan['id']}" class="bal-buy">{Lang::T('Buy')}</a>
+                </div>
                 {/foreach}
             </div>
             {/if}
