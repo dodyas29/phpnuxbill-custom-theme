@@ -163,8 +163,8 @@ function pvRunLiveness(){
                 var leftEye=landmarks.getLeftEye();
                 var rightEye=landmarks.getRightEye();
                 var ear=(pvEyeAspectRatio(leftEye)+pvEyeAspectRatio(rightEye))/2;
-                if(ear<.23&&!blinkState){blinkState=true;blinkCount++}
-                else if(ear>=.23&&blinkState)blinkState=false;
+                if(!blinkState&&ear<.23){blinkState=true}
+                else if(blinkState&&ear>=.23){blinkState=false;blinkCount++}
                 if(blinkCount>=1){
                     clearInterval(pvLivenessInterval);
                     pvStopStream();
