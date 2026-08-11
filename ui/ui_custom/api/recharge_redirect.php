@@ -3,7 +3,7 @@ session_start();
 $root_path = realpath(__DIR__ . '/../../../');
 $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] ?? 'localhost:8000';
 $_SERVER['SERVER_PORT'] = $_SERVER['SERVER_PORT'] ?? '8000';
-$_SERVER['SCRIPT_NAME'] = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
+$_SERVER['SCRIPT_NAME'] = '/index.php';
 require_once $root_path . '/config.php';
 require_once $root_path . '/system/vendor/autoload.php';
 require_once $root_path . '/init.php';

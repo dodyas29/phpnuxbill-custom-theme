@@ -493,7 +493,7 @@
             el.querySelector('.rch-arrow').outerHTML='<span class=\"btn-dots\" style=\"display:flex;gap:4px\"><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.15s\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.3s\"></span></span>';
             fetch(appUrl+'/ui/ui_custom/api/recharge_redirect.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({recharge_id:rechargeId,channel:channel})})
             .then(function(r){return r.json()}).then(function(d){
-                if(d.url)window.location.href=appUrl+'/index.php'+d.url;
+                if(d.url)window.location.href=d.url;
                 else showToast(d.error||'Gagal','error');
             });
         }
