@@ -64,31 +64,33 @@
                     </div>
                     {/if}
                     {if isset($customFields)}{$customFields}{/if}
-                    <div class="pr-row" onclick="togglePwForm()" style="text-decoration:none">
+                    <div class="pr-row" onclick="togglePwForm()">
                         <span>{Lang::T('Change Password')}</span>
                         <span class="pr-val"><i class="bi bi-chevron-down pr-pw-icon" style="font-size:.7rem;margin-left:4px;transition:transform .2s"></i></span>
                     </div>
-                    <form action="{Text::url('accounts/change-password-post')}" method="post" id="pwForm" style="display:none;padding:0 16px 16px">
-                        <input type="hidden" name="csrf_token" value="{$csrf_token}">
+                    <div id="pwForm" style="display:none;padding:0 16px 16px">
                         <div class="field-wrap" style="margin-bottom:12px">
                             <span class="fl">{Lang::T('Current Password')}</span>
-                            <input type="password" name="password" required placeholder="{Lang::T('Current Password')}">
+                            <input type="password" name="password" form="pwForm" required placeholder="{Lang::T('Current Password')}">
                         </div>
                         <div class="field-wrap" style="margin-bottom:12px">
                             <span class="fl">{Lang::T('New Password')}</span>
-                            <input type="password" name="newpassword" required placeholder="{Lang::T('New Password')}">
+                            <input type="password" name="newpassword" form="pwForm" required placeholder="{Lang::T('New Password')}">
                         </div>
-                        <div class="field-wrap" style="margin-bottom:14px">
+                        <div class="field-wrap">
                             <span class="fl">{Lang::T('Confirm New Password')}</span>
-                            <input type="password" name="cnewpassword" required placeholder="{Lang::T('Confirm New Password')}">
+                            <input type="password" name="cnewpassword" form="pwForm" required placeholder="{Lang::T('Confirm New Password')}">
                         </div>
-                        <button type="submit" class="vbtn"><i class="bi bi-check-lg"></i> {Lang::T('Save New Password')}</button>
-                    </form>
+                    </div>
                 </div>
 
                 <button type="submit" class="vbtn stg" style="margin-top:24px"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
                 <a href="{Text::url('home')}" style="display:block;text-align:center;margin-top:14px;color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a>
             </form>
+
+    <form action="{Text::url('accounts/change-password-post')}" method="post" id="pwForm" style="display:none">
+        <input type="hidden" name="csrf_token" value="{$csrf_token}">
+    </form>
         </section>
     </div>
 
