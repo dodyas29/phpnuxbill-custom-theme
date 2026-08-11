@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script>var appUrl = '{$app_url}';</script>
-    <link rel="stylesheet" href="{$app_url}/ui/ui_custom/assets/css/register.css">
+    <link rel="stylesheet" href="{$app_url}/ui/ui_custom/customer/assets/css/register.css">
     {if isset($xheader)}{$xheader}{/if}
 </head>
 <body>
@@ -177,7 +177,7 @@
         L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{subdomains:['mt0','mt1','mt2','mt3'],attribution:'&copy; Google'}).addTo(map);
         var marker,routerCircles=[];
 
-        fetch(appUrl+'/ui/ui_custom/api/routers_coverage.php').then(function(r){return r.json()}).then(function(d){
+        fetch(appUrl+'/ui/ui_custom/customer/api/routers_coverage.php').then(function(r){return r.json()}).then(function(d){
             d.forEach(function(r){if(!r.coordinates)return;var c=r.coordinates.split(',').map(Number);if(isNaN(c[0])||isNaN(c[1]))return;
                 var circle=L.circle([c[0],c[1]],{radius:Math.max((r.coverage||0)*1,100),color:'rgba(129,140,248,.3)',fillColor:'rgba(129,140,248,.08)',fillOpacity:1,weight:1.5});
                 circle.addTo(map);routerCircles.push(circle);});
@@ -199,7 +199,7 @@
             if(covInCoverage){icon.style.color=getComputedStyle(document.body).getPropertyValue('--cg');icon.className='bi bi-check-circle-fill';status.textContent='Within coverage area';status.className='coord-status in'}
             else{icon.style.color=getComputedStyle(document.body).getPropertyValue('--c5');icon.className='bi bi-exclamation-triangle-fill';status.textContent='Outside coverage';status.className='coord-status out'}
             document.getElementById('step1Next').disabled=false;
-            fetch(appUrl+'/ui/ui_custom/api/save_guest_coords.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({coordinates:userCoords})});
+            fetch(appUrl+'/ui/ui_custom/customer/api/save_guest_coords.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({coordinates:userCoords})});
         }
 
         document.getElementById('step1Next').addEventListener('click',function(){if(!covInCoverage&&!confirm('Lokasi di luar coverage. Tetap lanjut?'))return;goStep(2)});
@@ -249,7 +249,7 @@
         document.getElementById('username').addEventListener('input',function(){clearTimeout(checkTimer);var u=this.value.trim();if(u.length>=3)checkTimer=setTimeout(function(){checkUsername(u)},500)});
 
         function checkUsername(u){if(u.length<3)return;
-            fetch(appUrl+'/ui/ui_custom/api/check_username.php?username='+encodeURIComponent(u)).then(function(r){return r.json()}).then(function(d){
+            fetch(appUrl+'/ui/ui_custom/customer/api/check_username.php?username='+encodeURIComponent(u)).then(function(r){return r.json()}).then(function(d){
                 var hint=document.getElementById('usernameHint');
                 if(d.available){hint.innerHTML='<i class="bi bi-check-circle-fill"></i> Username tersedia';hint.className='field-hint ok'}
                 else{hint.innerHTML='<span style=\"color:var(--t3)\">Username sudah digunakan.</span> '+(d.suggestions.length?'Saran: <a href=\"javascript:void(0)\" class=\"suggest-link\" onclick=\"selectSuggestion(\''+d.suggestions[0]+'\')\">'+d.suggestions[0]+'</a>':'');
@@ -271,7 +271,7 @@
             var phone=document.getElementById('waPhone').value.replace(/\D/g,'');
             document.getElementById('phonenumber').value=phone;
             if(!regPhone){e.preventDefault();showDots(btn);
-                fetch(appUrl+'/ui/ui_custom/api/hold_registration_data.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone,coordinates:userCoords})})
+                fetch(appUrl+'/ui/ui_custom/customer/api/hold_registration_data.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone,coordinates:userCoords})})
                 .then(function(){hideDots(btn);regPhone=true;btn.disabled=false;btn.innerHTML='<i class="bi bi-person-check"></i> Selesai & Daftar';document.getElementById('regForm').submit()});
             }
         });

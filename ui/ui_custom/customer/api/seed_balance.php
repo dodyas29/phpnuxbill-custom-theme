@@ -1,5 +1,5 @@
 <?php
-$root_path = realpath(__DIR__ . '/../../../') . DIRECTORY_SEPARATOR;
+$root_path = realpath(__DIR__ . '/../../../../') . DIRECTORY_SEPARATOR;
 $_SERVER['HTTP_HOST'] = 'localhost';
 $_SERVER['SERVER_PORT'] = '8000';
 $_SERVER['SCRIPT_NAME'] = '/index.php';

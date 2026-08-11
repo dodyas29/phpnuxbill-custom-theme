@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-{include file="components/_head_common.tpl"}
+{include file="customer/components/_head_common.tpl"}
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 </head>
 <body>
-{include file="components/_header.tpl"}
+{include file="customer/components/_header.tpl"}
 
     <div class="cw">
         {if isset($notify)}<meta id="notify-data" data-msg="{$notify|escape}" data-type="{if $notify_t == 's'}success{else}error{/if}">{/if}
@@ -107,11 +107,11 @@
         </div>
     </div>
 
-{include file="components/_navbar.tpl"}
-{include file="components/_menu_sheet.tpl"}
+{include file="customer/components/_navbar.tpl"}
+{include file="customer/components/_menu_sheet.tpl"}
     <div class="tc" id="toastContainer"></div>
 
-{include file="components/_scripts_common.tpl"}
+{include file="customer/components/_scripts_common.tpl"}
 
     <meta id="voucher-config" data-prefix="{$_c['voucher_prefix']|escape:'html'}">
 
@@ -141,7 +141,7 @@
         (function init(){
             document.getElementById('skCard').classList.add('loaded');
 
-            fetch(appUrl+'/ui/ui_custom/api/plan.php',{credentials:'include'})
+            fetch(appUrl+'/ui/ui_custom/customer/api/plan.php',{credentials:'include'})
             .then(function(r){return r.json()})
             .then(function(d){
                 if(typeof d.balance_formatted!=='undefined'){
@@ -153,7 +153,7 @@
         })();
 
         function loadPackages(){
-            fetch(appUrl+'/ui/ui_custom/api/packages.php',{credentials:'include'})
+            fetch(appUrl+'/ui/ui_custom/customer/api/packages.php',{credentials:'include'})
             .then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json()})
             .then(function(d){
                 var list=document.getElementById('pkgList'),h='';
@@ -187,7 +187,7 @@
         }
 
         function loadChannels(){
-            fetch(appUrl+'/ui/ui_custom/api/tripay_channels.php',{credentials:'include'})
+            fetch(appUrl+'/ui/ui_custom/customer/api/tripay_channels.php',{credentials:'include'})
             .then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json()})
             .then(function(d){channels=d;renderPayModal();channelsLoaded=true})
             .catch(function(){showToast('Gagal memuat metode pembayaran','error')})
@@ -202,7 +202,7 @@
         function renderPayModal(){
             var c=document.getElementById('payModalList'),h='';
             channels.forEach(function(ch){
-                var logo=ch.logo?'<img src="'+appUrl+'/ui/ui_custom/'+ch.logo+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><span style="display:none">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
+                var logo=ch.logo?'<img src="'+appUrl+'/ui/ui_custom/customer/'+ch.logo+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><span style="display:none">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
                 h+='<div class="pay-modal-item" data-channel="'+ch.id+'" data-name="'+ch.name+'" data-logo="'+(ch.logo||'')+'" data-color="'+(ch.color||'')+'" data-init="'+ch.init+'" onclick="selectPayMethod(this)"><div class="pay-modal-logo" style="background:'+(ch.color||'#666')+'">'+logo+'</div><span>'+ch.name+'</span><i class="bi bi-circle"></i><i class="bi bi-check-circle-fill"></i></div>';
             });
             c.innerHTML=h;
@@ -245,7 +245,7 @@
             if(!selectedPackageId){showToast('Pilih paket','error');return}
             var btn=event.target;
             showDots(btn);
-            fetch(appUrl+'/ui/ui_custom/api/voucher_payment.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan_id:selectedPackageId,channel:selectedChannel})})
+            fetch(appUrl+'/ui/ui_custom/customer/api/voucher_payment.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan_id:selectedPackageId,channel:selectedChannel})})
             .then(function(r){return r.json()}).then(function(d){
                 if(d.success&&d.url)window.location.href=d.url;
                 else{hideDots(btn);showToast(d.error||'Gagal','error')}

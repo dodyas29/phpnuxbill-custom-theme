@@ -1,6 +1,6 @@
 <?php
 session_start();
-$root_path = realpath(__DIR__ . '/../../../') . DIRECTORY_SEPARATOR;
+$root_path = realpath(__DIR__ . '/../../../../') . DIRECTORY_SEPARATOR;
 $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] ?? 'localhost:8000';
 $_SERVER['SERVER_PORT'] = $_SERVER['SERVER_PORT'] ?? '8000';
 $_SERVER['SCRIPT_NAME'] = '/index.php';

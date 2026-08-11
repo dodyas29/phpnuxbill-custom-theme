@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-{include file="components/_head_common.tpl"}
+{include file="customer/components/_head_common.tpl"}
 </head>
 <body>
-{include file="components/_header.tpl"}
+{include file="customer/components/_header.tpl"}
 
     <div class="cw">
         <a href="javascript:history.back()" style="display:inline-flex;align-items:center;gap:4px;color:var(--t3);text-decoration:none;font-size:.76rem;font-weight:500;margin-bottom:12px"><i class="bi bi-arrow-left"></i> Kembali</a>
@@ -89,18 +89,18 @@
         </section>
     </div>
 
-{include file="components/_navbar.tpl"}
-{include file="components/_menu_sheet.tpl"}
+{include file="customer/components/_navbar.tpl"}
+{include file="customer/components/_menu_sheet.tpl"}
     <div class="tc" id="toastContainer"></div>
 
-{include file="components/_scripts_common.tpl"}
+{include file="customer/components/_scripts_common.tpl"}
 
     <script>
         {literal}
         function cancelTrx(id){
             if(!confirm('Batalkan transaksi?'))return;
             var btn=event.target.closest('.vbtn');if(btn)btn.disabled=true;
-            fetch(appUrl+'/ui/ui_custom/api/cancel_transaction.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({trx_id:id})})
+            fetch(appUrl+'/ui/ui_custom/customer/api/cancel_transaction.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({trx_id:id})})
             .then(function(r){return r.json()}).then(function(d){
                 if(d.success)window.location.href=appUrl+'/?_route=home';
                 else showToast(d.error||'Gagal','error');

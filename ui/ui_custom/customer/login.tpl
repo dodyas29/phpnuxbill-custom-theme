@@ -15,7 +15,7 @@
 
     <script>var appUrl = '{$app_url}';</script>
 
-    <link rel="stylesheet" href="{$app_url}/ui/ui_custom/assets/css/login.css">
+    <link rel="stylesheet" href="{$app_url}/ui/ui_custom/customer/assets/css/login.css">
     {if isset($xheader)}{$xheader}{/if}
 </head>
 

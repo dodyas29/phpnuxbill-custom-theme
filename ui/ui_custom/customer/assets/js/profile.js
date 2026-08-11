@@ -21,14 +21,14 @@ function changePassword(e){
         npass:document.getElementById('pwNew').value,
         cnpass:document.getElementById('pwConfirm').value
     };
-    fetch(appUrl+'/ui/ui_custom/api/change_password.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+    fetch(appUrl+'/ui/ui_custom/customer/api/change_password.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
     .then(function(r){return r.json()}).then(function(d){
         if(d.success){
             setTimeout(function(){
                 var body=document.querySelector('#pwModal .offcanvas-body');
                 body.innerHTML='<div style=\"text-align:center;padding:30px 0\"><i class=\"bi bi-check-circle-fill\" style=\"font-size:3rem;color:var(--c4);display:block;margin-bottom:12px\"></i><p style=\"font-size:.9rem;color:var(--tx);margin-bottom:8px\">Password berhasil diubah</p></div>';
                 setTimeout(function(){
-                    fetch(appUrl+'/ui/ui_custom/api/destroy_session.php',{credentials:'include'})
+                    fetch(appUrl+'/ui/ui_custom/customer/api/destroy_session.php',{credentials:'include'})
                     .then(function(){window.location.href=appUrl+'/?_route=login'});
                 },2000);
             },2000);

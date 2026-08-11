@@ -17,5 +17,5 @@
     data-csrf="{$csrf_token}">
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{$app_url}/ui/ui_custom/assets/js/script.js"></script>
+<script src="{$app_url}/ui/ui_custom/customer/assets/js/script.js"></script>
 {if isset($xfooter)}{$xfooter}{/if}

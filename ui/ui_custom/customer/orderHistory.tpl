@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-{include file="components/_head_common.tpl"}
+{include file="customer/components/_head_common.tpl"}
 </head>
 <body>
-{include file="components/_header.tpl"}
+{include file="customer/components/_header.tpl"}
 
     <div class="cw">
         <section>
@@ -27,11 +27,11 @@
         </section>
     </div>
 
-{include file="components/_navbar.tpl"}
-{include file="components/_menu_sheet.tpl"}
+{include file="customer/components/_navbar.tpl"}
+{include file="customer/components/_menu_sheet.tpl"}
     <div class="tc" id="toastContainer"></div>
 
-{include file="components/_scripts_common.tpl"}
+{include file="customer/components/_scripts_common.tpl"}
 
     <script>
         {literal}
@@ -41,7 +41,7 @@
             var btn=document.getElementById('ohMoreBtn');if(btn)btn.style.display='none';
             var skel='<div class="oh-skel"><span class="skl skl-bright" style="width:40%;height:15px;flex:0 0 auto"></span><span class="skl skl-bright" style="width:60px;height:13px;margin-left:auto;flex-shrink:0"></span><span class="skl skl-bright" style="width:18px;height:14px;border-radius:50%;flex-shrink:0;margin:0 8px"></span><span class="skl skl-bright" style="width:36px;height:10px;flex-shrink:0"></span><span class="skl skl-bright" style="width:8px;height:12px;flex-shrink:0;margin-left:4px"></span></div>';
             document.getElementById('ohList').insertAdjacentHTML('beforeend',skel+skel+skel);
-            fetch(appUrl+'/ui/ui_custom/api/order_history.php?page='+ohPage,{credentials:'include'})
+            fetch(appUrl+'/ui/ui_custom/customer/api/order_history.php?page='+ohPage,{credentials:'include'})
             .then(function(r){return r.json()}).then(function(d){
                 ohLoading=false;ohHasMore=d.has_more;
                 var list=document.getElementById('ohList');

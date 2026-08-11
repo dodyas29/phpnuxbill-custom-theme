@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded',function(){
     if(nb)nb.addEventListener('click',function(){window.location.href=appUrl+'/index.php?_route=mail'});
     if(dm)dm.addEventListener('click',toggleTheme);
     fetch(appUrl+'/index.php?_route=autoload_user/inbox_unread').then(function(r){return r.text()}).then(function(t){var n=parseInt(t)||0,b=document.getElementById('inboxBadge');if(n>0)b.style.display='flex';else b.style.display='none'}).catch(function(){});
-    fetch(appUrl+'/ui/ui_custom/api/apply_registration_data.php',{credentials:'include'}).catch(function(){});
+    fetch(appUrl+'/ui/ui_custom/customer/api/apply_registration_data.php',{credentials:'include'}).catch(function(){});
     var nd=document.getElementById('notify-data');if(nd){var m=nd.getAttribute('data-msg'),ty=nd.getAttribute('data-type');if(m)showToast(m,ty)}
     var slider=document.getElementById('nsChartWrap'),dots=document.querySelectorAll('#nsChartDots .ns-chart-dot-ind');
     if(slider&&dots.length){
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
 if(typeof userLang!=='undefined')setCookie('user_language',userLang,365);
 
-fetch(appUrl+'/ui/ui_custom/api/plan.php',{credentials:'include'}).then(function(r){return r.json()}).then(function(d){if(typeof d.balance_formatted!=='undefined'){var ab=document.getElementById('abBal');if(ab){ab.className='';ab.style.cssText='';ab.textContent=d.balance_formatted}}}).catch(function(){});
+fetch(appUrl+'/ui/ui_custom/customer/api/plan.php',{credentials:'include'}).then(function(r){return r.json()}).then(function(d){if(typeof d.balance_formatted!=='undefined'){var ab=document.getElementById('abBal');if(ab){ab.className='';ab.style.cssText='';ab.textContent=d.balance_formatted}}}).catch(function(){});
 
 function showDots(el){el._old=el.innerHTML;el.innerHTML='<div class=\"btn-dots\" style=\"display:flex;gap:6px;justify-content:center\"><span></span><span></span><span></span></div>';el.disabled=true}
 function hideDots(el){el.innerHTML=el._old;el.disabled=false}
@@ -60,10 +60,10 @@ document.querySelectorAll('.field-wrap input').forEach(function(input){
 
 var balanceModalBS=null,balanceErrModalBS=null,balancePlanId=null,balanceCustom=false;
 function getBalanceChannels(cb){
-    fetch(appUrl+'/ui/ui_custom/api/tripay_channels.php',{credentials:'include'})
+    fetch(appUrl+'/ui/ui_custom/customer/api/tripay_channels.php',{credentials:'include'})
     .then(function(r){return r.json()}).then(function(d){
         var h='';d.forEach(function(ch){
-            var logo=ch.logo?'<img src=\"'+appUrl+'/ui/ui_custom/'+ch.logo+'\" onerror=\"this.style.display=\\\'none\\\';this.nextElementSibling.style.display=\\\'block\\\'\"><span style=\"display:none\">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
+            var logo=ch.logo?'<img src=\"'+appUrl+'/ui/ui_custom/customer/'+ch.logo+'\" onerror=\"this.style.display=\\\'none\\\';this.nextElementSibling.style.display=\\\'block\\\'\"><span style=\"display:none\">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
             h+='<div class=\"rch-item\" data-channel=\"'+ch.id+'\" onclick=\"selectBalanceChannel(this)\"><span class=\"rch-logo\" style=\"background:'+(ch.color||'#666')+'\">'+logo+'</span><span class=\"rch-name\">'+ch.name+'</span><i class=\"bi bi-chevron-right rch-arrow\"></i></div>';
         });
         document.getElementById('balanceSkel').style.display='none';
@@ -101,7 +101,7 @@ function selectBalanceChannel(el){
     }else{
         body.plan_id=balancePlanId;
     }
-    fetch(appUrl+'/ui/ui_custom/api/balance_payment.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+    fetch(appUrl+'/ui/ui_custom/customer/api/balance_payment.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
     .then(function(r){return r.json()}).then(function(d){
         if(d.success&&d.url){window.location.href=d.url}
         else{el.classList.remove('loading');el.querySelector('.btn-dots').outerHTML='<i class=\"bi bi-chevron-right rch-arrow\"></i>';showBalanceError(d.error||'Gagal membuat transaksi')}
@@ -116,10 +116,10 @@ function showBalanceError(msg){
 
 var packageModalBS=null,packageErrModalBS=null,packagePlanId=null,packageRouter='';
 function getPackageChannels(){
-    fetch(appUrl+'/ui/ui_custom/api/tripay_channels.php',{credentials:'include'})
+    fetch(appUrl+'/ui/ui_custom/customer/api/tripay_channels.php',{credentials:'include'})
     .then(function(r){return r.json()}).then(function(d){
         var h='';d.forEach(function(ch){
-            var logo=ch.logo?'<img src=\"'+appUrl+'/ui/ui_custom/'+ch.logo+'\" onerror=\"this.style.display=\\\'none\\\';this.nextElementSibling.style.display=\\\'block\\\'\"><span style=\"display:none\">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
+            var logo=ch.logo?'<img src=\"'+appUrl+'/ui/ui_custom/customer/'+ch.logo+'\" onerror=\"this.style.display=\\\'none\\\';this.nextElementSibling.style.display=\\\'block\\\'\"><span style=\"display:none\">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
             h+='<div class=\"rch-item\" data-channel=\"'+ch.id+'\" onclick=\"selectPackageChannel(this)\"><span class=\"rch-logo\" style=\"background:'+(ch.color||'#666')+'\">'+logo+'</span><span class=\"rch-name\">'+ch.name+'</span><i class=\"bi bi-chevron-right rch-arrow\"></i></div>';
         });
         document.getElementById('packageSkel').style.display='none';
@@ -138,7 +138,7 @@ function selectPackageChannel(el){
     var channel=el.getAttribute('data-channel');
     el.classList.add('loading');
     el.querySelector('.rch-arrow').outerHTML='<span class=\"btn-dots\" style=\"display:flex;gap:4px\"><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.15s\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.3s\"></span></span>';
-    fetch(appUrl+'/ui/ui_custom/api/package_payment.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan_id:packagePlanId,channel:channel,router_name:packageRouter})})
+    fetch(appUrl+'/ui/ui_custom/customer/api/package_payment.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan_id:packagePlanId,channel:channel,router_name:packageRouter})})
     .then(function(r){return r.json()}).then(function(d){
         if(d.success&&d.url){window.location.href=d.url}
         else{el.classList.remove('loading');el.querySelector('.btn-dots').outerHTML='<i class=\"bi bi-chevron-right rch-arrow\"></i>';showPackageError(d.error||'Gagal membuat transaksi')}

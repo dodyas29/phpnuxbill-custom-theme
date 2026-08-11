@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-{include file="components/_head_common.tpl"}
+{include file="customer/components/_head_common.tpl"}
 </head>
 <body>
-{include file="components/_header.tpl"}
+{include file="customer/components/_header.tpl"}
 
     <div class="cw">
         {if isset($notify)}<meta id="notify-data" data-msg="{$notify|escape}" data-type="{if $notify_t == 's'}success{else}error{/if}">{/if}
@@ -52,10 +52,10 @@
         {/if}
 
         {foreach $routers as $router}
-            {$hasPlans = false}
-            {foreach $plans_hotspot as $p}{if $router['name'] eq $p['routers']}{$hasPlans = true}{/if}{/foreach}
-            {foreach $plans_pppoe as $p}{if $router['name'] eq $p['routers']}{$hasPlans = true}{/if}{/foreach}
-            {if isset($plans_vpn)}{foreach $plans_vpn as $p}{if $router['name'] eq $p['routers']}{$hasPlans = true}{/if}{/foreach}{/if}
+            {assign var="hasPlans" value=false}
+            {foreach $plans_hotspot as $p}{if $router['id'] eq $p['routers']}{assign var="hasPlans" value=true}{/if}{/foreach}
+            {foreach $plans_pppoe as $p}{if $router['id'] eq $p['routers']}{assign var="hasPlans" value=true}{/if}{/foreach}
+            {if isset($plans_vpn)}{foreach $plans_vpn as $p}{if $router['id'] eq $p['routers']}{assign var="hasPlans" value=true}{/if}{/foreach}{/if}
 
             {if $hasPlans}
             <section>
@@ -133,8 +133,8 @@
         {/if}
     </div>
 
-{include file="components/_navbar.tpl"}
-{include file="components/_menu_sheet.tpl"}
+{include file="customer/components/_navbar.tpl"}
+{include file="customer/components/_menu_sheet.tpl"}
 
     <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="packageErrModal">
         <div class="offcanvas-header flex-column"></div>
@@ -161,7 +161,7 @@
 
     <div class="tc" id="toastContainer"></div>
 
-{include file="components/_scripts_common.tpl"}
+{include file="customer/components/_scripts_common.tpl"}
 
 </body>
 </html>

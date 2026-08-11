@@ -1,6 +1,6 @@
 <?php
 session_start();
-$root_path = realpath(__DIR__ . '/../../../');
+$root_path = realpath(__DIR__ . '/../../../../');
 $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] ?? 'localhost:8000';
 $_SERVER['SERVER_PORT'] = $_SERVER['SERVER_PORT'] ?? '8000';
 $_SERVER['SCRIPT_NAME'] = '/index.php';
@@ -20,50 +20,61 @@ $input = json_decode(file_get_contents('php://input'), true);
 $planId = (int) ($input['plan_id'] ?? 0);
 $channel = trim($input['channel'] ?? '');
 $gateway = trim($config['payment_gateway'] ?? '');
-$routerName = trim($input['router_name'] ?? '');
+$custom = !empty($input['custom']);
+$amount = $custom ? ((int) ($input['amount'] ?? 0)) : 0;
 
-if (!$planId || !$channel || !$gateway) {
-    echo json_encode(['success' => false, 'error' => 'Missing plan_id, channel, or no gateway configured']);
+if (!$gateway) {
+    echo json_encode(['success' => false, 'error' => 'Payment gateway not configured']);
+    exit;
+}
+
+if (!$channel) {
+    echo json_encode(['success' => false, 'error' => 'Channel is required']);
+    exit;
+}
+
+if ($custom && $amount <= 0) {
+    echo json_encode(['success' => false, 'error' => 'Amount is required']);
     exit;
 }
 
 $user = User::_info();
 
-$plan = ORM::for_table('tbl_plans')
-    ->where('id', $planId)
-    ->where('enabled', '1')
-    ->find_one();
-if (!$plan) {
-    echo json_encode(['success' => false, 'error' => 'Plan not found']);
-    exit;
-}
-
-$routersId = 0;
-if ($plan['is_radius'] == '1' || $routerName === 'radius') {
+if ($custom) {
+    $planName = 'Custom Balance';
+    $price = $amount;
+    $routers = 'Custom Balance';
     $routersId = 0;
-} elseif (!empty($routerName)) {
-    $router = ORM::for_table('tbl_routers')->where('name', $routerName)->find_one();
-    if ($router) {
-        $routersId = $router['id'];
+} else {
+    if (!$planId) {
+        echo json_encode(['success' => false, 'error' => 'Plan ID is required']);
+        exit;
     }
+    $plan = ORM::for_table('tbl_plans')
+        ->where('id', $planId)
+        ->where('enabled', '1')
+        ->where('type', 'Balance')
+        ->find_one();
+    if (!$plan) {
+        echo json_encode(['success' => false, 'error' => 'Plan not found']);
+        exit;
+    }
+    $planName = $plan['name_plan'];
+    $price = (float) $plan['price'];
+    $routers = 'balance';
+    $routersId = 0;
 }
 
-$price = (float) $plan['price'];
-$taxEnable = isset($config['enable_tax']) ? $config['enable_tax'] : 'no';
-if ($taxEnable === 'yes') {
-    $tax = Package::tax($price);
-    $price += $tax;
-}
 $total = $price;
 
 $d = ORM::for_table('tbl_payment_gateway')->create();
 $d->username = $user['username'];
 $d->user_id = $user['id'];
 $d->gateway = $gateway;
-$d->plan_id = $plan['id'];
-$d->plan_name = $plan['name_plan'];
+$d->plan_id = $planId;
+$d->plan_name = $planName;
 $d->routers_id = $routersId;
-$d->routers = $routerName ?: 'balance';
+$d->routers = $routers;
 $d->price = $total;
 $d->payment_channel = $channel;
 $d->created_date = date('Y-m-d H:i:s');
@@ -93,7 +104,7 @@ if ($gateway === 'tripay') {
         'customer_email' => empty($user['email']) ? $user['username'] . '@' . $_SERVER['HTTP_HOST'] : $user['email'],
         'customer_phone' => $user['phonenumber'] ?? '',
         'order_items' => [[
-            'name' => $plan['name_plan'],
+            'name' => $planName,
             'price' => (int)$total,
             'quantity' => 1,
         ]],

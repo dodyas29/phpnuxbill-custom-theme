@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-{include file="components/_head_common.tpl"}
+{include file="customer/components/_head_common.tpl"}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
-{include file="components/_header.tpl"}
+{include file="customer/components/_header.tpl"}
 
     <div class="cw">
         {if isset($notify)}<meta id="notify-data" data-msg="{$notify|escape}" data-type="{if $notify_t == 's'}success{else}error{/if}">{/if}
@@ -167,8 +167,8 @@
         </section>
     </div>
 
-{include file="components/_navbar.tpl"}
-{include file="components/_menu_sheet.tpl"}
+{include file="customer/components/_navbar.tpl"}
+{include file="customer/components/_menu_sheet.tpl"}
 
     <!-- NETWORK DEVICE MODAL -->
     <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="nsDeviceModal">
@@ -237,13 +237,13 @@
         <script>var hh="http://{$hostname}/login",hu="{$_user['username']}",hp="{$_user['password']}",hd="{$apkurl}",hda="2";var hk=hexMD5('{$key1}'+hp+'{$key2}'),ha=hh+'?username='+hu+'&dst='+hd+'&password='+hk;document.write('<meta http-equiv="refresh" target="_blank" content="'+hda+'; url='+ha+'">');</script>
     {/if}
 
-{include file="components/_scripts_common.tpl"}
+{include file="customer/components/_scripts_common.tpl"}
 
     <script>
         {literal}
         function fetchData(){
             var start=Date.now();
-            fetch(appUrl+'/ui/ui_custom/api/plan.php',{credentials:'include'})
+            fetch(appUrl+'/ui/ui_custom/customer/api/plan.php',{credentials:'include'})
             .then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json()})
             .then(function(d){
                 var delay=Math.max(0,600-(Date.now()-start));
@@ -318,7 +318,7 @@
             var btn=document.querySelector('.ns-refresh');if(btn)btn.classList.add('spinning');
             var start=Date.now();
             if(refresh){document.getElementById('nsContent').style.display='none';document.getElementById('nsSkeleton').style.display='block'}
-            fetch(appUrl+'/ui/ui_custom/api/device.php',{credentials:'include'})
+            fetch(appUrl+'/ui/ui_custom/customer/api/device.php',{credentials:'include'})
             .then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json()})
             .then(function(d){_deviceData=d;
                 var delay=refresh?Math.max(0,400-(Date.now()-start)):Math.max(0,600-(Date.now()-start));
@@ -384,7 +384,7 @@
         function saveWifi(band){
             var ssid = document.getElementById('nsSsid'+(band==='24g'?'24':'5')+'Input').value;
             var pass = document.getElementById('nsPass'+(band==='24g'?'24':'5')+'Input').value;
-            fetch(appUrl+'/ui/ui_custom/api/device.php',{
+            fetch(appUrl+'/ui/ui_custom/customer/api/device.php',{
                 method:'POST',credentials:'include',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify({band:band,ssid:ssid,password:pass})
@@ -422,7 +422,7 @@
         }
 
         function deviceAction(action,band,mac){
-            fetch(appUrl+'/ui/ui_custom/api/device.php',{
+            fetch(appUrl+'/ui/ui_custom/customer/api/device.php',{
                 method:'POST',credentials:'include',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify({action:action,band:band,mac:mac})
@@ -486,10 +486,10 @@
             document.getElementById('rechargeSkel').style.display='block';
             document.getElementById('rechargeList').innerHTML='';
             rechargeModal.show();
-            fetch(appUrl+'/ui/ui_custom/api/tripay_channels.php',{credentials:'include'})
+            fetch(appUrl+'/ui/ui_custom/customer/api/tripay_channels.php',{credentials:'include'})
             .then(function(r){return r.json()}).then(function(d){
                 var h='';d.forEach(function(ch){
-                    var logo=ch.logo?'<img src=\"'+appUrl+'/ui/ui_custom/'+ch.logo+'\" onerror=\"this.style.display=\\\'none\\\';this.nextElementSibling.style.display=\\\'block\\\'\"><span style=\"display:none\">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
+                    var logo=ch.logo?'<img src=\"'+appUrl+'/ui/ui_custom/customer/'+ch.logo+'\" onerror=\"this.style.display=\\\'none\\\';this.nextElementSibling.style.display=\\\'block\\\'\"><span style=\"display:none\">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
                     h+='<div class=\"rch-item\" data-channel=\"'+ch.id+'\" onclick=\"selectRechargeChannel(this)\"><span class=\"rch-logo\" style=\"background:'+(ch.color||'#666')+'\">'+logo+'</span><span class=\"rch-name\">'+ch.name+'</span><i class=\"bi bi-chevron-right rch-arrow\"></i></div>';
                 });
                 document.getElementById('rechargeSkel').style.display='none';
@@ -501,7 +501,7 @@
             var channel=el.getAttribute('data-channel');
             el.classList.add('loading');
             el.querySelector('.rch-arrow').outerHTML='<span class=\"btn-dots\" style=\"display:flex;gap:4px\"><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.15s\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.3s\"></span></span>';
-            fetch(appUrl+'/ui/ui_custom/api/recharge_redirect.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({recharge_id:rechargeId,channel:channel})})
+            fetch(appUrl+'/ui/ui_custom/customer/api/recharge_redirect.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({recharge_id:rechargeId,channel:channel})})
             .then(function(r){return r.json()}).then(function(d){
                 if(d.success&&d.url){window.location.href=d.url}
                 else{el.classList.remove('loading');el.querySelector('.btn-dots').outerHTML='<i class=\"bi bi-chevron-right rch-arrow\"></i>';showRechargeError(d.error||'Gagal membuat transaksi')}
