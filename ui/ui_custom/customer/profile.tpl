@@ -87,13 +87,9 @@
                     </div>
                 </div>
 
-                <button type="submit" class="vbtn stg" style="margin-top:24px"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
+                <button type="submit" class="vbtn stg" id="saveBtn"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
                 <div style="text-align:center;margin-top:14px"><a href="{Text::url('home')}" style="color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a></div>
             </form>
-
-    <form action="{Text::url('accounts/change-password-post')}" method="post" id="pwForm" style="display:none">
-        <input type="hidden" name="csrf_token" value="{$csrf_token}">
-    </form>
         </section>
     </div>
 
@@ -110,17 +106,15 @@
             var open=pw.style.display==='block';
             pw.style.display=open?'none':'block';
             icon.style.transform=open?'rotate(0)':'rotate(180deg)';
+            var btn=document.getElementById('saveBtn');
+            if(!open){btn.setAttribute('formaction','{/literal}{Text::url('accounts/change-password-post')}{literal}')}
+            else{btn.removeAttribute('formaction')}
         }
         function togglePw(id,btn){
             var el=document.getElementById(id),icon=btn.querySelector('i');
             if(el.type==='password'){el.type='text';icon.className='bi bi-eye'}
             else{el.type='password';icon.className='bi bi-eye-slash'}
         }
-        document.querySelectorAll('#pwWrap input[type=password]').forEach(function(i){
-            i.addEventListener('keydown',function(e){
-                if(e.key==='Enter'){e.preventDefault();document.getElementById('pwForm').submit()}
-            });
-        });
         document.querySelectorAll('.field-wrap input').forEach(function(input){
             if(input.value)input.parentElement.classList.add('filled');
             input.addEventListener('input',function(){if(this.value)this.parentElement.classList.add('filled');else this.parentElement.classList.remove('filled')});
