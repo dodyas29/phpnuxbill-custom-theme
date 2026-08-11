@@ -100,34 +100,5 @@
 
 {include file="components/_scripts_common.tpl"}
 
-    <style>
-        {literal}
-        .tx-card{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r3);overflow:hidden}
-        .tx-card-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--bd);background:var(--bg)}
-        .tx-status{font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:6px}
-        .tx-status i{font-size:1rem}
-        .tx-status.status-1{color:var(--c5)}
-        .tx-status.status-2{color:var(--c4)}
-        .tx-status.status-3,.tx-status.status-4{color:var(--c6)}
-        .tx-id{font-size:.72rem;font-weight:600;color:var(--t3);font-family:'Courier New',monospace}
-        .tx-card-body{padding:16px 20px}
-        .tx-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--bd)}
-        .tx-row:last-child{border-bottom:none}
-        .tx-label{font-size:.76rem;color:var(--t3);flex-shrink:0}
-        .tx-value{font-size:.82rem;font-weight:600;color:var(--tx);text-align:right;margin-left:12px}
-        .tx-price{color:var(--c1);font-size:.9rem;font-weight:700}
-        .tx-actions{margin-top:16px}
-        {/literal}
-    </style>
-    <script>
-        {literal}
-        fetch(appUrl+'/ui/ui_custom/api/plan.php',{credentials:'include'})
-        .then(function(r){return r.json()}).then(function(d){
-            if(typeof d.balance_formatted!=='undefined'){
-                var ab=document.getElementById('abBal');if(ab){ab.className='';ab.style.cssText='';ab.textContent=d.balance_formatted}
-            }
-        }).catch(function(){});
-        {/literal}
-    </script>
 </body>
 </html>

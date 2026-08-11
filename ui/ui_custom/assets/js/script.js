@@ -46,3 +46,5 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 
 if(typeof userLang!=='undefined')setCookie('user_language',userLang,365);
+
+fetch(appUrl+'/ui/ui_custom/api/plan.php',{credentials:'include'}).then(function(r){return r.json()}).then(function(d){if(typeof d.balance_formatted!=='undefined'){var ab=document.getElementById('abBal');if(ab){ab.className='';ab.style.cssText='';ab.textContent=d.balance_formatted}}}).catch(function(){});
