@@ -206,7 +206,7 @@
 
     </div>
 
-    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="rechargeErrModal" style="max-height:40vh">
+    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="rechargeErrModal">
         <div class="offcanvas-header flex-column"></div>
         <div class="offcanvas-body" style="text-align:center">
             <i class="bi bi-x-circle-fill" style="font-size:2.5rem;color:var(--c6);display:block;margin-bottom:12px"></i>
