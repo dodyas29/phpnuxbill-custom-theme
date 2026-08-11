@@ -149,7 +149,7 @@ function pvRunLiveness(){
     var canvas=document.getElementById('pvCanvas');
     var displaySize={width:video.offsetWidth,height:video.offsetHeight};
     faceapi.matchDimensions(canvas,displaySize);
-    var blinkCount=0,blinkState=false,blinkCloseFrames=0;
+    var blinkCount=0,blinkState=false,blinkCloseFrames=0,baselineEAR=.28;
     pvLivenessInterval=setInterval(async function(){
             try{
                 var detections=await faceapi.detectAllFaces(video,new faceapi.TinyFaceDetectorOptions({inputSize:224,scoreThreshold:.4})).withFaceLandmarks();
@@ -164,10 +164,12 @@ function pvRunLiveness(){
                 var leftEye=landmarks.getLeftEye();
                 var rightEye=landmarks.getRightEye();
                 var ear=(pvEyeAspectRatio(leftEye)+pvEyeAspectRatio(rightEye))/2;
-                if(!blinkState&&ear<.22){blinkState=true;blinkCloseFrames=1}
-                else if(blinkState&&ear<.22){blinkCloseFrames++}
-                else if(blinkState&&ear>=.22&&blinkCloseFrames>=1){blinkState=false;blinkCount++}
-                else if(blinkState&&ear>=.22){blinkState=false}
+                if(!blinkState&&ear>.1){baselineEAR=baselineEAR*.9+ear*.1}
+                var threshold=baselineEAR*.7;
+                if(!blinkState&&ear<threshold){blinkState=true;blinkCloseFrames=1}
+                else if(blinkState&&ear<threshold){blinkCloseFrames++}
+                else if(blinkState&&ear>=threshold&&blinkCloseFrames>=1){blinkState=false;blinkCount++}
+                else if(blinkState&&ear>=threshold){blinkState=false}
                 if(blinkCount>=1){
                     clearInterval(pvLivenessInterval);
                     pvStopStream();
@@ -179,7 +181,7 @@ function pvRunLiveness(){
                     document.getElementById('pvSubmit').disabled=false;
                     document.getElementById('pvSubmit').click();
                 }else{
-                    document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-person-bounding-box"></i> Kedipkan mata... EAR:'+ear.toFixed(2)+' ('+blinkCount+'/1)';
+                    document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-person-bounding-box"></i> Kedipkan mata... EAR:'+ear.toFixed(2)+' thr:'+threshold.toFixed(2)+' ('+blinkCount+'/1)';
                 }
             }else{
                 document.getElementById('pvFaceStatus').innerHTML='<i class="bi bi-person-bounding-box"></i> Arahkan wajah ke kamera...';
