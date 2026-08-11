@@ -37,25 +37,28 @@ if ($npass !== $cnpass) {
 }
 
 $user = User::_info();
-if ($password !== $user['password']) {
+
+if ($password != $user['password']) {
     echo json_encode(['success' => false, 'message' => 'Incorrect current password']);
     exit;
 }
 
-$user->password = $npass;
-$user->save();
+$uid = User::getID();
+$d = ORM::for_table('tbl_customers')->find_one($uid);
+$d->password = $npass;
+$d->save();
 
-$turs = ORM::for_table('tbl_user_recharges')->where('customer_id', $user['id'])->find_many();
+$turs = ORM::for_table('tbl_user_recharges')->where('customer_id', $uid)->find_many();
 foreach ($turs as $tur) {
     if ($tur['status'] == 'on') {
         $p = ORM::for_table('tbl_plans')->where('id', $tur['plan_id'])->find_one();
         if ($p) {
             $dvc = Package::getDevice($p);
-            if ($_app_stage != 'demo') {
-                if (file_exists($dvc)) {
+            if ($_app_stage != 'demo' && file_exists($dvc)) {
+                try {
                     require_once $dvc;
                     (new $p['device'])->add_customer($user, $p);
-                }
+                } catch (\Throwable $e) {}
             }
         }
     }
