@@ -113,3 +113,44 @@ function showBalanceError(msg){
     document.getElementById('balanceErrMsg').textContent=msg;
     balanceErrModalBS.show();
 }
+
+var packageModalBS=null,packageErrModalBS=null,packagePlanId=null,packageRouter='';
+function getPackageChannels(){
+    fetch(appUrl+'/ui/ui_custom/api/tripay_channels.php',{credentials:'include'})
+    .then(function(r){return r.json()}).then(function(d){
+        var h='';d.forEach(function(ch){
+            var logo=ch.logo?'<img src=\"'+appUrl+'/ui/ui_custom/'+ch.logo+'\" onerror=\"this.style.display=\\\'none\\\';this.nextElementSibling.style.display=\\\'block\\\'\"><span style=\"display:none\">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
+            h+='<div class=\"rch-item\" data-channel=\"'+ch.id+'\" onclick=\"selectPackageChannel(this)\"><span class=\"rch-logo\" style=\"background:'+(ch.color||'#666')+'\">'+logo+'</span><span class=\"rch-name\">'+ch.name+'</span><i class=\"bi bi-chevron-right rch-arrow\"></i></div>';
+        });
+        document.getElementById('packageSkel').style.display='none';
+        document.getElementById('packageList').innerHTML=h;
+    });
+}
+function openPackageModal(planId,routerName){
+    if(!packageModalBS)packageModalBS=new bootstrap.Offcanvas(document.getElementById('packageModal'));
+    packagePlanId=planId;packageRouter=routerName||'';
+    document.getElementById('packageSkel').style.display='block';
+    document.getElementById('packageList').innerHTML='';
+    packageModalBS.show();
+    getPackageChannels();
+}
+function selectPackageChannel(el){
+    var channel=el.getAttribute('data-channel');
+    el.classList.add('loading');
+    el.querySelector('.rch-arrow').outerHTML='<span class=\"btn-dots\" style=\"display:flex;gap:4px\"><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.15s\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.3s\"></span></span>';
+    fetch(appUrl+'/ui/ui_custom/api/package_payment.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan_id:packagePlanId,channel:channel,router_name:packageRouter})})
+    .then(function(r){return r.json()}).then(function(d){
+        if(d.success&&d.url){window.location.href=d.url}
+        else{el.classList.remove('loading');el.querySelector('.btn-dots').outerHTML='<i class=\"bi bi-chevron-right rch-arrow\"></i>';showPackageError(d.error||'Gagal membuat transaksi')}
+    }).catch(function(){el.classList.remove('loading');el.querySelector('.btn-dots').outerHTML='<i class=\"bi bi-chevron-right rch-arrow\"></i>';showPackageError('Gagal membuat transaksi')});
+}
+function showPackageError(msg){
+    if(packageModalBS)packageModalBS.hide();
+    if(!packageErrModalBS)packageErrModalBS=new bootstrap.Offcanvas(document.getElementById('packageErrModal'));
+    document.getElementById('packageErrMsg').textContent=msg;
+    packageErrModalBS.show();
+}
+
+document.querySelectorAll('[api-get-text]').forEach(function(el){
+    fetch(el.getAttribute('api-get-text'),{credentials:'include'}).then(function(r){return r.text()}).then(function(t){el.textContent=t}).catch(function(){el.textContent='-'});
+});

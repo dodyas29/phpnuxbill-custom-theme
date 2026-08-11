@@ -1,593 +1,167 @@
-{include file="customer/header.tpl"}
-<!-- user-orderPlan -->
-<div class="row">
-    <div class="col-sm-12">
-        <div class="box box-solid box-default">
-            <div class="box-header">{Lang::T('Order Internet Package')}</div>
-        </div>
-        {if $_c['radius_enable']}
-            {if $_user['service_type'] == 'PPPoE'}
-                {if Lang::arrayCount($radius_pppoe)>0}
-                    <ol class="breadcrumb">
-                        <li>{if $_c['radius_plan']==''}Radius Plan{else}{$_c['radius_plan']}{/if}</li>
-                        <li>{if $_c['pppoe_plan']==''}PPPOE Plan{else}{$_c['pppoe_plan']}{/if}</li>
-                    </ol>
-                    <div class="row">
-                        {foreach $radius_pppoe as $plan}
-                            <div class="col col-md-4">
-                                <div class="box box-primary">
-                                    <div class="box-header text-bold">{$plan['name_plan']}</div>
-                                    <div class="table-responsive">
-                                        <div style="margin-left: 5px; margin-right: 5px;">
-                                            <table class="table table-bordered table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{Lang::T('Type')}</td>
-                                                        <td>{$plan['type']}</td>
-                                                    </tr>
-                                                    {if $_c['show_bandwidth_plan'] == 'yes'}
-                                                        <tr>
-                                                            <td>{Lang::T('Bandwidth')}</td>
-                                                            <td api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}"></td>
-                                                        </tr>
-                                                    {/if}
-                                                    <tr>
-                                                        <td>{Lang::T('Price')}</td>
-                                                        <td>{Lang::moneyFormat($plan['price'])}
-                                                            {if !empty($plan['price_old'])}
-                                                                <sup
-                                                                    style="text-decoration: line-through; color: red">{Lang::moneyFormat($plan['price_old'])}</sup>
-                                                            {/if}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{Lang::T('Validity')}</td>
-                                                        <td>{$plan['validity']} {$plan['validity_unit']}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="box-body">
-                                        <a href="{Text::url('order/gateway/radius/',$plan['id'],'&stoken=',App::getToken())}"
-                                            onclick="return ask(this, '{Lang::T('Buy this? your active package will be overwrite')}')"
-                                            class="btn btn-sm btn-block btn-warning text-black">{Lang::T('Buy')}</a>
-                                        {if $_c['enable_balance'] == 'yes' && $_c['allow_balance_transfer'] == 'yes' && $_user['balance']>=$plan['price']}
-                                            <a href="{Text::url('order/send/radius/',$plan['id'],'&stoken=',App::getToken())}"
-                                                onclick="return ask(this, '{Lang::T('Buy this for friend account?')}')"
-                                                class="btn btn-sm btn-block btn-primary">{Lang::T('Buy for friend')}</a>
-                                        {/if}
-                                    </div>
-                                </div>
-                            </div>
-                        {/foreach}
-                    </div>
-                {/if}
-            {elseif $_user['service_type'] == 'Hotspot'}
-                {if Lang::arrayCount($radius_hotspot)>0}
-                    <ol class="breadcrumb">
-                        <li>{if $_c['radius_plan']==''}Radius Plan{else}{$_c['radius_plan']}{/if}</li>
-                        <li>{if $_c['hotspot_plan']==''}Hotspot Plan{else}{$_c['hotspot_plan']}{/if}</li>
-                    </ol>
-                    <div class="row">
-                        {foreach $radius_hotspot as $plan}
-                            <div class="col col-md-4">
-                                <div class="box box-primary">
-                                    <div class="box-header text-bold">{$plan['name_plan']}</div>
-                                    <div class="table-responsive">
-                                        <div style="margin-left: 5px; margin-right: 5px;">
-                                            <table class="table table-bordered table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{Lang::T('Type')}</td>
-                                                        <td>{$plan['type']}</td>
-                                                    </tr>
-                                                    {if $_c['show_bandwidth_plan'] == 'yes'}
-                                                        <tr>
-                                                            <td>{Lang::T('Bandwidth')}</td>
-                                                            <td api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}"></td>
-                                                        </tr>
-                                                    {/if}
-                                                    <tr>
-                                                        <td>{Lang::T('Price')}</td>
-                                                        <td>{Lang::moneyFormat($plan['price'])}
-                                                            {if !empty($plan['price_old'])}
-                                                                <sup
-                                                                    style="text-decoration: line-through; color: red">{Lang::moneyFormat($plan['price_old'])}</sup>
-                                                            {/if}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{Lang::T('Validity')}</td>
-                                                        <td>{$plan['validity']} {$plan['validity_unit']}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="box-body">
-                                        <a href="{Text::url('order/gateway/radius/',$plan['id'],'&stoken=',App::getToken())}"
-                                            onclick="return ask(this, '{Lang::T('Buy this? your active package will be overwrite')}')"
-                                            class="btn btn-sm btn-block btn-warning text-black">{Lang::T('Buy')}</a>
-                                        {if $_c['enable_balance'] == 'yes' && $_c['allow_balance_transfer'] == 'yes' && $_user['balance']>=$plan['price']}
-                                            <a href="{Text::url('order/send/radius/', $plan['id'], '&stoken=', App::getToken())}"
-                                                onclick="return ask(this, '{Lang::T('Buy this for friend account?')}')"
-                                                class="btn btn-sm btn-block btn-primary">{Lang::T('Buy for friend')}</a>
-                                        {/if}
-                                    </div>
-                                </div>
-                            </div>
-                        {/foreach}
-                    </div>
-                {/if}
-                {elseif $_user['service_type'] == 'Others' || $_user['service_type'] == '' && (Lang::arrayCount($radius_pppoe)>0
-                                                                                                                    || Lang::arrayCount($radius_hotspot)>0)}
-                <ol class="breadcrumb">
-                    <li>{if $_c['radius_plan']==''}Radius Plan{else}{$_c['radius_plan']}{/if}</li>
-                    <li>{if $_c['pppoe_plan']==''}PPPOE Plan{else}{$_c['pppoe_plan']}{/if}</li>
-                </ol>
-                {if Lang::arrayCount($radius_pppoe)>0}
-                    <div class="row">
-                        {foreach $radius_pppoe as $plan}
-                            <div class="col col-md-4">
-                                <div class="box box-primary">
-                                    <div class="box-header text-bold">{$plan['name_plan']}</div>
-                                    <div class="table-responsive">
-                                        <div style="margin-left: 5px; margin-right: 5px;">
-                                            <table class="table table-bordered table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{Lang::T('Type')}</td>
-                                                        <td>{$plan['type']}</td>
-                                                    </tr>
-                                                    {if $_c['show_bandwidth_plan'] == 'yes'}
-                                                        <tr>
-                                                            <td>{Lang::T('Bandwidth')}</td>
-                                                            <td api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}"></td>
-                                                        </tr>
-                                                    {/if}
-                                                    <tr>
-                                                        <td>{Lang::T('Price')}</td>
-                                                        <td>{Lang::moneyFormat($plan['price'])}
-                                                            {if !empty($plan['price_old'])}
-                                                                <sup
-                                                                    style="text-decoration: line-through; color: red">{Lang::moneyFormat($plan['price_old'])}</sup>
-                                                            {/if}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{Lang::T('Validity')}</td>
-                                                        <td>{$plan['validity']} {$plan['validity_unit']}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="box-body">
-                                        <a href="{Text::url('order/gateway/pppoe/',$plan['id'],'&stoken=',App::getToken())}"
-                                            onclick="return ask(this, '{Lang::T('Buy this? your active package will be overwritten')}')"
-                                            class="btn btn-sm btn-block btn-warning text-black">{Lang::T('Buy')}</a>
-                                        {if $_c['enable_balance'] == 'yes' && $_c['allow_balance_transfer'] == 'yes' && $_user['balance']>=$plan['price']}
-                                            <a href="{Text::url('order/send/pppoe/', $plan['id'],'&stoken=',App::getToken())}"
-                                                onclick="return ask(this, '{Lang::T('Buy this for friend account?')}')"
-                                                class="btn btn-sm btn-block btn-primary">{Lang::T('Buy for friend')}</a>
-                                        {/if}
-                                    </div>
-                                </div>
-                            </div>
-                        {/foreach}
-                    </div>
-                {/if}
-                {if Lang::arrayCount($radius_hotspot)>0}
-                    <ol class="breadcrumb">
-                        <li>{if $_c['radius_plan']==''}Radius Plan{else}{$_c['radius_plan']}{/if}</li>
-                        <li>{if $_c['hotspot_plan']==''}Hotspot Plan{else}{$_c['hotspot_plan']}{/if}</li>
-                    </ol>
-                    <div class="row">
-                        {foreach $radius_hotspot as $plan}
-                            <div class="col col-md-4">
-                                <div class="box box-primary">
-                                    <div class="box-header text-bold">{$plan['name_plan']}</div>
-                                    <div class="table-responsive">
-                                        <div style="margin-left: 5px; margin-right: 5px;">
-                                            <table class="table table-bordered table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{Lang::T('Type')}</td>
-                                                        <td>{$plan['type']}</td>
-                                                    </tr>
-                                                    {if $_c['show_bandwidth_plan'] == 'yes'}
-                                                        <tr>
-                                                            <td>{Lang::T('Bandwidth')}</td>
-                                                            <td api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}"></td>
-                                                        </tr>
-                                                    {/if}
-                                                    <tr>
-                                                        <td>{Lang::T('Price')}</td>
-                                                        <td>{Lang::moneyFormat($plan['price'])}
-                                                            {if !empty($plan['price_old'])}
-                                                                <sup
-                                                                    style="text-decoration: line-through; color: red">{Lang::moneyFormat($plan['price_old'])}</sup>
-                                                            {/if}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{Lang::T('Validity')}</td>
-                                                        <td>{$plan['validity']} {$plan['validity_unit']}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="box-body">
-                                        <a href="{Text::url('order/gateway/hotspot/',$plan['id'],'&stoken=',App::getToken())}"
-                                            onclick="return ask(this, '{Lang::T('Buy this? your active package will be overwritten')}')"
-                                            class="btn btn-sm btn-block btn-warning text-black">{Lang::T('Buy')}</a>
-                                        {if $_c['enable_balance'] == 'yes' && $_c['allow_balance_transfer'] == 'yes' &&
-                                                                                                                                                                                                                                                                                                                                        $_user['balance']>=$plan['price']}
-                                        <a href="{Text::url('order/send/hotspot/', $plan['id'], '&stoken=', App::getToken())}"
-                                            onclick="return ask(this, '{Lang::T('Buy this for friend account?')}')"
-                                            class="btn btn-sm btn-block btn-primary">{Lang::T('Buy for friend')}</a>
-                                    {/if}
-                                </div>
-                            </div>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+{include file="components/_head_common.tpl"}
+</head>
+<body>
+{include file="components/_header.tpl"}
+
+    <div class="cw">
+        {if isset($notify)}<meta id="notify-data" data-msg="{$notify|escape}" data-type="{if $notify_t == 's'}success{else}error{/if}">{/if}
+
+        {if Lang::arrayCount($radius_pppoe)>0 || Lang::arrayCount($radius_hotspot)>0}
+        <section>
+            <div class="sh stg"><h2>{if $_c['radius_plan']}{$_c['radius_plan']}{else}Radius Plans{/if}</h2></div>
+            <div class="pl-list stg">
+                {foreach $radius_pppoe as $plan}
+                    <div class="pl-card">
+                        <div class="pl-card-name">{$plan['name_plan']}</div>
+                        <div class="pl-card-meta">
+                            <span><i class="bi bi-router"></i> {$plan['type']}</span>
+                            {if $_c['show_bandwidth_plan'] == 'yes'}<span><i class="bi bi-speedometer2"></i> <b api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}"></b></span>{/if}
+                            <span><i class="bi bi-clock"></i> {$plan['validity']} {$plan['validity_unit']}</span>
                         </div>
-                    {/foreach}
-                </div>
-            {/if}
+                        <div class="pl-card-row">
+                            <div class="pl-card-price">
+                                {if !empty($plan['price_old'])}<span class="pl-card-old">{Lang::moneyFormat($plan['price_old'])}</span>{/if}
+                                {Lang::moneyFormat($plan['price'])}
+                            </div>
+                            <a href="javascript:void(0)" class="tx-act pay" onclick="openPackageModal({$plan['id']},'radius')">{Lang::T('Buy')}</a>
+                        </div>
+                    </div>
+                {/foreach}
+                {foreach $radius_hotspot as $plan}
+                    <div class="pl-card">
+                        <div class="pl-card-name">{$plan['name_plan']}</div>
+                        <div class="pl-card-meta">
+                            <span><i class="bi bi-router"></i> {$plan['type']}</span>
+                            {if $_c['show_bandwidth_plan'] == 'yes'}<span><i class="bi bi-speedometer2"></i> <b api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}"></b></span>{/if}
+                            <span><i class="bi bi-clock"></i> {$plan['validity']} {$plan['validity_unit']}</span>
+                        </div>
+                        <div class="pl-card-row">
+                            <div class="pl-card-price">
+                                {if !empty($plan['price_old'])}<span class="pl-card-old">{Lang::moneyFormat($plan['price_old'])}</span>{/if}
+                                {Lang::moneyFormat($plan['price'])}
+                            </div>
+                            <a href="javascript:void(0)" class="tx-act pay" onclick="openPackageModal({$plan['id']},'radius')">{Lang::T('Buy')}</a>
+                        </div>
+                    </div>
+                {/foreach}
+            </div>
+        </section>
         {/if}
-        {/if}
+
         {foreach $routers as $router}
-            {if Validator::isRouterHasPlan($plans_hotspot, $router['name']) || Validator::isRouterHasPlan($plans_pppoe,
-                                                                                                                $router['name']) || Validator::isRouterHasPlan($plans_vpn,
-                                                                                                                $router['name'])}
-            <div class="box box-solid box-primary bg-gray">
-                <div class="box-header text-white text-bold">{$router['name']}</div>
-                {if $router['description'] != ''}
-                    <div class="box-body">
-                        {$router['description']}
-                    </div>
-                {/if}
-                {if $_user['service_type'] == 'Hotspot' && Validator::countRouterPlan($plans_hotspot, $router['name'])>0}
-                    <div class="box-header text-white">{if $_c['hotspot_plan']==''}Hotspot Plan{else}{$_c['hotspot_plan']}{/if}
-                    </div>
-                    <div class="box-body row">
-                        {foreach $plans_hotspot as $plan}
-                            {if $router['name'] eq $plan['routers']}
-                                <div class="col col-md-4">
-                                    <div class="box box-primary">
-                                        <div class="box-header text-center text-bold">{$plan['name_plan']}</div>
-                                        <div class="table-responsive">
-                                            <div style="margin-left: 5px; margin-right: 5px;">
-                                                <table class="table table-bordered table-striped">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>{Lang::T('Type')}</td>
-                                                            <td>{$plan['type']}</td>
-                                                        </tr>
-                                                        {if $_c['show_bandwidth_plan'] == 'yes'}
-                                                            <tr>
-                                                                <td>{Lang::T('Bandwidth')}</td>
-                                                                <td api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}">
-                                                                </td>
-                                                            </tr>
-                                                        {/if}
-                                                        <tr>
-                                                            <td>{Lang::T('Price')}</td>
-                                                            <td>{Lang::moneyFormat($plan['price'])}
-                                                                {if !empty($plan['price_old'])}
-                                                                    <sup
-                                                                        style="text-decoration: line-through; color: red">{Lang::moneyFormat($plan['price_old'])}</sup>
-                                                                {/if}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>{Lang::T('Validity')}</td>
-                                                            <td>{$plan['validity']} {$plan['validity_unit']}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="box-body">
-                                            <a href="{Text::url('order/gateway/', $router['id'],'/',$plan['id'], '&stoken=', App::getToken())}"
-                                                onclick="return ask(this, '{Lang::T('Buy this? your active package will be overwrite')}')"
-                                                class="btn btn-sm btn-block btn-warning text-black">{Lang::T('Buy')}</a>
-                                            {if $_c['enable_balance'] == 'yes' && $_c['allow_balance_transfer'] == 'yes' && $_user['balance']>=$plan['price']}
-                                                <a href="{Text::url('order/send/', $router['id'], '/', $plan['id'], '&stoken=', App::getToken())}"
-                                                    onclick="return ask(this, '{Lang::T('Buy this for friend account?')}')"
-                                                    class="btn btn-sm btn-block btn-primary">{Lang::T('Buy for friend')}</a>
-                                            {/if}
-                                        </div>
-                                    </div>
-                                </div>
-                            {/if}
-                        {/foreach}
-                    </div>
-                {/if}
-                {if $_user['service_type'] == 'PPPoE' && Validator::countRouterPlan($plans_pppoe,$router['name'])>0}
-                    <div class="box-header text-white">{if $_c['pppoe_plan']==''}PPPOE Plan{else}{$_c['pppoe_plan']}{/if}</div>
-                    <div class="box-body row">
-                        {foreach $plans_pppoe as $plan}
-                            {if $router['name'] eq $plan['routers']}
-                                <div class="col col-md-4">
-                                    <div class="box box- box-primary">
-                                        <div class="box-header text-bold text-center">{$plan['name_plan']}</div>
-                                        <div class="table-responsive">
-                                            <div style="margin-left: 5px; margin-right: 5px;">
-                                                <table class="table table-bordered table-striped">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>{Lang::T('Type')}</td>
-                                                            <td>{$plan['type']}</td>
-                                                        </tr>
-                                                        {if $_c['show_bandwidth_plan'] == 'yes'}
-                                                            <tr>
-                                                                <td>{Lang::T('Bandwidth')}</td>
-                                                                <td api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}">
-                                                                </td>
-                                                            </tr>
-                                                        {/if}
-                                                        <tr>
-                                                            <td>{Lang::T('Price')}</td>
-                                                            <td>{Lang::moneyFormat($plan['price'])}
-                                                                {if !empty($plan['price_old'])}
-                                                                    <sup
-                                                                        style="text-decoration: line-through; color: red">{Lang::moneyFormat($plan['price_old'])}</sup>
-                                                                {/if}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>{Lang::T('Validity')}</td>
-                                                            <td>{$plan['validity']} {$plan['validity_unit']}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="box-body">
-                                            <a href="{Text::url('order/gateway/', $router['id'], '/', $plan['id'], '&stoken=', App::getToken())}"
-                                                onclick="return ask(this, '{Lang::T('Buy this? your active package will be overwrite')}')"
-                                                class="btn btn-sm btn-block btn-warning text-black">{Lang::T('Buy')}</a>
-                                            {if $_c['enable_balance'] == 'yes' && $_c['allow_balance_transfer'] == 'yes' && $_user['balance']>=$plan['price']}
-                                                <a href="{Text::url('order/send/', $router['id'], '/', $plan['id'],'&stoken=', App::getToken())}"
-                                                    onclick="return ask(this, '{Lang::T('Buy this for friend account?')}')"
-                                                    class="btn btn-sm btn-block btn-primary">{Lang::T('Buy for friend')}</a>
-                                            {/if}
-                                        </div>
-                                    </div>
-                                </div>
-                            {/if}
-                        {/foreach}
-                    </div>
-                {/if}
-                {if $_user['service_type'] == 'VPN' && Validator::countRouterPlan($plans_vpn,$router['name'])>0}
-                    <div class="box-header text-white">{if $_c['vpn_plan']==''}VPN Plan{else}{$_c['vpn_plan']}{/if}</div>
-                    <div class="box-body row">
-                        {foreach $plans_vpn as $plan}
-                            {if $router['name'] eq $plan['routers']}
-                                <div class="col col-md-4">
-                                    <div class="box box- box-primary">
-                                        <div class="box-header text-bold text-center">{$plan['name_plan']}</div>
-                                        <div class="table-responsive">
-                                            <div style="margin-left: 5px; margin-right: 5px;">
-                                                <table class="table table-bordered table-striped">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>{Lang::T('Type')}</td>
-                                                            <td>{$plan['type']}</td>
-                                                        </tr>
-                                                        {if $_c['show_bandwidth_plan'] == 'yes'}
-                                                            <tr>
-                                                                <td>{Lang::T('Bandwidth')}</td>
-                                                                <td api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}">
-                                                                </td>
-                                                            </tr>
-                                                        {/if}
-                                                        <tr>
-                                                            <td>{Lang::T('Price')}</td>
-                                                            <td>{Lang::moneyFormat($plan['price'])}
-                                                                {if !empty($plan['price_old'])}
-                                                                    <sup
-                                                                        style="text-decoration: line-through; color: red">{Lang::moneyFormat($plan['price_old'])}</sup>
-                                                                {/if}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>{Lang::T('Validity')}</td>
-                                                            <td>{$plan['validity']} {$plan['validity_unit']}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="box-body">
-                                            <a href="{Text::url('order/gateway/',$router['id'],'/',$plan['id'],'&stoken=', App::getToken())}"
-                                                onclick="return ask(this, '{Lang::T('Buy this? your active package will be overwrite')}')"
-                                                class="btn btn-sm btn-block btn-warning text-black">{Lang::T('Buy')}</a>
-                                            {if $_c['enable_balance'] == 'yes' && $_c['allow_balance_transfer'] == 'yes' && $_user['balance']>=$plan['price']}
-                                                <a href="{Text::url('order/send/',$router['id'],'/', $plan['id'], '&stoken=', App::getToken())}"
-                                                    onclick="return ask(this, '{Lang::T('Buy this for friend account?')}')"
-                                                    class="btn btn-sm btn-block btn-primary">{Lang::T('Buy for friend')}</a>
-                                            {/if}
-                                        </div>
-                                    </div>
-                                </div>
-                            {/if}
-                        {/foreach}
-                    </div>
-                {/if}
-                {if $_user['service_type'] == 'Others' || $_user['service_type'] == '' &&
-                                                            (Validator::countRouterPlan($plans_hotspot, $router['name'])>0 || Validator::countRouterPlan($plans_pppoe,
-                                                            $router['name'])>0 || Validator::countRouterPlan($plans_vpn,
-                                                            $router['name'])>0)}
-                <div class="box-header text-white">{if $_c['hotspot_plan']==''}Hotspot Plan{else}{$_c['hotspot_plan']}{/if}
-                </div>
-                <div class="box-body row">
+            {assign "hasPlans" false}
+            {foreach $plans_hotspot as $p}{if $router['name'] eq $p['routers']}{assign "hasPlans" true}{/if}{/foreach}
+            {foreach $plans_pppoe as $p}{if $router['name'] eq $p['routers']}{assign "hasPlans" true}{/if}{/foreach}
+            {if isset($plans_vpn)}{foreach $plans_vpn as $p}{if $router['name'] eq $p['routers']}{assign "hasPlans" true}{/if}{/foreach}{/if}
+
+            {if $hasPlans}
+            <section>
+                <div class="sh stg"><h2>{$router['name']}</h2></div>
+                <div class="pl-list stg">
                     {foreach $plans_hotspot as $plan}
                         {if $router['name'] eq $plan['routers']}
-                            <div class="col col-md-4">
-                                <div class="box box-primary">
-                                    <div class="box-header text-center text-bold">{$plan['name_plan']}</div>
-                                    <div class="table-responsive">
-                                        <div style="margin-left: 5px; margin-right: 5px;">
-                                            <table class="table table-bordered table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{Lang::T('Type')}</td>
-                                                        <td>{$plan['type']}</td>
-                                                    </tr>
-                                                    {if $_c['show_bandwidth_plan'] == 'yes'}
-                                                        <tr>
-                                                            <td>{Lang::T('Bandwidth')}</td>
-                                                            <td api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}">
-                                                            </td>
-                                                        </tr>
-                                                    {/if}
-                                                    <tr>
-                                                        <td>{Lang::T('Price')}</td>
-                                                        <td>{Lang::moneyFormat($plan['price'])}
-                                                            {if !empty($plan['price_old'])}
-                                                                <sup
-                                                                    style="text-decoration: line-through; color: red">{Lang::moneyFormat($plan['price_old'])}</sup>
-                                                            {/if}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{Lang::T('Validity')}</td>
-                                                        <td>{$plan['validity']} {$plan['validity_unit']}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                            <div class="pl-card">
+                                <div class="pl-card-name">{$plan['name_plan']}</div>
+                                <div class="pl-card-meta">
+                                    <span><i class="bi bi-router"></i> {if $_c['hotspot_plan']}{$_c['hotspot_plan']}{else}Hotspot{/if}</span>
+                                    {if $_c['show_bandwidth_plan'] == 'yes'}<span><i class="bi bi-speedometer2"></i> <b api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}"></b></span>{/if}
+                                    <span><i class="bi bi-clock"></i> {$plan['validity']} {$plan['validity_unit']}</span>
+                                </div>
+                                <div class="pl-card-row">
+                                    <div class="pl-card-price">
+                                        {if !empty($plan['price_old'])}<span class="pl-card-old">{Lang::moneyFormat($plan['price_old'])}</span>{/if}
+                                        {Lang::moneyFormat($plan['price'])}
                                     </div>
-                                    <div class="box-body">
-                                        <a href="{Text::url('order/gateway/', $router['id'],'/', $plan['id'], '&stoken=',App::getToken())}"
-                                            onclick="return ask(this, '{Lang::T('Buy this? your active package will be overwrite')}')"
-                                            class="btn btn-sm btn-block btn-warning text-black">{Lang::T('Buy')}</a>
-                                        {if $_c['enable_balance'] == 'yes' && $_c['allow_balance_transfer'] == 'yes' && $_user['balance']>=$plan['price']}
-                                            <a href="{Text::url('order/send/', $router['id'],'/', $plan['id'],'&stoken=',App::getToken())}"
-                                                onclick="return ask(this, '{Lang::T('Buy this for friend account?')}')"
-                                                class="btn btn-sm btn-block btn-primary">{Lang::T('Buy for friend')}</a>
-                                        {/if}
-                                    </div>
+                                    <a href="javascript:void(0)" class="tx-act pay" onclick="openPackageModal({$plan['id']},'{$plan['routers']}')">{Lang::T('Buy')}</a>
                                 </div>
                             </div>
                         {/if}
                     {/foreach}
-                </div>
-                <div class="box-header text-white">{if $_c['pppoe_plan']==''}PPPOE Plan{else}{$_c['pppoe_plan']}{/if}</div>
-                <div class="box-body row">
                     {foreach $plans_pppoe as $plan}
                         {if $router['name'] eq $plan['routers']}
-                            <div class="col col-md-4">
-                                <div class="box box- box-primary">
-                                    <div class="box-header text-bold text-center">{$plan['name_plan']}</div>
-                                    <div class="table-responsive">
-                                        <div style="margin-left: 5px; margin-right: 5px;">
-                                            <table class="table table-bordered table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{Lang::T('Type')}</td>
-                                                        <td>{$plan['type']}</td>
-                                                    </tr>
-                                                    {if $_c['show_bandwidth_plan'] == 'yes'}
-                                                        <tr>
-                                                            <td>{Lang::T('Bandwidth')}</td>
-                                                            <td api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}">
-                                                            </td>
-                                                        </tr>
-                                                    {/if}
-                                                    <tr>
-                                                        <td>{Lang::T('Price')}</td>
-                                                        <td>{Lang::moneyFormat($plan['price'])}
-                                                            {if !empty($plan['price_old'])}
-                                                                <sup
-                                                                    style="text-decoration: line-through; color: red">{Lang::moneyFormat($plan['price_old'])}</sup>
-                                                            {/if}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{Lang::T('Validity')}</td>
-                                                        <td>{$plan['validity']} {$plan['validity_unit']}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                            <div class="pl-card">
+                                <div class="pl-card-name">{$plan['name_plan']}</div>
+                                <div class="pl-card-meta">
+                                    <span><i class="bi bi-router"></i> {if $_c['pppoe_plan']}{$_c['pppoe_plan']}{else}PPPoE{/if}</span>
+                                    {if $_c['show_bandwidth_plan'] == 'yes'}<span><i class="bi bi-speedometer2"></i> <b api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}"></b></span>{/if}
+                                    <span><i class="bi bi-clock"></i> {$plan['validity']} {$plan['validity_unit']}</span>
+                                </div>
+                                <div class="pl-card-row">
+                                    <div class="pl-card-price">
+                                        {if !empty($plan['price_old'])}<span class="pl-card-old">{Lang::moneyFormat($plan['price_old'])}</span>{/if}
+                                        {Lang::moneyFormat($plan['price'])}
                                     </div>
-                                    <div class="box-body">
-                                        <a href="{Text::url('order/gateway/', $router['id'], '/', $plan['id'], '&stoken=', App::getToken())}"
-                                            onclick="return ask(this, '{Lang::T('Buy this? your active package will be overwrite')}')"
-                                            class="btn btn-sm btn-block btn-warning text-black">{Lang::T('Buy')}</a>
-                                        {if $_c['enable_balance'] == 'yes' && $_c['allow_balance_transfer'] == 'yes' && $_user['balance']>=$plan['price']}
-                                            <a href="{Text::url('order/send/',$router['id'],'/',$plan['id'],'&stoken=',App::getToken())}"
-                                                onclick="return ask(this, '{Lang::T('Buy this for friend account?')}')"
-                                                class="btn btn-sm btn-block btn-primary">{Lang::T('Buy for friend')}</a>
-                                        {/if}
-                                    </div>
+                                    <a href="javascript:void(0)" class="tx-act pay" onclick="openPackageModal({$plan['id']},'{$plan['routers']}')">{Lang::T('Buy')}</a>
                                 </div>
                             </div>
                         {/if}
                     {/foreach}
-                </div>
-                <div class="box-header text-white">{if $_c['vpn_plan']==''}VPN Plan{else}{$_c['vpn_plan']}{/if}</div>
-                <div class="box-body row">
-                    {foreach $plans_vpn as $plan}
-                        {if $router['name'] eq $plan['routers']}
-                            <div class="col col-md-4">
-                                <div class="box box- box-primary">
-                                    <div class="box-header text-bold text-center">{$plan['name_plan']}</div>
-                                    <div class="table-responsive">
-                                        <div style="margin-left: 5px; margin-right: 5px;">
-                                            <table class="table table-bordered table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{Lang::T('Type')}</td>
-                                                        <td>{$plan['type']}</td>
-                                                    </tr>
-                                                    {if $_c['show_bandwidth_plan'] == 'yes'}
-                                                        <tr>
-                                                            <td>{Lang::T('Bandwidth')}</td>
-                                                            <td api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}">
-                                                            </td>
-                                                        </tr>
-                                                    {/if}
-                                                    <tr>
-                                                        <td>{Lang::T('Price')}</td>
-                                                        <td>{Lang::moneyFormat($plan['price'])}
-                                                            {if !empty($plan['price_old'])}
-                                                                <sup
-                                                                    style="text-decoration: line-through; color: red">{Lang::moneyFormat($plan['price_old'])}</sup>
-                                                            {/if}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{Lang::T('Validity')}</td>
-                                                        <td>{$plan['validity']} {$plan['validity_unit']}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                    {if isset($plans_vpn)}
+                        {foreach $plans_vpn as $plan}
+                            {if $router['name'] eq $plan['routers']}
+                                <div class="pl-card">
+                                    <div class="pl-card-name">{$plan['name_plan']}</div>
+                                    <div class="pl-card-meta">
+                                        <span><i class="bi bi-router"></i> {if $_c['vpn_plan']}{$_c['vpn_plan']}{else}VPN{/if}</span>
+                                        {if $_c['show_bandwidth_plan'] == 'yes'}<span><i class="bi bi-speedometer2"></i> <b api-get-text="{Text::url('autoload_user/bw_name/')}{$plan['id_bw']}"></b></span>{/if}
+                                        <span><i class="bi bi-clock"></i> {$plan['validity']} {$plan['validity_unit']}</span>
                                     </div>
-                                    <div class="box-body">
-                                        <a href="{Text::url('order/gateway/',$router['id'],'/', $plan['id'], '&stoken=', App::getToken())}"
-                                            onclick="return ask(this, '{Lang::T('Buy this? your active package will be overwrite')}')"
-                                            class="btn btn-sm btn-block btn-warning text-black">{Lang::T('Buy')}</a>
-                                        {if $_c['enable_balance'] == 'yes' && $_c['allow_balance_transfer'] == 'yes' && $_user['balance']>=$plan['price']}
-                                            <a href="{Text::url('order/send/',$router['id'], '/',$plan['id'],'&stoken=', App::getToken())}"
-                                                onclick="return ask(this, '{Lang::T('Buy this for friend account?')}')"
-                                                class="btn btn-sm btn-block btn-primary">{Lang::T('Buy for friend')}</a>
-                                        {/if}
+                                    <div class="pl-card-row">
+                                        <div class="pl-card-price">
+                                            {if !empty($plan['price_old'])}<span class="pl-card-old">{Lang::moneyFormat($plan['price_old'])}</span>{/if}
+                                            {Lang::moneyFormat($plan['price'])}
+                                        </div>
+                                        <a href="javascript:void(0)" class="tx-act pay" onclick="openPackageModal({$plan['id']},'{$plan['routers']}')">{Lang::T('Buy')}</a>
                                     </div>
                                 </div>
-                            </div>
-                        {/if}
-                    {/foreach}
+                            {/if}
+                        {/foreach}
+                    {/if}
                 </div>
+            </section>
             {/if}
-        </div>
-        {/if}
         {/foreach}
+
+        {if Lang::arrayCount($radius_pppoe)==0 && Lang::arrayCount($radius_hotspot)==0 && Lang::arrayCount($plans_pppoe)==0 && Lang::arrayCount($plans_hotspot)==0 && empty($plans_vpn)}
+            <div class="pc-empty stg">
+                <i class="bi bi-inbox" style="font-size:2rem;color:var(--t3);display:block;margin-bottom:8px"></i>
+                {Lang::T('No package available')}
+            </div>
+        {/if}
     </div>
-</div>
-{include file="customer/footer.tpl"}
+
+{include file="components/_navbar.tpl"}
+{include file="components/_menu_sheet.tpl"}
+
+    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="packageErrModal">
+        <div class="offcanvas-header flex-column"></div>
+        <div class="offcanvas-body bem-body">
+            <i class="bi bi-x-circle-fill bem-icon"></i>
+            <p id="packageErrMsg" class="bem-msg"></p>
+            <button class="vbtn bem-btn" onclick="packageErrModalBS.hide()">{Lang::T('Close')}</button>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-bottom os mod-h" tabindex="-1" id="packageModal">
+        <div class="offcanvas-header flex-column"></div>
+        <div class="offcanvas-body">
+            <div id="packageSkel">
+                <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+                <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-md h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+                <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+                <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-lg h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+                <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+            </div>
+            <div id="packageList"></div>
+        </div>
+    </div>
+
+    <div class="tc" id="toastContainer"></div>
+
+{include file="components/_scripts_common.tpl"}
+
+</body>
+</html>
