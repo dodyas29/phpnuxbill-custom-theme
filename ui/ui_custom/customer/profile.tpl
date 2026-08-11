@@ -68,7 +68,7 @@
                         <span>{Lang::T('Change Password')}</span>
                         <span class="pr-val"><i class="bi bi-chevron-down pr-pw-icon" style="font-size:.7rem;margin-left:4px;transition:transform .2s"></i></span>
                     </div>
-                    <div id="pwForm" style="display:none;padding:0 16px 16px">
+                    <div id="pwWrap" style="display:none;padding:0 16px 16px">
                         <div class="field-wrap" style="margin-bottom:12px">
                             <span class="fl">{Lang::T('Current Password')}</span>
                             <input type="password" name="password" form="pwForm" required placeholder="{Lang::T('Current Password')}">
@@ -103,7 +103,7 @@
     <script>
         {literal}
         function togglePwForm(){
-            var pw=document.getElementById('pwForm'),icon=document.querySelector('.pr-pw-icon');
+            var pw=document.getElementById('pwWrap'),icon=document.querySelector('.pr-pw-icon');
             var open=pw.style.display==='block';
             pw.style.display=open?'none':'block';
             icon.style.transform=open?'rotate(0)':'rotate(180deg)';
