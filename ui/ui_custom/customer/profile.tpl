@@ -93,7 +93,7 @@
                             <input type="password" id="pwConfirm" name="cnpass" required placeholder="{Lang::T('Confirm New Password')}">
                             <button type="button" class="pw-toggle" onclick="togglePw('pwConfirm',this)"><i class="bi bi-eye-slash"></i></button>
                         </div>
-                        <button type="submit" class="vbtn" id="pwSubmit" style="margin-top:16px"><i class="bi bi-check-lg"></i> {Lang::T('Save New Password')}</button>
+                        <button type="submit" class="vbtn" id="pwSubmit" style="margin-top:16px" data-text="{Lang::T('Save New Password')}"><i class="bi bi-check-lg"></i> {Lang::T('Save New Password')}</button>
                     </form>
                 </div>
             </div>
@@ -106,43 +106,5 @@
 
 {include file="components/_scripts_common.tpl"}
 
-    <script>
-        {literal}
-        function changePassword(e){
-            e.preventDefault();
-            var btn=document.getElementById('pwSubmit');
-            btn.disabled=true;btn.innerHTML='Menyimpan...';
-            var data={
-                password:document.getElementById('pwCurrent').value,
-                npass:document.getElementById('pwNew').value,
-                cnpass:document.getElementById('pwConfirm').value
-            };
-            fetch(appUrl+'/ui/ui_custom/api/change_password.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-            .then(function(r){return r.json()}).then(function(d){
-                if(d.success)window.location.href=d.redirect;
-                else{btn.disabled=false;btn.innerHTML='<i class=\"bi bi-check-lg\"></i> {/literal}{Lang::T('Save New Password')}{literal}';showToast(d.message,'error')}
-            }).catch(function(){btn.disabled=false;btn.innerHTML='<i class=\"bi bi-check-lg\"></i> {/literal}{Lang::T('Save New Password')}{literal}';showToast('Gagal','error')});
-        }
-
-        var pwModal=null;
-        function openPwModal(){
-            var pw=document.getElementById('pwCurrent'),pn=document.getElementById('pwNew'),pc=document.getElementById('pwConfirm');
-            if(pw)pw.value='';if(pn)pn.value='';if(pc)pc.value='';
-            [pw,pn,pc].forEach(function(i){if(i&&i.parentElement)i.parentElement.classList.remove('filled')});
-            if(!pwModal)pwModal=new bootstrap.Offcanvas(document.getElementById('pwModal'));
-            pwModal.show();
-        }
-        function togglePw(id,btn){
-            var el=document.getElementById(id),icon=btn.querySelector('i');
-            if(el.type==='password'){el.type='text';icon.className='bi bi-eye'}
-            else{el.type='password';icon.className='bi bi-eye-slash'}
-        }
-        document.querySelectorAll('.field-wrap input').forEach(function(input){
-            if(input.value)input.parentElement.classList.add('filled');
-            input.addEventListener('input',function(){if(this.value)this.parentElement.classList.add('filled');else this.parentElement.classList.remove('filled')});
-            input.addEventListener('animationstart',function(e){if(e.animationName==='onAutoFillStart')this.parentElement.classList.add('filled')});
-        });
-        {/literal}
-    </script>
 </body>
 </html>
