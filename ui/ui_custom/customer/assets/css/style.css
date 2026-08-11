@@ -209,6 +209,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
         .qa{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:8px}
         .qa a{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r2);padding:8px;text-decoration:none;color:var(--tx);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:all .15s}
         .qa a:active{transform:scale(.95);border-color:var(--c1)}
+.qa a .btn-dots span{background:var(--tx)}
         .qa a i{font-size:1.4rem;color:var(--c1)}
         .qa a span{font-size:.6rem;font-weight:600;text-align:center;line-height:1.2}
 
