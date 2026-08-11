@@ -184,7 +184,7 @@ function postpaidUpgrade(pid){
         }
         if(!confirm(msg))return;
         var btn=document.querySelector('.tx-act.pay');
-        if(btn){btn.style.minWidth=btn.offsetWidth+'px';showDots(btn);}
+        if(btn){btn.style.minWidth=btn.offsetWidth+'px';btn.style.minHeight=btn.offsetHeight+'px';showDots(btn);}
         fetch(appUrl+'/?_route=plugin/postpaid_upgrade_exec&plan_id='+pid,{credentials:'include'})
         .then(function(){window.location.href=appUrl+'/?_route=plugin/postpaid_page'})
         .catch(function(){showToast('Gagal upgrade','error');if(btn){hideDots(btn);btn.style.minWidth=''}});

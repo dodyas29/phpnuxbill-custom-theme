@@ -29,6 +29,8 @@
 
     {if isset($notify)}<meta id="notify-data" data-msg="{$notify|escape}" data-type="{if $notify_t == 's'}success{else}error{/if}">{/if}
 
+    <a href="{$app_url}/?_route=home" class="in-back stg"><i class="bi bi-chevron-left"></i> Kembali</a>
+
     {if $active && $activePlan}
 
         {if $only_up == 'yes'}
