@@ -367,6 +367,22 @@
         </div>
     </div>
 
+    </div>
+
+    <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="rechargeModal" style="max-height:55vh">
+        <div class="offcanvas-header flex-column"></div>
+        <div class="offcanvas-body">
+            <div id="rechargeSkel">
+                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
+                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-md h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
+                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
+                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-lg h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
+                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
+            </div>
+            <div id="rechargeList"></div>
+        </div>
+    </div>
+
     <div class="tc" id="toastContainer"></div>
 
     {if isset($hostname) && $hchap == 'true' && $_c['hs_auth_method'] == 'hchap'}
@@ -424,8 +440,15 @@
             // Buttons
             var b1=document.getElementById('sklBtn1');
             if(b1){var h1=appUrl+'/index.php?_route=order/package',l1='<i class="bi bi-cart3"></i> '+L.buy;
-                if(p){h1=appUrl+'/index.php?_route=home&'+(p.status==='on'?'recharge':'extend')+'='+p.id;l1='<i class="bi bi-arrow-repeat"></i> '+(p.status==='on'?L.recharge:L.extend)}
-                b1.outerHTML='<a href="'+h1+'" class="hero-btn p">'+l1+'</a>'}
+                if(p){
+                    if(p.status==='on'){
+                        h1='javascript:void(0)';l1='<i class=\"bi bi-arrow-repeat\"></i> '+L.recharge;
+                        b1.outerHTML='<a href=\"'+h1+'\" class=\"hero-btn p\" onclick=\"openRechargeModal('+p.id+')\">'+l1+'</a>'
+                    }else{
+                        h1=appUrl+'/index.php?_route=home&extend='+p.id;l1='<i class=\"bi bi-arrow-repeat\"></i> '+L.extend;
+                        b1.outerHTML='<a href=\"'+h1+'\" class=\"hero-btn p\">'+l1+'</a>'
+                    }
+                }else{b1.outerHTML='<a href=\"'+h1+'\" class=\"hero-btn p\">'+l1+'</a>'}}
 
             var b2=document.getElementById('sklBtn2');
             if(b2)b2.outerHTML='<a href="'+appUrl+'/index.php?_route=order/balance" class="hero-btn s"><i class="bi bi-plus-circle"></i> {/literal}{Lang::T('Top Up')|escape}{literal}</a>'
@@ -608,6 +631,32 @@
             ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'#18181b',titleColor:'#a1a1aa',bodyColor:'#fafafa',borderColor:'#27272a',borderWidth:1,padding:10,titleFont:{size:10},bodyFont:{size:11},displayColors:true,boxPadding:3,callbacks:{label:function(c){return c.dataset.label+': '+c.raw+' GB'}}}},scales:{x:{display:true,border:{display:false},grid:{display:false},ticks:{color:'#71717a',font:{size:8},maxTicksLimit:6,align:'center'}},y:{display:false,border:{display:false},grid:{display:false},ticks:{display:false}}}}});
         }
         function showTransfer(){var b=bootstrap.Offcanvas.getInstance(document.getElementById('menuSheet'));if(b)b.hide();setTimeout(function(){new bootstrap.Offcanvas(document.getElementById('transferSheet')).show()},300)}
+
+        var rechargeModal=null,rechargeId=null;
+        function openRechargeModal(rid){
+            rechargeId=rid;
+            if(!rechargeModal)rechargeModal=new bootstrap.Offcanvas(document.getElementById('rechargeModal'));
+            document.getElementById('rechargeSkel').style.display='block';
+            document.getElementById('rechargeList').innerHTML='';
+            rechargeModal.show();
+            fetch(appUrl+'/ui/ui_custom/api/tripay_channels.php',{credentials:'include'})
+            .then(function(r){return r.json()}).then(function(d){
+                var h='';d.forEach(function(ch){
+                    var logo=ch.logo?'<img src=\"'+appUrl+'/ui/ui_custom/'+ch.logo+'\" onerror=\"this.style.display=\\\'none\\\';this.nextElementSibling.style.display=\\\'block\\\'\"><span style=\"display:none\">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
+                    h+='<div class=\"pay-modal-item\" onclick=\"selectRechargeChannel(\\\''+ch.id+'\\\')\"><div class=\"pay-modal-logo\" style=\"background:'+(ch.color||'#666')+'\">'+logo+'</div><span>'+ch.name+'</span><i class=\"bi bi-circle\"></i><i class=\"bi bi-check-circle-fill\"></i></div>';
+                });
+                document.getElementById('rechargeSkel').style.display='none';
+                document.getElementById('rechargeList').innerHTML=h;
+            });
+        }
+        function selectRechargeChannel(channel){
+            if(!rechargeId)return;
+            fetch(appUrl+'/ui/ui_custom/api/recharge_redirect.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({recharge_id:rechargeId,channel:channel})})
+            .then(function(r){return r.json()}).then(function(d){
+                if(d.url)window.location.href=appUrl+'/index.php'+d.url;
+                else showToast(d.error||'Gagal','error');
+            });
+        }
 
         document.addEventListener('DOMContentLoaded',function(){
             fetchData();fetchDeviceData();
