@@ -114,3 +114,85 @@ function postpaid_page()
     $ui->assign('prepaidBws', $prepaidBws);
     $ui->display('postpaid.tpl');
 }
+
+function postpaid_upgrade_exec()
+{
+    _auth();
+    $user = User::_info();
+    $planId = (int) _req('plan_id');
+
+    if (!$planId) {
+        r2(U . 'plugin/postpaid_page', 'e', 'Invalid plan');
+    }
+
+    $plan = ORM::for_table('tbl_plans')
+        ->where('id', $planId)
+        ->where('enabled', 1)
+        ->find_one();
+    if (!$plan) {
+        r2(U . 'plugin/postpaid_page', 'e', 'Plan not found');
+    }
+
+    $active = ORM::for_table('tbl_user_recharges')
+        ->where('username', $user['username'])
+        ->where('type', 'PPPOE')
+        ->where('status', 'on')
+        ->find_one();
+
+    $total = (int) $plan['price'];
+    if ($active) {
+        $oldPlan = ORM::for_table('tbl_plans')->find_one($active['plan_id']);
+        if ($oldPlan && $oldPlan['validity_unit'] == 'Period') {
+            $total = _postpaid_calc_prorated($oldPlan, $plan);
+        }
+    }
+
+    Package::rechargeUser($user['id'], $plan['routers'] ?: 'Router Utama', $planId, 'postpaid', 'Upgrade');
+
+    $inv = ORM::for_table('tbl_customers_fields')
+        ->where('customer_id', $user['id'])
+        ->where('field_name', 'Invoice')
+        ->find_one();
+    if ($inv) {
+        $inv->field_value = $total;
+        $inv->save();
+    } else {
+        $inv = ORM::for_table('tbl_customers_fields')->create();
+        $inv->customer_id = $user['id'];
+        $inv->field_name = 'Invoice';
+        $inv->field_value = $total;
+        $inv->save();
+    }
+
+    r2(U . 'plugin/postpaid_page', 's', 'Paket berhasil diupgrade. Invoice: Rp ' . number_format($total, 0, ',', '.'));
+}
+
+function _postpaid_calc_prorated($oldPlan, $newPlan)
+{
+    $dayExp = (int) ($oldPlan['expired_date'] ?: 20);
+    $today = new DateTime(date('Y-m-d'));
+    $d = (int) $today->format('d');
+
+    if ($d <= $dayExp) {
+        $prevMonth = clone $today;
+        $prevMonth->modify('-1 month');
+        $periodStart = new DateTime($prevMonth->format('Y-m-') . str_pad($dayExp, 2, '0', STR_PAD_LEFT));
+        $periodEnd = new DateTime($today->format('Y-m-') . str_pad($dayExp, 2, '0', STR_PAD_LEFT));
+    } else {
+        $periodStart = new DateTime($today->format('Y-m-') . str_pad($dayExp, 2, '0', STR_PAD_LEFT));
+        $nextMonth = clone $today;
+        $nextMonth->modify('+1 month');
+        $periodEnd = new DateTime($nextMonth->format('Y-m-') . str_pad($dayExp, 2, '0', STR_PAD_LEFT));
+    }
+
+    $daysInPeriod = (int) $periodStart->diff($periodEnd)->days;
+    if ($daysInPeriod <= 0) $daysInPeriod = 30;
+
+    $daysUsed = (int) $periodStart->diff($today)->days;
+    $daysRemaining = (int) $today->diff($periodEnd)->days;
+
+    $oldDaily = $oldPlan['price'] / $daysInPeriod;
+    $newDaily = $newPlan['price'] / $daysInPeriod;
+
+    return (int) round($oldDaily * $daysUsed + $newDaily * $daysRemaining);
+}

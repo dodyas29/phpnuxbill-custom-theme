@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="pp-pkg-price">{Lang::moneyFormat($plan['price'])}<small>per bulan</small></div>
-                    <a href="javascript:void(0)" class="tx-act pay" onclick="openPostpaidModal({$plan['id']})">Upgrade</a>
+                    <a href="javascript:void(0)" class="tx-act pay" onclick="postpaidUpgrade({$plan['id']})">Upgrade</a>
                 </div>
                 {/if}
             {/foreach}
