@@ -133,6 +133,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .pr-row input:focus{color:var(--tx)}
 .pr-val{font-size:.82rem;color:var(--t2);text-decoration:none;display:flex;align-items:center}
 .pr-top{border-radius:12px 12px 0 0;margin-bottom:0;border-bottom:none}
+.pr-top .pr-row:last-child{border-bottom:1px solid var(--bd)}
 .pr-bot{border-radius:0 0 12px 12px;border-top:none}
 
 .field-wrap{position:relative;background:var(--bg);border:2px solid var(--bd);border-radius:12px;transition:all .2s;margin-bottom:16px}
