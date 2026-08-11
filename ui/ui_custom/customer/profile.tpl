@@ -16,63 +16,62 @@
                 <input type="hidden" name="csrf_token" value="{$csrf_token}">
                 <input type="hidden" name="id" value="{$_user['id']}">
 
-                <div class="pr-card stg">
-                    <div class="pr-photo-wrap">
-                        {if strpos($_user['photo'], 'default') !== false}
-                        <img src="{$app_url}/{$UPLOAD_PATH}{$_user['photo']}" class="pr-photo" onerror="this.src='{$app_url}/{$UPLOAD_PATH}/user.default.jpg'">
-                        {else}
-                        <img src="{$app_url}/{$UPLOAD_PATH}{$_user['photo']}.thumb.jpg" class="pr-photo" onerror="this.src='{$app_url}/{$UPLOAD_PATH}/user.default.jpg'">
-                        {/if}
-                        <label class="pr-upload-label">
-                            <i class="bi bi-camera"></i> Ubah Foto
-                            <input type="file" name="photo" class="pr-upload" accept="image/*">
-                        </label>
+                <div class="pr-head stg">
+                    {if strpos($_user['photo'], 'default') !== false}
+                    <img src="{$app_url}/{$UPLOAD_PATH}{$_user['photo']}" class="pr-avatar" onerror="this.src='{$app_url}/{$UPLOAD_PATH}/user.default.jpg'">
+                    {else}
+                    <img src="{$app_url}/{$UPLOAD_PATH}{$_user['photo']}.thumb.jpg" class="pr-avatar" onerror="this.src='{$app_url}/{$UPLOAD_PATH}/user.default.jpg'">
+                    {/if}
+                    <div class="pr-head-info">
+                        <div class="pr-head-name">{$_user['fullname']}</div>
+                        <div class="pr-head-sub">{$_user['email']}</div>
                     </div>
+                    <label class="pr-upload-label">
+                        <i class="bi bi-camera"></i>
+                        <input type="file" name="photo" class="pr-upload" accept="image/*">
+                    </label>
                 </div>
 
-                <div class="pr-card stg">
-
-                    <div class="field-wrap">
-                        <span class="fl">{Lang::T('Username')}</span>
-                        <input type="text" value="{$_user['username']}" readonly>
+                <div class="pr-list stg">
+                    <label class="pr-row">
+                        <span>{Lang::T('Full Name')}</span>
+                        <input type="text" name="fullname" value="{$_user['fullname']}" required>
+                    </label>
+                    <label class="pr-row">
+                        <span>{Lang::T('Address')}</span>
+                        <input type="text" name="address" value="{$_user['address']}">
+                    </label>
+                    {if $_c['allow_phone_otp'] != 'yes'}
+                    <label class="pr-row">
+                        <span>{Lang::T('Phone Number')}</span>
+                        <input type="text" name="phonenumber" value="{$_user['phonenumber']}">
+                    </label>
+                    {else}
+                    <div class="pr-row">
+                        <span>{Lang::T('Phone Number')}</span>
+                        <a href="{Text::url('accounts/phone-update')}" class="pr-val">{$_user['phonenumber']} <i class="bi bi-chevron-right" style="font-size:.7rem;margin-left:4px"></i></a>
                     </div>
-
-                    <div class="field-wrap">
-                        <span class="fl">{Lang::T('Full Name')}</span>
-                        <input type="text" name="fullname" value="{$_user['fullname']}" required placeholder="{Lang::T('Full Name')}">
+                    {/if}
+                    {if $_c['allow_email_otp'] != 'yes'}
+                    <label class="pr-row">
+                        <span>{Lang::T('Email')}</span>
+                        <input type="text" name="email" value="{$_user['email']}">
+                    </label>
+                    {else}
+                    <div class="pr-row">
+                        <span>{Lang::T('Email')}</span>
+                        <a href="{Text::url('accounts/email-update')}" class="pr-val">{$_user['email']} <i class="bi bi-chevron-right" style="font-size:.7rem;margin-left:4px"></i></a>
                     </div>
-
-                    <div class="field-wrap">
-                        <span class="fl">{Lang::T('Address')}</span>
-                        <input type="text" name="address" value="{$_user['address']}" placeholder="{Lang::T('Address')}">
-                    </div>
-
-                    <div class="field-wrap">
-                        <span class="fl">{Lang::T('Phone Number')}</span>
-                        {if $_c['allow_phone_otp'] == 'yes'}
-                        <input type="text" value="{$_user['phonenumber']}" readonly>
-                        <a href="{Text::url('accounts/phone-update')}" class="pr-change-link"><i class="bi bi-pencil"></i></a>
-                        {else}
-                        <input type="text" name="phonenumber" value="{$_user['phonenumber']}" placeholder="{Lang::T('Phone Number')}">
-                        {/if}
-                    </div>
-
-                    <div class="field-wrap">
-                        <span class="fl">{Lang::T('Email')}</span>
-                        {if $_c['allow_email_otp'] == 'yes'}
-                        <input type="text" value="{$_user['email']}" readonly>
-                        <a href="{Text::url('accounts/email-update')}" class="pr-change-link"><i class="bi bi-pencil"></i></a>
-                        {else}
-                        <input type="text" name="email" value="{$_user['email']}" placeholder="{Lang::T('Email')}">
-                        {/if}
-                    </div>
-
+                    {/if}
                     {if isset($customFields)}{$customFields}{/if}
-
-                    <button type="submit" class="vbtn" style="margin-top:8px"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
-                    <a href="{Text::url('accounts/change-password')}" class="vbtn" style="margin-top:10px;background:var(--bgc);color:var(--tx)"><i class="bi bi-key"></i> {Lang::T('Change Password')}</a>
-                    <a href="{Text::url('home')}" style="display:block;text-align:center;margin-top:16px;color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a>
+                    <a href="{Text::url('accounts/change-password')}" class="pr-row" style="text-decoration:none">
+                        <span>{Lang::T('Change Password')}</span>
+                        <span class="pr-val"><i class="bi bi-chevron-right" style="font-size:.7rem;margin-left:4px"></i></span>
+                    </a>
                 </div>
+
+                <button type="submit" class="vbtn stg" style="margin-top:24px"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
+                <a href="{Text::url('home')}" style="display:block;text-align:center;margin-top:14px;color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a>
             </form>
         </section>
     </div>
@@ -83,14 +82,5 @@
 
 {include file="components/_scripts_common.tpl"}
 
-    <script>
-        {literal}
-        document.querySelectorAll('.field-wrap input').forEach(function(input){
-            if(input.value)input.parentElement.classList.add('filled');
-            input.addEventListener('input',function(){if(this.value)this.parentElement.classList.add('filled');else this.parentElement.classList.remove('filled')});
-            input.addEventListener('animationstart',function(e){if(e.animationName==='onAutoFillStart')this.parentElement.classList.add('filled')});
-        });
-        {/literal}
-    </script>
 </body>
 </html>
