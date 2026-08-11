@@ -166,7 +166,7 @@ function pvRunLiveness(){
                 var ear=(pvEyeAspectRatio(leftEye)+pvEyeAspectRatio(rightEye))/2;
                 if(!blinkState&&ear<.23){blinkState=true;blinkCloseFrames=1}
                 else if(blinkState&&ear<.23){blinkCloseFrames++}
-                else if(blinkState&&ear>=.23&&blinkCloseFrames>=3){blinkState=false;blinkCount++}
+                else if(blinkState&&ear>=.23&&blinkCloseFrames>=2){blinkState=false;blinkCount++}
                 else if(blinkState&&ear>=.23){blinkState=false}
                 if(blinkCount>=1){
                     clearInterval(pvLivenessInterval);
