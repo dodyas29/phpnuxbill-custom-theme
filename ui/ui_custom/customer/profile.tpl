@@ -76,7 +76,7 @@
             <div class="offcanvas offcanvas-bottom os" tabindex="-1" id="pwModal" style="max-height:65vh">
                 <div class="offcanvas-header flex-column"></div>
                 <div class="offcanvas-body">
-                    <form action="{Text::url('accounts/change-password-post')}" method="post">
+                    <form onsubmit="changePassword(event)" id="pwForm">
                         <input type="hidden" name="csrf_token" value="{$csrf_token}">
                         <div class="field-wrap" style="margin-bottom:12px">
                             <span class="fl">{Lang::T('Current Password')}</span>
@@ -93,7 +93,7 @@
                             <input type="password" id="pwConfirm" name="cnpass" required placeholder="{Lang::T('Confirm New Password')}">
                             <button type="button" class="pw-toggle" onclick="togglePw('pwConfirm',this)"><i class="bi bi-eye-slash"></i></button>
                         </div>
-                        <button type="submit" class="vbtn" style="margin-top:16px"><i class="bi bi-check-lg"></i> {Lang::T('Save New Password')}</button>
+                        <button type="submit" class="vbtn" id="pwSubmit" style="margin-top:16px"><i class="bi bi-check-lg"></i> {Lang::T('Save New Password')}</button>
                     </form>
                 </div>
             </div>
@@ -108,6 +108,22 @@
 
     <script>
         {literal}
+        function changePassword(e){
+            e.preventDefault();
+            var btn=document.getElementById('pwSubmit');
+            btn.disabled=true;btn.innerHTML='Menyimpan...';
+            var data={
+                password:document.getElementById('pwCurrent').value,
+                npass:document.getElementById('pwNew').value,
+                cnpass:document.getElementById('pwConfirm').value
+            };
+            fetch(appUrl+'/ui/ui_custom/api/change_password.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+            .then(function(r){return r.json()}).then(function(d){
+                if(d.success)window.location.href=d.redirect;
+                else{btn.disabled=false;btn.innerHTML='<i class=\"bi bi-check-lg\"></i> {/literal}{Lang::T('Save New Password')}{literal}';showToast(d.message,'error')}
+            }).catch(function(){btn.disabled=false;btn.innerHTML='<i class=\"bi bi-check-lg\"></i> {/literal}{Lang::T('Save New Password')}{literal}';showToast('Gagal','error')});
+        }
+
         var pwModal=null;
         function openPwModal(){
             var pw=document.getElementById('pwCurrent'),pn=document.getElementById('pwNew'),pc=document.getElementById('pwConfirm');
