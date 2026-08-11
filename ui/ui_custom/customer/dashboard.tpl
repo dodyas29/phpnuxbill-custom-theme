@@ -164,6 +164,17 @@
         .ns-submit.danger{background:var(--c6);color:#fff}.ns-submit.danger:disabled{opacity:.3;cursor:not-allowed}
         .ns-submit.danger:not(:disabled):active{filter:brightness(.9)}
 
+        .rch-skel{display:flex;align-items:center;gap:14px;padding:14px 16px}
+        .rch-item{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;transition:all .1s;border-bottom:1px solid var(--bd)}
+        .rch-item:last-child{border-bottom:none}
+        .rch-item:active{background:var(--bgc)}
+        .rch-logo{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;font-size:.7rem;font-weight:800;color:#fff}
+        .rch-logo img{width:100%;height:100%;object-fit:contain}
+        .rch-name{flex:1;font-size:.85rem;font-weight:500}
+        .rch-check{color:var(--c1);font-size:1rem;flex-shrink:0;display:none}
+        .rch-item.selected .rch-name{color:var(--c1)}
+        .rch-item.selected .rch-check{display:block}
+
         {/literal}
     </style>
 </head>
@@ -373,11 +384,11 @@
         <div class="offcanvas-header flex-column"></div>
         <div class="offcanvas-body">
             <div id="rechargeSkel">
-                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
-                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-md h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
-                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
-                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-lg h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
-                <div class="pay-modal-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><span class="skl skl-bright w-xs h-xs" style="margin-left:auto"></span></div>
+                <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+                <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-md h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+                <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+                <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-lg h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
+                <div class="rch-skel"><span class="skl skl-bright" style="width:36px;height:36px;border-radius:8px"></span><span class="skl skl-bright w-sm h-sm"></span><i class="skl skl-bright" style="width:18px;height:18px;border-radius:50%;margin-left:auto"></i></div>
             </div>
             <div id="rechargeList"></div>
         </div>
@@ -643,7 +654,7 @@
             .then(function(r){return r.json()}).then(function(d){
                 var h='';d.forEach(function(ch){
                     var logo=ch.logo?'<img src=\"'+appUrl+'/ui/ui_custom/'+ch.logo+'\" onerror=\"this.style.display=\\\'none\\\';this.nextElementSibling.style.display=\\\'block\\\'\"><span style=\"display:none\">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
-                    h+='<div class=\"pay-modal-item\" onclick=\"selectRechargeChannel(\\\''+ch.id+'\\\')\"><div class=\"pay-modal-logo\" style=\"background:'+(ch.color||'#666')+'\">'+logo+'</div><span>'+ch.name+'</span><i class=\"bi bi-circle\"></i><i class=\"bi bi-check-circle-fill\"></i></div>';
+                    h+='<div class=\"rch-item\" onclick=\"selectRechargeChannel(\\\''+ch.id+'\\\')\"><span class=\"rch-logo\" style=\"background:'+(ch.color||'#666')+'\">'+logo+'</span><span class=\"rch-name\">'+ch.name+'</span><i class=\"bi bi-check-circle-fill rch-check\"></i></div>';
                 });
                 document.getElementById('rechargeSkel').style.display='none';
                 document.getElementById('rechargeList').innerHTML=h;
