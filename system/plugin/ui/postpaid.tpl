@@ -17,7 +17,12 @@
 
 <header class="ab">
     <div class="ab-l">
-        <div class="ab-logo"><img src="{$app_url}/ui/ui/images/logo.png" class="ab-logo-img" alt=""><span>{$_c['CompanyName']}</span></div>
+        <div class="ab-logo">
+            {if isset($_c['login_page_logo']) && $_c['login_page_logo'] != ''}
+                <img src="{$app_url}/{$UPLOAD_PATH}/{$_c['login_page_logo']}" class="ab-logo-img" onerror="this.style.display='none'">
+            {/if}
+            <span>{$_c['CompanyName']|truncate:14:""}</span>
+        </div>
     </div>
     <div class="ab-r">
         {if $_c['enable_balance'] == 'yes'}<span class="ab-chip"><i class="bi bi-wallet2"></i> <span class="skl skl-bright h-sm pill" style="width:65px" id="abBal"></span></span>{/if}
