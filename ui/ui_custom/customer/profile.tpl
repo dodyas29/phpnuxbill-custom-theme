@@ -2,10 +2,6 @@
 <html lang="en" data-theme="dark">
 <head>
 {include file="components/_head_common.tpl"}
-    <style>
-        .pr-top{border-radius:12px 12px 0 0;margin-bottom:0;border-bottom:none}
-        .pr-bot{border-radius:0 0 12px 12px;border-top:none}
-    </style>
 </head>
 <body>
 {include file="components/_header.tpl"}
