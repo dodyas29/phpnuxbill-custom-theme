@@ -4,8 +4,11 @@ $root_path = realpath(__DIR__ . '/../../../');
 $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] ?? 'localhost:8000';
 $_SERVER['SERVER_PORT'] = $_SERVER['SERVER_PORT'] ?? '8000';
 $_SERVER['SCRIPT_NAME'] = '/index.php';
+
 require_once $root_path . '/config.php';
 require_once $root_path . '/system/vendor/autoload.php';
+
+$root_path_global = $root_path;
 require_once $root_path . '/init.php';
 
 header('Content-Type: application/json; charset=utf-8');
@@ -48,23 +51,26 @@ $d = ORM::for_table('tbl_customers')->find_one($uid);
 $d->password = $npass;
 $d->save();
 
-$turs = ORM::for_table('tbl_user_recharges')->where('customer_id', $uid)->find_many();
-foreach ($turs as $tur) {
-    if ($tur['status'] == 'on') {
-        $p = ORM::for_table('tbl_plans')->where('id', $tur['plan_id'])->find_one();
-        if ($p) {
-            $dvc = Package::getDevice($p);
-            if ($_app_stage != 'demo' && file_exists($dvc)) {
-                try {
-                    require_once $dvc;
-                    (new $p['device'])->add_customer($user, $p);
-                } catch (\Throwable $e) {}
+User::removeCookie();
+session_destroy();
+
+ignore_user_abort(true);
+register_shutdown_function(function () use ($uid, $user, $root_path_global) {
+    $turs = ORM::for_table('tbl_user_recharges')->where('customer_id', $uid)->find_many();
+    foreach ($turs as $tur) {
+        if ($tur['status'] == 'on') {
+            $p = ORM::for_table('tbl_plans')->where('id', $tur['plan_id'])->find_one();
+            if ($p) {
+                $dvc = Package::getDevice($p);
+                if ($_app_stage != 'demo' && file_exists($dvc)) {
+                    try {
+                        require_once $dvc;
+                        (new $p['device'])->add_customer($user, $p);
+                    } catch (\Throwable $e) {}
+                }
             }
         }
     }
-}
-
-User::removeCookie();
-session_destroy();
+});
 
 echo json_encode(['success' => true, 'message' => 'Password changed successfully', 'redirect' => APP_URL . '/?_route=login']);
