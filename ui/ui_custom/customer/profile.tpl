@@ -71,15 +71,18 @@
                     <div id="pwWrap" style="display:none;padding:16px 16px 0">
                         <div class="field-wrap" style="margin-bottom:12px">
                             <span class="fl">{Lang::T('Current Password')}</span>
-                            <input type="password" name="password" form="pwForm" required placeholder="{Lang::T('Current Password')}">
+                            <input type="password" id="pwCurrent" name="password" form="pwForm" required placeholder="{Lang::T('Current Password')}">
+                            <button type="button" class="pw-toggle" onclick="togglePw('pwCurrent',this)"><i class="bi bi-eye-slash"></i></button>
                         </div>
                         <div class="field-wrap" style="margin-bottom:12px">
                             <span class="fl">{Lang::T('New Password')}</span>
-                            <input type="password" name="newpassword" form="pwForm" required placeholder="{Lang::T('New Password')}">
+                            <input type="password" id="pwNew" name="newpassword" form="pwForm" required placeholder="{Lang::T('New Password')}">
+                            <button type="button" class="pw-toggle" onclick="togglePw('pwNew',this)"><i class="bi bi-eye-slash"></i></button>
                         </div>
                         <div class="field-wrap">
                             <span class="fl">{Lang::T('Confirm New Password')}</span>
-                            <input type="password" name="cnewpassword" form="pwForm" required placeholder="{Lang::T('Confirm New Password')}">
+                            <input type="password" id="pwConfirm" name="cnewpassword" form="pwForm" required placeholder="{Lang::T('Confirm New Password')}">
+                            <button type="button" class="pw-toggle" onclick="togglePw('pwConfirm',this)"><i class="bi bi-eye-slash"></i></button>
                         </div>
                     </div>
                 </div>
@@ -108,6 +111,16 @@
             pw.style.display=open?'none':'block';
             icon.style.transform=open?'rotate(0)':'rotate(180deg)';
         }
+        function togglePw(id,btn){
+            var el=document.getElementById(id),icon=btn.querySelector('i');
+            if(el.type==='password'){el.type='text';icon.className='bi bi-eye'}
+            else{el.type='password';icon.className='bi bi-eye-slash'}
+        }
+        document.querySelectorAll('.field-wrap input').forEach(function(input){
+            if(input.value)input.parentElement.classList.add('filled');
+            input.addEventListener('input',function(){if(this.value)this.parentElement.classList.add('filled');else this.parentElement.classList.remove('filled')});
+            input.addEventListener('animationstart',function(e){if(e.animationName==='onAutoFillStart')this.parentElement.classList.add('filled')});
+        });
         {/literal}
     </script>
 </body>
