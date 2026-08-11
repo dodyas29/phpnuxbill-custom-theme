@@ -59,6 +59,17 @@ document.addEventListener('DOMContentLoaded',function(){
     });
 });
 
+document.addEventListener('click',function(e){
+    var el=e.target.closest('.hero-btn.s');
+    if(!el||el.dataset.dots)return;
+    e.preventDefault();
+    el.dataset.dots='1';
+    el.style.minWidth=el.offsetWidth+'px';
+    el.style.minHeight=el.offsetHeight+'px';
+    showDots(el);
+    setTimeout(function(){window.location.href=el.href},400);
+});
+
 if(typeof userLang!=='undefined')setCookie('user_language',userLang,365);
 
 fetch(appUrl+'/ui/ui_custom/customer/api/plan.php',{credentials:'include'}).then(function(r){return r.json()}).then(function(d){if(typeof d.balance_formatted!=='undefined'){var ab=document.getElementById('abBal');if(ab){ab.className='';ab.style.cssText='';ab.textContent=d.balance_formatted}}}).catch(function(){});
