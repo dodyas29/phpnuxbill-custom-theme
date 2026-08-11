@@ -71,17 +71,17 @@
                     <div id="pwWrap" style="display:none;padding:16px 16px 0">
                         <div class="field-wrap" style="margin-bottom:12px">
                             <span class="fl">{Lang::T('Current Password')}</span>
-                            <input type="password" id="pwCurrent" name="password" form="pwForm" required placeholder="{Lang::T('Current Password')}">
+                            <input type="password" id="pwCurrent" name="password" required placeholder="{Lang::T('Current Password')}">
                             <button type="button" class="pw-toggle" onclick="togglePw('pwCurrent',this)"><i class="bi bi-eye-slash"></i></button>
                         </div>
                         <div class="field-wrap" style="margin-bottom:12px">
                             <span class="fl">{Lang::T('New Password')}</span>
-                            <input type="password" id="pwNew" name="newpassword" form="pwForm" required placeholder="{Lang::T('New Password')}">
+                            <input type="password" id="pwNew" name="newpassword" required placeholder="{Lang::T('New Password')}">
                             <button type="button" class="pw-toggle" onclick="togglePw('pwNew',this)"><i class="bi bi-eye-slash"></i></button>
                         </div>
                         <div class="field-wrap">
                             <span class="fl">{Lang::T('Confirm New Password')}</span>
-                            <input type="password" id="pwConfirm" name="cnewpassword" form="pwForm" required placeholder="{Lang::T('Confirm New Password')}">
+                            <input type="password" id="pwConfirm" name="cnewpassword" required placeholder="{Lang::T('Confirm New Password')}">
                             <button type="button" class="pw-toggle" onclick="togglePw('pwConfirm',this)"><i class="bi bi-eye-slash"></i></button>
                         </div>
                     </div>
@@ -116,6 +116,11 @@
             if(el.type==='password'){el.type='text';icon.className='bi bi-eye'}
             else{el.type='password';icon.className='bi bi-eye-slash'}
         }
+        document.querySelectorAll('#pwWrap input[type=password]').forEach(function(i){
+            i.addEventListener('keydown',function(e){
+                if(e.key==='Enter'){e.preventDefault();document.getElementById('pwForm').submit()}
+            });
+        });
         document.querySelectorAll('.field-wrap input').forEach(function(input){
             if(input.value)input.parentElement.classList.add('filled');
             input.addEventListener('input',function(){if(this.value)this.parentElement.classList.add('filled');else this.parentElement.classList.remove('filled')});
