@@ -483,6 +483,9 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .pp-plans-back{font-size:.66rem;font-weight:600;color:var(--t2);cursor:pointer;background:none;border:none;font-family:var(--ff);display:flex;align-items:center;gap:4px;padding:4px 0}
 .pp-upgrade-info{font-size:.62rem;color:var(--t3);text-align:center;margin-bottom:12px;line-height:1.5;background:var(--bg);border-radius:var(--r2);padding:8px 12px}
 .pp-upgrade-info strong{color:var(--c5)}
+.pp-alert{display:flex;align-items:flex-start;gap:10px;background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.2);border-radius:var(--r2);padding:12px 14px;margin-bottom:16px;font-size:.7rem;color:var(--tx);line-height:1.5}
+.pp-alert i{font-size:1.1rem;color:var(--c5);flex-shrink:0;margin-top:1px}
+.pp-alert strong{color:var(--c5)}
 .pp-pkg{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r2);padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px;transition:all .15s}
 .pp-pkg:active{background:var(--bgc)}
 .pp-pkg.current{border-color:var(--c4);background:rgba(52,211,153,.04)}

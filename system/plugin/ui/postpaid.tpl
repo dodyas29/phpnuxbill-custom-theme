@@ -31,6 +31,13 @@
 
     {if $active && $activePlan}
 
+        {if $only_up == 'yes'}
+        <div class="pp-alert stg">
+            <i class="bi bi-info-circle-fill"></i>
+            <span>Upgrade pertengahan periode? Biaya dihitung <strong>prorated</strong>. Hanya membayar selisih biaya paket lama yang sudah terpakai + biaya paket baru untuk sisa hari.</span>
+        </div>
+        {/if}
+
         <section>
             <div class="sh stg"><h2>Current Package</h2></div>
             <div class="pp-pkg current stg">
@@ -46,12 +53,6 @@
             </div>
 
             <div class="sh stg"><h2>Upgrade To</h2></div>
-            {if $only_up == 'yes'}
-            <div class="pp-upgrade-info stg">
-                Upgrade pertengahan periode? Biaya dihitung <strong>prorated</strong>.
-                Hanya membayar selisih biaya paket lama yang sudah terpakai + biaya paket baru untuk sisa hari.
-            </div>
-            {/if}
 
             {assign var="found" value=false}
             {foreach $postpaidPlans as $plan}
