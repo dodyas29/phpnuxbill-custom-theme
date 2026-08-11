@@ -107,7 +107,8 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 
 .oh-month{font-size:.62rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;padding:20px 0 8px;text-align:center}
 .oh-month::after{content:'';display:block;height:2px;margin:8px auto 0;width:40px;background:var(--c1);border-radius:1px}
-.oh-row{display:flex;align-items:center;gap:10px;padding:13px 16px;text-decoration:none;color:var(--tx);border-bottom:1px solid var(--bd);transition:all .1s}
+.oh-row{display:flex;align-items:center;gap:10px;padding:13px 0;text-decoration:none;color:var(--tx);border-bottom:1px solid var(--bd);transition:all .1s}
+.oh-skel{display:flex;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid var(--bd)}
 .oh-row:active{background:var(--bgc)}
 .oh-plan{flex:1;font-size:.8rem;font-weight:600;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .oh-price{font-size:.76rem;font-weight:700;color:var(--c1);flex-shrink:0;min-width:60px;text-align:right}
