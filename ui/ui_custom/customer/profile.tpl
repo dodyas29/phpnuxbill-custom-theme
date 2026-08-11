@@ -2,6 +2,10 @@
 <html lang="en" data-theme="dark">
 <head>
 {include file="components/_head_common.tpl"}
+    <style>
+        .pr-top{border-radius:12px 12px 0 0;margin-bottom:0;border-bottom:none}
+        .pr-bot{border-radius:0 0 12px 12px;border-top:none}
+    </style>
 </head>
 <body>
 {include file="components/_header.tpl"}
@@ -32,7 +36,7 @@
                     </label>
                 </div>
 
-                <div class="pr-list stg">
+                <div class="pr-list stg pr-top">
                     <label class="pr-row">
                         <span>{Lang::T('Full Name')}</span>
                         <input type="text" name="fullname" value="{$_user['fullname']}" required>
@@ -67,7 +71,7 @@
                 </div>
             </form>
 
-            <div class="pr-list stg">
+            <div class="pr-list stg pr-bot">
                 <div class="pr-row" onclick="togglePwForm()">
                     <span>{Lang::T('Change Password')}</span>
                     <span class="pr-val"><i class="bi bi-chevron-down pr-pw-icon" style="font-size:.7rem;margin-left:4px;transition:transform .2s"></i></span>
