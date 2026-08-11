@@ -88,7 +88,7 @@
                 </div>
 
                 <button type="submit" class="vbtn stg" style="margin-top:24px"><i class="bi bi-check-lg"></i> {Lang::T('Save Changes')}</button>
-                <a href="{Text::url('home')}" style="display:block;text-align:center;margin-top:14px;color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a>
+                <div style="text-align:center;margin-top:14px"><a href="{Text::url('home')}" style="color:var(--t3);text-decoration:none;font-size:.78rem;font-weight:500">{Lang::T('Cancel')}</a></div>
             </form>
 
     <form action="{Text::url('accounts/change-password-post')}" method="post" id="pwForm" style="display:none">
