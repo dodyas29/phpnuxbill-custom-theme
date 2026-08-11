@@ -229,9 +229,8 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
         /* ====== NETWORK STATUS ====== */
         .ns-card{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r3);padding:20px;margin-bottom:10px}
 .ns-card.flat{background:none;border:none;border-radius:0;padding:0;box-shadow:none;margin-bottom:0}
-.ns-card.flat>*+*{border-top:1px solid var(--bd);padding-top:14px}
-.ns-card.flat>.ns-top{border-top:none;padding-top:0}
-.ns-card.flat>.ns-btn-sesuaikan{margin-top:16px;border-top:1px solid var(--bd);padding-top:14px}
+.ns-card.flat>*+*{padding-top:14px}
+.ns-card.flat>.ns-btn-sesuaikan{margin-top:16px;padding-top:14px}
         .ns-top{display:flex;align-items:center;gap:10px;margin-bottom:18px}
         .ns-device-icon{width:40px;height:40px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--c1);flex-shrink:0;border:1px solid var(--bd)}
         .ns-device-info{min-width:0;flex:1}
