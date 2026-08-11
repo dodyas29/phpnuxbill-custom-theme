@@ -22,15 +22,15 @@
                     </div>
                 </div>
                 <div class="hero-plan-line">
-                    <span class="skl skl-bright w-sm" style="width:130px;height:15px" id="sklPlan"></span>
-                    <span class="skl skl-bright w-xs h-md pill" style="width:60px" id="sklBw"></span>
-                    <span class="skl skl-bright w-xs" style="width:80px;margin-left:auto;height:15px" id="sklPlanPrice"></span>
+                    <span class="skl skl-bright w-sm" style="width:clamp(100px,40vw,130px);height:15px" id="sklPlan"></span>
+                    <span class="skl skl-bright w-xs h-md pill" style="width:clamp(44px,16vw,60px)" id="sklBw"></span>
+                    <span class="skl skl-bright w-xs" style="width:clamp(60px,20vw,80px);margin-left:auto;height:15px" id="sklPlanPrice"></span>
                 </div>
                 <div class="hero-divider"></div>
                 <div class="hero-numbers">
-                    <div class="hero-num"><div class="hero-num-label">{Lang::T('Last Payment')}</div><div class="hero-num-value"><span class="skl skl-bright" style="width:95px;height:13px" id="sklPayDate"></span></div></div>
+                    <div class="hero-num"><div class="hero-num-label">{Lang::T('Last Payment')}</div><div class="hero-num-value"><span class="skl skl-bright" style="width:clamp(70px,25vw,95px);height:13px" id="sklPayDate"></span></div></div>
                     <div class="hero-num"><div class="hero-num-label">{Lang::T('Expired')}</div><div class="hero-num-value"><span class="skl skl-bright" style="width:95px;height:13px" id="sklExpired"></span></div></div>
-                    <div class="hero-num"><div class="hero-num-label">{Lang::T('Auto Renewal')}</div><div class="hero-num-value"><span class="skl skl-bright w-xs h-md pill" style="width:44px" id="sklAutoRenewal"></span></div></div>
+                    <div class="hero-num"><div class="hero-num-label">{Lang::T('Auto Renewal')}</div><div class="hero-num-value"><span class="skl skl-bright w-xs h-md pill" style="width:clamp(36px,12vw,44px)" id="sklAutoRenewal"></span></div></div>
                 </div>
                 <div class="hero-actions">
                     <span class="skl skl-bright w-full pill" style="flex:1;height:36px" id="sklBtn1"></span>
