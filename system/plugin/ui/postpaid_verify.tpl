@@ -149,7 +149,7 @@ function pvRunLiveness(){
     var canvas=document.getElementById('pvCanvas');
     var displaySize={width:video.offsetWidth,height:video.offsetHeight};
     faceapi.matchDimensions(canvas,displaySize);
-    var blinkCount=0,blinkState=false;
+    var blinkCount=0,blinkState=false,blinkCloseFrames=0;
     pvLivenessInterval=setInterval(async function(){
             try{
                 var detections=await faceapi.detectAllFaces(video,new faceapi.TinyFaceDetectorOptions({inputSize:320,scoreThreshold:.4})).withFaceLandmarks();
@@ -163,8 +163,10 @@ function pvRunLiveness(){
                 var leftEye=landmarks.getLeftEye();
                 var rightEye=landmarks.getRightEye();
                 var ear=(pvEyeAspectRatio(leftEye)+pvEyeAspectRatio(rightEye))/2;
-                if(!blinkState&&ear<.23){blinkState=true}
-                else if(blinkState&&ear>=.23){blinkState=false;blinkCount++}
+                if(!blinkState&&ear<.23){blinkState=true;blinkCloseFrames=1}
+                else if(blinkState&&ear<.23){blinkCloseFrames++}
+                else if(blinkState&&ear>=.23&&blinkCloseFrames>=3){blinkState=false;blinkCount++}
+                else if(blinkState&&ear>=.23){blinkState=false}
                 if(blinkCount>=1){
                     clearInterval(pvLivenessInterval);
                     pvStopStream();
