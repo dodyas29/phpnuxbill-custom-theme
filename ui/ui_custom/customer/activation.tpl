@@ -237,9 +237,18 @@
             qrModal.show();
         }
 
+        function showDots(el){el._old=el.innerHTML;el.innerHTML='<div class="btn-dots" style="display:flex;gap:6px;justify-content:center"><span style="width:8px;height:8px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.15s"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.3s"></span></div>';el.disabled=true}
+        function hideDots(el){el.innerHTML=el._old;el.disabled=false}
+
         function proceedPayment(){
             if(!selectedChannel){showToast('Pilih metode pembayaran','error');return}
-            showToast('Mengarahkan ke pembayaran...','success');
+            if(!selectedPackageId){showToast('Pilih paket','error');return}
+            showDots(document.getElementById('realBtn'));
+            fetch(appUrl+'/ui/ui_custom/api/voucher_payment.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan_id:selectedPackageId,channel:selectedChannel})})
+            .then(function(r){return r.json()}).then(function(d){
+                if(d.success&&d.url)window.location.href=d.url;
+                else showToast(d.error||'Gagal','error');
+            }).catch(function(){showToast('Gagal','error')});
         }
         {/literal}
     </script>
