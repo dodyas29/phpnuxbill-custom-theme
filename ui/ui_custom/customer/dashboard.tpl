@@ -480,14 +480,16 @@
             .then(function(r){return r.json()}).then(function(d){
                 var h='';d.forEach(function(ch){
                     var logo=ch.logo?'<img src=\"'+appUrl+'/ui/ui_custom/'+ch.logo+'\" onerror=\"this.style.display=\\\'none\\\';this.nextElementSibling.style.display=\\\'block\\\'\"><span style=\"display:none\">'+ch.init.substring(0,2)+'</span>':'<span>'+ch.init.substring(0,2)+'</span>';
-                    h+='<div class=\"rch-item\" onclick=\"selectRechargeChannel(\\\''+ch.id+'\\\')\"><span class=\"rch-logo\" style=\"background:'+(ch.color||'#666')+'\">'+logo+'</span><span class=\"rch-name\">'+ch.name+'</span><i class=\"bi bi-check-circle-fill rch-check\"></i></div>';
+                    h+='<div class=\"rch-item\" onclick=\"selectRechargeChannel(this,\\\''+ch.id+'\\\')\"><span class=\"rch-logo\" style=\"background:'+(ch.color||'#666')+'\">'+logo+'</span><span class=\"rch-name\">'+ch.name+'</span><i class=\"bi bi-chevron-right rch-arrow\"></i></div>';
                 });
                 document.getElementById('rechargeSkel').style.display='none';
                 document.getElementById('rechargeList').innerHTML=h;
             });
         }
-        function selectRechargeChannel(channel){
+        function selectRechargeChannel(el,channel){
             if(!rechargeId)return;
+            el.classList.add('loading');
+            el.querySelector('.rch-arrow').outerHTML='<span class=\"btn-dots\" style=\"display:flex;gap:4px\"><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.15s\"></span><span style=\"width:6px;height:6px;border-radius:50%;background:var(--c1);animation:dotJump .5s infinite alternate;animation-delay:.3s\"></span></span>';
             fetch(appUrl+'/ui/ui_custom/api/recharge_redirect.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({recharge_id:rechargeId,channel:channel})})
             .then(function(r){return r.json()}).then(function(d){
                 if(d.url)window.location.href=appUrl+'/index.php'+d.url;
