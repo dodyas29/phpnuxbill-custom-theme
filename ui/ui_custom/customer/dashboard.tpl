@@ -23,12 +23,12 @@
                 </div>
                 <div class="hero-plan-line">
                     <div class="hero-num hero-num-wide"><div class="hero-num-label">Paket Internet</div><div class="hero-num-value"><span class="skl skl-bright w-sm" style="width:clamp(100px,40vw,130px);height:13px" id="sklPlan"></span><span class="skl skl-bright w-xs h-md pill" style="width:clamp(44px,16vw,60px);margin-left:8px" id="sklBw"></span></div></div>
-                    <div class="hero-num" style="margin-left:auto"><div class="hero-num-label">Harga</div><div class="hero-num-value"><span class="skl skl-bright w-xs" style="width:clamp(60px,20vw,80px);height:13px" id="sklPlanPrice"></span></div></div>
+                    <div class="hero-num"><div class="hero-num-label">Harga</div><div class="hero-num-value"><span class="skl skl-bright w-xs" style="width:clamp(60px,20vw,80px);height:13px" id="sklPlanPrice"></span></div></div>
                 </div>
                 <div class="hero-divider"></div>
                 <div class="hero-numbers">
                     <div class="hero-num hero-num-wide"><div class="hero-num-label">Periode</div><div class="hero-num-value"><span class="skl skl-bright" style="width:clamp(140px,45vw,180px);height:13px" id="sklPeriod"></span></div></div>
-                    <div class="hero-num" style="margin-left:auto"><div class="hero-num-label">Perpanjang</div><div class="hero-num-value"><span class="skl skl-bright w-xs h-md pill" style="width:clamp(36px,12vw,44px)" id="sklAutoRenewal"></span></div></div>
+                    <div class="hero-num"><div class="hero-num-label">Perpanjang</div><div class="hero-num-value"><span class="skl skl-bright w-xs h-md pill" style="width:clamp(36px,12vw,44px)" id="sklAutoRenewal"></span></div></div>
                 </div>
                 <div class="hero-actions">
                     <span class="skl skl-bright w-full pill" style="flex:1;height:36px" id="sklBtn1"></span>
