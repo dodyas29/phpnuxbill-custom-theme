@@ -28,8 +28,7 @@
                 </div>
                 <div class="hero-divider"></div>
                 <div class="hero-numbers">
-                    <div class="hero-num"><div class="hero-num-label">{Lang::T('Last Payment')}</div><div class="hero-num-value"><span class="skl skl-bright" style="width:clamp(70px,25vw,95px);height:13px" id="sklPayDate"></span></div></div>
-                    <div class="hero-num"><div class="hero-num-label">{Lang::T('Expired')}</div><div class="hero-num-value"><span class="skl skl-bright" style="width:95px;height:13px" id="sklExpired"></span></div></div>
+                    <div class="hero-num hero-num-wide"><div class="hero-num-label">Periode</div><div class="hero-num-value"><span class="skl skl-bright" style="width:clamp(140px,45vw,180px);height:13px" id="sklPeriod"></span></div></div>
                     <div class="hero-num"><div class="hero-num-label">{Lang::T('Auto Renewal')}</div><div class="hero-num-value"><span class="skl skl-bright w-xs h-md pill" style="width:clamp(36px,12vw,44px)" id="sklAutoRenewal"></span></div></div>
                 </div>
                 <div class="hero-actions">
@@ -280,10 +279,14 @@
             var hs=document.getElementById('heroStatus');
             if(hs&&p)hs.innerHTML='<span class="status-dot '+(p.status==='on'?'on':'off')+'"></span><span>'+(p.status==='on'?L.active:L.expired)+'</span>';
 
-            // Expired + Last Payment
-            var se=document.getElementById('sklExpired'),sp=document.getElementById('sklPayDate');
-            if(se){se.className='';se.style.cssText='';se.textContent=p?p.expiration_formatted||p.expiration:'-'}
-            if(sp){sp.className='';sp.style.cssText='';sp.textContent=d.last_payment?d.last_payment.date:'-'}
+            // Period (Last Payment - Expired)
+            var sp=document.getElementById('sklPeriod');
+            if(sp){
+                sp.className='';sp.style.cssText='';
+                var payDate=d.last_payment?d.last_payment.date:'-';
+                var expDate=p?p.expiration_formatted||p.expiration:'-';
+                sp.textContent=payDate+' - '+expDate;
+            }
 
             // Auto renewal
             var sa=document.getElementById('sklAutoRenewal');
