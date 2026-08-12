@@ -22,9 +22,8 @@
                     </div>
                 </div>
                 <div class="hero-plan-line">
-                    <div class="hero-num"><div class="hero-num-label">Paket</div><div class="hero-num-value"><span class="skl skl-bright w-sm" style="width:clamp(100px,40vw,130px);height:13px" id="sklPlan"></span></div></div>
-                    <div class="hero-num"><div class="hero-num-label">Bandwidth</div><div class="hero-num-value"><span class="skl skl-bright w-xs h-md pill" style="width:clamp(44px,16vw,60px)" id="sklBw"></span></div></div>
-                    <div class="hero-num"><div class="hero-num-label">Harga</div><div class="hero-num-value"><span class="skl skl-bright w-xs" style="width:clamp(60px,20vw,80px);height:13px;margin-left:auto" id="sklPlanPrice"></span></div></div>
+                    <div class="hero-num hero-num-wide"><div class="hero-num-label">Paket Internet</div><div class="hero-num-value"><span class="skl skl-bright w-sm" style="width:clamp(100px,40vw,130px);height:13px" id="sklPlan"></span><span class="skl skl-bright w-xs h-md pill" style="width:clamp(44px,16vw,60px);margin-left:8px" id="sklBw"></span></div></div>
+                    <div class="hero-num" style="margin-left:auto"><div class="hero-num-label">Harga</div><div class="hero-num-value"><span class="skl skl-bright w-xs" style="width:clamp(60px,20vw,80px);height:13px" id="sklPlanPrice"></span></div></div>
                 </div>
                 <div class="hero-divider"></div>
                 <div class="hero-numbers">
