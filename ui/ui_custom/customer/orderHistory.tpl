@@ -8,7 +8,7 @@
 
     <div class="cw">
         <section>
-            <div class="sh stg"><h2>{Lang::T('Order History')}</h2></div>
+            <div class="sh shm stg"><h2>{Lang::T('Order History')}</h2></div>
 
             <div id="ohList">
                 <div class="oh-skel"><span class="skl skl-bright" style="width:40%;height:15px;flex:0 0 auto"></span><span class="skl skl-bright" style="width:60px;height:13px;margin-left:auto;flex-shrink:0"></span><span class="skl skl-bright" style="width:18px;height:14px;border-radius:50%;flex-shrink:0;margin:0 8px"></span><span class="skl skl-bright" style="width:36px;height:10px;flex-shrink:0"></span><span class="skl skl-bright" style="width:8px;height:12px;flex-shrink:0;margin-left:4px"></span></div>
