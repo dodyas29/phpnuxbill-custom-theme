@@ -46,7 +46,7 @@
         {else}
 
             <section>
-                <div class="sh stg"><h2>{Lang::T('Inbox')}</h2></div>
+                <div class="sh shm stg"><h2>{Lang::T('Inbox')}</h2></div>
 
                 <form method="post" action="{Text::url('mail')}" class="in-search stg">
                     <i class="bi bi-search"></i>
