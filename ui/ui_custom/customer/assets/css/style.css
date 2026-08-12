@@ -437,7 +437,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .in-row.unread .in-subj{color:var(--tx);font-weight:500}
 .in-time{font-size:.6rem;color:var(--t3);flex-shrink:0;margin-top:4px;white-space:nowrap}
 .in-pager{display:flex;gap:10px;justify-content:center;margin-top:16px}
-.in-back{display:inline-flex;align-items:center;gap:4px;color:var(--t2);font-size:.78rem;font-weight:600;text-decoration:none;margin-bottom:14px;padding:4px 0;transition:all .1s}
+.in-back{display:inline-flex;align-items:center;gap:4px;color:var(--t2);font-size:.78rem;font-weight:600;text-decoration:none;margin-bottom:14px;transition:all .1s}
 .in-back:active{color:var(--c1)}
 .in-msg-card{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r3);padding:20px 18px;margin-bottom:14px}
 .in-msg-subj{font-size:.95rem;font-weight:700;color:var(--tx);margin-bottom:6px;line-height:1.3}
