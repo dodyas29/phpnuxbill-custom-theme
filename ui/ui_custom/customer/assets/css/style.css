@@ -191,6 +191,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
         .hero-end{text-align:right}
         .hero-lbl{font-size:.55rem;text-transform:uppercase;letter-spacing:1.2px;opacity:.45;font-weight:600;margin-bottom:4px}
         .hero-plan{font-size:clamp(.58rem,3.5vw,.78rem);font-weight:700;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+        .hero-period{font-size:clamp(.58rem,3.5vw,.78rem);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .hero-bw{font-size:.68rem;font-weight:600;opacity:.6}
         .hero-bw-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.1);padding:5px 12px;border-radius:var(--rp);font-size:clamp(.52rem,3vw,.66rem);font-weight:600;vertical-align:middle;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-left:6px}
         .hero-plan-price{margin-left:auto;font-size:clamp(.6rem,3.5vw,.78rem);font-weight:700;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

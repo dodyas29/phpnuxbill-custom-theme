@@ -293,7 +293,7 @@
             // Period (Last Payment - Expired)
             var sp=document.getElementById('sklPeriod');
             if(sp){
-                sp.className='';sp.style.cssText='';
+                sp.className='hero-period';sp.style.cssText='';
                 var payDate=d.last_payment?d.last_payment.date:'-';
                 var expDate=p?p.expiration_formatted||p.expiration:'-';
                 sp.textContent=payDate+' - '+expDate;
