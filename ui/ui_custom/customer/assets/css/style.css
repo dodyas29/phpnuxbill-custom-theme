@@ -130,7 +130,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
 .oh-pager{display:flex;gap:10px;margin-top:24px}
 
 .pr-card{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r3);padding:18px 20px;margin-bottom:10px}
-.pr-head{display:flex;align-items:center;gap:14px;padding:16px 0}
+.pr-head{display:flex;align-items:center;gap:14px;padding:0 0 16px 0}
 .pr-avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;border:3px solid var(--bd);flex-shrink:0}
 .pr-head-info{flex:1;min-width:0}
 .pr-head-name{font-size:.88rem;font-weight:700;color:var(--tx)}
