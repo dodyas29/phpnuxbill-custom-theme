@@ -194,7 +194,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
         .hero-plan-price{margin-left:auto;font-size:clamp(.6rem,3.5vw,.78rem);font-weight:700;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .hero-divider{height:1px;background:rgba(255,255,255,.08);margin:0 0 14px}
         .hero-numbers{display:flex;justify-content:space-between;gap:16px;margin-bottom:16px}
-        .hero-num{flex:1}
+        .hero-num{flex:0 0 auto}
         .hero-num-wide{flex:2}
         .hero-num-label{font-size:.55rem;text-transform:uppercase;letter-spacing:1.2px;opacity:.45;font-weight:600;margin-bottom:4px}
         .hero-num-value{font-size:clamp(.6rem,3vw,.78rem);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
