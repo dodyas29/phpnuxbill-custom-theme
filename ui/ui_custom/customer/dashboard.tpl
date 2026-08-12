@@ -28,7 +28,7 @@
                 <div class="hero-divider"></div>
                 <div class="hero-numbers">
                     <div class="hero-num hero-num-wide"><div class="hero-num-label">Periode</div><div class="hero-num-value"><span class="skl skl-bright" style="width:clamp(140px,45vw,180px);height:13px" id="sklPeriod"></span></div></div>
-                    <div class="hero-num"><div class="hero-num-label">{Lang::T('Auto Renewal')}</div><div class="hero-num-value"><span class="skl skl-bright w-xs h-md pill" style="width:clamp(36px,12vw,44px)" id="sklAutoRenewal"></span></div></div>
+                    <div class="hero-num"><div class="hero-num-label">Perpanjang</div><div class="hero-num-value"><span class="skl skl-bright w-xs h-md pill" style="width:clamp(36px,12vw,44px)" id="sklAutoRenewal"></span></div></div>
                 </div>
                 <div class="hero-actions">
                     <span class="skl skl-bright w-full pill" style="flex:1;height:36px" id="sklBtn1"></span>
@@ -289,7 +289,7 @@
 
             // Auto renewal
             var sa=document.getElementById('sklAutoRenewal');
-            if(sa){sa.className='hero-ar-badge '+(p&&p.status==='on'?'ar-on':'ar-off');sa.style.cssText='';sa.textContent=(p&&p.status==='on')?'ON':'OFF'}
+            if(sa){sa.className='hero-ar-badge '+(p&&p.status==='on'?'ar-on':'ar-off');sa.style.cssText='';sa.textContent=(p&&p.status==='on')?'OTOMATIS':'TIDAK'}
 
             // Buttons
             var b1=document.getElementById('sklBtn1');
