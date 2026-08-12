@@ -289,7 +289,7 @@
 
             // Auto renewal
             var sa=document.getElementById('sklAutoRenewal');
-            if(sa){sa.className='hero-ar-badge '+(p&&p.status==='on'?'ar-on':'ar-off');sa.style.cssText='';sa.textContent=(p&&p.status==='on')?'OTOMATIS':'TIDAK'}
+            if(sa){sa.className='hero-ar-badge '+(p&&p.status==='on'?'ar-on':'ar-off');sa.style.cssText='';sa.textContent=(p&&p.status==='on')?'OTOMATIS':'MANUAL'}
 
             // Buttons
             var b1=document.getElementById('sklBtn1');
