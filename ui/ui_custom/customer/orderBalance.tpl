@@ -10,7 +10,7 @@
         {if isset($notify)}<meta id="notify-data" data-msg="{$notify|escape}" data-type="{if $notify_t == 's'}success{else}error{/if}">{/if}
 
         <section>
-            <div class="sh stg"><h2>{Lang::T('Top Up')}</h2></div>
+            <div class="sh shm stg"><h2>{Lang::T('Top Up')}</h2></div>
 
             {if empty($plans_balance) && $_c['allow_balance_custom'] != 'yes'}
             <div class="pc-empty">Tidak ada paket top up tersedia</div>
