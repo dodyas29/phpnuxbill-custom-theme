@@ -187,7 +187,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--tx);min-height:100vh
         .hero-status-badge .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
         .status-dot.on{background:#4ade80;box-shadow:0 0 8px #4ade80}
         .status-dot.off{background:#f87171;box-shadow:0 0 8px #f87171}
-        .hero-plan-line{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+        .hero-plan-line{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}
         .hero-plan{font-size:clamp(.58rem,3.5vw,.78rem);font-weight:700;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
         .hero-bw{font-size:.68rem;font-weight:600;opacity:.6}
         .hero-bw-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.1);padding:5px 12px;border-radius:var(--rp);font-size:clamp(.52rem,3vw,.66rem);font-weight:600;vertical-align:middle;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
