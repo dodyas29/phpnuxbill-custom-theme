@@ -18,11 +18,6 @@
         <a href="{Text::url('accounts/change-password')}" class="ms-item"><i class="bi bi-key"></i> {Lang::T('Change Password')}<span class="ms-trail"><i class="bi bi-chevron-right"></i></span></a>
         <a href="{Text::url('mail')}" class="ms-item"><i class="bi bi-envelope"></i> {Lang::T('Inbox')}<span class="ms-trail"><span></span><i class="bi bi-chevron-right"></i></span></a>
         {if $_c['enable_balance'] == 'yes' && $_c['allow_balance_transfer'] == 'yes'}<a href="javascript:void(0)" onclick="showTransfer()" class="ms-item"><i class="bi bi-send"></i> {Lang::T('Transfer')}<span class="ms-trail"><i class="bi bi-chevron-right"></i></span></a>{/if}
-        <div class="mi-div"></div>
-        <div class="ms-toggle" id="menuThemeToggle" onclick="toggleTheme()">
-            <span style="display:flex;align-items:center;gap:14px"><i class="bi bi-moon-stars" id="menuThemeIcon"></i> <span id="menuThemeLabel">{Lang::T('Light Mode')}</span></span>
-            <span class="ms-switch"></span>
-        </div>
         <a href="{Text::url('logout')}" class="ms-item danger"><i class="bi bi-box-arrow-right"></i> {Lang::T('Logout')}</a>
     </div>
 </div>
